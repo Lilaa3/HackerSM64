@@ -500,8 +500,6 @@ VADPCM_ENC            := $(TOOLS_DIR)/vadpcm_enc
 EXTRACT_DATA_FOR_MIO  := $(TOOLS_DIR)/extract_data_for_mio
 SKYCONV               := $(TOOLS_DIR)/skyconv
 FIXLIGHTS_PY          := $(TOOLS_DIR)/fixlights.py
-QUATERNIONANIMS_PY    := $(TOOLS_DIR)/quaternionanims.py
-
 ifeq ($(GZIPVER),std)
 GZIP                  := gzip
 else
@@ -683,6 +681,7 @@ $(BUILD_DIR)/%.ci4.inc.c: %.ci4.png
 	$(call print,Converting CI:,$<,$@)
 	$(V)$(BINPNG) $< $@ 4
 
+
 #==============================================================================#
 # Compressed Segment Generation                                                #
 #==============================================================================#
@@ -778,6 +777,11 @@ $(BUILD_DIR)/%.inc.c: $(BUILD_DIR)/%
 	$(V)hexdump -v -e '1/1 "0x%X,"' $< > $@
 	$(V)echo >> $@
 
+# Generate animation data
+$(BUILD_DIR)/assets/mario_anim_data.c: $(wildcard assets/anims/*.inc.c)
+	@$(PRINT) "$(GREEN)Generating animation data $(NO_COL)\n"
+	$(V)$(PYTHON) $(TOOLS_DIR)/mario_anims_converter.py > $@
+
 # Generate demo input data
 $(BUILD_DIR)/assets/demo_data.c: assets/demo_data.json $(wildcard assets/demos/*.bin)
 	@$(PRINT) "$(GREEN)Generating demo data $(NO_COL)\n"
@@ -816,9 +820,7 @@ ifeq ($(FIXLIGHTS),1)
 # This must not be run multiple times at once, so we run it ahead of time rather than in a rule
 DUMMY != $(FIXLIGHTS_PY) actors
 DUMMY != $(FIXLIGHTS_PY) levels
-DUMMY != $(PYTHON) $(QUATERNIONANIMS_PY) $(MAKECMDGOALS)
 endif
-
 $(BUILD_DIR)/%.o: %.c
 	$(call print,Compiling:,$<,$@)
 	$(V)$(CC) -c $(CFLAGS) -MMD -MF $(BUILD_DIR)/$*.d  -o $@ $<
