@@ -9,8 +9,14 @@
 #include "types.h"
 #include "memory.h"
 #include "config.h"
+#include "config/config_graphics.h"
 
-#define MARIO_ANIMS_POOL_SIZE 0x4000
+#ifdef PER_FRAME_DMA
+#define MARIO_ANIMS_POOL_SIZE 0x5000
+#define MARIO_FRAME_POOL_SIZE 0x100
+#else
+#define MARIO_ANIMS_POOL_SIZE 0x10
+#endif
 #define DEMO_INPUTS_POOL_SIZE 0x800
 
 struct GfxPool {
@@ -41,6 +47,7 @@ extern struct VblankHandler gGameVblankHandler;
 extern uintptr_t gPhysicalFramebuffers[3];
 extern uintptr_t gPhysicalZBuffer;
 extern void *gMarioAnimsMemAlloc;
+extern void *gMarioFrameMemAlloc;
 extern void *gDemoInputsMemAlloc;
 extern struct SPTask *gGfxSPTask;
 extern Gfx *gDisplayListHead;

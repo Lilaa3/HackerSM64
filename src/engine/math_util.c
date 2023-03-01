@@ -1543,3 +1543,86 @@ void mtxf_to_mtx_fast(s16* dst, float* src)
     //  to set the top half.
     dst[15] = 1;
 }
+
+ALWAYS_INLINE f32 load_fixed_exponent_bfloat(s16 value, u32 exponent, f32 removal)
+{
+    f32 f;
+    u32 literal = exponent | (value << 8);
+    *((u32*) &f) = literal;
+    f -= removal;
+    return f;
+}
+
+#define load_bfloat_rotation_element(value)\
+load_fixed_exponent_bfloat(value, 0x40000000, 3.f)
+
+// https://automaticaddison.com/wp-content/uploads/2020/09/quaternion-to-rotation-matrix.jpg
+// Thanks to Kaze Emanuar for writing the original function.
+void mtxf_quat_trans_mul(s16 *rot, Vec3f trans, Mat4 dest, Mat4 src) {
+    f32 qw, qx, qy, qz;
+    f32 qxs, qys, qzs;
+
+    #ifdef USE_THREE_ELEMENT_QUATERNIONS
+        s16 x = rot[0];
+        s16 y = rot[1];
+        s16 z = rot[2];
+    #else
+        s16 w = rot[0];
+        s16 x = rot[1];
+        s16 y = rot[2];
+        s16 z = rot[3];
+    #endif
+
+    #ifdef USE_FIXED_EXPONENT_BFLOATS
+        qx = load_bfloat_rotation_element(x);
+        qy = load_bfloat_rotation_element(y);
+        qz = load_bfloat_rotation_element(z);
+
+        #ifndef USE_THREE_ELEMENT_QUATERNIONS
+            qw = load_bfloat_rotation_element(w);
+        #endif
+    #else
+        qx /= 32766.f;
+        qy /= 32766.f;
+        qz /= 32766.f;
+        #ifndef USE_THREE_ELEMENT_QUATERNIONS
+            qw /= 32766.f;
+        #endif
+    #endif
+
+    qxs = sqr(qx);
+    qys = sqr(qy);
+    qzs = sqr(qz);
+
+    #ifdef USE_THREE_ELEMENT_QUATERNIONS
+        f32 val = qxs + qys + qzs;
+        qw = sqrtf(1.f - val);
+    #endif
+
+    f32 entry0, entry1, entry2;
+
+    entry0 = -2.f * (qys + qzs) + 1.f;
+    entry1 = 2.f * (qx * qy - qw * qz);
+    entry2 = 2.f * (qx * qz + qw * qy);
+    dest[0][0] = (entry0 * src[0][0] + entry1 * src[1][0] + entry2 * src[2][0]);
+    dest[0][1] = (entry0 * src[0][1] + entry1 * src[1][1] + entry2 * src[2][1]);
+    dest[0][2] = (entry0 * src[0][2] + entry1 * src[1][2] + entry2 * src[2][2]);
+
+    entry0 = 2.f * (qx * qy + qw * qz);
+    entry1 = -2.f * (qxs + qzs) + 1.f;
+    entry2 = 2.f * (qy * qz - qw * qx);
+    dest[1][0] = (entry0 * src[0][0] + entry1 * src[1][0] + entry2 * src[2][0]);
+    dest[1][1] = (entry0 * src[0][1] + entry1 * src[1][1] + entry2 * src[2][1]);
+    dest[1][2] = (entry0 * src[0][2] + entry1 * src[1][2] + entry2 * src[2][2]);
+
+    entry0 = 2.f * (qx * qz - qw * qy);
+    entry1 = 2.f * (qy * qz + qw * qx);
+    entry2 = -2.f * (qxs + qys) + 1.f;
+    dest[2][0] = (entry0 * src[0][0] + entry1 * src[1][0] + entry2 * src[2][0]);
+    dest[2][1] = (entry0 * src[0][1] + entry1 * src[1][1] + entry2 * src[2][1]);
+    dest[2][2] = (entry0 * src[0][2] + entry1 * src[1][2] + entry2 * src[2][2]);
+
+    dest[3][0] = trans[0] * src[0][0] + trans[1] * src[1][0] + trans[2] * src[2][0] + src[3][0];
+    dest[3][1] = trans[0] * src[0][1] + trans[1] * src[1][1] + trans[2] * src[2][1] + src[3][1];
+    dest[3][2] = trans[0] * src[0][2] + trans[1] * src[1][2] + trans[2] * src[2][2] + src[3][2];
+}

@@ -39,6 +39,7 @@ struct Controller gControllers[3];
 #include "vc_check.h"
 #include "vc_ultra.h"
 #include "profiling.h"
+#include "config/config_graphics.h"
 
 // First 3 controller slots
 struct Controller gControllers[3];
@@ -80,6 +81,7 @@ uintptr_t gPhysicalZBuffer;
 
 // Mario Anims and Demo allocation
 void *gMarioAnimsMemAlloc;
+void *gMarioFrameMemAlloc;
 void *gDemoInputsMemAlloc;
 struct DmaHandlerList gMarioAnimsBuf;
 struct DmaHandlerList gDemoInputsBuf;
@@ -738,10 +740,17 @@ void setup_game_memory(void) {
     gPhysicalFramebuffers[0] = VIRTUAL_TO_PHYSICAL(gFramebuffer0);
     gPhysicalFramebuffers[1] = VIRTUAL_TO_PHYSICAL(gFramebuffer1);
     gPhysicalFramebuffers[2] = VIRTUAL_TO_PHYSICAL(gFramebuffer2);
+
     // Setup Mario Animations
     gMarioAnimsMemAlloc = main_pool_alloc(MARIO_ANIMS_POOL_SIZE, MEMORY_POOL_LEFT);
     set_segment_base_addr(SEGMENT_MARIO_ANIMS, (void *) gMarioAnimsMemAlloc);
     setup_dma_table_list(&gMarioAnimsBuf, gMarioAnims, gMarioAnimsMemAlloc);
+
+    #ifdef PER_FRAME_DMA
+    gMarioFrameMemAlloc = main_pool_alloc(MARIO_FRAME_POOL_SIZE, MEMORY_POOL_LEFT);
+    set_segment_base_addr(SEGMENT_MARIO_FRAME, (void *) gMarioFrameMemAlloc);
+    #endif
+
     // Setup Demo Inputs List
     gDemoInputsMemAlloc = main_pool_alloc(DEMO_INPUTS_POOL_SIZE, MEMORY_POOL_LEFT);
     set_segment_base_addr(SEGMENT_DEMO_INPUTS, (void *) gDemoInputsMemAlloc);

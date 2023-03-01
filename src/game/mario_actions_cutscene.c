@@ -807,10 +807,10 @@ s32 act_unlocking_key_door(struct MarioState *m) {
             break;
     }
 
-    update_mario_pos_for_anim(m);
     stop_and_set_height_to_floor(m);
 
     if (is_anim_at_end(m)) {
+        update_mario_pos_for_anim(m);
         if (GET_BPARAM1(m->usedObj->oBehParams) == KEY_DOOR_BP1_UPSTAIRS) {
             save_file_set_flags(SAVE_FLAG_UNLOCKED_UPSTAIRS_DOOR);
             save_file_clear_flags(SAVE_FLAG_HAVE_KEY_2);
@@ -851,6 +851,7 @@ s32 act_unlocking_star_door(struct MarioState *m) {
             break;
         case ACT_STATE_UNLOCKING_STAR_DOOR_IN_DIALOG:
             if (is_anim_at_end(m)) {
+                update_mario_pos_for_anim(m);
                 save_file_set_flags(get_door_save_file_flag(m->usedObj));
                 set_mario_action(m, ACT_READING_AUTOMATIC_DIALOG, DIALOG_038);
             }
@@ -860,7 +861,6 @@ s32 act_unlocking_star_door(struct MarioState *m) {
     m->pos[0] = m->marioObj->oMarioReadingSignDPosX;
     m->pos[2] = m->marioObj->oMarioReadingSignDPosZ;
 
-    update_mario_pos_for_anim(m);
     stop_and_set_height_to_floor(m);
 
     return FALSE;
@@ -941,7 +941,6 @@ s32 act_going_through_door(struct MarioState *m) {
     m->pos[0] = m->usedObj->oPosX;
     m->pos[2] = m->usedObj->oPosZ;
 
-    update_mario_pos_for_anim(m);
     stop_and_set_height_to_floor(m);
 
     if (m->actionArg & WARP_FLAG_DOOR_IS_WARP) {
@@ -949,6 +948,7 @@ s32 act_going_through_door(struct MarioState *m) {
             level_trigger_warp(m, WARP_OP_WARP_DOOR);
         }
     } else if (is_anim_at_end(m)) {
+        update_mario_pos_for_anim(m);
         if (m->actionArg & WARP_FLAG_DOOR_FLIP_MARIO) {
             m->faceAngle[1] += 0x8000;
         }
@@ -1879,12 +1879,12 @@ static void jumbo_star_cutscene_taking_off(struct MarioState *m) {
         m->particleFlags |= PARTICLE_SPARKLES;
 
         if (is_anim_past_end(m)) {
+            update_mario_pos_for_anim(m);
             advance_cutscene_step(m);
         }
     }
 
     vec3f_set(m->pos, 0.0f, 307.0, marioObj->oMarioJumboStarCutscenePosZ);
-    update_mario_pos_for_anim(m);
     vec3f_copy(marioObj->header.gfx.pos, m->pos);
     vec3s_set(marioObj->header.gfx.angle, 0, m->faceAngle[1], 0);
 }

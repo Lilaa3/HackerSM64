@@ -7,6 +7,7 @@
 #include <ultra64.h>
 #include "macros.h"
 #include "config.h"
+#include "config/config_graphics.h"
 
 #define BIT(i)  (1 << (i))
 #define BITMASK(size) ((BIT(size)) - 1)
@@ -201,23 +202,19 @@ enum AnimFlags {
     ANIM_FLAG_NOLOOP     = BIT(0), // 0x01
     ANIM_FLAG_FORWARD    = BIT(1), // 0x02
     ANIM_FLAG_NO_ACCEL   = BIT(2), // 0x04
-    ANIM_FLAG_HOR_TRANS  = BIT(3), // 0x08
-    ANIM_FLAG_VERT_TRANS = BIT(4), // 0x10
-    ANIM_FLAG_DISABLED   = BIT(5), // 0x20
-    ANIM_FLAG_NO_TRANS   = BIT(6), // 0x40
-    ANIM_FLAG_UNUSED     = BIT(7), // 0x80
+    ANIM_FLAG_DISABLED   = BIT(3), // 0x08
+    ANIM_FLAG_HAS_SCALE  = BIT(4), // 0x08
 };
 
 struct Animation {
-    /*0x00*/ s16 flags;
-    /*0x02*/ s16 animYTransDivisor;
-    /*0x04*/ s16 startFrame;
+    /*0x00*/ s16 *frames;
+    /*0x04*/ s16 elementCount;
     /*0x06*/ s16 loopStart;
     /*0x08*/ s16 loopEnd;
-    /*0x0A*/ s16 unusedBoneCount;
-    /*0x0C*/ const s16 *values;
-    /*0x10*/ const u16 *index;
-    /*0x14*/ u32 length; // only used with Mario animations to determine how much to load. 0 otherwise.
+    /*0x0A*/ s16 animYTransDivisor;
+    /*0x0C*/ u8 startFrame; 
+    /*0x0D*/ u8 flags;
+    /*0x0F*/
 };
 
 #define ANIMINDEX_NUMPARTS(animindex) (sizeof(animindex) / sizeof(u16) / 6 - 1)
@@ -488,6 +485,10 @@ struct MarioState {
              s16 moveYaw;
              s16 ceilYaw;
              s16 wallYaw;
+             #ifdef PER_FRAME_DMA
+             uintptr_t animDataOffset;
+             void *animData;
+             #endif
     // -- HackerSM64 MarioState fields end --
 };
 

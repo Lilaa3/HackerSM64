@@ -22,7 +22,8 @@
 #include "puppyprint.h"
 #include "puppylights.h"
 #include "profiling.h"
-
+#include "memory.h"
+#include "config/config_graphics.h"
 
 /**
  * Flags controlling what debug info is displayed.
@@ -214,6 +215,53 @@ struct ParticleProperties sParticleTypes[] = {
     { PARTICLE_NONE, ACTIVE_PARTICLE_NONE, MODEL_NONE, NULL },
 };
 
+#ifdef PER_FRAME_DMA
+extern void *gMarioFrameMemAlloc;
+extern void dma_read(u8 *dest, u8 *srcStart, u8 *srcEnd);
+
+void update_mario_anim(struct MarioState *marioState){
+    struct Animation *curAnim = marioState->marioObj->header.gfx.animInfo.curAnim;
+    u8* frameDataBuf = (u8*) gMarioFrameMemAlloc;
+    
+    if (curAnim == NULL){
+        return;
+    }
+
+    // We use the frame data offset to offset the current animation´s rom pointer to the frame data.
+    // The anim data offset is calculated by doing:
+    // (const s16*)(offsetof(struct MarioAnimsObj, anim_data))
+    u8* frameDataROM = marioState->animList->dmaTable->srcAddr + (uintptr_t) marioState->animDataOffset;
+
+    // Each element is an s16.
+    s16 frameSize = curAnim->elementCount * sizeof(s16);
+    s32 accelAssist = gCurrentObject->header.gfx.animInfo.animFrameAccelAssist;
+    s16 curFrame = geo_update_animation_frame(&gCurrentObject->header.gfx.animInfo, &accelAssist);
+    u16 framePos = frameSize * curFrame;
+
+    // Points to the start of the current frame´s data
+    frameDataROM += framePos;
+
+    // Aligns the rom pointer to the lower 16 multiple value
+    // We increase the dma size to account for such
+    s8 startOffset = (uintptr_t) frameDataROM & 0xF;
+    frameDataROM -= startOffset;
+    s16 dmaSize = frameSize + startOffset;
+
+    // Aligns the dma size to the higher 16 multiple value
+    dmaSize = (dmaSize + 0xf) & ~0xF;
+
+    // Reads from rom onto the the frame data buffer, requires 16 byte alignments.
+    dma_read(frameDataBuf, 
+            frameDataROM, 
+            frameDataROM + dmaSize);
+    // We subtract the current frame times the frame size because the render code will
+    // adds it to the frames pointer, but we only have one frame worth of data.
+    curAnim->frames = virtual_to_segmented(SEGMENT_MARIO_FRAME, 
+                            frameDataBuf + startOffset
+                        ) - framePos;
+}
+#endif
+
 /**
  * Copy position, velocity, and angle variables from MarioState to the Mario
  * object.
@@ -244,6 +292,10 @@ void copy_mario_state_to_object(void) {
     gCurrentObject->oAngleVelPitch = gMarioStates[i].angleVel[0];
     gCurrentObject->oAngleVelYaw = gMarioStates[i].angleVel[1];
     gCurrentObject->oAngleVelRoll = gMarioStates[i].angleVel[2];
+    
+#ifdef PER_FRAME_DMA
+    update_mario_anim(&gMarioStates[i]);
+#endif
 }
 
 /**

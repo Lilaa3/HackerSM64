@@ -6092,4 +6092,14 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
-
+#ifdef ANIM_TEST_OBJ
+const BehaviorScript bhvAnimTestObj[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, anim_test_obj_anims),
+    ANIMATE(0),
+    BEGIN_LOOP(),
+        ADD_INT(oTimer, 1),
+    END_LOOP(),
+};
+#endif

@@ -18,3 +18,6 @@
 #include "mario/geo.inc.c"
 
 #include "lantern/geo.inc.c"
+#ifdef ANIM_TEST_OBJ
+#include "anim_test_obj/geo.inc.c"
+#endif

@@ -77,6 +77,9 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_STAR,                    star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_TRANSPARENT_STAR,        transparent_star_geo),
     LOAD_MODEL_FROM_GEO(MODEL_WOODEN_SIGNPOST,         wooden_signpost_geo),
+    #ifdef ANIM_TEST_OBJ
+    LOAD_MODEL_FROM_GEO(MODEL_ANIM_TEST_OBJ,           anim_test_obj_geo),
+    #endif
     LOAD_MODEL_FROM_DL( MODEL_WHITE_PARTICLE_SMALL,    white_particle_small_dl,     LAYER_OCCLUDE_SILHOUETTE_ALPHA),
     LOAD_MODEL_FROM_GEO(MODEL_RED_FLAME,               red_flame_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BLUE_FLAME,              blue_flame_geo),

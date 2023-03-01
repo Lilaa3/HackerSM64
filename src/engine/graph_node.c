@@ -798,27 +798,6 @@ void geo_obj_init_animation_accel(struct GraphNodeObject *graphNode, struct Anim
 }
 
 /**
- * Retrieves an index into animation data based on the attribute pointer
- * An attribute is an x-, y- or z-component of the translation / rotation for a part
- * Each attribute is a pair of s16's, where the first s16 represents the maximum frame
- * and the second s16 the actual index. This index can be used to index in the array
- * with actual animation values.
- */
-s32 retrieve_animation_index(s32 frame, u16 **attributes) {
-    s32 result;
-
-    if (frame < (*attributes)[0]) {
-        result = (*attributes)[1] + frame;
-    } else {
-        result = (*attributes)[1] + (*attributes)[0] - 1;
-    }
-
-    *attributes += 2;
-
-    return result;
-}
-
-/**
  * Update the animation frame of an object. The animation flags determine
  * whether it plays forwards or backwards, and whether it stops or loops at
  * the end etc.
@@ -884,18 +863,19 @@ UNUSED void geo_retreive_animation_translation(struct GraphNodeObject *obj, Vec3
     struct Animation *animation = obj->animInfo.curAnim;
 
     if (animation != NULL) {
-        u16 *attribute = segmented_to_virtual((void *) animation->index);
-        s16 *values = segmented_to_virtual((void *) animation->values);
+        s16 *boneTrans = segmented_to_virtual((void *) animation->frames);
 
-        s16 frame = obj->animInfo.animFrame;
+        s16 animFrame = obj->animInfo.animFrame;
 
-        if (frame < 0) {
-            frame = 0;
+        if (animFrame < 0) {
+            animFrame = 0;
         }
 
-        position[0] = (f32) values[retrieve_animation_index(frame, &attribute)];
-        position[1] = (f32) values[retrieve_animation_index(frame, &attribute)];
-        position[2] = (f32) values[retrieve_animation_index(frame, &attribute)];
+        boneTrans += animFrame * animation->elementCount;
+
+        position[0] = (f32) boneTrans[0];
+        position[1] = (f32) boneTrans[1];
+        position[2] = (f32) boneTrans[2];
     } else {
         vec3_zero(position);
     }

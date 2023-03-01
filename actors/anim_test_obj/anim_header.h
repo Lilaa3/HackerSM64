@@ -1,0 +1,1 @@
+extern const struct Animation *const anim_test_obj_anims[];

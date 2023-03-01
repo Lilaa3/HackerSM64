@@ -26,7 +26,7 @@
  * This allows you to quickly test the level you're working on.
  * If you want the game to boot normally, just comment out the define again.
  */
-// #define TEST_LEVEL LEVEL_BOB
+#define TEST_LEVEL LEVEL_BOB
 
 /**
  * Enables debug level select. Hold L while the game boots to turn it on.
@@ -41,12 +41,12 @@
 /**
  * Enables a custom, enhanced performance profiler. (Enables PUPPYPRINT by default in config_safeguards).
  */
-// #define PUPPYPRINT_DEBUG 1
+#define PUPPYPRINT_DEBUG 1
 
 /**
  * Uses cycles instead of microseconds in Puppyprint debug output.
  */
-// #define PUPPYPRINT_DEBUG_CYCLES
+#define PUPPYPRINT_DEBUG_CYCLES
 
 /**
  * A vanilla style debug mode. It doesn't rely on a text engine, but it's much less powerful that PUPPYPRINT_DEBUG.
@@ -85,3 +85,5 @@
  * Forces a crash when the game starts. Useful for debugging the crash screen.
  */
 // #define DEBUG_FORCE_CRASH_ON_BOOT
+
+#define ANIM_TEST_OBJ

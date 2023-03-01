@@ -32,7 +32,7 @@
 #include "save_file.h"
 #include "sound_init.h"
 #include "rumble_init.h"
-
+#include "config/config_graphics.h"
 
 /**************************************************
  *                    ANIMATIONS                  *
@@ -64,8 +64,11 @@ s16 set_mario_animation(struct MarioState *m, s32 targetAnimID) {
     struct Animation *targetAnim = m->animList->bufTarget;
 
     if (load_patchable_table(m->animList, targetAnimID)) {
-        targetAnim->values = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->values);
-        targetAnim->index  = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->index);
+        #ifdef PER_FRAME_DMA
+        m->animDataOffset = (uintptr_t) targetAnim->frames;
+        #else
+        targetAnim->frames = (s16 *) VIRTUAL_TO_PHYSICAL((uintptr_t) targetAnim + (uintptr_t) targetAnim->frames);
+        #endif
     }
 
     if (marioObj->header.gfx.animInfo.animID != targetAnimID) {
@@ -84,7 +87,7 @@ s16 set_mario_animation(struct MarioState *m, s32 targetAnimID) {
             }
         }
     }
-
+    
     return marioObj->header.gfx.animInfo.animFrame;
 }
 
@@ -97,8 +100,11 @@ s16 set_mario_anim_with_accel(struct MarioState *m, s32 targetAnimID, s32 accel)
     struct Animation *targetAnim = m->animList->bufTarget;
 
     if (load_patchable_table(m->animList, targetAnimID)) {
-        targetAnim->values = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->values);
-        targetAnim->index = (void *) VIRTUAL_TO_PHYSICAL((u8 *) targetAnim + (uintptr_t) targetAnim->index);
+        #ifdef PER_FRAME_DMA
+        m->animDataOffset = (uintptr_t) targetAnim->frames;
+        #else
+        targetAnim->frames = (s16 *) VIRTUAL_TO_PHYSICAL((uintptr_t) targetAnim + (uintptr_t) targetAnim->frames);
+        #endif
     }
 
     if (marioObj->header.gfx.animInfo.animID != targetAnimID) {
@@ -181,19 +187,19 @@ s16 find_mario_anim_flags_and_translation(struct Object *obj, s32 yaw, Vec3s tra
     f32 dx, dz;
 
     struct Animation *curAnim = (void *) obj->header.gfx.animInfo.curAnim;
-    s16 animFrame = geo_update_animation_frame(&obj->header.gfx.animInfo, NULL);
-    u16 *animIndex = segmented_to_virtual((void *) curAnim->index);
-    s16 *animValues = segmented_to_virtual((void *) curAnim->values);
+
+    const s16 *animValues = curAnim->frames + (obj->header.gfx.animInfo.animFrame * curAnim->elementCount);
+    animValues = (s16*) segmented_to_virtual(animValues);
 
     f32 s = (f32) sins(yaw);
     f32 c = (f32) coss(yaw);
-
-    dx = *(animValues + (retrieve_animation_index(animFrame, &animIndex))) / 4.0f;
-    translation[1] = *(animValues + (retrieve_animation_index(animFrame, &animIndex))) / 4.0f;
-    dz = *(animValues + (retrieve_animation_index(animFrame, &animIndex))) / 4.0f;
+    
+    dx = animValues[1] / 4.0f;
+    translation[1] = animValues[2] / 4.0f;
+    dz = animValues[3] / 4.0f;
 
     translation[0] = ( dx * c) + (dz * s);
-    translation[2] = (-dx * s) + (dz * c);
+    translation[2] = ( -dx * s) + (dz * c);
 
     return curAnim->flags;
 }
@@ -203,29 +209,14 @@ s16 find_mario_anim_flags_and_translation(struct Object *obj, s32 yaw, Vec3s tra
  */
 void update_mario_pos_for_anim(struct MarioState *m) {
     Vec3s translation;
-    s16 flags;
-
-    flags = find_mario_anim_flags_and_translation(m->marioObj, m->faceAngle[1], translation);
-
-    if (flags & (ANIM_FLAG_HOR_TRANS | ANIM_FLAG_NO_TRANS)) {
-        m->pos[0] += (f32) translation[0];
-        m->pos[2] += (f32) translation[2];
-    }
-
-    if (flags & (ANIM_FLAG_VERT_TRANS | ANIM_FLAG_NO_TRANS)) {
-        m->pos[1] += (f32) translation[1];
-    }
+    
+    find_mario_anim_flags_and_translation(m->marioObj, m->faceAngle[1], translation);
+    
+    m->pos[0] += (f32) translation[0];
+    m->pos[1] += (f32) translation[1];
+    m->pos[2] += (f32) translation[2];
 }
 
-/**
- * Finds the vertical translation from Mario's animation.
- */
-s16 return_mario_anim_y_translation(struct MarioState *m) {
-    Vec3s translation;
-    find_mario_anim_flags_and_translation(m->marioObj, 0, translation);
-
-    return translation[1];
-}
 
 /**************************************************
  *                      AUDIO                     *

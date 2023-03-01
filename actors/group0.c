@@ -31,3 +31,8 @@
 #include FONT_C_FILE
 #endif
 #include "lantern/model.inc.c"
+#ifdef ANIM_TEST_OBJ
+#include "anim_test_obj/model.inc.c"
+#include "anim_test_obj/anims/data.inc.c"
+#include "anim_test_obj/anims/table.inc.c"
+#endif

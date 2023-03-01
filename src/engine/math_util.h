@@ -608,5 +608,7 @@ void spline_get_weights(Vec4f result, f32 t, UNUSED s32 c);
 void anim_spline_init(Vec4s *keyFrames);
 s32  anim_spline_poll(Vec3f result);
 void find_surface_on_ray(Vec3f orig, Vec3f dir, struct Surface **hit_surface, Vec3f hit_pos, s32 flags);
+f32 load_fixed_exponent_bfloat(s16 value, u32 exponent, f32 removal);
+void mtxf_quat_trans_mul(s16 *rot, Vec3f trans, Mat4 dest, Mat4 src);
 
 #endif // MATH_UTIL_H

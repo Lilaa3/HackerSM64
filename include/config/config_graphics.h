@@ -130,3 +130,11 @@
  * NOTE: When this is enabled, The 49th hardcoded rectangle shadow will act as a regular circular shadow, due to Mario's shadow ID being 99 in vanilla.
  */
 #define LEGACY_SHADOW_IDS
+
+#define USE_THREE_ELEMENT_QUATERNIONS
+#define USE_FIXED_EXPONENT_BFLOATS
+#define PER_FRAME_DMA
+#define ALLOW_SCALE_BONE
+// Check the 1ST element of an animation value for this value to determine if the value is a special bone value like translation or scale.
+#define TRANSLATATION_IDENTIFIER -32768
+#define SCALE_IDENTIFIER -32767

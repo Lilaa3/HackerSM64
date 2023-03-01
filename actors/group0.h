@@ -335,4 +335,8 @@ extern const Gfx white_particle_small_unused_dl[];
 
 #include "lantern/geo_header.h"
 
+#ifdef ANIM_TEST_OBJ
+#include "anim_test_obj/geo_header.h"
+#include "anim_test_obj/anim_header.h"
+#endif
 #endif
