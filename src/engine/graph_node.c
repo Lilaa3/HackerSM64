@@ -884,18 +884,19 @@ UNUSED void geo_retreive_animation_translation(struct GraphNodeObject *obj, Vec3
     struct Animation *animation = obj->animInfo.curAnim;
 
     if (animation != NULL) {
-        u16 *attribute = segmented_to_virtual((void *) animation->index);
-        s16 *values = segmented_to_virtual((void *) animation->values);
+        s16 *animFrames = segmented_to_virtual((void *) animation->frames);
 
-        s16 frame = obj->animInfo.animFrame;
+        s16 animFrame = obj->animInfo.animFrame;
 
-        if (frame < 0) {
-            frame = 0;
+        if (animFrame < 0) {
+            animFrame = 0;
         }
 
-        position[0] = (f32) values[retrieve_animation_index(frame, &attribute)];
-        position[1] = (f32) values[retrieve_animation_index(frame, &attribute)];
-        position[2] = (f32) values[retrieve_animation_index(frame, &attribute)];
+        s16* boneTrans = animFrames + (animFrame * animation->boneCount);
+
+        position[0] = (f32) boneTrans[0];
+        position[1] = (f32) boneTrans[1];
+        position[2] = (f32) boneTrans[2];
     } else {
         vec3_zero(position);
     }

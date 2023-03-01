@@ -609,4 +609,6 @@ void anim_spline_init(Vec4s *keyFrames);
 s32  anim_spline_poll(Vec3f result);
 void find_surface_on_ray(Vec3f orig, Vec3f dir, struct Surface **hit_surface, Vec3f hit_pos, s32 flags);
 
+void mtxf_quat_trans_mul(s16 *rot, Vec3f trans, Mat4 dest, Mat4 src);
+
 #endif // MATH_UTIL_H

@@ -209,15 +209,14 @@ enum AnimFlags {
 };
 
 struct Animation {
-    /*0x00*/ s16 flags;
-    /*0x02*/ s16 animYTransDivisor;
-    /*0x04*/ s16 startFrame;
-    /*0x06*/ s16 loopStart;
-    /*0x08*/ s16 loopEnd;
-    /*0x0A*/ s16 unusedBoneCount;
-    /*0x0C*/ const s16 *values;
-    /*0x10*/ const u16 *index;
-    /*0x14*/ u32 length; // only used with Mario animations to determine how much to load. 0 otherwise.
+    /*0x00*/ const Vec4s *frames;
+    /*0x04*/ u16 startFrame;
+    /*0x08*/ u16 loopStart;
+    /*0x08*/ u16 loopEnd;
+    /*0x0A*/ s16 animYTransDivisor;
+    /*0x0C*/ u8 boneCount;
+    /*0x0D*/ u8 flags;
+    /*0x0F*/
 };
 
 #define ANIMINDEX_NUMPARTS(animindex) (sizeof(animindex) / sizeof(u16) / 6 - 1)
