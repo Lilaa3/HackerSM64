@@ -1646,6 +1646,8 @@ void mario_update_hitbox_and_cap_model(struct MarioState *m) {
     if (flags & MARIO_CAP_ON_HEAD) {
         if (flags & MARIO_WING_CAP) {
             bodyState->capState = MARIO_HAS_WING_CAP_ON;
+        } else if (flags & MARIO_SHYGUY_MASK){
+            bodyState->capState = MARIO_HAS_SHYGUY_MASK_ON;
         } else {
             bodyState->capState = MARIO_HAS_DEFAULT_CAP_ON;
         }

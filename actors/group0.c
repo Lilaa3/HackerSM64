@@ -31,3 +31,5 @@
 #include FONT_C_FILE
 #endif
 #include "lantern/model.inc.c"
+
+#include "exclamation_mark/model.inc.c"

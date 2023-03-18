@@ -1,0 +1,13 @@
+extern const GeoLayout shyguy_mask_geo[];
+extern u8 shyguy_mask_shy_guy_mask_texture_i4[];
+extern Vtx shyguy_mask_shyguy_001_mesh_layer_1_vtx_cull[8];
+extern Vtx shyguy_mask_shyguy_001_mesh_layer_1_vtx_0[48];
+extern Gfx shyguy_mask_shyguy_001_mesh_layer_1_tri_0[];
+extern Vtx shyguy_mask_shyguy_001_mesh_layer_1_vtx_1[24];
+extern Gfx shyguy_mask_shyguy_001_mesh_layer_1_tri_1[];
+extern Gfx mat_shyguy_mask_shy_guy_mask_layer1[];
+extern Gfx mat_revert_shyguy_mask_shy_guy_mask_layer1[];
+extern Gfx mat_shyguy_mask_f3dlite_material_layer1[];
+extern Gfx mat_revert_shyguy_mask_f3dlite_material_layer1[];
+extern Gfx shyguy_mask_shyguy_001_mesh_layer_1[];
+extern Gfx shyguy_mask_material_revert_render_settings[];

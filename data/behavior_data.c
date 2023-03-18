@@ -528,7 +528,7 @@ const BehaviorScript bhvCapSwitch[] = {
 const BehaviorScript bhvKingBobomb[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_ACTIVE_FROM_AFAR | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, king_bobomb_seg5_anims_0500FE30),
+    //LOAD_ANIMATIONS(oAnimations, king_bobomb_seg5_anims_0500FE30),
     SET_INT(oInteractType, INTERACT_GRABBABLE),
     SET_HITBOX(/*Radius*/ 100, /*Height*/ 100),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 30, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
@@ -3777,14 +3777,14 @@ const BehaviorScript bhvJetStream[] = {
 const BehaviorScript bhvMessagePanel[] = {
     BEGIN(OBJ_LIST_SURFACE),
     OR_INT(oFlags, (OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_COLLISION_DATA(wooden_signpost_seg3_collision_0302DD80),
+    //LOAD_COLLISION_DATA(wooden_signpost_seg3_collision_0302DD80),
     SET_INTERACT_TYPE(INTERACT_TEXT),
     SET_INT(oInteractionSubtype, INT_SUBTYPE_SIGN),
     DROP_TO_FLOOR(),
     SET_HITBOX(/*Radius*/ 150, /*Height*/ 80),
     SET_INT(oWoodenPostTotalMarioAngle, 0),
     CALL_NATIVE(bhv_init_room),
-    CALL_NATIVE(load_object_static_model),
+    //CALL_NATIVE(load_object_static_model),
     BEGIN_LOOP(),
         SET_INT(oIntangibleTimer, 0),
         SET_INT(oInteractStatus, INT_STATUS_NONE),
@@ -6092,4 +6092,84 @@ const BehaviorScript bhvIntroScene[] = {
     END_LOOP(),
 };
 
+const BehaviorScript bhvShyGuy[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, shy_guy_anims),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 40, /*Gravity*/ -400, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_shyguy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shyguy_loop),
+    END_LOOP(),
+};
 
+const BehaviorScript bhvShyGuySpawner[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    SET_HOME(),
+    CALL_NATIVE(bhv_shyguy_spawner_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shyguy_spawner_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvShyGuyMask[] = {
+    BEGIN(OBJ_LIST_LEVEL),
+    OR_LONG(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE | OBJ_FLAG_SILHOUETTE)),
+    CALL_NATIVE(bhv_shyguy_mask_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shyguy_mask_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvEstalactite[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    SET_HOME(),
+    CALL_NATIVE(bhv_estalactite_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_estalactite_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvScubbaGuy[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, scuba_guy_anims),
+    DROP_TO_FLOOR(),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 120, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 8000, /*Friction*/ 8000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_scubbaguy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_scubbaguy_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvShyGuyBuoy[] = {
+    BEGIN(OBJ_LIST_PUSHABLE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    LOAD_ANIMATIONS(oAnimations, shy_guy_buoy_anims),
+    SET_HOME(),
+    SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 120, /*Gravity*/ 0, /*Bounciness*/ 0, /*Drag strength*/ 8000, /*Friction*/ 8000, /*Buoyancy*/ 0, /*Unused*/ 0, 0),
+    CALL_NATIVE(bhv_shy_guy_buoy_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_shy_guy_buoy_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvAreaController[] = {
+    BEGIN(OBJ_LIST_DEFAULT),
+    CALL_NATIVE(bhv_area_controller_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_area_controller_loop),
+    END_LOOP(),
+};
+
+const BehaviorScript bhvPillarPuzzle[] = {
+    BEGIN(OBJ_LIST_SURFACE),
+    OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
+    CALL_NATIVE(bhv_pillar_init),
+    BEGIN_LOOP(),
+        CALL_NATIVE(bhv_pillar_loop),
+    END_LOOP(),
+};

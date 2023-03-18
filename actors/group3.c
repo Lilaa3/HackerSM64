@@ -6,10 +6,17 @@
 #include "types.h"
 #include "make_const_nonconst.h"
 
-#include "king_bobomb/model.inc.c"
-#include "king_bobomb/anims/data.inc.c"
-#include "king_bobomb/anims/table.inc.c"
-UNUSED static const u64 binid_0 = 0;
-
-#include "water_bubble/model.inc.c"
-UNUSED static const u64 binid_1 = 1;
+#include "shy_guy/model.inc.c"
+#include "shy_guy/anims/data.inc.c"
+#include "shy_guy/anims/table.inc.c"
+#include "shyguy_mask/model.inc.c"
+#include "estalactite/model.inc.c"
+#include "scuba_guy/model.inc.c"
+#include "scuba_guy/anims/data.inc.c"
+#include "scuba_guy/anims/table.inc.c"
+#include "shy_guy_buoy/model.inc.c"
+#include "shy_guy_buoy/anims/data.inc.c"
+#include "shy_guy_buoy/anims/table.inc.c"
+#include "pillar/model.inc.c"
+#include "pillar/collision.inc.c"
+#include "pillar_ice/collision.inc.c"

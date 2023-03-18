@@ -3,39 +3,25 @@
 
 #include "types.h"
 
-// king_bobomb
-extern const GeoLayout king_bobomb_geo[];
-extern const Gfx king_bobomb_seg5_dl_0500A4B8[];
-extern const Gfx king_bobomb_seg5_dl_0500A4F0[];
-extern const Gfx king_bobomb_seg5_dl_0500A5A0[];
-extern const Gfx king_bobomb_seg5_dl_0500A5D8[];
-extern const Gfx king_bobomb_seg5_dl_0500A688[];
-extern const Gfx king_bobomb_seg5_dl_0500A6C0[];
-extern const Gfx king_bobomb_seg5_dl_0500A770[];
-extern const Gfx king_bobomb_seg5_dl_0500A7A8[];
-extern const Gfx king_bobomb_seg5_dl_0500A858[];
-extern const Gfx king_bobomb_seg5_dl_0500A890[];
-extern const Gfx king_bobomb_seg5_dl_0500A940[];
-extern const Gfx king_bobomb_seg5_dl_0500A978[];
-extern const Gfx king_bobomb_seg5_dl_0500ABC0[];
-extern const Gfx king_bobomb_seg5_dl_0500AD08[];
-extern const Gfx king_bobomb_seg5_dl_0500AF20[];
-extern const Gfx king_bobomb_seg5_dl_0500B068[];
-extern const Gfx king_bobomb_seg5_sub_dl_body_left_side[];
-extern const Gfx king_bobomb_seg5_sub_dl_body_right_side[];
-extern const Gfx king_bobomb_seg5_dl_body[];
-extern const Gfx king_bobomb_seg5_dl_eyes[];
-extern const Gfx king_bobomb_seg5_dl_eyes_blink[];
-extern const Gfx king_bobomb_seg5_dl_0500B3C8[];
-extern const Gfx king_bobomb_seg5_dl_0500B418[];
-extern const Gfx king_bobomb_seg5_dl_0500B5F0[];
-extern const Gfx king_bobomb_seg5_dl_0500B6C0[];
-extern const struct Animation *const king_bobomb_seg5_anims_0500FE30[];
+#include "shy_guy/geo_header.h"
 
-// water_bubble
-extern const GeoLayout water_bomb_geo[];
-extern const GeoLayout water_bomb_shadow_geo[];
-extern const Gfx water_bubble_seg5_dl_05010D30[];
-extern const Gfx water_bubble_seg5_dl_05011000[];
+#include "shy_guy/anim_header.h"
+#include "shyguy_mask/geo_header.h"
+
+#include "estalactite/geo_header.h"
+
+#include "scuba_guy/geo_header.h"
+
+
+#include "scuba_guy/anim_header.h"
+#include "shy_guy_buoy/geo_header.h"
+
+
+#include "shy_guy_buoy/anim_header.h"
+#include "pillar/geo_header.h"
+
+#include "pillar/collision_header.h"
+
+#include "pillar_ice/collision_header.h"
 
 #endif

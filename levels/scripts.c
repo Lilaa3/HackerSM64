@@ -105,6 +105,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_MODEL_FROM_GEO(MODEL_BOWSER_KEY,              bowser_key_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_FLAME_SHADOW,        red_flame_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_1UP,                     mushroom_1up_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_EXCLAMATION_MARK,        exclamation_mark_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_COIN,                red_coin_geo),
     LOAD_MODEL_FROM_GEO(MODEL_RED_COIN_NO_SHADOW,      red_coin_no_shadow_geo),
     LOAD_MODEL_FROM_GEO(MODEL_NUMBER,                  number_geo),
@@ -219,9 +220,12 @@ const LevelScript script_func_global_3[] = {
 };
 
 const LevelScript script_func_global_4[] = {
-    LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB,              water_bomb_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_WATER_BOMB_SHADOW,       water_bomb_shadow_geo),
-    LOAD_MODEL_FROM_GEO(MODEL_KING_BOBOMB,             king_bobomb_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_SHYGUY,              shyguy_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_SHYGUY_MASK,         shyguy_mask_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_ESTALACTITE,         estalactite_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_SCUBAGUY,            scuba_guy_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_SHYGUY_BUOY,         shy_guy_buoy_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_BOB_PILLAR,              pillar_geo),
     RETURN(),
 };
 

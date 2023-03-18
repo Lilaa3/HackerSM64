@@ -549,6 +549,23 @@ void bhv_intro_scene_loop(void);
 void bhv_dust_smoke_loop(void);
 void bhv_yoshi_loop(void);
 void bhv_volcano_trap_loop(void);
+void bhv_shyguy_init(void);
+void bhv_shyguy_loop(void);
+void bhv_shyguy_spawner_init(void);
+void bhv_shyguy_spawner_loop(void);
+void bhv_shyguy_mask_init(void);
+void bhv_shyguy_mask_loop(void);
+void bhv_estalactite_init(void);
+void bhv_estalactite_loop(void);
+void bhv_s_loop(void);
+void bhv_scubbaguy_init(void);
+void bhv_scubbaguy_loop(void);
+void bhv_area_controller_init(void);
+void bhv_area_controller_loop(void);
+void bhv_shy_guy_buoy_init(void);
+void bhv_shy_guy_buoy_loop(void);
+void bhv_pillar_init(void);
+void bhv_pillar_loop(void);
 
 Gfx *geo_move_mario_part_from_parent(s32 callContext, UNUSED struct GraphNode *node, Mat4 mtx);
 
@@ -573,5 +590,7 @@ Gfx *geo_scale_bowser_key(s32 callContext, struct GraphNode *node, UNUSED Mat4 m
 // Water splash
 extern struct WaterDropletParams gShallowWaterSplashDropletParams;
 extern struct WaterDropletParams gShallowWaterWaveDropletParams;
+
+Gfx *geo_pillar_puzzle(s32 callContext, struct GraphNode *node, UNUSED void *context);
 
 #endif // BEHAVIOR_ACTIONS_H

@@ -52,7 +52,7 @@ void bhv_water_bomb_spawner_update(void) {
                 waterBomb->oPosZ =
                     gMarioObject->oPosZ + waterBombDistToMario * coss(gMarioObject->oMoveAngleYaw);
 
-                spawn_object(waterBomb, MODEL_WATER_BOMB_SHADOW, bhvWaterBombShadow);
+                //spawn_object(waterBomb, MODEL_WATER_BOMB_SHADOW, bhvWaterBombShadow);
 
                 o->oWaterBombSpawnerBombActive = TRUE;
                 o->oWaterBombSpawnerTimeToSpawn = random_linear_offset(0, 50);

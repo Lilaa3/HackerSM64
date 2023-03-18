@@ -507,10 +507,17 @@ Gfx *geo_switch_mario_cap_on_off(s32 callContext, struct GraphNode *node, UNUSED
     struct MarioBodyState *bodyState = &gBodyStates[switchCase->numCases];
 
     if (callContext == GEO_CONTEXT_RENDER) {
-        switchCase->selectedCase = bodyState->capState & MARIO_HAS_DEFAULT_CAP_OFF;
+        if (bodyState->capState == MARIO_HAS_DEFAULT_CAP_OFF){
+            switchCase->selectedCase = 1;
+        } else if (bodyState->capState == MARIO_HAS_SHYGUY_MASK_ON){
+            switchCase->selectedCase = 2;
+        } else{
+            switchCase->selectedCase = 0;
+        }
+
         while (next != node) {
             if (next->type == GRAPH_NODE_TYPE_TRANSLATION_ROTATION) {
-                COND_BIT((bodyState->capState & MARIO_HAS_WING_CAP_ON), next->flags, GRAPH_RENDER_ACTIVE);
+                COND_BIT((bodyState->capState == MARIO_HAS_WING_CAP_ON), next->flags, GRAPH_RENDER_ACTIVE);
             }
             next = next->next;
         }

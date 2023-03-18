@@ -369,7 +369,7 @@ enum GeoLayoutCommands {
  */
 #define GEO_SHADOW(type, solidity, scale) \
     CMD_BBH(GEO_CMD_NODE_SHADOW, 0x00, type), \
-    CMD_HH(solidity, scale)
+    CMD_HH(solidity / 1.3, scale)
 
 /**
  * 0x17: Create render object scene graph node

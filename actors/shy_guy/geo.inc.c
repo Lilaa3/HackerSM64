@@ -1,0 +1,25 @@
+#include "src/game/envfx_snow.h"
+
+const GeoLayout shyguy_geo[] = {
+	GEO_CULLING_RADIUS(153),
+	GEO_OPEN_NODE(),
+		GEO_SHADOW(1, 255, 120),
+		GEO_OPEN_NODE(),
+			GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 0, -14, shy_guy_Bone_mesh_layer_1),
+			GEO_OPEN_NODE(),
+				GEO_DISPLAY_LIST(LAYER_OPAQUE, shy_guy_Bone_002_skinned_mesh_layer_1),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, 0, 125, -20, shy_guy_Bone_002_mesh_layer_1),
+				GEO_DISPLAY_LIST(LAYER_OPAQUE, shy_guy_Bone_L_001_skinned_mesh_layer_1),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, -18, 45, 3, shy_guy_Bone_L_001_mesh_layer_1),
+				GEO_DISPLAY_LIST(LAYER_OPAQUE, shy_guy_Bone_L_002_skinned_mesh_layer_1),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, -41, 68, 0, shy_guy_Bone_L_002_mesh_layer_1),
+				GEO_DISPLAY_LIST(LAYER_OPAQUE, shy_guy_Bone_R_001_skinned_mesh_layer_1),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, 18, 45, 3, shy_guy_Bone_R_001_mesh_layer_1),
+				GEO_DISPLAY_LIST(LAYER_OPAQUE, shy_guy_Bone_R_002_skinned_mesh_layer_1),
+				GEO_ANIMATED_PART(LAYER_OPAQUE, 41, 68, 0, shy_guy_Bone_R_002_mesh_layer_1),
+			GEO_CLOSE_NODE(),
+		GEO_CLOSE_NODE(),
+		GEO_DISPLAY_LIST(LAYER_OPAQUE, shy_guy_material_revert_render_settings),
+	GEO_CLOSE_NODE(),
+	GEO_END(),
+};

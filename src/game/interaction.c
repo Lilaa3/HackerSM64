@@ -128,6 +128,8 @@ u32 get_mario_cap_flag(struct Object *capObject) {
         return MARIO_WING_CAP;
     } else if (script == bhvVanishCap) {
         return MARIO_VANISH_CAP;
+    } else if (script == bhvShyGuyMask) {
+        return MARIO_SHYGUY_MASK;
     }
 
     return 0;
@@ -1577,14 +1579,16 @@ u32 interact_cap(struct MarioState *m, UNUSED u32 interactType, struct Object *o
             case MARIO_VANISH_CAP: capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
             case MARIO_METAL_CAP:  capTime =  600; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_METAL_CAP); break;
             case MARIO_WING_CAP:   capTime = 1800; capMusic = SEQUENCE_ARGS(4, SEQ_EVENT_POWERUP  ); break;
+            case MARIO_SHYGUY_MASK:capTime = 6 * 30; capMusic = 0; break;
         }
 
         if (capTime > m->capTimer) {
             m->capTimer = capTime;
         }
 
-        if ((m->action & ACT_FLAG_IDLE) || m->action == ACT_WALKING) {
+        if ((m->action & ACT_FLAG_IDLE) || m->action == ACT_WALKING || capFlag != MARIO_SHYGUY_MASK) {
             m->flags |= MARIO_CAP_IN_HAND;
+
             set_mario_action(m, ACT_PUTTING_ON_CAP, 0);
         } else {
             m->flags |= MARIO_CAP_ON_HEAD;

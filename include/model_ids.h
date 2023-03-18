@@ -327,8 +327,12 @@
 
 // group 3
 #define MODEL_WATER_BOMB                  0x54        // water_bomb_geo
-#define MODEL_WATER_BOMB_SHADOW           0x55        // water_bomb_shadow_geo
-#define MODEL_KING_BOBOMB                 0x56        // king_bobomb_geo
+#define MODEL_BOB_SHYGUY                  0x55        // shyguy_geo
+#define MODEL_BOB_SHYGUY_MASK             0x56        // shyguy_mask_geo
+#define MODEL_BOB_ESTALACTITE             0x57        // estalactite_geo
+#define MODEL_BOB_SCUBAGUY                0x58        // scuba_guy_geo
+#define MODEL_BOB_SHYGUY_BUOY             0x59        // shy_guy_buoy_geo
+#define MODEL_BOB_PILLAR                  0x5A        // pillar_geo
 
 // group 4
 #define MODEL_MANTA_RAY                   0x54        // manta_seg5_geo_05008D14
@@ -529,7 +533,7 @@
 #define MODEL_CASTLE_STAR_DOOR_30_STARS   0xD0        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_50_STARS   0xD1        // castle_geo_000F00
 #define MODEL_CCM_SNOWMAN_BASE            0xD2        // ccm_geo_0003F0
-// find me
+#define MODEL_EXCLAMATION_MARK            0xD3        // exclamation_mark_geo
 #define MODEL_1UP                         0xD4        // mushroom_1up_geo
 #define MODEL_CASTLE_STAR_DOOR_8_STARS    0xD5        // castle_geo_000F00
 #define MODEL_CASTLE_STAR_DOOR_70_STARS   0xD6        // castle_geo_000F00

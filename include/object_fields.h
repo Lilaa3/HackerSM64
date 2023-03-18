@@ -1254,6 +1254,19 @@
 #define /*0x0FC*/ oYoshiChosenHome OBJECT_FIELD_S32(0x1D)
 #define /*0x100*/ oYoshiTargetYaw  OBJECT_FIELD_S32(0x1E)
 
+/* Shyguy spawner */
+#define oShyguySpawnerCount OBJECT_FIELD_S32(0x1B)
+
+/* Scubba guy */
+#define oScubbaGuyTargetVecIndex 0x1B
+#define oScubbaGuyTargetVec OBJECT_FIELD_F32(oScubbaGuyTargetVecIndex) // 1b
+#define oScubbaGuyTargetX OBJECT_FIELD_F32(oScubbaGuyTargetVecIndex) // 1c
+#define oScubbaGuyTargetY OBJECT_FIELD_F32(oScubbaGuyTargetVecIndex + 1) // 1d
+#define oScubbaGuyTargetZ OBJECT_FIELD_F32(oScubbaGuyTargetVecIndex + 2) // 1e
+#define oScubbaGuyTargetYaw OBJECT_FIELD_S32(0x01F)
+
+/* Orange number */
+#define oOrangeNumberScale OBJECT_FIELD_F32(0x1B)
 
 /*Custom general defines:
 

@@ -28,7 +28,7 @@ enum MarioCapGSCId {
     /*0x00*/ MARIO_HAS_DEFAULT_CAP_ON,
     /*0x01*/ MARIO_HAS_DEFAULT_CAP_OFF,
     /*0x02*/ MARIO_HAS_WING_CAP_ON,
-    /*0x03*/ MARIO_HAS_WING_CAP_OFF // unused
+    /*0x03*/ MARIO_HAS_SHYGUY_MASK_ON // unused
 };
 
 enum MarioGrabPosGSCId {

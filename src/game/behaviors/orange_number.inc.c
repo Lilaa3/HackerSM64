@@ -3,6 +3,7 @@
 void bhv_orange_number_init(void) {
     o->oAnimState = o->oBehParams2ndByte;
     o->oVelY = 26.0f;
+    o->oOrangeNumberScale = 0.1f;
 }
 
 void bhv_orange_number_loop(void) {
@@ -26,4 +27,10 @@ void bhv_orange_number_loop(void) {
         obj_mark_for_deletion(o);
     }
 #endif
+
+    o->oOrangeNumberScale = approach_f32_asymptotic(o->oOrangeNumberScale, 1.f, o->oOrangeNumberScale / 5.f);
+
+    o->header.gfx.scale[0] = o->oOrangeNumberScale;
+    o->header.gfx.scale[1] = o->oOrangeNumberScale;
+    o->header.gfx.scale[2] = o->oOrangeNumberScale;
 }

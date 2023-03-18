@@ -9,6 +9,28 @@
 #include "envfx_snow.h"
 #include "level_geo.h"
 
+extern struct MarioState *gMarioState;
+
+Gfx *geo_shyguy_mask_render(s32 callContext, struct GraphNode *node, Mat4 mtxf) {
+    if (callContext == GEO_CONTEXT_RENDER && gCurGraphNodeCamera != NULL) {
+        struct GraphNode *next = node->next;
+        struct GraphNodeGenerated* asGenerated = (struct GraphNodeGenerated *) node;
+        if (asGenerated->parameter == 1){
+            if (!(gMarioState->flags & MARIO_SHYGUY_MASK))
+                next->flags |= GRAPH_RENDER_ACTIVE;
+            else
+                next->flags &= ~GRAPH_RENDER_ACTIVE;
+        }
+        if (asGenerated->parameter == 0){
+            if ((gMarioState->flags & MARIO_SHYGUY_MASK))
+                next->flags |= GRAPH_RENDER_ACTIVE;
+            else
+                next->flags &= ~GRAPH_RENDER_ACTIVE;
+        }
+    }
+    return NULL;
+}
+
 /**
  * Geo function that generates a displaylist for environment effects such as
  * snow or jet stream bubbles.
