@@ -22,6 +22,8 @@
 #include "config.h"
 #include "config/config_world.h"
 
+#include "particle_system.h"
+
 /**
  * This file contains the code that processes the scene graph for rendering.
  * The scene graph is responsible for drawing everything except the HUD / text boxes.
@@ -522,6 +524,7 @@ void geo_process_master_list(struct GraphNodeMasterList *node) {
             }
         }
         geo_process_node_and_siblings(node->node.children);
+        render_particles(1);
         geo_process_master_list_sub(gCurGraphNodeMasterList);
         gCurGraphNodeMasterList = NULL;
     }
