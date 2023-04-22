@@ -27,6 +27,7 @@
 #include "spawn_object.h"
 #include "spawn_sound.h"
 #include "puppylights.h"
+#include "particle_system.h"
 
 static s8 sLevelsWithRooms[] = { LEVEL_BBH, LEVEL_CASTLE, LEVEL_HMC, -1 };
 
@@ -936,7 +937,7 @@ struct Surface *cur_obj_update_floor_height_and_get_floor(void) {
     return floor;
 }
 
-static void apply_drag_to_value(f32 *value, f32 dragStrength) {
+void apply_drag_to_value(f32 *value, f32 dragStrength) {
     f32 decel;
 
     if (*value != 0) {
@@ -1669,39 +1670,125 @@ s32 cur_obj_reflect_move_angle_off_wall(void) {
     return (s16)(o->oWallAngle - ((s16) o->oMoveAngleYaw - (s16) o->oWallAngle) + 0x8000);
 }
 
+ALIGNED8 static const Texture mist_seg3_texture_03000080[] = {
+#include "actors/mist/mist.ia16.inc.c"
+};
+
+Gfx mistFrame0[] = {
+    gsDPPipeSync(),
+    gsSPClearGeometryMode(G_LIGHTING),
+    gsDPSetCombineMode(G_CC_MODULATEIFADEA, G_CC_MODULATEIFADEA),
+    gsDPLoadTextureBlock(mist_seg3_texture_03000080, G_IM_FMT_IA, G_IM_SIZ_16b, 32, 32, 0, G_TX_CLAMP, G_TX_CLAMP, 5, 5, G_TX_NOLOD, G_TX_NOLOD),
+    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
+    gsSPEndDisplayList(),
+};
+
+Gfx *mistMat[] = {mistFrame0,};
+
+static Vtx particleVertex[] = {
+    {{{   -25,    -25,      0}, 0, {     0,    992}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{    25,    -25,      0}, 0, {   992,    992}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{    25,     25,      0}, 0, {   992,      0}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{   -25,     25,      0}, 0, {     0,      0}, {0xff, 0xff, 0xff, 0xff}}},
+};
+
+Gfx particleDl[] = {
+    gsDPPipeSync(),
+    gsSPVertex(particleVertex, 4, 0),
+    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
+    gsSPEndDisplayList(),
+};
+
+struct ParticalMaterial mistMaterial = {
+    /*Gfx **frames;*/ mistMat,
+    /*Gfx *displayList;*/ particleDl,
+    /*u8 frameAmount;*/ 1
+};
+
+struct SpawnFastParticlesInfo newInfo;
+
 void cur_obj_spawn_particles(struct SpawnParticlesInfo *info) {
-    struct Object *particle;
-    s32 i;
-    f32 scale;
-    s32 numParticles = info->count;
+    print_text_fmt_int(30, 30, "ID - %d", info->model);
 
-    // If there are a lot of objects already, limit the number of particles
-    if ((gPrevFrameObjectCount > (OBJECT_POOL_CAPACITY - 90)) && numParticles > 10) {
-        numParticles = 10;
+    newInfo.count = info->count;
+    
+    newInfo.scaleBase = info->sizeBase * 0.1f;
+    newInfo.scaleRange = info->sizeRange * 0.1f;
+
+    newInfo.gravity = info->gravity * 0.5f;
+    newInfo.dragStrength = info->dragStrength * 0.5f;
+
+    newInfo.offsetY = info->offsetY;
+
+    newInfo.forwardVelRange = info->forwardVelRange * 0.5f;
+    newInfo.forwardVelBase = info->forwardVelBase * 0.5f;
+
+    newInfo.velYBase = info->velYBase * 0.5f;
+    newInfo.velYRange = info->velYRange * 0.5f;
+    newInfo.maxYVel = 100.f * 0.5f;
+
+    newInfo.despawnTime = 20;
+    
+    newInfo.r = 255;
+    newInfo.g = 255;
+    newInfo.b = 255;
+
+    newInfo.tR = 255;
+    newInfo.tG = 255;
+    newInfo.tB = 255;
+
+    newInfo.opacity = 255;
+
+    if (info->behParam == 2 || info->behParam == 3){
+        if (info->behParam == 2){
+            newInfo.opacityVel = -21;
+            newInfo.scaleVel = newInfo.scaleBase * (newInfo.opacityVel / 255.0f);
+        }
+        else if (info->behParam == 3){
+            newInfo.opacityVel = -13;
+            newInfo.scaleVel = newInfo.scaleBase * (-newInfo.opacityVel / 255.0f);
+        }
+
+        f32 despawnByOpacity = (newInfo.opacity - 2) / -newInfo.opacityVel;
+
+        if (despawnByOpacity < newInfo.despawnTime){
+            newInfo.despawnTime = despawnByOpacity;
+        }
+
+        newInfo.opacityVel /= 2;
+        newInfo.scaleVel *= 0.5f;
     }
 
-    // We're close to running out of object slots, so don't spawn particles at
-    // all
-    if (gPrevFrameObjectCount > (OBJECT_POOL_CAPACITY - 30)) {
-        numParticles = 0;
+    newInfo.despawnTime *= 2;
+
+    newInfo.isBillboard = TRUE;
+
+    switch (info->model)
+    {
+        case MODEL_MIST:
+            newInfo.material = &mistMaterial;
+            break;
+        case MODEL_SAND_DUST:
+            newInfo.material = &mistMaterial;
+            break;
+        case MODEL_WHITE_PARTICLE_DL:
+            newInfo.material = &mistMaterial;
+            break;
+        case MODEL_PEBBLE:
+            newInfo.material = &mistMaterial;
+            break;
+        case MODEL_WHITE_PARTICLE:
+            newInfo.material = &mistMaterial;
+            break;
+        case MODEL_WHITE_PARTICLE_SMALL:
+            newInfo.material = &mistMaterial;
+            break;
+        case MODEL_BUBBLE:
+            newInfo.material = &mistMaterial;
+            break;
     }
 
-    for (i = 0; i < numParticles; i++) {
-        scale = random_float() * (info->sizeRange * 0.1f) + info->sizeBase * 0.1f;
-
-        particle = spawn_object(o, info->model, bhvWhitePuffExplosion);
-
-        particle->oBehParams2ndByte = info->behParam;
-        particle->oMoveAngleYaw = random_u16();
-        particle->oGravity = info->gravity;
-        particle->oDragStrength = info->dragStrength;
-
-        particle->oPosY += info->offsetY;
-        particle->oForwardVel = random_float() * info->forwardVelRange + info->forwardVelBase;
-        particle->oVelY = random_float() * info->velYRange + info->velYBase;
-
-        obj_scale(particle, scale);
-    }
+    spawn_fast_particle(&o->oPosVec, newInfo);
 }
 
 void obj_set_hitbox(struct Object *obj, struct ObjectHitbox *hitbox) {
