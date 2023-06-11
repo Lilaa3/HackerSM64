@@ -3806,7 +3806,7 @@ const BehaviorScript bhvSignOnWall[] = {
 const BehaviorScript bhvHomingAmp[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, dAmpAnimsList),
+    LOAD_ANIMATIONS(oAnimations, amp_anims),
     ANIMATE(AMP_ANIM_DEFAULT),
     SET_FLOAT(oGraphYOffset, 40),
     SET_INT(oIntangibleTimer, 0),
@@ -3819,7 +3819,7 @@ const BehaviorScript bhvHomingAmp[] = {
 const BehaviorScript bhvCirclingAmp[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_MOVE_XZ_USING_FVEL | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, dAmpAnimsList),
+    LOAD_ANIMATIONS(oAnimations, amp_anims),
     ANIMATE(AMP_ANIM_DEFAULT),
     SET_FLOAT(oGraphYOffset, 40),
     SET_INT(oIntangibleTimer, 0),
