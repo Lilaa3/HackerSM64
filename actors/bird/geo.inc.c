@@ -1,7 +1,7 @@
 #include "src/game/envfx_snow.h"
 
 const GeoLayout birds_geo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(62),
 	GEO_OPEN_NODE(),
 		GEO_SHADOW(0, 150, 100),
 		GEO_OPEN_NODE(),
