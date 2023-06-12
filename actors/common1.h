@@ -3,15 +3,6 @@
 
 #include "types.h"
 
-// blue_fish
-extern const GeoLayout fish_shadow_geo[];
-extern const GeoLayout fish_geo[];
-extern const Gfx blue_fish_seg3_dl_0301BEC0[];
-extern const Gfx blue_fish_seg3_dl_0301BFB8[];
-extern const Gfx blue_fish_seg3_dl_0301C0A8[];
-extern const Gfx blue_fish_seg3_dl_0301C150[];
-extern const struct Animation *const blue_fish_seg3_anims_0301C2B0[];
-
 // bowser_key
 extern const GeoLayout bowser_key_geo[];
 extern const GeoLayout bowser_key_cutscene_geo[];
@@ -293,5 +284,9 @@ extern const Gfx wooden_signpost_seg3_dl_0302DC40[];
 extern const Gfx wooden_signpost_seg3_dl_0302DCD0[];
 extern const Gfx wooden_signpost_seg3_dl_0302DD08[];
 extern const Collision wooden_signpost_seg3_collision_0302DD80[];
+
+// blue_fish
+#include "blue_fish/geo_header.h"
+#include "blue_fish/anim_header.h"
 
 #endif
