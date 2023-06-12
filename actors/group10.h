@@ -3,14 +3,6 @@
 
 #include "types.h"
 
-// bird
-extern const GeoLayout birds_geo[];
-extern const Gfx birds_seg5_dl_05000528[];
-extern const Gfx birds_seg5_dl_05000598[];
-extern const Gfx birds_seg5_dl_05000600[];
-extern const Gfx birds_seg5_dl_05000670[];
-extern const struct Animation *const birds_seg5_anims_050009E8[];
-
 // peach
 extern const GeoLayout peach_geo_000098[];
 extern const GeoLayout peach_geo_000254[];
@@ -93,5 +85,9 @@ extern const Gfx yoshi_seg5_dl_050222A8[];
 extern const Gfx yoshi_seg5_dl_05022408[];
 extern const Gfx yoshi_seg5_dl_05022608[];
 extern const struct Animation *const yoshi_seg5_anims_05024100[];
+
+// bird
+#include "bird/geo_header.h"
+#include "bird/anim_header.h"
 
 #endif
