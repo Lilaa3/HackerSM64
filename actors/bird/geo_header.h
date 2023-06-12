@@ -1,0 +1,13 @@
+extern const GeoLayout birds_geo[];
+extern Lights1 bird_blue_lights;
+extern Lights1 bird_white_lights;
+extern Lights1 bird_beak_lights;
+extern Vtx bird_body_mesh_layer_1_vtx_0[22];
+extern Vtx bird_body_mesh_layer_1_vtx_1[13];
+extern Vtx bird_body_mesh_layer_1_vtx_2[4];
+extern Vtx bird_left_wing_mesh_layer_1_vtx_0[9];
+extern Vtx bird_right_wing_mesh_layer_1_vtx_0[9];
+extern Gfx bird_body_mesh_layer_1[];
+extern Gfx bird_left_wing_mesh_layer_1[];
+extern Gfx bird_right_wing_mesh_layer_1[];
+extern Gfx bird_material_revert_render_settings[];

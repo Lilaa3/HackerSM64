@@ -5867,7 +5867,7 @@ const BehaviorScript bhvKlepto[] = {
 const BehaviorScript bhvBird[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, birds_seg5_anims_050009E8),
+    LOAD_ANIMATIONS(oAnimations, bird_anims),
     ANIMATE(BIRD_ANIM_FLY),
     HIDE(),
     SCALE(/*Unused*/ 0, /*Field*/ 70),
@@ -6062,7 +6062,7 @@ const BehaviorScript bhvBeginningPeach[] = {
 const BehaviorScript bhvEndBirds1[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, birds_seg5_anims_050009E8),
+    LOAD_ANIMATIONS(oAnimations, bird_anims),
     ANIMATE(END_BIRDS_ANIM_FLY),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_end_birds_1_loop),
@@ -6072,7 +6072,7 @@ const BehaviorScript bhvEndBirds1[] = {
 const BehaviorScript bhvEndBirds2[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, (OBJ_FLAG_SET_FACE_ANGLE_TO_MOVE_ANGLE | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, birds_seg5_anims_050009E8),
+    LOAD_ANIMATIONS(oAnimations, bird_anims),
     ANIMATE(END_BIRDS_ANIM_FLY),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_end_birds_2_loop),

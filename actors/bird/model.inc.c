@@ -1,215 +1,166 @@
-// Birds
+Lights1 bird_blue_lights = gdSPDefLights1(
+	0xC, 0x5D, 0x72,
+	0x1D, 0x91, 0xB0, 0x28, 0x28, 0x28);
 
-// 0x05000000
-static const Lights1 birds_seg5_lights_05000000 = gdSPDefLights1(
-    0x07, 0x24, 0x2c,
-    0x1d, 0x91, 0xb0, 0x28, 0x28, 0x28
-);
+Lights1 bird_white_lights = gdSPDefLights1(
+	0x3F, 0x3F, 0x3F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-// 0x05000018
-static const Lights1 birds_seg5_lights_05000018 = gdSPDefLights1(
-    0x33, 0x27, 0x0d,
-    0xce, 0x9d, 0x34, 0x28, 0x28, 0x28
-);
+Lights1 bird_beak_lights = gdSPDefLights1(
+	0x33, 0x27, 0xD,
+	0xCE, 0x9D, 0x34, 0x28, 0x28, 0x28);
 
-// 0x05000030
-static const Lights1 birds_seg5_lights_05000030 = gdSPDefLights1(
-    0x3f, 0x3f, 0x3f,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
-
-// 0x05000048
-static const Vtx birds_seg5_vertex_05000048[] = {
-    {{{   178,      2,     39}, 0, {     0,      0}, {0x0d, 0x7e, 0x00, 0x00}}},
-    {{{   122,     -4,    -33}, 0, {     0,      0}, {0x10, 0x79, 0xde, 0x00}}},
-    {{{    97,     10,     13}, 0, {     0,      0}, {0x0b, 0x7e, 0xff, 0x00}}},
-    {{{    47,      4,     47}, 0, {     0,      0}, {0xfe, 0x7c, 0x1b, 0xff}}},
-    {{{    53,     14,      7}, 0, {     0,      0}, {0xfe, 0x7e, 0xf8, 0xff}}},
-    {{{     0,      5,     32}, 0, {     0,      0}, {0xf0, 0x7d, 0x03, 0xff}}},
-    {{{    27,      9,     16}, 0, {     0,      0}, {0xee, 0x7d, 0x05, 0xff}}},
-    {{{    53,     -8,    -58}, 0, {     0,      0}, {0x0a, 0x78, 0xd8, 0xff}}},
-    {{{    -4,     -6,    -64}, 0, {     0,      0}, {0xf1, 0x7b, 0xe9, 0xff}}},
+Vtx bird_body_mesh_layer_1_vtx_0[22] = {
+	{{ {-38, -8, -4}, 0, {-16, -16}, {38, 135, 0, 255} }},
+	{{ {-20, -2, 0}, 0, {-16, -16}, {38, 135, 0, 255} }},
+	{{ {-38, -8, 4}, 0, {-16, -16}, {38, 135, 0, 255} }},
+	{{ {-38, -5, 2}, 0, {-16, -16}, {22, 148, 63, 255} }},
+	{{ {-22, -3, 0}, 0, {-16, -16}, {22, 148, 63, 255} }},
+	{{ {-36, -2, 7}, 0, {-16, -16}, {22, 148, 63, 255} }},
+	{{ {-36, -2, -7}, 0, {-16, -16}, {22, 148, 193, 255} }},
+	{{ {-22, -3, 0}, 0, {-16, -16}, {22, 148, 193, 255} }},
+	{{ {-38, -5, -2}, 0, {-16, -16}, {22, 148, 193, 255} }},
+	{{ {17, 1, -10}, 0, {-16, -16}, {61, 24, 147, 255} }},
+	{{ {20, -13, -5}, 0, {-16, -16}, {30, 162, 176, 255} }},
+	{{ {0, 0, -14}, 0, {-16, -16}, {236, 209, 140, 255} }},
+	{{ {28, 0, -2}, 0, {-16, -16}, {76, 56, 170, 255} }},
+	{{ {28, -6, 0}, 0, {-16, -16}, {106, 185, 0, 255} }},
+	{{ {21, -14, 0}, 0, {-16, -16}, {40, 135, 0, 255} }},
+	{{ {20, -13, 5}, 0, {-16, -16}, {30, 162, 80, 255} }},
+	{{ {28, 0, 2}, 0, {-16, -16}, {76, 56, 86, 255} }},
+	{{ {17, 1, 10}, 0, {-16, -16}, {61, 24, 109, 255} }},
+	{{ {0, 0, 14}, 0, {-16, -16}, {236, 209, 116, 255} }},
+	{{ {-2, -8, 0}, 0, {-16, -16}, {225, 133, 0, 255} }},
+	{{ {-26, -2, 3}, 0, {-16, -16}, {153, 212, 60, 255} }},
+	{{ {-26, -2, -3}, 0, {-16, -16}, {153, 212, 196, 255} }},
 };
 
-// 0x050000D8
-static const Vtx birds_seg5_vertex_050000D8[] = {
-    {{{  -143,     -7,    -29}, 0, {     0,      0}, {0x16, 0x94, 0xc2, 0x00}}},
-    {{{   -86,    -11,     -2}, 0, {     0,      0}, {0x16, 0x94, 0xc2, 0x00}}},
-    {{{  -154,    -21,     -9}, 0, {     0,      0}, {0x16, 0x94, 0xc2, 0x00}}},
+Vtx bird_body_mesh_layer_1_vtx_1[13] = {
+	{{ {17, 1, 10}, 0, {-16, -16}, {61, 24, 109, 255} }},
+	{{ {2, 12, 14}, 0, {-16, -16}, {3, 72, 105, 255} }},
+	{{ {0, 0, 14}, 0, {-16, -16}, {236, 209, 116, 255} }},
+	{{ {4, 20, 0}, 0, {-16, -16}, {18, 126, 0, 255} }},
+	{{ {17, 8, 0}, 0, {-16, -16}, {78, 101, 0, 255} }},
+	{{ {28, 0, 2}, 0, {-16, -16}, {76, 56, 86, 255} }},
+	{{ {28, 0, -2}, 0, {-16, -16}, {76, 56, 170, 255} }},
+	{{ {17, 1, -10}, 0, {-16, -16}, {61, 24, 147, 255} }},
+	{{ {2, 12, -14}, 0, {-16, -16}, {3, 72, 151, 255} }},
+	{{ {0, 0, -14}, 0, {-16, -16}, {236, 209, 140, 255} }},
+	{{ {-26, -2, -3}, 0, {-16, -16}, {153, 212, 196, 255} }},
+	{{ {-22, 5, 0}, 0, {-16, -16}, {166, 90, 0, 255} }},
+	{{ {-26, -2, 3}, 0, {-16, -16}, {153, 212, 60, 255} }},
 };
 
-// 0x05000108
-static const Vtx birds_seg5_vertex_05000108[] = {
-    {{{  -154,    -21,      9}, 0, {     0,      0}, {0x16, 0x94, 0x3e, 0x00}}},
-    {{{   -86,    -11,      2}, 0, {     0,      0}, {0x16, 0x94, 0x3e, 0x00}}},
-    {{{  -143,     -7,     29}, 0, {     0,      0}, {0x16, 0x94, 0x3e, 0x00}}},
+Vtx bird_body_mesh_layer_1_vtx_2[4] = {
+	{{ {28, -6, 0}, 0, {-16, -16}, {106, 185, 0, 255} }},
+	{{ {28, 0, -2}, 0, {-16, -16}, {76, 56, 170, 255} }},
+	{{ {36, 0, 0}, 0, {-16, -16}, {125, 21, 0, 255} }},
+	{{ {28, 0, 2}, 0, {-16, -16}, {76, 56, 86, 255} }},
 };
 
-// 0x05000138
-static const Vtx birds_seg5_vertex_05000138[] = {
-    {{{  -152,    -30,    -17}, 0, {     0,      0}, {0x26, 0x87, 0x00, 0x00}}},
-    {{{   -80,     -7,      0}, 0, {     0,      0}, {0x26, 0x87, 0x00, 0x00}}},
-    {{{  -152,    -30,     17}, 0, {     0,      0}, {0x26, 0x87, 0x00, 0x00}}},
+Vtx bird_left_wing_mesh_layer_1_vtx_0[9] = {
+	{{ {13, 4, 2}, 0, {-16, -16}, {0, 127, 252, 255} }},
+	{{ {13, -2, -14}, 0, {-16, -16}, {9, 121, 217, 255} }},
+	{{ {-1, -2, -16}, 0, {-16, -16}, {249, 123, 227, 255} }},
+	{{ {24, 3, 3}, 0, {-16, -16}, {10, 127, 253, 255} }},
+	{{ {12, 1, 12}, 0, {-16, -16}, {254, 124, 28, 255} }},
+	{{ {7, 2, 4}, 0, {-16, -16}, {238, 126, 5, 255} }},
+	{{ {0, 1, 8}, 0, {-16, -16}, {239, 126, 2, 255} }},
+	{{ {44, 0, 10}, 0, {-16, -16}, {14, 126, 250, 255} }},
+	{{ {30, -1, -8}, 0, {-16, -16}, {12, 123, 226, 255} }},
 };
 
-// 0x05000168
-static const Vtx birds_seg5_vertex_05000168[] = {
-    {{{    97,     10,    -13}, 0, {     0,      0}, {0x0b, 0x7e, 0x01, 0x00}}},
-    {{{   122,     -4,     33}, 0, {     0,      0}, {0x10, 0x79, 0x22, 0x00}}},
-    {{{   178,      2,    -39}, 0, {     0,      0}, {0x0d, 0x7e, 0x00, 0x00}}},
-    {{{    47,      4,    -47}, 0, {     0,      0}, {0xfe, 0x7c, 0xe5, 0xff}}},
-    {{{    53,     14,     -7}, 0, {     0,      0}, {0xff, 0x7f, 0x02, 0xff}}},
-    {{{    27,      9,    -16}, 0, {     0,      0}, {0xf1, 0x7d, 0x06, 0xff}}},
-    {{{     0,      5,    -32}, 0, {     0,      0}, {0xf0, 0x7d, 0xfd, 0xff}}},
-    {{{    -4,     -6,     64}, 0, {     0,      0}, {0xf7, 0x7c, 0x14, 0xff}}},
-    {{{    53,     -8,     58}, 0, {     0,      0}, {0xfa, 0x79, 0x25, 0xff}}},
+Vtx bird_right_wing_mesh_layer_1_vtx_0[9] = {
+	{{ {7, 2, -4}, 0, {-16, -16}, {240, 126, 0, 255} }},
+	{{ {-1, -2, 16}, 0, {-16, -16}, {0, 125, 23, 255} }},
+	{{ {13, -2, 14}, 0, {-16, -16}, {2, 122, 34, 255} }},
+	{{ {0, 1, -8}, 0, {-16, -16}, {239, 126, 254, 255} }},
+	{{ {12, 1, -12}, 0, {-16, -16}, {254, 124, 228, 255} }},
+	{{ {13, 4, -2}, 0, {-16, -16}, {248, 126, 8, 255} }},
+	{{ {30, -1, 8}, 0, {-16, -16}, {15, 122, 32, 255} }},
+	{{ {24, 3, -3}, 0, {-16, -16}, {11, 127, 1, 255} }},
+	{{ {44, 0, -10}, 0, {-16, -16}, {14, 126, 6, 255} }},
 };
 
-// 0x050001F8
-static const Vtx birds_seg5_vertex_050001F8[] = {
-    {{{    69,      4,    -40}, 0, {     0,      0}, {0x40, 0x26, 0x9a, 0x00}}},
-    {{{    78,    -51,    -21}, 0, {     0,      0}, {0x27, 0xae, 0xa8, 0x00}}},
-    {{{    -1,      0,    -56}, 0, {     0,      0}, {0xf4, 0xc6, 0x90, 0x00}}},
-    {{{    69,      4,     40}, 0, {     0,      0}, {0x40, 0x26, 0x66, 0xff}}},
-    {{{    10,     48,     56}, 0, {     0,      0}, {0xef, 0x41, 0x6b, 0xff}}},
-    {{{    -1,      0,     56}, 0, {     0,      0}, {0xf4, 0xc6, 0x70, 0xff}}},
-    {{{   -88,     21,      0}, 0, {     0,      0}, {0xaa, 0x5d, 0x00, 0xff}}},
-    {{{  -103,    -10,    -11}, 0, {     0,      0}, {0xa7, 0x30, 0xb4, 0xff}}},
-    {{{  -103,    -10,     11}, 0, {     0,      0}, {0xa7, 0x30, 0x4c, 0xff}}},
-    {{{    83,    -57,      0}, 0, {     0,      0}, {0xdd, 0x87, 0x00, 0xff}}},
-    {{{    -9,    -30,      0}, 0, {     0,      0}, {0xe0, 0x86, 0x00, 0xff}}},
-    {{{   113,      0,    -10}, 0, {     0,      0}, {0x4e, 0x32, 0xab, 0xff}}},
-    {{{   113,      0,     10}, 0, {     0,      0}, {0x4e, 0x32, 0x55, 0xff}}},
-    {{{    78,    -51,     21}, 0, {     0,      0}, {0x27, 0xae, 0x58, 0xff}}},
-    {{{  -103,    -10,     11}, 0, {     0,      0}, {0xea, 0x88, 0x1f, 0xff}}},
-    {{{   113,    -23,      0}, 0, {     0,      0}, {0x62, 0xb0, 0x00, 0xff}}},
+
+Gfx bird_body_mesh_layer_1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_LIGHTING | G_SHADING_SMOOTH),
+	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
+	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsSPSetLights1(bird_blue_lights),
+	gsSPVertex(bird_body_mesh_layer_1_vtx_0 + 0, 22, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+	gsSP2Triangles(10, 9, 12, 0, 12, 13, 10, 0),
+	gsSP2Triangles(10, 13, 14, 0, 14, 13, 15, 0),
+	gsSP2Triangles(15, 13, 16, 0, 16, 17, 15, 0),
+	gsSP2Triangles(18, 15, 17, 0, 15, 18, 19, 0),
+	gsSP2Triangles(18, 20, 19, 0, 19, 20, 21, 0),
+	gsSP2Triangles(21, 11, 19, 0, 19, 11, 10, 0),
+	gsSP2Triangles(10, 14, 19, 0, 19, 14, 15, 0),
+	gsDPPipeSync(),
+	gsSPSetLights1(bird_white_lights),
+	gsSPVertex(bird_body_mesh_layer_1_vtx_1 + 0, 13, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
+	gsSP2Triangles(0, 4, 3, 0, 4, 0, 5, 0),
+	gsSP2Triangles(4, 5, 6, 0, 6, 7, 4, 0),
+	gsSP2Triangles(3, 4, 7, 0, 7, 8, 3, 0),
+	gsSP2Triangles(9, 8, 7, 0, 8, 9, 10, 0),
+	gsSP2Triangles(10, 11, 8, 0, 11, 10, 12, 0),
+	gsSP2Triangles(1, 11, 12, 0, 12, 2, 1, 0),
+	gsSP2Triangles(1, 3, 11, 0, 11, 3, 8, 0),
+	gsDPPipeSync(),
+	gsSPSetLights1(bird_beak_lights),
+	gsSPVertex(bird_body_mesh_layer_1_vtx_2 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
+	gsSP1Triangle(3, 0, 2, 0),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPPipeSync(),
+	gsSPEndDisplayList(),
 };
 
-// 0x050002F8
-static const Vtx birds_seg5_vertex_050002F8[] = {
-    {{{    83,    -57,      0}, 0, {     0,      0}, {0x60, 0xad, 0x00, 0xff}}},
-    {{{   113,    -23,      0}, 0, {     0,      0}, {0x62, 0xb0, 0x00, 0x00}}},
-    {{{    78,    -51,     21}, 0, {     0,      0}, {0x27, 0xae, 0x58, 0x00}}},
-    {{{    78,    -51,    -21}, 0, {     0,      0}, {0x27, 0xae, 0xa8, 0xff}}},
-    {{{  -103,    -10,    -11}, 0, {     0,      0}, {0xa7, 0x30, 0xb4, 0xff}}},
-    {{{   -88,     21,      0}, 0, {     0,      0}, {0xaa, 0x5d, 0x00, 0xff}}},
-    {{{    10,     48,    -56}, 0, {     0,      0}, {0xef, 0x41, 0x95, 0xff}}},
-    {{{    -1,      0,    -56}, 0, {     0,      0}, {0xf4, 0xc6, 0x90, 0xff}}},
-    {{{    10,     48,     56}, 0, {     0,      0}, {0xef, 0x41, 0x6b, 0xff}}},
-    {{{  -103,    -10,     11}, 0, {     0,      0}, {0xa7, 0x30, 0x4c, 0xff}}},
-    {{{  -103,    -10,    -11}, 0, {     0,      0}, {0xea, 0x88, 0xe1, 0xff}}},
-    {{{    -9,    -30,      0}, 0, {     0,      0}, {0xe0, 0x86, 0x00, 0xff}}},
-    {{{  -103,    -10,     11}, 0, {     0,      0}, {0xea, 0x88, 0x1f, 0xff}}},
-    {{{    83,    -57,      0}, 0, {     0,      0}, {0xdd, 0x87, 0x00, 0xff}}},
-    {{{    -1,      0,     56}, 0, {     0,      0}, {0xf4, 0xc6, 0x70, 0xff}}},
-    {{{    69,      4,    -40}, 0, {     0,      0}, {0x40, 0x26, 0x9a, 0xff}}},
+Gfx bird_left_wing_mesh_layer_1[] = {
+	gsDPPipeSync(),
+	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
+	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
+	gsSPSetLights1(bird_blue_lights),
+	gsSPVertex(bird_left_wing_mesh_layer_1_vtx_0 + 0, 9, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
+	gsSP2Triangles(0, 4, 3, 0, 5, 4, 0, 0),
+	gsSP2Triangles(0, 2, 5, 0, 5, 2, 6, 0),
+	gsSP2Triangles(6, 4, 5, 0, 3, 4, 7, 0),
+	gsSP2Triangles(7, 8, 3, 0, 3, 8, 1, 0),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPPipeSync(),
+	gsSPEndDisplayList(),
 };
 
-// 0x050003F8
-static const Vtx birds_seg5_vertex_050003F8[] = {
-    {{{    -1,      0,     56}, 0, {     0,      0}, {0xf4, 0xc6, 0x70, 0xff}}},
-    {{{    78,    -51,     21}, 0, {     0,      0}, {0x27, 0xae, 0x58, 0x00}}},
-    {{{    69,      4,     40}, 0, {     0,      0}, {0x40, 0x26, 0x66, 0x00}}},
+Gfx bird_right_wing_mesh_layer_1[] = {
+	gsDPPipeSync(),
+	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
+	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
+	gsSPVertex(bird_right_wing_mesh_layer_1_vtx_0 + 0, 9, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
+	gsSP2Triangles(0, 4, 3, 0, 5, 4, 0, 0),
+	gsSP2Triangles(0, 2, 5, 0, 5, 2, 6, 0),
+	gsSP2Triangles(5, 6, 7, 0, 7, 6, 8, 0),
+	gsSP2Triangles(8, 4, 7, 0, 7, 4, 5, 0),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsDPPipeSync(),
+	gsSPEndDisplayList(),
 };
 
-// 0x05000428
-static const Vtx birds_seg5_vertex_05000428[] = {
-    {{{    69,      4,    -40}, 0, {     0,      0}, {0x40, 0x26, 0x9a, 0x00}}},
-    {{{    10,     48,    -56}, 0, {     0,      0}, {0xef, 0x41, 0x95, 0x00}}},
-    {{{    18,     78,      0}, 0, {     0,      0}, {0x54, 0x5e, 0x00, 0x00}}},
-    {{{    10,     48,     56}, 0, {     0,      0}, {0xef, 0x41, 0x6b, 0xff}}},
-    {{{    18,     78,      0}, 0, {     0,      0}, {0xc4, 0x6f, 0x00, 0xff}}},
-    {{{   -88,     21,      0}, 0, {     0,      0}, {0xaa, 0x5d, 0x00, 0xff}}},
-    {{{   113,      0,    -10}, 0, {     0,      0}, {0x4e, 0x32, 0xab, 0xff}}},
-    {{{    69,     33,      0}, 0, {     0,      0}, {0x4b, 0x65, 0x00, 0xff}}},
-    {{{   113,      0,     10}, 0, {     0,      0}, {0x4e, 0x32, 0x55, 0xff}}},
-    {{{    69,      4,     40}, 0, {     0,      0}, {0x40, 0x26, 0x66, 0xff}}},
+Gfx bird_material_revert_render_settings[] = {
+	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_TEXTURE_GEN),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
+	gsDPSetEnvColor(255, 255, 255, 255),
+	gsDPSetAlphaCompare(G_AC_NONE),
+	gsSPEndDisplayList(),
 };
 
-// 0x050004C8
-static const Vtx birds_seg5_vertex_050004C8[] = {
-    {{{   113,    -23,      0}, 0, {     0,      0}, {0x62, 0xb0, 0x00, 0x00}}},
-    {{{   113,      0,    -10}, 0, {     0,      0}, {0x4e, 0x32, 0xab, 0x00}}},
-    {{{   143,     -2,      0}, 0, {     0,      0}, {0x24, 0xcb, 0x93, 0x00}}},
-    {{{   113,      0,     10}, 0, {     0,      0}, {0x4e, 0x32, 0x55, 0xff}}},
-    {{{   143,     -2,      0}, 0, {     0,      0}, {0x24, 0xcb, 0x6d, 0xff}}},
-    {{{   143,     -2,      0}, 0, {     0,      0}, {0x07, 0x7e, 0x00, 0xff}}},
-};
-
-// 0x05000528 - 0x05000598
-const Gfx birds_seg5_dl_05000528[] = {
-    gsSPLight(&birds_seg5_lights_05000000.l, 1),
-    gsSPLight(&birds_seg5_lights_05000000.a, 2),
-    gsSPVertex(birds_seg5_vertex_05000048, 9, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  2,  3,  0, 0x0),
-    gsSP2Triangles( 4,  3,  2, 0x0,  5,  3,  6, 0x0),
-    gsSP2Triangles( 4,  7,  8, 0x0,  4,  8,  6, 0x0),
-    gsSP2Triangles( 6,  8,  5, 0x0,  6,  3,  4, 0x0),
-    gsSP2Triangles( 2,  1,  7, 0x0,  2,  7,  4, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05000598 - 0x05000600
-const Gfx birds_seg5_dl_05000598[] = {
-    gsSPLight(&birds_seg5_lights_05000000.l, 1),
-    gsSPLight(&birds_seg5_lights_05000000.a, 2),
-    gsSPVertex(birds_seg5_vertex_050000D8, 3, 0),
-    gsSP1Triangle( 0,  1,  2, 0x0),
-    gsSPLight(&birds_seg5_lights_05000000.l, 1),
-    gsSPLight(&birds_seg5_lights_05000000.a, 2),
-    gsSPVertex(birds_seg5_vertex_05000108, 3, 0),
-    gsSP1Triangle( 0,  1,  2, 0x0),
-    gsSPLight(&birds_seg5_lights_05000000.l, 1),
-    gsSPLight(&birds_seg5_lights_05000000.a, 2),
-    gsSPVertex(birds_seg5_vertex_05000138, 3, 0),
-    gsSP1Triangle( 0,  1,  2, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05000600 - 0x05000670
-const Gfx birds_seg5_dl_05000600[] = {
-    gsSPLight(&birds_seg5_lights_05000000.l, 1),
-    gsSPLight(&birds_seg5_lights_05000000.a, 2),
-    gsSPVertex(birds_seg5_vertex_05000168, 9, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  2,  3,  0, 0x0),
-    gsSP2Triangles( 0,  3,  4, 0x0,  5,  3,  6, 0x0),
-    gsSP2Triangles( 5,  7,  8, 0x0,  5,  8,  4, 0x0),
-    gsSP2Triangles( 6,  7,  5, 0x0,  4,  3,  5, 0x0),
-    gsSP2Triangles( 4,  8,  1, 0x0,  4,  1,  0, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05000670 - 0x050007E0
-const Gfx birds_seg5_dl_05000670[] = {
-    gsSPLight(&birds_seg5_lights_05000000.l, 1),
-    gsSPLight(&birds_seg5_lights_05000000.a, 2),
-    gsSPVertex(birds_seg5_vertex_050001F8, 16, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
-    gsSP2Triangles( 6,  7,  8, 0x0,  1,  9, 10, 0x0),
-    gsSP2Triangles( 1,  0, 11, 0x0, 12,  3, 13, 0x0),
-    gsSP2Triangles( 8,  5,  4, 0x0,  5, 14, 10, 0x0),
-    gsSP2Triangles(13, 15, 12, 0x0, 11, 15,  1, 0x0),
-    gsSPVertex(birds_seg5_vertex_050002F8, 16, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  3,  1,  0, 0x0),
-    gsSP2Triangles( 4,  5,  6, 0x0,  6,  7,  4, 0x0),
-    gsSP2Triangles( 8,  5,  9, 0x0, 10,  7, 11, 0x0),
-    gsSP2Triangles(11, 12, 10, 0x0, 11, 13,  2, 0x0),
-    gsSP2Triangles( 2, 14, 11, 0x0, 11,  7,  3, 0x0),
-    gsSP1Triangle( 7,  6, 15, 0x0),
-    gsSPVertex(birds_seg5_vertex_050003F8, 3, 0),
-    gsSP1Triangle( 0,  1,  2, 0x0),
-    gsSPLight(&birds_seg5_lights_05000030.l, 1),
-    gsSPLight(&birds_seg5_lights_05000030.a, 2),
-    gsSPVertex(birds_seg5_vertex_05000428, 10, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
-    gsSP2Triangles( 6,  0,  7, 0x0,  7,  8,  6, 0x0),
-    gsSP2Triangles( 9,  7,  2, 0x0,  2,  7,  0, 0x0),
-    gsSP2Triangles( 2,  3,  9, 0x0,  7,  9,  8, 0x0),
-    gsSP1Triangle( 5,  4,  1, 0x0),
-    gsSPLight(&birds_seg5_lights_05000018.l, 1),
-    gsSPLight(&birds_seg5_lights_05000018.a, 2),
-    gsSPVertex(birds_seg5_vertex_050004C8, 6, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  3,  0,  4, 0x0),
-    gsSP1Triangle( 1,  3,  5, 0x0),
-    gsSPEndDisplayList(),
-};
