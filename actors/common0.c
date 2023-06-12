@@ -6,7 +6,6 @@
 #include "types.h"
 #include "make_const_nonconst.h"
 
-#include "blue_coin_switch/model.inc.c"
 #include "blue_coin_switch/collision.inc.c"
 
 #include "amp/model.inc.c"
@@ -59,3 +58,5 @@
 #include "test_platform/collision.inc.c"
 
 #include "koopa_shell/model.inc.c"
+
+#include "blue_coin_switch/model.inc.c"

@@ -3,21 +3,6 @@
 
 #include "types.h"
 
-// amp
-extern const GeoLayout dAmpGeo[];
-extern const Gfx dAmpElectricityDl[];
-extern const Gfx dAmpEyeDl[];
-extern const Gfx dAmpMouthDl[];
-extern const Gfx dAmpBodyDl[];
-extern const struct Animation *const dAmpAnimsList[];
-
-// blue_coin_switch
-extern const GeoLayout blue_coin_switch_geo[];
-extern const Gfx blue_coin_switch_seg8_dl_08000D58[];
-extern const Gfx blue_coin_switch_seg8_dl_08000DD0[];
-extern const Gfx blue_coin_switch_seg8_dl_08000E08[];
-extern const Collision blue_coin_switch_seg8_collision_08000E98[];
-
 // bobomb
 extern const GeoLayout black_bobomb_geo[];
 extern const GeoLayout bobomb_buddy_geo[];
@@ -195,8 +180,13 @@ extern const GeoLayout test_platform_geo[];
 extern const Gfx unknown_seg8_dl_08026260[];
 extern const Collision unknown_seg8_collision_080262F8[];
 
+// amp
 #include "amp/geo_header.h"
-
-
 #include "amp/anim_header.h"
+
+// blue_coin_switch
+extern const Collision blue_coin_switch_seg8_collision_08000E98[];
+
+#include "blue_coin_switch/geo_header.h"
+
 #endif
