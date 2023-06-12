@@ -7,7 +7,6 @@
 #include "common1.h"
 #include "common0.h"
 
-#include "blue_coin_switch/geo.inc.c"
 // Hmm, this is included earlier.
 #include "test_platform/geo.inc.c"
 #include "amp/geo.inc.c"
@@ -27,3 +26,5 @@
 #include "metal_box/geo.inc.c"
 #include "exclamation_box_outline/geo.inc.c"
 #include "koopa_shell/geo.inc.c"
+
+#include "blue_coin_switch/geo.inc.c"
