@@ -1,0 +1,12 @@
+extern const GeoLayout blargg_geo[];
+extern Lights1 blargg_body_lights;
+extern Lights1 blargg_teeth_lights;
+extern Vtx blargg_lower_body_mesh_layer_1_vtx_0[41];
+extern Vtx blargg_head_mesh_layer_1_vtx_0[27];
+extern Vtx blargg_head_mesh_layer_1_vtx_1[60];
+extern Vtx blargg_jaw_mesh_layer_1_vtx_0[12];
+extern Vtx blargg_jaw_mesh_layer_1_vtx_1[60];
+extern Gfx blargg_lower_body_mesh_layer_1[];
+extern Gfx blargg_head_mesh_layer_1[];
+extern Gfx blargg_jaw_mesh_layer_1[];
+extern Gfx blargg_material_revert_render_settings[];
