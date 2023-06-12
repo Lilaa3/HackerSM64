@@ -11,7 +11,7 @@ const GeoLayout amp_eletricity_geolayout[] = {
 	GEO_RETURN(),
 };
 const GeoLayout dAmpGeo[] = {
-	GEO_NODE_START(),
+	GEO_CULLING_RADIUS(56),
 	GEO_OPEN_NODE(),
 		GEO_SHADOW(0, 200, 100),
 		GEO_OPEN_NODE(),
