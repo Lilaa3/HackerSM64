@@ -3,14 +3,6 @@
 
 #include "types.h"
 
-// bomb
-extern const GeoLayout bowser_bomb_geo[];
-extern const Gfx bomb_seg6_dl_0605A7C0[];
-extern const Gfx bomb_seg6_dl_0605A7F8[];
-extern const Gfx bomb_seg6_dl_0605A830[];
-extern const Gfx bomb_seg6_dl_0605A8A8[];
-extern const Gfx bomb_seg6_dl_0605A9C0[];
-
 // bowser
 extern const GeoLayout bowser_geo_0000D8[];
 extern const GeoLayout bowser_geo_000424[];
@@ -134,5 +126,8 @@ extern const Gfx impact_smoke_seg6_dl_06062D18[];
 extern const GeoLayout bowser_1_yellow_sphere_geo[];
 extern const Gfx yellow_sphere_seg6_dl_0601F388[];
 extern const Gfx yellow_sphere_seg6_dl_0601F3C0[];
+
+// bomb
+#include "bomb/geo_header.h"
 
 #endif
