@@ -44,10 +44,6 @@
 #include "goomba/anims/data.inc.c"
 #include "goomba/anims/table.inc.c"
 
-#include "bobomb/model.inc.c"
-#include "bobomb/anims/data.inc.c"
-#include "bobomb/anims/table.inc.c"
-
 #include "metal_box/model.inc.c"
 #include "metal_box/collision.inc.c"
 
@@ -60,3 +56,8 @@
 #include "koopa_shell/model.inc.c"
 
 #include "blue_coin_switch/model.inc.c"
+
+#include "bobomb/anims/data.inc.c"
+#include "bobomb/anims/table.inc.c"
+#include "bobomb/model.inc.c"
+#include "bowling_ball/model.inc.c"
