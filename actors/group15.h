@@ -3,13 +3,6 @@
 
 #include "types.h"
 
-// boo_castle
-extern const GeoLayout boo_castle_geo[];
-extern const Gfx boo_castle_seg6_dl_06017A10[];
-extern const Gfx boo_castle_seg6_dl_06017A78[];
-extern const Gfx boo_castle_seg6_dl_06017AD0[];
-extern const Gfx boo_castle_seg6_dl_06017CE0[];
-
 // lakitu_cameraman
 extern const GeoLayout lakitu_geo[];
 extern const Gfx lakitu_seg6_dl_06003C80[];
@@ -85,5 +78,8 @@ extern const Gfx toad_seg6_dl_06008890[];
 extern const Gfx toad_seg6_dl_06008A90[];
 extern const Gfx toad_seg6_dl_06008BD8[];
 extern const struct Animation *const toad_seg6_anims_0600FB58[];
+
+// boo_castle
+#include "boo_castle/geo_header.h"
 
 #endif
