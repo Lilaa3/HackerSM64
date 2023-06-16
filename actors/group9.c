@@ -10,7 +10,6 @@
 #include "bookend/anims/data.inc.c"
 #include "bookend/anims/table.inc.c"
 
-#include "book/model.inc.c"
 #include "chair/model.inc.c"
 #include "chair/anims/data.inc.c"
 #include "chair/anims/table.inc.c"
@@ -24,3 +23,5 @@
 #include "haunted_cage/model.inc.c"
 
 #include "boo/model.inc.c"
+
+#include "book/model.inc.c"

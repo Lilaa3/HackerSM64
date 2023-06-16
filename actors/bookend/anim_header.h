@@ -1,0 +1,1 @@
+extern const struct Animation *const bookend_anims[];
