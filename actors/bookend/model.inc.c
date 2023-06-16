@@ -1,434 +1,284 @@
-// Bookend
+Lights1 bookend_teeth_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-// Unreferenced light group
-UNUSED static const Lights1 bookend_lights_unused1 = gdSPDefLights1(
-    0x3f, 0x3f, 0x3f,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
+Lights1 bookend_mouth_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-// Unreferenced light group
-UNUSED static const Lights1 bookend_lights_unused2 = gdSPDefLights1(
-    0x03, 0x19, 0x09,
-    0x0c, 0x66, 0x26, 0x28, 0x28, 0x28
-);
+Lights1 bookend_pages_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-// Unreferenced light group
-UNUSED static const Lights1 bookend_lights_unused3 = gdSPDefLights1(
-    0x3f, 0x3f, 0x3f,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
+Lights1 bookend_case_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-// Unreferenced light group
-UNUSED static const Lights1 bookend_lights_unused4 = gdSPDefLights1(
-    0x3f, 0x00, 0x00,
-    0xff, 0x00, 0x00, 0x28, 0x28, 0x28
-);
+Lights1 bookend_spine_lights = gdSPDefLights1(
+	0x7F, 0x7F, 0x7F,
+	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-// 0x05000060
-ALIGNED8 static const Texture bookend_seg5_texture_05000060[] = {
-#include "actors/bookend/bookend_spine.rgba16.inc.c"
+Gfx bookend_bookend_tooth_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
+u8 bookend_bookend_tooth_rgba16_rgba16[] = {
+	#include "actors/bookend/bookend_tooth.rgba16.inc.c"
 };
 
-// 0x05000460
-ALIGNED8 static const Texture bookend_seg5_texture_05000460[] = {
-#include "actors/bookend/bookend_tooth.rgba16.inc.c"
+Gfx bookend_bookend_mouth_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
+u8 bookend_bookend_mouth_rgba16_rgba16[] = {
+	#include "actors/bookend/bookend_mouth.rgba16.inc.c"
 };
 
-// 0x05000860
-ALIGNED8 static const Texture bookend_seg5_texture_05000860[] = {
-#include "actors/bookend/bookend_mouth.rgba16.inc.c"
+Gfx bookend_bookend_pages_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
+u8 bookend_bookend_pages_rgba16_rgba16[] = {
+	#include "actors/bookend/bookend_pages.rgba16.inc.c"
 };
 
-// 0x05000C60
-ALIGNED8 static const Texture bookend_seg5_texture_05000C60[] = {
-#include "actors/bookend/bookend_pages.rgba16.inc.c"
+Gfx bookend_bookend_cover_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
+u8 bookend_bookend_cover_rgba16_rgba16[] = {
+	#include "actors/bookend/bookend_cover.rgba16.inc.c"
 };
 
-// 0x05001060
-ALIGNED8 static const Texture bookend_seg5_texture_05001060[] = {
-#include "actors/bookend/bookend_cover.rgba16.inc.c"
+Gfx bookend_bookend_spine_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
+u8 bookend_bookend_spine_rgba16_rgba16[] = {
+	#include "actors/bookend/bookend_spine.rgba16.inc.c"
 };
 
-// 0x05001860
-static const Lights1 bookend_seg5_lights_05001860 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
-
-// 0x05001878
-static const Vtx bookend_seg5_vertex_05001878[] = {
-    {{{   -10,      0,    108}, 0, {     0,    990}, {0x83, 0xed, 0x00, 0xff}}},
-    {{{    -4,    -39,   -109}, 0, {   479,      0}, {0x83, 0xed, 0x00, 0xff}}},
-    {{{    -4,    -39,    108}, 0, {   479,    990}, {0x83, 0xed, 0x00, 0xff}}},
-    {{{   -10,      0,   -109}, 0, {     0,      0}, {0x83, 0xed, 0x00, 0xff}}},
+Vtx bookend_left_side_mesh_layer_1_vtx_0[12] = {
+	{{ {39, 0, 0}, 0, {-16, 344}, {130, 238, 0, 255} }},
+	{{ {38, 10, -6}, 0, {220, 890}, {130, 238, 0, 255} }},
+	{{ {39, 0, -12}, 0, {170, -948}, {130, 238, 0, 255} }},
+	{{ {39, 0, -12}, 0, {-10, 224}, {130, 238, 0, 255} }},
+	{{ {38, 10, -19}, 0, {230, 616}, {130, 238, 0, 255} }},
+	{{ {39, 0, -26}, 0, {166, -1020}, {130, 238, 0, 255} }},
+	{{ {39, 0, 12}, 0, {-36, 376}, {130, 238, 0, 255} }},
+	{{ {38, 10, 6}, 0, {212, 836}, {130, 238, 0, 255} }},
+	{{ {39, 0, 0}, 0, {166, -580}, {130, 238, 0, 255} }},
+	{{ {39, 0, 25}, 0, {0, 378}, {130, 238, 0, 255} }},
+	{{ {38, 10, 18}, 0, {197, 758}, {130, 238, 0, 255} }},
+	{{ {39, 0, 12}, 0, {191, -738}, {130, 238, 0, 255} }},
 };
 
-// 0x050018B8
-static const Vtx bookend_seg5_vertex_050018B8[] = {
-    {{{    -4,    -39,   -109}, 0, {   479,      0}, {0x00, 0x81, 0x00, 0xff}}},
-    {{{   185,    -39,    108}, 0, {     0,    990}, {0x00, 0x81, 0x00, 0xff}}},
-    {{{    -4,    -39,    108}, 0, {   479,    990}, {0x00, 0x81, 0x00, 0xff}}},
-    {{{   185,    -39,   -109}, 0, {     0,      0}, {0x00, 0x81, 0x00, 0xff}}},
+Vtx bookend_left_side_mesh_layer_1_vtx_1[4] = {
+	{{ {-2, 0, 26}, 0, {-16, 1008}, {0, 127, 0, 255} }},
+	{{ {40, 0, 26}, 0, {496, 1008}, {0, 127, 0, 255} }},
+	{{ {40, 0, -26}, 0, {496, -16}, {0, 127, 0, 255} }},
+	{{ {-2, 0, -26}, 0, {-16, -16}, {0, 127, 0, 255} }},
 };
 
-// 0x050018F8 - 0x05001940
-const Gfx bookend_seg5_dl_050018F8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000060),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&bookend_seg5_lights_05001860.l, 1),
-    gsSPLight(&bookend_seg5_lights_05001860.a, 2),
-    gsSPVertex(bookend_seg5_vertex_05001878, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
-    gsSPEndDisplayList(),
+Vtx bookend_left_side_mesh_layer_1_vtx_2[16] = {
+	{{ {40, 0, 26}, 0, {-16, -16}, {0, 0, 127, 255} }},
+	{{ {-2, 0, 26}, 0, {-16, 1008}, {0, 0, 127, 255} }},
+	{{ {-1, -10, 26}, 0, {496, 1004}, {0, 0, 127, 255} }},
+	{{ {40, 0, 26}, 0, {-16, -16}, {0, 0, 127, 255} }},
+	{{ {-1, -10, 26}, 0, {496, 1004}, {0, 0, 127, 255} }},
+	{{ {42, -10, 26}, 0, {496, -12}, {0, 0, 127, 255} }},
+	{{ {-2, 0, -26}, 0, {-16, -16}, {0, 0, 129, 255} }},
+	{{ {40, 0, -26}, 0, {-16, 1008}, {0, 0, 129, 255} }},
+	{{ {42, -10, -26}, 0, {496, 1004}, {0, 0, 129, 255} }},
+	{{ {-2, 0, -26}, 0, {-16, -16}, {0, 0, 129, 255} }},
+	{{ {42, -10, -26}, 0, {496, 1004}, {0, 0, 129, 255} }},
+	{{ {-1, -10, -26}, 0, {496, -12}, {0, 0, 129, 255} }},
+	{{ {40, 0, -26}, 0, {-16, -12}, {122, 35, 0, 255} }},
+	{{ {40, 0, 26}, 0, {-16, 1008}, {122, 35, 0, 255} }},
+	{{ {42, -10, 26}, 0, {496, 1004}, {122, 35, 0, 255} }},
+	{{ {42, -10, -26}, 0, {496, -12}, {122, 35, 0, 255} }},
 };
 
-// 0x05001940 - 0x05001978
-const Gfx bookend_seg5_dl_05001940[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05001060),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
-    gsSPVertex(bookend_seg5_vertex_050018B8, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
-    gsSPEndDisplayList(),
+Vtx bookend_left_side_mesh_layer_1_vtx_3[4] = {
+	{{ {-1, -10, -27}, 0, {496, -16}, {0, 129, 0, 255} }},
+	{{ {46, -10, 27}, 0, {-16, 1008}, {0, 129, 0, 255} }},
+	{{ {-1, -10, 27}, 0, {496, 1008}, {0, 129, 0, 255} }},
+	{{ {46, -10, -27}, 0, {-16, -16}, {0, 129, 0, 255} }},
 };
 
-// 0x05001978 - 0x05001A08
-const Gfx bookend_seg5_dl_05001978[] = {
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPClearGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 4, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_050018F8),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_05001940),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPEndDisplayList(),
+Vtx bookend_left_side_mesh_layer_1_vtx_4[4] = {
+	{{ {-2, 0, 27}, 0, {-16, 1008}, {130, 237, 0, 255} }},
+	{{ {-1, -10, -27}, 0, {496, -16}, {130, 237, 0, 255} }},
+	{{ {-1, -10, 27}, 0, {496, 1008}, {130, 237, 0, 255} }},
+	{{ {-2, 0, -27}, 0, {-16, -16}, {130, 237, 0, 255} }},
 };
 
-// 0x05001A08
-static const Lights1 bookend_seg5_lights_05001A08 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
-
-// 0x05001A20
-static const Vtx bookend_seg5_vertex_05001A20[] = {
-    {{{    -4,    -39,   -107}, 0, {   479,    990}, {0x83, 0xed, 0x00, 0xff}}},
-    {{{    -4,    -39,    110}, 0, {   479,      0}, {0x83, 0xed, 0x00, 0xff}}},
-    {{{   -10,      0,    110}, 0, {     0,      0}, {0x83, 0xed, 0x00, 0xff}}},
-    {{{   -10,      0,   -107}, 0, {     0,    990}, {0x83, 0xed, 0x00, 0xff}}},
+Vtx bookend_right_side_mesh_layer_1_vtx_0[4] = {
+	{{ {-2, 0, 26}, 0, {-16, -16}, {0, 127, 0, 255} }},
+	{{ {40, 0, -26}, 0, {496, 1008}, {0, 127, 0, 255} }},
+	{{ {-2, 0, -26}, 0, {-16, 1008}, {0, 127, 0, 255} }},
+	{{ {40, 0, 26}, 0, {496, -16}, {0, 127, 0, 255} }},
 };
 
-// 0x05001A60
-static const Vtx bookend_seg5_vertex_05001A60[] = {
-    {{{    -4,    -39,   -107}, 0, {     0,    990}, {0x00, 0x81, 0x00, 0xff}}},
-    {{{   185,    -39,    110}, 0, {   990,      0}, {0x00, 0x81, 0x00, 0xff}}},
-    {{{    -4,    -39,    110}, 0, {     0,      0}, {0x00, 0x81, 0x00, 0xff}}},
-    {{{   185,    -39,   -107}, 0, {   990,    990}, {0x00, 0x81, 0x00, 0xff}}},
+Vtx bookend_right_side_mesh_layer_1_vtx_1[16] = {
+	{{ {-1, -10, 26}, 0, {496, 1004}, {0, 0, 127, 255} }},
+	{{ {40, 0, 26}, 0, {-16, -16}, {0, 0, 127, 255} }},
+	{{ {-2, 0, 26}, 0, {-16, 1008}, {0, 0, 127, 255} }},
+	{{ {42, -10, -26}, 0, {496, 1004}, {0, 0, 129, 255} }},
+	{{ {-1, -10, -26}, 0, {496, -12}, {0, 0, 129, 255} }},
+	{{ {-2, 0, -26}, 0, {-16, -16}, {0, 0, 129, 255} }},
+	{{ {42, -10, -26}, 0, {496, 1004}, {0, 0, 129, 255} }},
+	{{ {-2, 0, -26}, 0, {-16, -16}, {0, 0, 129, 255} }},
+	{{ {40, 0, -26}, 0, {-16, 1008}, {0, 0, 129, 255} }},
+	{{ {-1, -10, 26}, 0, {496, 1004}, {0, 0, 127, 255} }},
+	{{ {42, -10, 26}, 0, {496, -12}, {0, 0, 127, 255} }},
+	{{ {40, 0, 26}, 0, {-16, -16}, {0, 0, 127, 255} }},
+	{{ {42, -10, 26}, 0, {496, 1004}, {122, 35, 0, 255} }},
+	{{ {42, -10, -26}, 0, {496, -12}, {122, 35, 0, 255} }},
+	{{ {40, 0, -26}, 0, {-16, -12}, {122, 35, 0, 255} }},
+	{{ {40, 0, 26}, 0, {-16, 1008}, {122, 35, 0, 255} }},
 };
 
-// 0x05001AA0 - 0x05001AE8
-const Gfx bookend_seg5_dl_05001AA0[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000060),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&bookend_seg5_lights_05001A08.l, 1),
-    gsSPLight(&bookend_seg5_lights_05001A08.a, 2),
-    gsSPVertex(bookend_seg5_vertex_05001A20, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
-    gsSPEndDisplayList(),
+Vtx bookend_right_side_mesh_layer_1_vtx_2[12] = {
+	{{ {39, 0, 26}, 0, {17, 286}, {130, 238, 0, 255} }},
+	{{ {38, 10, 20}, 0, {232, 574}, {130, 238, 0, 255} }},
+	{{ {39, 0, 13}, 0, {215, -978}, {130, 238, 0, 255} }},
+	{{ {39, 0, 0}, 0, {37, 374}, {130, 238, 0, 255} }},
+	{{ {38, 10, -6}, 0, {216, 620}, {130, 238, 0, 255} }},
+	{{ {39, 0, -12}, 0, {214, -966}, {130, 238, 0, 255} }},
+	{{ {39, 0, 13}, 0, {-43, 336}, {130, 238, 0, 255} }},
+	{{ {38, 10, 6}, 0, {223, 554}, {130, 238, 0, 255} }},
+	{{ {39, 0, 0}, 0, {207, -994}, {130, 238, 0, 255} }},
+	{{ {39, 0, -12}, 0, {-13, 342}, {130, 238, 0, 255} }},
+	{{ {38, 10, -18}, 0, {222, 608}, {130, 238, 0, 255} }},
+	{{ {39, 0, -25}, 0, {170, -1018}, {130, 238, 0, 255} }},
 };
 
-// 0x05001AE8 - 0x05001B20
-const Gfx bookend_seg5_dl_05001AE8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05001060),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 32 * 32 - 1, CALC_DXT(32, G_IM_SIZ_16b_BYTES)),
-    gsSPVertex(bookend_seg5_vertex_05001A60, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
-    gsSPEndDisplayList(),
+Vtx bookend_right_side_mesh_layer_1_vtx_3[4] = {
+	{{ {-1, -10, -27}, 0, {-16, 1008}, {0, 129, 0, 255} }},
+	{{ {46, -10, 28}, 0, {1008, -16}, {0, 129, 0, 255} }},
+	{{ {-1, -10, 28}, 0, {-16, -16}, {0, 129, 0, 255} }},
+	{{ {46, -10, -27}, 0, {1008, 1008}, {0, 129, 0, 255} }},
 };
 
-// 0x05001B20 - 0x05001BB0
-const Gfx bookend_seg5_dl_05001B20[] = {
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPClearGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 4, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_05001AA0),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (32 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_05001AE8),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsSPSetGeometryMode(G_CULL_BACK | G_SHADING_SMOOTH),
-    gsSPEndDisplayList(),
+Vtx bookend_right_side_mesh_layer_1_vtx_4[4] = {
+	{{ {-1, -10, -27}, 0, {496, 1008}, {130, 237, 0, 255} }},
+	{{ {-1, -10, 28}, 0, {496, -16}, {130, 237, 0, 255} }},
+	{{ {-2, 0, 28}, 0, {-16, -16}, {130, 237, 0, 255} }},
+	{{ {-2, 0, -27}, 0, {-16, 1008}, {130, 237, 0, 255} }},
 };
 
-// 0x05001BB0
-static const Lights1 bookend_seg5_lights_05001BB0 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
 
-// 0x05001BC8
-static const Vtx bookend_seg5_vertex_05001BC8[] = {
-    {{{   -10,      0,    103}, 0, {     0,    990}, {0x00, 0x7f, 0x00, 0xff}}},
-    {{{   159,      0,   -104}, 0, {   479,      0}, {0x00, 0x7f, 0x00, 0xff}}},
-    {{{   -10,      0,   -104}, 0, {     0,      0}, {0x00, 0x7f, 0x00, 0xff}}},
-    {{{   159,      0,    103}, 0, {   479,    990}, {0x00, 0x7f, 0x00, 0xff}}},
+Gfx bookend_left_side_mesh_layer_1[] = {
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_LIGHTING),
+	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
+	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
+	gsSPTexture(65535, 65535, 0, 0, 1),
+	gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+	gsSPSetLights1(bookend_teeth_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_tooth_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTileSize(0, 0, 0, 60, 124),
+	gsSPVertex(bookend_left_side_mesh_layer_1_vtx_0 + 0, 12, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, SHADE, TEXEL0, 0, SHADE, 0, 0, 0, 0, SHADE),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_LIGHTING),
+	gsSPSetLights1(bookend_mouth_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_mouth_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
+	gsSPVertex(bookend_left_side_mesh_layer_1_vtx_1 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsDPPipeSync(),
+	gsSPSetLights1(bookend_pages_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_pages_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
+	gsSPVertex(bookend_left_side_mesh_layer_1_vtx_2 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsDPPipeSync(),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_LIGHTING),
+	gsSPSetLights1(bookend_case_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_cover_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 1023, 256),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsSPVertex(bookend_left_side_mesh_layer_1_vtx_3 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsDPPipeSync(),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_LIGHTING),
+	gsSPSetLights1(bookend_spine_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_spine_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTileSize(0, 0, 0, 60, 124),
+	gsSPVertex(bookend_left_side_mesh_layer_1_vtx_4 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsDPPipeSync(),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	gsSPEndDisplayList(),
 };
 
-// 0x05001C08
-static const Vtx bookend_seg5_vertex_05001C08[] = {
-    {{{   159,      0,    103}, 0, {     0,     -6}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   -10,      0,    103}, 0, {     0,    990}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{    -4,    -38,    103}, 0, {   479,    990}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   170,    -38,    103}, 0, {   479,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   159,      0,   -104}, 0, {     0,      0}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{   159,      0,    103}, 0, {     0,    990}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{   170,    -38,    103}, 0, {   479,    990}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{   170,    -38,   -104}, 0, {   479,      0}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{   -10,      0,   -104}, 0, {     0,     -6}, {0x00, 0x00, 0x81, 0xff}}},
-    {{{   159,      0,   -104}, 0, {     0,    990}, {0x00, 0x00, 0x81, 0xff}}},
-    {{{   170,    -38,   -104}, 0, {   479,    990}, {0x00, 0x00, 0x81, 0xff}}},
-    {{{    -4,    -38,   -104}, 0, {   479,      0}, {0x00, 0x00, 0x81, 0xff}}},
+Gfx bookend_right_side_mesh_layer_1[] = {
+	gsDPPipeSync(),
+	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
+	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
+	gsSPSetLights1(bookend_mouth_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_mouth_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
+	gsSPVertex(bookend_right_side_mesh_layer_1_vtx_0 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsDPPipeSync(),
+	gsSPSetLights1(bookend_pages_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_pages_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
+	gsSPVertex(bookend_right_side_mesh_layer_1_vtx_1 + 0, 16, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+	gsSP2Triangles(12, 13, 14, 0, 12, 14, 15, 0),
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE, TEXEL0, 0, SHADE, 0, 0, 0, 0, PRIMITIVE),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_LIGHTING),
+	gsDPSetPrimColor(0, 0, 255, 255, 255, 255),
+	gsSPSetLights1(bookend_teeth_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_tooth_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, 0, G_TX_WRAP | G_TX_NOMIRROR, 4, 0),
+	gsSPVertex(bookend_right_side_mesh_layer_1_vtx_2 + 0, 12, 0),
+	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
+	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
+	gsDPPipeSync(),
+	gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, SHADE, TEXEL0, 0, SHADE, 0, 0, 0, 0, SHADE),
+	gsSPSetLights1(bookend_case_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_cover_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 1023, 256),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 8, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0),
+	gsDPSetTileSize(0, 0, 0, 124, 124),
+	gsSPVertex(bookend_right_side_mesh_layer_1_vtx_3 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 3, 1, 0),
+	gsDPPipeSync(),
+	gsSPLoadGeometryMode(G_ZBUFFER | G_SHADE | G_CULL_BACK | G_LIGHTING),
+	gsSPSetLights1(bookend_spine_lights),
+	gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 1, bookend_bookend_spine_rgba16_rgba16),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b_LOAD_BLOCK, 0, 0, 7, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0, G_TX_WRAP | G_TX_NOMIRROR, 0, 0),
+	gsDPLoadBlock(7, 0, 0, 511, 512),
+	gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, 0, 0, G_TX_CLAMP | G_TX_NOMIRROR, 5, 0, G_TX_CLAMP | G_TX_NOMIRROR, 4, 0),
+	gsDPSetTileSize(0, 0, 0, 60, 124),
+	gsSPVertex(bookend_right_side_mesh_layer_1_vtx_4 + 0, 4, 0),
+	gsSP2Triangles(0, 1, 2, 0, 0, 2, 3, 0),
+	gsDPPipeSync(),
+	gsDPSetCycleType(G_CYC_1CYCLE),
+	// Material revert
+	gsDPPipeSync(),
+	gsSPSetGeometryMode(G_LIGHTING),
+	gsSPClearGeometryMode(G_TEXTURE_GEN),
+	gsDPSetCombineLERP(0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT, 0, 0, 0, SHADE, 0, 0, 0, ENVIRONMENT),
+	gsSPTexture(65535, 65535, 0, 0, 0),
+	gsDPSetEnvColor(255, 255, 255, 255),
+	gsDPSetAlphaCompare(G_AC_NONE),
+	gsSPEndDisplayList(),
 };
 
-// 0x05001CC8 - 0x05001D10
-const Gfx bookend_seg5_dl_05001CC8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000860),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&bookend_seg5_lights_05001BB0.l, 1),
-    gsSPLight(&bookend_seg5_lights_05001BB0.a, 2),
-    gsSPVertex(bookend_seg5_vertex_05001BC8, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05001D10 - 0x05001D68
-const Gfx bookend_seg5_dl_05001D10[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000C60),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPVertex(bookend_seg5_vertex_05001C08, 12, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
-    gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
-    gsSP2Triangles( 8,  9, 10, 0x0,  8, 10, 11, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05001D68 - 0x05001DE0
-const Gfx bookend_seg5_dl_05001D68[] = {
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 4, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_05001CC8),
-    gsSPDisplayList(bookend_seg5_dl_05001D10),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsSPSetGeometryMode(G_SHADING_SMOOTH),
-    gsSPEndDisplayList(),
-};
-
-// 0x05001DE0
-static const Lights1 bookend_seg5_lights_05001DE0 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
-
-// 0x05001DF8
-static const Vtx bookend_seg5_vertex_05001DF8[] = {
-    {{{   -10,      0,    105}, 0, {     0,      0}, {0x00, 0x7f, 0x00, 0xff}}},
-    {{{   159,      0,   -102}, 0, {   479,    990}, {0x00, 0x7f, 0x00, 0xff}}},
-    {{{   -10,      0,   -102}, 0, {     0,    990}, {0x00, 0x7f, 0x00, 0xff}}},
-    {{{   159,      0,    105}, 0, {   479,      0}, {0x00, 0x7f, 0x00, 0xff}}},
-};
-
-// 0x05001E38
-static const Vtx bookend_seg5_vertex_05001E38[] = {
-    {{{   170,    -38,   -102}, 0, {   479,    990}, {0x00, 0x00, 0x81, 0xff}}},
-    {{{    -4,    -38,   -102}, 0, {   479,      0}, {0x00, 0x00, 0x81, 0xff}}},
-    {{{   -10,      0,   -102}, 0, {     0,     -6}, {0x00, 0x00, 0x81, 0xff}}},
-    {{{   159,      0,   -102}, 0, {     0,    990}, {0x00, 0x00, 0x81, 0xff}}},
-    {{{   170,    -38,    105}, 0, {   479,    990}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{   170,    -38,   -102}, 0, {   479,      0}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{   159,      0,   -102}, 0, {     0,      0}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{   159,      0,    105}, 0, {     0,    990}, {0x79, 0x23, 0x00, 0xff}}},
-    {{{    -4,    -38,    105}, 0, {   479,    990}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   170,    -38,    105}, 0, {   479,      0}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   159,      0,    105}, 0, {     0,     -6}, {0x00, 0x00, 0x7f, 0xff}}},
-    {{{   -10,      0,    105}, 0, {     0,    990}, {0x00, 0x00, 0x7f, 0xff}}},
-};
-
-// 0x05001EF8 - 0x05001F40
-const Gfx bookend_seg5_dl_05001EF8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000860),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&bookend_seg5_lights_05001DE0.l, 1),
-    gsSPLight(&bookend_seg5_lights_05001DE0.a, 2),
-    gsSPVertex(bookend_seg5_vertex_05001DF8, 4, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  3,  1, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05001F40 - 0x05001F98
-const Gfx bookend_seg5_dl_05001F40[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000C60),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPVertex(bookend_seg5_vertex_05001E38, 12, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  0,  2,  3, 0x0),
-    gsSP2Triangles( 4,  5,  6, 0x0,  4,  6,  7, 0x0),
-    gsSP2Triangles( 8,  9, 10, 0x0,  8, 10, 11, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05001F98 - 0x05002010
-const Gfx bookend_seg5_dl_05001F98[] = {
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPClearGeometryMode(G_SHADING_SMOOTH),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_CLAMP, 5, G_TX_NOLOD, G_TX_CLAMP, 4, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_05001EF8),
-    gsSPDisplayList(bookend_seg5_dl_05001F40),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsSPSetGeometryMode(G_SHADING_SMOOTH),
-    gsSPEndDisplayList(),
-};
-
-// 0x05002010
-static const Lights1 bookend_seg5_lights_05002010 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
-
-// 0x05002028
-static const Vtx bookend_seg5_vertex_05002028[] = {
-    {{{   157,     -1,    -48}, 0, {     6,    358}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,    -72}, 0, {   475,    624}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,    -99}, 0, {   372,  -1002}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,      0}, 0, {   106,    390}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,    -24}, 0, {   465,    636}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,    -48}, 0, {   461,   -950}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,     51}, 0, {   -54,    352}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,     26}, 0, {   478,    570}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,      0}, 0, {   446,   -978}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,    103}, 0, {    66,    302}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,     78}, 0, {   495,    590}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,     51}, 0, {   462,   -962}, {0x83, 0xee, 0x00, 0xff}}},
-};
-
-// 0x050020E8 - 0x05002140
-const Gfx bookend_seg5_dl_050020E8[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000460),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&bookend_seg5_lights_05002010.l, 1),
-    gsSPLight(&bookend_seg5_lights_05002010.a, 2),
-    gsSPVertex(bookend_seg5_vertex_05002028, 12, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
-    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x05002140 - 0x050021B0
-const Gfx bookend_seg5_dl_05002140[] = {
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPClearGeometryMode(G_CULL_BACK),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_050020E8),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPEndDisplayList(),
-};
-
-// 0x050021B0
-static const Lights1 bookend_seg5_lights_050021B0 = gdSPDefLights1(
-    0x66, 0x66, 0x66,
-    0xff, 0xff, 0xff, 0x28, 0x28, 0x28
-);
-
-// 0x050021C8
-static const Vtx bookend_seg5_vertex_050021C8[] = {
-    {{{   157,     -1,    100}, 0, {    32,    394}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,     73}, 0, {   426,    774}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,     49}, 0, {   414,   -722}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,     49}, 0, {   -39,    392}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,     25}, 0, {   457,    852}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,      0}, 0, {   363,   -564}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,      0}, 0, {    -1,    360}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,    -25}, 0, {   473,    906}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,    -50}, 0, {   372,   -932}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,    -50}, 0, {    12,    240}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   151,     39,    -77}, 0, {   491,    632}, {0x83, 0xee, 0x00, 0xff}}},
-    {{{   157,     -1,   -102}, 0, {   365,  -1004}, {0x83, 0xee, 0x00, 0xff}}},
-};
-
-// 0x05002288 - 0x050022E0
-const Gfx bookend_seg5_dl_05002288[] = {
-    gsDPSetTextureImage(G_IM_FMT_RGBA, G_IM_SIZ_16b, 1, bookend_seg5_texture_05000460),
-    gsDPLoadSync(),
-    gsDPLoadBlock(G_TX_LOADTILE, 0, 0, 16 * 32 - 1, CALC_DXT(16, G_IM_SIZ_16b_BYTES)),
-    gsSPLight(&bookend_seg5_lights_050021B0.l, 1),
-    gsSPLight(&bookend_seg5_lights_050021B0.a, 2),
-    gsSPVertex(bookend_seg5_vertex_050021C8, 12, 0),
-    gsSP2Triangles( 0,  1,  2, 0x0,  3,  4,  5, 0x0),
-    gsSP2Triangles( 6,  7,  8, 0x0,  9, 10, 11, 0x0),
-    gsSPEndDisplayList(),
-};
-
-// 0x050022E0 - 0x05002350
-const Gfx bookend_seg5_dl_050022E0[] = {
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_MODULATERGB, G_CC_MODULATERGB),
-    gsSPClearGeometryMode(G_CULL_BACK),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 0, 0, G_TX_LOADTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, G_TX_NOMASK, G_TX_NOLOD),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPTileSync(),
-    gsDPSetTile(G_IM_FMT_RGBA, G_IM_SIZ_16b, 4, 0, G_TX_RENDERTILE, 0, G_TX_WRAP | G_TX_NOMIRROR, 5, G_TX_NOLOD, G_TX_WRAP | G_TX_NOMIRROR, 4, G_TX_NOLOD),
-    gsDPSetTileSize(0, 0, 0, (16 - 1) << G_TEXTURE_IMAGE_FRAC, (32 - 1) << G_TEXTURE_IMAGE_FRAC),
-    gsSPDisplayList(bookend_seg5_dl_05002288),
-    gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_OFF),
-    gsDPPipeSync(),
-    gsDPSetCombineMode(G_CC_SHADE, G_CC_SHADE),
-    gsSPSetGeometryMode(G_CULL_BACK),
-    gsSPEndDisplayList(),
-};

@@ -4,12 +4,12 @@ Lights1 boo_castle_body_lights = gdSPDefLights1(
 
 Gfx boo_castle_boo_mouth_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 boo_castle_boo_mouth_rgba16_rgba16[] = {
-	#include "actors/boo_castle/boo_mouth.rgba16.inc.c"
+	#include "actors/boo_castle/bbh_boo_mouth.rgba16.inc.c"
 };
 
 Gfx boo_castle_boo_eyes_rgba16_rgba16_aligner[] = {gsSPEndDisplayList()};
 u8 boo_castle_boo_eyes_rgba16_rgba16[] = {
-	#include "actors/boo_castle/boo_eyes.rgba16.inc.c"
+	#include "actors/boo_castle/bbh_boo_eyes.rgba16.inc.c"
 };
 
 Vtx boo_castle_body_mesh_layer_1_vtx_0[6] = {

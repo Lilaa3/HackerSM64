@@ -5701,7 +5701,7 @@ const BehaviorScript bhvMadPiano[] = {
 const BehaviorScript bhvFlyingBookend[] = {
     BEGIN(OBJ_LIST_GENACTOR),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_ANGLE_TO_MARIO | OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_SET_FACE_YAW_TO_MOVE_YAW | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
-    LOAD_ANIMATIONS(oAnimations, bookend_seg5_anims_05002540),
+    LOAD_ANIMATIONS(oAnimations, bookend_anims),
     ANIMATE(FLYING_BOOKEND_ANIM_SPAWN),
     SET_OBJ_PHYSICS(/*Wall hitbox radius*/ 60, /*Gravity*/ 0, /*Bounciness*/ -50, /*Drag strength*/ 1000, /*Friction*/ 1000, /*Buoyancy*/ 200, /*Unused*/ 0, 0),
     SET_INT(oMoveFlags, OBJ_MOVE_NONE),
