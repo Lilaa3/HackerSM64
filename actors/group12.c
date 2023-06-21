@@ -12,11 +12,10 @@
 
 #include "yellow_sphere/model.inc.c"
 
+#include "impact_smoke/model.inc.c"
+
+#include "bomb/model.inc.c"
 #include "bowser/model.inc.c"
 #include "bowser/anims/data.inc.c"
 #include "bowser/anims/table.inc.c"
 #include "bowser/flames_data.inc.c"
-
-#include "impact_smoke/model.inc.c"
-
-#include "bomb/model.inc.c"
