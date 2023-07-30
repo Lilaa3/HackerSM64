@@ -1,0 +1,4 @@
+extern void scroll_gfx_mat_castle_courtyard_dl_f3dlite_material_022();
+extern void scroll_gfx_mat_castle_courtyard_dl_f3dlite_material_014();
+extern void scroll_gfx_mat_castle_courtyard_dl_f3dlite_material_012();
+extern void scroll_castle_courtyard();

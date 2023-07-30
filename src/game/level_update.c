@@ -1,3 +1,4 @@
+#include "texscroll.h"
 
 #include <ultra64.h>
 
@@ -506,51 +507,53 @@ void warp_credits(void) {
     }
 }
 
-void check_instant_warp(void) {
-    s16 cameraAngle;
-    struct Surface *floor;
-
-#ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
- #ifdef UNLOCK_ALL
-    if (gCurrLevelNum == LEVEL_CASTLE) {
- #else // !UNLOCK_ALL
-    if (gCurrLevelNum == LEVEL_CASTLE
-        && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 70) {
- #endif // !UNLOCK_ALL
-        return;
+extern struct ModeTransitionInfo sModeInfo;
+extern struct Surface gWaterSurfacePseudoFloor;
+ALWAYS_INLINE void check_instant_warp(void) {
+    if (gMarioState->floor == NULL) {
+        gMarioState->floor = &gWaterSurfacePseudoFloor;
     }
-#endif // ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
-
-    if ((floor = gMarioState->floor) != NULL) {
-        s32 index = floor->type - SURFACE_INSTANT_WARP_1B;
-        if (index >= INSTANT_WARP_INDEX_START && index < INSTANT_WARP_INDEX_STOP
-            && gCurrentArea->instantWarps != NULL) {
-            struct InstantWarp *warp = &gCurrentArea->instantWarps[index];
-
-            if (warp->id != 0) {
-                gMarioState->pos[0] += warp->displacement[0];
-                gMarioState->pos[1] += warp->displacement[1];
-                gMarioState->pos[2] += warp->displacement[2];
-
-                gMarioState->marioObj->oPosX = gMarioState->pos[0];
-                gMarioState->marioObj->oPosY = gMarioState->pos[1];
-                gMarioState->marioObj->oPosZ = gMarioState->pos[2];
-
-                // Fix instant warp offset not working when warping across different areas
-                gMarioObject->header.gfx.pos[0] = gMarioState->pos[0];
-                gMarioObject->header.gfx.pos[1] = gMarioState->pos[1];
-                gMarioObject->header.gfx.pos[2] = gMarioState->pos[2];
-
-                cameraAngle = gMarioState->area->camera->yaw;
-
-                change_area(warp->area);
-                gMarioState->area = gCurrentArea;
-
-                warp_camera(warp->displacement[0], warp->displacement[1], warp->displacement[2]);
-
-                gMarioState->area->camera->yaw = cameraAngle;
-            }
+    f32 warpDisplacement = 0.f;
+    u8 warparea = 255;
+    if (gMarioState->pos[1] > 16000.f) {
+        warpDisplacement = -32000.f;
+        warparea = gCurrAreaIndex + 1;
+    }
+    if (gMarioState->pos[1] < -16000.f) {
+        warpDisplacement = 32000.f;
+        warparea = gCurrAreaIndex - 1;
+    }
+    if (warparea != 255) {
+        s32 i;
+        float displacement[3];
+        displacement[0] = 0;
+        displacement[1] = warpDisplacement;
+        displacement[2] = 0;
+        for (i = 0; i < 3; i++) {
+            gMarioState->pos[i] += displacement[i];
+            gMarioState->marioObj->OBJECT_FIELD_F32(O_POS_INDEX + i) = gMarioState->pos[i];
         }
+        gMarioState->peakHeight += displacement[1];
+
+        change_area(warparea);
+        gMarioState->area = gCurrentArea;
+        struct LinearTransitionPoint *start = &sModeInfo.transitionStart;
+        struct LinearTransitionPoint *end = &sModeInfo.transitionEnd;
+        vec3f_add(gLakituState.curPos, displacement);
+        vec3f_add(gLakituState.pos, displacement);
+        //vec3f_add(gMarioState->cam->newcam_pos, displacement);
+        //vec3f_add(gMarioState->cam->newcam_pos_physical, displacement);
+
+        vec3f_add(gLakituState.curFocus, displacement);
+        vec3f_add(gLakituState.focus, displacement);
+        //vec3f_add(gMarioState->cam->newcam_focustarget, displacement);
+        //vec3f_add(gMarioState->cam->newcam_renderfocus, displacement);
+        gMarioStates->waterLevel += displacement[1];
+
+        vec3f_add(start->focus, displacement);
+        vec3f_add(start->pos, displacement);
+        vec3f_add(end->focus, displacement);
+        vec3f_add(end->pos, displacement);
     }
 }
 
@@ -1140,7 +1143,7 @@ s32 update_level(void) {
 
     switch (sCurrPlayMode) {
         case PLAY_MODE_NORMAL:
-            changeLevel = play_mode_normal();
+            changeLevel = play_mode_normal(); scroll_textures();
             break;
         case PLAY_MODE_PAUSED:
             changeLevel = play_mode_paused();

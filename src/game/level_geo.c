@@ -9,6 +9,52 @@
 #include "envfx_snow.h"
 #include "level_geo.h"
 
+extern Gfx upBG_Icosphere_mesh[];
+
+extern struct AllocOnlyPool *gDisplayListHeap;
+extern Gfx *gDisplayListHead;
+extern LookAt* gCurLookAt;
+
+Gfx *BGList[] = {
+    &upBG_Icosphere_mesh[0]
+};
+
+f32 farawaynesses[] = {
+    0.99f, 0.99f, 0.99f, 0.99f, 0.99f,
+};
+
+Gfx *geo_render_INFBG(s32 callContext, UNUSED struct GraphNode *node, UNUSED f32 b[4][4]) {
+    Mtx *mtx = alloc_display_list(sizeof(*mtx));
+    s32 i;
+    f32 pos[3];
+    struct GraphNodeGenerated *asGenerated = (struct GraphNodeGenerated *) node;
+    if (callContext == GEO_CONTEXT_RENDER) {
+#ifdef F3DEX_GBI_2
+        gSPLookAt(gDisplayListHead++, gCurLookAt);
+#endif
+
+        for (i = 0; i < 3; i++) {
+            pos[i] = gCurGraphNodeCamera->pos[i] * farawaynesses[asGenerated->parameter];
+        }
+
+        guTranslate(mtx, pos[0], pos[1], pos[2]);
+        if (gCurGraphNodeMasterList != 0) {
+            struct DisplayListNode *listNode =
+                alloc_only_pool_alloc(gDisplayListHeap, sizeof(struct DisplayListNode));
+            listNode->transform = mtx;
+            listNode->displayList = BGList[asGenerated->parameter];
+            listNode->next = 0;
+            if (gCurGraphNodeMasterList->listHeads[GRAPH_NODE_UCODE_DEFAULT][LAYER_FIRST]) {
+                gCurGraphNodeMasterList->listTails[GRAPH_NODE_UCODE_DEFAULT][LAYER_FIRST]->next = listNode;
+            } else {
+                gCurGraphNodeMasterList->listHeads[GRAPH_NODE_UCODE_DEFAULT][LAYER_FIRST] = listNode;
+            }
+            gCurGraphNodeMasterList->listTails[GRAPH_NODE_UCODE_DEFAULT][LAYER_FIRST] = listNode;
+        }
+    }
+    return 0;
+}
+
 /**
  * Geo function that generates a displaylist for environment effects such as
  * snow or jet stream bubbles.

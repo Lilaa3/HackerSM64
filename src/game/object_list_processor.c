@@ -289,6 +289,10 @@ void bhv_mario_update(void) {
 
         i++;
     }
+
+    print_text_fmt_int(30, 90, "x %d", (s32) gCurrentObject->oPosX);
+    print_text_fmt_int(30, 60, "y %d", (s32) gCurrentObject->oPosY);
+    print_text_fmt_int(30, 30, "z %d", (s32) gCurrentObject->oPosZ);
 }
 
 /**

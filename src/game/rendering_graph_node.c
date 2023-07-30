@@ -1020,6 +1020,7 @@ void geo_process_translation_rotation(struct GraphNodeTranslationRotation *node)
     append_dl_and_return((struct GraphNodeDisplayList *)node);
 }
 
+#define HEIGHT 25000
 /**
  * Process a translation node. A transformation matrix based on the node's
  * translation is created and pushed on both the float and fixed point matrix stacks.
@@ -1027,8 +1028,19 @@ void geo_process_translation_rotation(struct GraphNodeTranslationRotation *node)
  */
 void geo_process_translation(struct GraphNodeTranslation *node) {
     Vec3f translation;
+    f32 height = node->translation[1];
 
-    vec3s_to_vec3f(translation, node->translation);
+    if (GET_GRAPH_NODE_LAYER(node->node.flags)) {
+        height -= (gCurrAreaIndex * 32000.f);
+        if ((height > HEIGHT) || (height < -HEIGHT)) {
+            return;
+        }
+    }
+
+    translation[0] = node->translation[0];
+    translation[1] = height;
+    translation[2] = node->translation[2];
+
     mtxf_rotate_zxy_and_translate_and_mul(gVec3sZero, translation, gMatStack[gMatStackIndex + 1], gMatStack[gMatStackIndex]);
 
     inc_mat_stack();

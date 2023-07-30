@@ -18,5 +18,6 @@ enum EnvFxMode {
 
 Gfx *geo_envfx_main(s32 callContext, struct GraphNode *node, Mat4 mtxf);
 Gfx *geo_skybox_main(s32 callContext, struct GraphNode *node, UNUSED Mat4 *mtx);
+Gfx *geo_render_INFBG(s32 callContext, UNUSED struct GraphNode *node, UNUSED f32 b[4][4]);
 
 #endif // LEVEL_GEO_H
