@@ -255,12 +255,11 @@ Gfx *create_shadow_below_xyz(Vec3f pos, s16 shadowScale, u8 shadowSolidity, s8 s
             isEnvBox = TRUE;
         }
     } else { // Normal surfaces:
-        TerrainData type = floor->type;
-        if (type == SURFACE_ICE) {
-            // Ice floors are usually transparent.
+        CollisionType type = floor->type;
+        if (type.nonDecalShadow) {
             s->isDecal = FALSE;
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
-        } else if (type == SURFACE_BURNING) {
+        } else if (type.special == COL_TYPE_BURNING) {
             // Set the shadow height to the lava height in specific areas.
             correct_lava_shadow_height(&floorHeight);
 #endif

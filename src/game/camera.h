@@ -497,16 +497,16 @@ struct CutsceneSplinePoint {
 struct PlayerGeometry {
     /*0x00*/ struct Surface *currFloor;
     /*0x04*/ f32 currFloorHeight;
-    /*0x08*/ s16 currFloorType;
+    /*0x08*/ CollisionType currFloorType;
     /*0x0C*/ struct Surface *currCeil;
-    /*0x10*/ s16 currCeilType;
+    /*0x10*/ CollisionType currCeilType;
     /*0x14*/ f32 currCeilHeight;
     /*0x18*/ struct Surface *prevFloor;
     /*0x1C*/ f32 prevFloorHeight;
-    /*0x20*/ s16 prevFloorType;
+    /*0x20*/ CollisionType prevFloorType;
     /*0x24*/ struct Surface *prevCeil;
     /*0x28*/ f32 prevCeilHeight;
-    /*0x2C*/ s16 prevCeilType;
+    /*0x2C*/ CollisionType prevCeilType;
     /*0x30*/ f32 waterHeight;
 };
 
@@ -748,7 +748,7 @@ s32 camera_approach_f32_symmetric_bool(f32 *current, f32 target, f32 increment);
 f32 camera_approach_f32_symmetric(f32 value, f32 target, f32 increment);
 void random_vec3s(Vec3s dst, s16 xRange, s16 yRange, s16 zRange);
 s32 clamp_positions_and_find_yaw(Vec3f pos, Vec3f origin, f32 xMax, f32 xMin, f32 zMax, f32 zMin);
-s32 is_range_behind_surface(Vec3f from, Vec3f to, struct Surface *surf, s16 range, s16 surfType);
+s32 is_range_behind_surface(Vec3f from, Vec3f to, struct Surface *surf, s16 range, s32 checkWallCamType);
 void scale_along_line(Vec3f dest, Vec3f from, Vec3f to, f32 scale);
 s16 calculate_pitch(Vec3f from, Vec3f to);
 s16 calculate_yaw(Vec3f from, Vec3f to);

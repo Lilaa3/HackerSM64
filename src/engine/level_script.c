@@ -544,7 +544,7 @@ static void level_cmd_create_instant_warp(void) {
 
         warp = gAreas[sCurrAreaIndex].instantWarps + CMD_GET(u8, 2);
 
-        warp[0].id = SURFACE_INSTANT_WARP_1B + CMD_GET(u8, 2);
+        warp[0].id = 0x1B + CMD_GET(u8, 2);
         warp[0].area = CMD_GET(u8, 3);
 
         warp[0].displacement[0] = CMD_GET(s32, 4);

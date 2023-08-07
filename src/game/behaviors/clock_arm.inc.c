@@ -4,6 +4,8 @@
  * Main loop of the hour and minute hands of the Tick Tock Clock painting.
  */
 void bhv_rotating_clock_arm_loop(void) {
+    return;
+    /*
     struct Surface *marioSurface = gMarioState->floor;
     u16 rollAngle = o->oFaceAngleRoll;
     o->oFloorHeight = gMarioState->floorHeight;
@@ -13,7 +15,7 @@ void bhv_rotating_clock_arm_loop(void) {
     // Probably a safety check for when you leave the level through the painting
     //   to make sure the setting isn't accidentally locked in as you fly out.
     if (o->oAction == 0) {
-        if (marioSurface->type == SURFACE_DEFAULT && o->oTimer >= 4) {
+        if (marioSurface->type.asValue == SURFACE_DEFAULT && o->oTimer >= 4) {
             o->oAction++;
         }
     } else if (o->oAction == 1) {
@@ -44,7 +46,7 @@ void bhv_rotating_clock_arm_loop(void) {
             o->oAction++;
         }
     }
-
+    */
     // Only rotate the hands until Mario enters the painting.
     if (o->oAction < 2) {
         cur_obj_rotate_face_angle_using_vel();

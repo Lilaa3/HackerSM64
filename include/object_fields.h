@@ -7,19 +7,20 @@
  */
 
 #ifdef OBJECT_FIELDS_INDEX_DIRECTLY
-#define OBJECT_FIELD_U32(index)           index
-#define OBJECT_FIELD_S32(index)           index
-#define OBJECT_FIELD_S16(index, subIndex) index
-#define OBJECT_FIELD_F32(index)           index
-#define OBJECT_FIELD_S16P(index)          index
-#define OBJECT_FIELD_S32P(index)          index
-#define OBJECT_FIELD_ANIMS(index)         index
-#define OBJECT_FIELD_WAYPOINT(index)      index
-#define OBJECT_FIELD_CHAIN_SEGMENT(index) index
-#define OBJECT_FIELD_OBJ(index)           index
-#define OBJECT_FIELD_SURFACE(index)       index
-#define OBJECT_FIELD_VPTR(index)          index
-#define OBJECT_FIELD_CVPTR(index)         index
+#define OBJECT_FIELD_U32(index)             index
+#define OBJECT_FIELD_S32(index)             index
+#define OBJECT_FIELD_S16(index, subIndex)   index
+#define OBJECT_FIELD_F32(index)             index
+#define OBJECT_FIELD_S16P(index)            index
+#define OBJECT_FIELD_S32P(index)            index
+#define OBJECT_FIELD_ANIMS(index)           index
+#define OBJECT_FIELD_WAYPOINT(index)        index
+#define OBJECT_FIELD_CHAIN_SEGMENT(index)   index
+#define OBJECT_FIELD_OBJ(index)             index
+#define OBJECT_FIELD_SURFACE(index)         index
+#define OBJECT_FIELD_VPTR(index)            index
+#define OBJECT_FIELD_CVPTR(index)           index
+#define OBJECT_FIELD_COL_TYPE(index)        index
 #else
 #define OBJECT_FIELD_U32(index)           rawData.asU32[index]
 #define OBJECT_FIELD_S32(index)           rawData.asS32[index]
@@ -35,6 +36,7 @@
 #define OBJECT_FIELD_SURFACE(index)       rawData.asSurface[index]
 #define OBJECT_FIELD_VPTR(index)          rawData.asVoidPtr[index]
 #define OBJECT_FIELD_CVPTR(index)         rawData.asConstVoidPtr[index]
+#define OBJECT_FIELD_COL_TYPE(index)      rawData.asCollisionType[index]
 #else
 #define OBJECT_FIELD_S16P(index)          ptrData.asS16P[index]
 #define OBJECT_FIELD_S32P(index)          ptrData.asS32P[index]
@@ -45,6 +47,7 @@
 #define OBJECT_FIELD_SURFACE(index)       ptrData.asSurface[index]
 #define OBJECT_FIELD_VPTR(index)          ptrData.asVoidPtr[index]
 #define OBJECT_FIELD_CVPTR(index)         ptrData.asConstVoidPtr[index]
+#define OBJECT_FIELD_COL_TYPE(index)      ptrData.asCollisionType[index]
 #endif
 #endif
 
@@ -164,13 +167,13 @@
 #define /*0x1A8*/ oUnusedCoinParams                             OBJECT_FIELD_U32(0x48)
 // 0x1AC-0x1B2 (0x48-0x4A) are object specific and defined below the common fields.
 #define /*0x1B4*/ oWallAngle                  OBJECT_FIELD_S32(0x4B)
-#define /*0x1B8*/ oFloorType                  OBJECT_FIELD_S16(0x4C, 0)
-#define /*0x1BA*/ oFloorRoom                  OBJECT_FIELD_S16(0x4C, 1)
+#define /*0x1B8*/ oFloorRoom                  OBJECT_FIELD_S16(0x4C, 0)
 #define /*0x1BC*/ oAngleToHome                OBJECT_FIELD_S32(0x4D)
 #define /*0x1C0*/ oFloor                      OBJECT_FIELD_SURFACE(0x4E)
 #define /*0x1C4*/ oDeathSound                 OBJECT_FIELD_S32(0x4F)
+#define /*0x1C8*/ oFloorType                  OBJECT_FIELD_COL_TYPE(0x50)
 #ifdef PUPPYLIGHTS
-#define /*0x1C4*/ oLightID                                      OBJECT_FIELD_S32(0x50)
+#define /*0x1CA*/ oLightID                    OBJECT_FIELD_S32(0x51)
 #endif
 
 /* Pathed (see obj_follow_path) */

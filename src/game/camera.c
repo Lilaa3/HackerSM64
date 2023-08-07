@@ -762,7 +762,7 @@ s16 look_down_slopes(s16 camYaw) {
     f32 floorDY = find_floor(xOff, sMarioCamState->pos[1], zOff, &floor) - sMarioCamState->pos[1];
 
     if (floor != NULL) {
-        if (floor->type != SURFACE_WALL_MISC && floorDY > 0) {
+        if (floor->type.camera != COL_TYPE_CAMERA_WALL && floorDY > 0) {
             if (floor->normal.z == 0.f && floorDY < 100.f) {
                 pitch = 0x05B0;
             } else {
@@ -913,16 +913,16 @@ void radial_camera_move(struct Camera *c) {
     // Check if Mario stepped on a surface that rotates the camera. For example, when Mario enters the
     // gate in BoB, the camera turns right to face up the hill path
     if (!(gCameraMovementFlags & CAM_MOVE_ROTATE)) {
-        if (sMarioGeometry.currFloorType == SURFACE_CAMERA_MIDDLE
-            && sMarioGeometry.prevFloorType != SURFACE_CAMERA_MIDDLE) {
+        if (sMarioGeometry.currFloorType.camera == COL_TYPE_CAMERA_MIDDLE
+            && sMarioGeometry.prevFloorType.camera != COL_TYPE_CAMERA_MIDDLE) {
             gCameraMovementFlags |= (CAM_MOVE_RETURN_TO_MIDDLE | CAM_MOVE_ENTERED_ROTATE_SURFACE);
         }
-        if (sMarioGeometry.currFloorType == SURFACE_CAMERA_ROTATE_RIGHT
-            && sMarioGeometry.prevFloorType != SURFACE_CAMERA_ROTATE_RIGHT) {
+        if (sMarioGeometry.currFloorType.camera == COL_TYPE_CAMERA_ROTATE_RIGHT
+            && sMarioGeometry.prevFloorType.camera != COL_TYPE_CAMERA_ROTATE_RIGHT) {
             gCameraMovementFlags |= (CAM_MOVE_ROTATE_RIGHT | CAM_MOVE_ENTERED_ROTATE_SURFACE);
         }
-        if (sMarioGeometry.currFloorType == SURFACE_CAMERA_ROTATE_LEFT
-            && sMarioGeometry.prevFloorType != SURFACE_CAMERA_ROTATE_LEFT) {
+        if (sMarioGeometry.currFloorType.camera == COL_TYPE_CAMERA_ROTATE_LEFT
+            && sMarioGeometry.prevFloorType.camera != COL_TYPE_CAMERA_ROTATE_LEFT) {
             gCameraMovementFlags |= (CAM_MOVE_ROTATE_LEFT | CAM_MOVE_ENTERED_ROTATE_SURFACE);
         }
     }
@@ -1421,7 +1421,7 @@ s32 update_fixed_camera(struct Camera *c, Vec3f focus, UNUSED Vec3f pos) {
     vec3f_copy(basePos, sFixedModeBasePosition);
     vec3f_add(basePos, sCastleEntranceOffset);
 
-    if (sMarioGeometry.currFloorType != SURFACE_DEATH_PLANE
+    if (sMarioGeometry.currFloorType.special != COL_TYPE_DEATH_PLANE
         && sMarioGeometry.currFloorHeight != FLOOR_LOWER_LIMIT) {
         goalHeight = sMarioGeometry.currFloorHeight + basePos[1] + heightOffset;
     } else {
@@ -1886,7 +1886,7 @@ s16 update_slide_camera(struct Camera *c) {
     camera_approach_s16_symmetric_bool(&camPitch, goalPitch, 0x100);
 
     // Hoot mode
-    if (sMarioCamState->action != ACT_RIDING_HOOT && sMarioGeometry.currFloorType == SURFACE_DEATH_PLANE) {
+    if (sMarioCamState->action != ACT_RIDING_HOOT && sMarioGeometry.currFloorType.special == COL_TYPE_DEATH_PLANE) {
         vec3f_set_dist_and_angle(c->focus, pos, maxCamDist + sLakituDist, camPitch, camYaw);
         c->pos[0] = pos[0];
         c->pos[2] = pos[2];
@@ -2183,7 +2183,7 @@ s16 update_default_camera(struct Camera *c) {
     vec3f_copy(tempPos, cPos);
     tempPos[1] -= 125.f;
     if (marioFloor != NULL && camFloorHeight <= marioFloorHeight) {
-        avoidStatus = is_range_behind_surface(c->focus, tempPos, marioFloor, 0, SURFACE_NULL);
+        avoidStatus = is_range_behind_surface(c->focus, tempPos, marioFloor, 0, FALSE);
         if (avoidStatus != AVOID_STATUS_WALL_NEAR_CAMERA && ceilHeight > marioFloorHeight) {
             camFloorHeight = marioFloorHeight;
         }
@@ -2249,7 +2249,7 @@ s16 update_default_camera(struct Camera *c) {
         dist = 50.f;
         vec3f_set_dist_and_angle(cPos, c->pos, dist, tempPitch, tempYaw);
     }
-    if (sMarioGeometry.currFloorType != SURFACE_DEATH_PLANE) {
+    if (sMarioGeometry.currFloorType.special != COL_TYPE_DEATH_PLANE) {
         vec3f_get_dist_and_angle(c->focus, c->pos, &dist, &tempPitch, &tempYaw);
         if (dist > zoomDist) {
             dist = zoomDist;
@@ -2258,7 +2258,7 @@ s16 update_default_camera(struct Camera *c) {
     }
     if (ceilHeight != CELL_HEIGHT_LIMIT) {
         if (c->pos[1] > (ceilHeight -= 150.f)
-            && (avoidStatus = is_range_behind_surface(c->pos, sMarioCamState->pos, ceil, 0, -1)) == 1) {
+            && (avoidStatus = is_range_behind_surface(c->pos, sMarioCamState->pos, ceil, 0, FALSE)) == 1) {
             c->pos[1] = ceilHeight;
         }
     }
@@ -2387,8 +2387,9 @@ static UNUSED void unused_mode_0f_camera(struct Camera *c) {
  * In this mode, the camera is always at the back of Mario, because Mario generally only moves forward.
  */
 void mode_slide_camera(struct Camera *c) {
-    if (sMarioGeometry.currFloorType == SURFACE_CLOSE_CAMERA ||
-        sMarioGeometry.currFloorType == SURFACE_NO_CAM_COL_SLIPPERY) {
+    if (sMarioGeometry.currFloorType.camera == COL_TYPE_CLOSE_CAMERA ||
+        (sMarioGeometry.currFloorType.noCameraCollision && 
+        sMarioGeometry.currFloorType.slipperiness == SURFACE_CLASS_SLIPPERY)) {
         mode_lakitu_camera(c);
     } else {
         if (gPlayer1Controller->buttonPressed & U_CBUTTONS) {
@@ -4203,7 +4204,7 @@ s32 is_behind_surface(Vec3f pos, struct Surface *surf) {
 /**
  * Checks if the whole circular sector is behind the surface.
  */
-s32 is_range_behind_surface(Vec3f from, Vec3f to, struct Surface *surf, s16 range, s16 surfType) {
+s32 is_range_behind_surface(Vec3f from, Vec3f to, struct Surface *surf, s16 range, s32 checkWallCamType) {
     s32 behindSurface = TRUE;
     s32 leftBehind = 0;
     s32 rightBehind = 0;
@@ -4213,7 +4214,7 @@ s32 is_range_behind_surface(Vec3f from, Vec3f to, struct Surface *surf, s16 rang
     Vec3f checkPos;
 
     if (surf != NULL) {
-        if (surfType == SURFACE_NULL || surf->type != surfType) {
+        if (!checkWallCamType || surf->type.camera != COL_TYPE_CAMERA_WALL) {
             if (range == 0) {
                 behindSurface = is_behind_surface(to, surf);
             } else {
@@ -4857,9 +4858,11 @@ u8 get_cutscene_from_mario_status(struct Camera *c) {
         if (sMarioCamState->cameraEvent == CAM_EVENT_CANNON) {
             cutscene = CUTSCENE_ENTER_CANNON;
         }
+        /*
         if (SURFACE_IS_PAINTING_WARP(sMarioGeometry.currFloorType)) {
             cutscene = CUTSCENE_ENTER_PAINTING;
         }
+        */
         switch (sMarioCamState->action) {
             case ACT_DEATH_EXIT:
                 cutscene = CUTSCENE_DEATH_EXIT;
@@ -5762,25 +5765,21 @@ void cam_ccm_leave_slide_shortcut(UNUSED struct Camera *c) {
  * Apply any modes that are triggered by special floor surface types
  */
 u32 surface_type_modes(struct Camera *c) {
-    u32 modeChanged = 0;
-
-    switch (sMarioGeometry.currFloorType) {
-        case SURFACE_CLOSE_CAMERA:
-            transition_to_camera_mode(c, CAMERA_MODE_CLOSE, 90);
-            modeChanged++;
-            break;
-
-        case SURFACE_CAMERA_FREE_ROAM:
-            transition_to_camera_mode(c, CAMERA_MODE_FREE_ROAM, 90);
-            modeChanged++;
-            break;
-
-        case SURFACE_NO_CAM_COL_SLIPPERY:
-            transition_to_camera_mode(c, CAMERA_MODE_CLOSE, 90);
-            modeChanged++;
-            break;
+    if (sMarioGeometry.currFloorType.asValue == SURFACE_NO_CAM_COL_SLIPPERY){
+        transition_to_camera_mode(c, CAMERA_MODE_CLOSE, 90);
+        return TRUE;
     }
-    return modeChanged;
+
+    switch (sMarioGeometry.currFloorType.camera) {
+        case COL_TYPE_CLOSE_CAMERA:
+            transition_to_camera_mode(c, CAMERA_MODE_CLOSE, 90);
+            return TRUE;
+
+        case COL_TYPE_CAMERA_FREE_ROAM:
+            transition_to_camera_mode(c, CAMERA_MODE_FREE_ROAM, 90);
+            return TRUE;
+    }
+    return FALSE;
 }
 
 /**
@@ -5800,26 +5799,26 @@ u32 set_mode_if_not_set_by_surface(struct Camera *c, u8 mode) {
  * Used in THI, check if Mario is standing on any of the special surfaces in that area
  */
 void surface_type_modes_thi(struct Camera *c) {
-    switch (sMarioGeometry.currFloorType) {
-        case SURFACE_CLOSE_CAMERA:
+    if (sMarioGeometry.currFloorType.asValue == SURFACE_NO_CAM_COL_SLIPPERY){
+        if (c->mode != CAMERA_MODE_CLOSE) {
+            transition_to_camera_mode(c, CAMERA_MODE_FREE_ROAM, 90);
+        }
+        return;
+    }
+    switch (sMarioGeometry.currFloorType.camera) {
+        case COL_TYPE_CLOSE_CAMERA:
             if (c->mode != CAMERA_MODE_CLOSE) {
                 transition_to_camera_mode(c, CAMERA_MODE_FREE_ROAM, 90);
             }
             break;
 
-        case SURFACE_CAMERA_FREE_ROAM:
+        case COL_TYPE_CAMERA_FREE_ROAM:
             if (c->mode != CAMERA_MODE_CLOSE) {
                 transition_to_camera_mode(c, CAMERA_MODE_FREE_ROAM, 90);
             }
             break;
 
-        case SURFACE_NO_CAM_COL_SLIPPERY:
-            if (c->mode != CAMERA_MODE_CLOSE) {
-                transition_to_camera_mode(c, CAMERA_MODE_FREE_ROAM, 90);
-            }
-            break;
-
-        case SURFACE_CAMERA_8_DIR:
+        case COL_TYPE_CAMERA_8_DIR:
             transition_to_camera_mode(c, CAMERA_MODE_8_DIRECTIONS, 90);
             break;
 
@@ -6254,13 +6253,13 @@ s16 camera_course_processing(struct Camera *c) {
                 if (sMarioCamState->action == ACT_RIDING_HOOT) {
                     transition_to_camera_mode(c, CAMERA_MODE_SLIDE_HOOT, 60);
                 } else {
-                    switch (sMarioGeometry.currFloorType) {
-                        case SURFACE_CAMERA_8_DIR:
+                    switch (sMarioGeometry.currFloorType.camera) {
+                        case 8COL_TYPE_CAMERA_8_DIR:
                             transition_to_camera_mode(c, CAMERA_MODE_8_DIRECTIONS, 90);
                             s8DirModeBaseYaw = DEGREES(90);
                             break;
 
-                        case SURFACE_BOSS_FIGHT_CAMERA:
+                        case COL_TYPE_BOSS_FIGHT_CAMERA:
                             if (gCurrActNum == 1) {
                                 set_camera_mode_boss_fight(c);
                             } else {
@@ -6316,16 +6315,16 @@ s16 camera_course_processing(struct Camera *c) {
                 break;
 
             case AREA_WDW_MAIN:
-                switch (sMarioGeometry.currFloorType) {
-                    case SURFACE_INSTANT_WARP_1B:
+                switch (sMarioGeometry.currFloorType.warpsAndLevel) {
+                    case COL_TYPE_INSTANT_WARP_0:
                         c->defMode = CAMERA_MODE_RADIAL;
                         break;
                 }
                 break;
 
             case AREA_WDW_TOWN:
-                switch (sMarioGeometry.currFloorType) {
-                    case SURFACE_INSTANT_WARP_1C:
+                switch (sMarioGeometry.currFloorType.warpsAndLevel) {
+                    case COL_TYPE_INSTANT_WARP_1:
                         c->defMode = CAMERA_MODE_CLOSE;
                         break;
                 }
@@ -6477,7 +6476,7 @@ s32 rotate_camera_around_walls(UNUSED struct Camera *c, Vec3f cPos, s16 *avoidYa
                 horWallNorm = atan2s(wall->normal.z, wall->normal.x);
                 wallYaw = horWallNorm + DEGREES(90);
                 // If Mario would be blocked by the surface, then avoid it
-                if ((is_range_behind_surface(sMarioCamState->pos, cPos, wall, yawRange, SURFACE_WALL_MISC) == 0)
+                if ((is_range_behind_surface(sMarioCamState->pos, cPos, wall, yawRange, TRUE) == 0)
                     && (is_mario_behind_surface(c, wall) == TRUE)
                     // Also check if the wall is tall enough to cover Mario
                     && (is_surf_within_bounding_box(wall, -1.f, 150.f, -1.f) == FALSE)) {
@@ -6510,14 +6509,14 @@ void find_mario_floor_and_ceil(struct PlayerGeometry *pg) {
                    sMarioCamState->pos[2], &surf) != FLOOR_LOWER_LIMIT) {
         pg->currFloorType = surf->type;
     } else {
-        pg->currFloorType = 0;
+        pg->currFloorType.asValue = SURFACE_DEFAULT;
     }
 
     if (find_ceil(sMarioCamState->pos[0], sMarioCamState->pos[1] - 10.f,
                   sMarioCamState->pos[2], &surf) != CELL_HEIGHT_LIMIT) {
         pg->currCeilType = surf->type;
     } else {
-        pg->currCeilType = 0;
+        pg->currCeilType.asValue = SURFACE_DEFAULT;
     }
 
     gCollisionFlags &= ~COLLISION_FLAG_CAMERA;
@@ -9580,6 +9579,8 @@ void cutscene_enter_painting_stub(UNUSED struct Camera *c) {
  * zooms in until the star select screen appears.
  */
 void cutscene_enter_painting(struct Camera *c) {
+    return;
+    /*
     struct Surface *floor, *highFloor;
     Vec3f paintingPos, focus, focusOffset;
     Vec3s paintingAngle;
@@ -9628,6 +9629,7 @@ void cutscene_enter_painting(struct Camera *c) {
         }
     }
     c->mode = CAMERA_MODE_CLOSE;
+    */
 }
 
 /**

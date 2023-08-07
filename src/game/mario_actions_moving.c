@@ -341,7 +341,7 @@ void update_shell_speed(struct MarioState *m) {
         // m->floor->originOffset = m->waterLevel; //! (Original code) Negative origin offset
     }
 
-    if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
+    if (m->floor != NULL && m->floor->type.special == COL_TYPE_SLOW) {
         maxTargetSpeed = 48.0f;
     } else {
         maxTargetSpeed = 64.0f;
@@ -419,7 +419,7 @@ void update_walking_speed(struct MarioState *m) {
     f32 maxTargetSpeed;
     f32 targetSpeed;
 
-    if (m->floor != NULL && m->floor->type == SURFACE_SLOW) {
+    if (m->floor != NULL && m->floor->type.special == COL_TYPE_SLOW) {
         maxTargetSpeed = 24.0f;
     } else {
         maxTargetSpeed = 32.0f;
@@ -470,7 +470,7 @@ void update_walking_speed(struct MarioState *m) {
 
 s32 should_begin_sliding(struct MarioState *m) {
     if (m->input & INPUT_ABOVE_SLIDE) {
-        s32 superSlippery = (m->floor != NULL) && (m->floor->type == SURFACE_SUPER_SLIPPERY);
+        s32 superSlippery = (m->floor != NULL) && (m->floor->type.slipperiness == SURFACE_CLASS_SUPER_SLIPPERY);
         s32 slideLevel = (m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE;
         s32 movingBackward = m->forwardVel <= -1.0f;
 
@@ -1227,7 +1227,7 @@ s32 act_riding_shell_ground(struct MarioState *m) {
     }
 
     tilt_body_ground_shell(m, startYaw);
-    if (m->floor->type == SURFACE_BURNING) {
+    if (m->floor->type.special == COL_TYPE_BURNING) {
         play_sound(SOUND_MOVING_RIDING_SHELL_LAVA, m->marioObj->header.gfx.cameraToObject);
     } else {
         play_sound(SOUND_MOVING_TERRAIN_RIDING_SHELL + m->terrainSoundAddend,
@@ -1723,7 +1723,7 @@ u32 common_landing_action(struct MarioState *m, s16 animation, u32 airAction) {
     set_mario_animation(m, animation);
     play_mario_landing_sound_once(m, SOUND_ACTION_TERRAIN_LANDING);
 
-    if (m->floor->type >= SURFACE_SHALLOW_QUICKSAND && m->floor->type <= SURFACE_MOVING_QUICKSAND) {
+    if (SURFACE_IS_QUICKSAND(m->floor->type)) {
         m->quicksandDepth += (4 - m->actionTimer) * 3.5f - 0.5f;
     }
 

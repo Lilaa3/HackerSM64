@@ -35,32 +35,32 @@ void cap_check_quicksand(void) {
         return;
     }
 
-    switch (sObjFloor->type) {
-        case SURFACE_DEATH_PLANE:
+    switch (sObjFloor->type.special) {
+        case COL_TYPE_DEATH_PLANE:
             o->activeFlags = ACTIVE_FLAG_DEACTIVATED;
             break;
 
-        case SURFACE_SHALLOW_QUICKSAND:
-        case SURFACE_DEEP_QUICKSAND:
-        case SURFACE_QUICKSAND:
+        case COL_TYPE_SHALLOW_QUICKSAND:
+        case COL_TYPE_DEEP_QUICKSAND:
+        case COL_TYPE_QUICKSAND:
             o->oAction = CAP_ACT_QUICKSAND;
             o->oForwardVel = 0.0f;
             break;
 
-        case SURFACE_DEEP_MOVING_QUICKSAND:
-        case SURFACE_SHALLOW_MOVING_QUICKSAND:
-        case SURFACE_MOVING_QUICKSAND:
+        case COL_TYPE_DEEP_MOVING_QUICKSAND:
+        case COL_TYPE_SHALLOW_MOVING_QUICKSAND:
+        case COL_TYPE_MOVING_QUICKSAND:
             o->oAction = CAP_ACT_MOVING_QUICKSAND;
             o->oMoveAngleYaw = (sObjFloor->force & 0xFF) << 8;
             o->oForwardVel = 8 + 2 * (0 - ((sObjFloor->force & 0xFF00) >> 8));
             break;
 
-        case SURFACE_INSTANT_QUICKSAND:
+        case COL_TYPE_INSTANT_QUICKSAND:
             o->oAction = CAP_ACT_INSTANT_QUICKSAND;
             o->oForwardVel = 0.0f;
             break;
 
-        case SURFACE_INSTANT_MOVING_QUICKSAND:
+        case COL_TYPE_INSTANT_MOVING_QUICKSAND:
             o->oAction = CAP_ACT_INSTANT_MOVING_QUICKSAND;
             o->oMoveAngleYaw = (sObjFloor->force & 0xFF) << 8;
             o->oForwardVel = 8 + 2 * (0 - ((sObjFloor->force & 0xFF00) >> 8));

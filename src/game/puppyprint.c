@@ -980,7 +980,7 @@ u8 gLastWarpID = 0;
 void puppyprint_render_general_vars(void) {
     
     char textBytes[200];
-    u32 floorType = 0;
+    CollisionType floorType = {.asValue = 0};
     u32 objParams = 0;
     if (gMarioState->floor) {
         floorType = gMarioState->floor->type;
@@ -1014,7 +1014,7 @@ void puppyprint_render_general_vars(void) {
             (f32)(gMarioState->vel[1]),
             (s32)(gMarioState->health),
             (u32)(gMarioState->action & ACT_ID_MASK),
-            (u32)(floorType),
+            (u32)(floorType.asValue),
             (s32)(gMarioState->waterLevel)
             );
         print_small_text_light(16, 36, textBytes, PRINT_TEXT_ALIGN_LEFT, PRINT_ALL, FONT_OUTLINE);

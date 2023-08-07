@@ -1899,29 +1899,31 @@ void mario_handle_special_floors(struct MarioState *m) {
     }
 
     if (m->floor != NULL) {
-        s32 floorType = m->floor->type;
+        CollisionType floorType = m->floor->type;
 
-        switch (floorType) {
-            case SURFACE_DEATH_PLANE:
-            case SURFACE_VERTICAL_WIND:
+        switch (floorType.special) {
+            case COL_TYPE_DEATH_PLANE:
+            case COL_TYPE_VERTICAL_WIND:
                 check_death_barrier(m);
                 break;
+        }
 
-            case SURFACE_WARP:
+        switch (floorType.warpsAndLevel) {
+            case COL_TYPE_WARP:
                 level_trigger_warp(m, WARP_OP_WARP_FLOOR);
                 break;
 
-            case SURFACE_TIMER_START:
+            case COL_TYPE_TIMER_START:
                 pss_begin_slide(m);
                 break;
 
-            case SURFACE_TIMER_END:
+            case COL_TYPE_TIMER_END:
                 pss_end_slide(m);
                 break;
         }
 
         if (!(m->action & (ACT_FLAG_AIR | ACT_FLAG_SWIMMING))) {
-            if (floorType == SURFACE_BURNING) {
+            if (floorType.special == COL_TYPE_BURNING) {
                 check_lava_boost(m);
             }
         }

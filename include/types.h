@@ -264,6 +264,48 @@ struct ObjectNode {
     struct ObjectNode *prev;
 };
 
+#define NON_DECAL_SHADOW_SIZE 1
+#define VANISH_SIZE 1
+#define CAN_GET_STUCK_SIZE 1
+#define WARPS_AND_LEVEL_SIZE 4
+#define SPECIAL_SIZE 5
+#define SLIPPERINESS_SIZE 3
+#define NO_CAMERA_COLLISION_SIZE 1
+#define CAMERA_SIZE 4
+#define PARTICLES_SIZE 4
+#define SOUND_SIZE 4
+#define PADDING_SIZE 4
+
+#define NON_DECAL_SHADOW_POS      (VANISH_POS + VANISH_SIZE)
+#define VANISH_POS              (CAN_GET_STUCK_POS + CAN_GET_STUCK_SIZE)
+#define CAN_GET_STUCK_POS       (WARPS_AND_LEVEL_POS + WARPS_AND_LEVEL_SIZE)
+#define WARPS_AND_LEVEL_POS     (SPECIAL_POS + SPECIAL_SIZE)
+#define SPECIAL_POS             (SLIPPERINESS_POS + SLIPPERINESS_SIZE)
+#define SLIPPERINESS_POS        (NO_CAMERA_COLLISION_POS + NO_CAMERA_COLLISION_SIZE)
+#define NO_CAMERA_COLLISION_POS (CAMERA_POS + CAMERA_SIZE)
+#define CAMERA_POS              (PARTICLES_POS + PARTICLES_SIZE)
+#define PARTICLES_POS           (SOUND_POS + SOUND_SIZE)
+#define SOUND_POS               (PADDING_SIZE)
+
+
+typedef union {
+    struct {
+        /*0 */ u32 nonDecalShadow:NON_DECAL_SHADOW_SIZE;
+        /*1 */ u32 vanish:VANISH_SIZE;
+        /*2 */ u32 canGetStuck:CAN_GET_STUCK_SIZE;
+        /*3 */ u32 warpsAndLevel:WARPS_AND_LEVEL_SIZE;
+        /*7 */ u32 special:SPECIAL_SIZE;
+        /*12*/ u32 slipperiness:SLIPPERINESS_SIZE;
+        /*15*/ u32 noCameraCollision:NO_CAMERA_COLLISION_SIZE;
+        /*16*/ u32 camera:CAMERA_SIZE;
+        /*20*/ u32 particles:PARTICLES_SIZE;
+        /*24*/ u32 sound:SOUND_SIZE;
+        /*28*/ u32 padding:PADDING_SIZE;
+        /*32*/
+    };
+    u32 asValue;
+} CollisionType;
+
 #ifdef PUPPYLIGHTS
 struct PuppyLight {
     Vec3t pos[2];   // The location of the light. First index is the absolute position, second index are offsets.
@@ -281,9 +323,9 @@ struct PuppyLight {
 // whether some of these pointers point to ObjectNode or Object.
 
 #ifdef PUPPYLIGHTS
-#define MAX_OBJECT_FIELDS 0x51
+#define MAX_OBJECT_FIELDS 0x52
 #else
-#define MAX_OBJECT_FIELDS 0x50
+#define MAX_OBJECT_FIELDS 0x51
 #endif
 
 struct Object {
@@ -311,6 +353,7 @@ struct Object {
         struct Surface *asSurface[MAX_OBJECT_FIELDS];
         void *asVoidPtr[MAX_OBJECT_FIELDS];
         const void *asConstVoidPtr[MAX_OBJECT_FIELDS];
+        CollisionType asCollisionType[MAX_OBJECT_FIELDS];
 #endif
     } rawData;
 #if IS_64_BIT
@@ -324,6 +367,7 @@ struct Object {
         struct Surface *asSurface[MAX_OBJECT_FIELDS];
         void *asVoidPtr[MAX_OBJECT_FIELDS];
         const void *asConstVoidPtr[MAX_OBJECT_FIELDS];
+        CollisionType asCollisionType[MAX_OBJECT_FIELDS];
     } ptrData;
 #endif
     /*0x1C8*/ u32 unused1;
@@ -372,17 +416,17 @@ struct Normal {
 };
 
 struct Surface {
-    /*0x00*/ TerrainData type;
-    /*0x02*/ TerrainData force;
-    /*0x04*/ s8 flags;
+    /*0x04*/ u8 flags;
     /*0x05*/ RoomData room;
+    /*0x00*/ CollisionType type;
+    /*0x04*/ TerrainData force;
     /*0x06*/ s16 lowerY;
     /*0x08*/ s16 upperY;
     /*0x0A*/ Vec3t vertex1;
     /*0x10*/ Vec3t vertex2;
     /*0x16*/ Vec3t vertex3;
-    /*0x1C*/ struct Normal normal;
     /*0x28*/ f32 originOffset;
+    /*0x1C*/ struct Normal normal;
     /*0x2C*/ struct Object *object;
 };
 

@@ -1371,10 +1371,10 @@ static void cur_obj_update_floor(void) {
     o->oFloor = floor;
 
     if (floor != NULL) {
-        SurfaceType floorType = floor->type;
-        if (floorType == SURFACE_BURNING) {
+        CollisionType floorType = floor->type;
+        if (floorType.special == COL_TYPE_BURNING) {
             o->oMoveFlags |= OBJ_MOVE_ABOVE_LAVA;
-        } else if ((floorType == SURFACE_DEATH_PLANE) || (floorType == SURFACE_VERTICAL_WIND)) {
+        } else if ((floorType.special == COL_TYPE_DEATH_PLANE) || (floorType.special == COL_TYPE_VERTICAL_WIND)) {
             //! This maybe misses SURFACE_WARP
             o->oMoveFlags |= OBJ_MOVE_ABOVE_DEATH_BARRIER;
         }
@@ -1382,7 +1382,7 @@ static void cur_obj_update_floor(void) {
         o->oFloorType = floorType;
         o->oFloorRoom = floor->room;
     } else {
-        o->oFloorType = SURFACE_DEFAULT;
+        o->oFloorType.asValue = SURFACE_DEFAULT;
         o->oFloorRoom = 0;
     }
 }

@@ -78,7 +78,7 @@ static struct Surface *alloc_surface(u32 dynamic) {
     (*poolEnd)++;
     gSurfacesAllocated++;
 
-    surface->type = SURFACE_DEFAULT;
+    surface->type.asValue = SURFACE_DEFAULT;
     surface->force = 0;
     surface->flags = SURFACE_FLAGS_NONE;
     surface->room = 0;
@@ -308,18 +308,14 @@ static struct Surface *read_surface_data(TerrainData *vertexData, TerrainData **
 static s32 surface_has_force(s32 surfaceType) {
     s32 hasForce = FALSE;
 
-    switch (surfaceType) {
-        case SURFACE_0004: // Unused
-        case SURFACE_FLOWING_WATER:
-        case SURFACE_DEEP_MOVING_QUICKSAND:
-        case SURFACE_SHALLOW_MOVING_QUICKSAND:
-        case SURFACE_MOVING_QUICKSAND:
-        case SURFACE_HORIZONTAL_WIND:
-        case SURFACE_INSTANT_MOVING_QUICKSAND:
+    switch (surfaceType.special) {
+        case COL_TYPE_FLOWING_WATER:
+        case COL_TYPE_DEEP_MOVING_QUICKSAND:
+        case COL_TYPE_SHALLOW_MOVING_QUICKSAND:
+        case COL_TYPE_MOVING_QUICKSAND:
+        case COL_TYPE_HORIZONTAL_WIND:
+        case COL_TYPE_INSTANT_MOVING_QUICKSAND:
             hasForce = TRUE;
-            break;
-
-        default:
             break;
     }
     return hasForce;
@@ -330,32 +326,23 @@ static s32 surface_has_force(s32 surfaceType) {
  * Returns whether a surface should have the
  * SURFACE_FLAG_NO_CAM_COLLISION flag.
  */
-static s32 surf_has_no_cam_collision(s32 surfaceType) {
-    s32 flags = SURFACE_FLAGS_NONE;
-
-    switch (surfaceType) {
-        case SURFACE_NO_CAM_COLLISION:
-        case SURFACE_NO_CAM_COLLISION_77: // Unused
-        case SURFACE_NO_CAM_COL_VERY_SLIPPERY:
-        case SURFACE_SWITCH:
-            flags = SURFACE_FLAG_NO_CAM_COLLISION;
-            break;
-
-        default:
-            break;
+static s32 surf_has_no_cam_collision(CollisionType surfaceType) {
+    if (surfaceType.noCameraCollision){
+        return SURFACE_FLAG_NO_CAM_COLLISION;
     }
 
-    return flags;
+    return SURFACE_FLAGS_NONE;
 }
 
 /**
  * Load in the surfaces for a given surface type. This includes setting the flags,
  * exertion, and room.
  */
-static void load_static_surfaces(TerrainData **data, TerrainData *vertexData, s32 surfaceType, RoomData **surfaceRooms) {
+static void load_static_surfaces(TerrainData **data, TerrainData *vertexData, CollisionType surfaceType, RoomData **surfaceRooms) {
     s32 i;
     struct Surface *surface;
     RoomData room = 0;
+
 #ifndef ALL_SURFACES_HAVE_FORCE
     s16 hasForce = surface_has_force(surfaceType);
 #endif
@@ -369,16 +356,19 @@ static void load_static_surfaces(TerrainData **data, TerrainData *vertexData, s3
         }
 
         surface = read_surface_data(vertexData, data, FALSE);
+        *data += 3;
         if (surface != NULL) {
             surface->room = room;
             surface->type = surfaceType;
             surface->flags = flags;
 
 #ifdef ALL_SURFACES_HAVE_FORCE
-            surface->force = *(*data + 3);
+            surface->force = *(*data);
+            (*data)++;
 #else
             if (hasForce) {
-                surface->force = *(*data + 3);
+                surface->force = *(*data);
+                (*data)++;
             } else {
                 surface->force = 0;
             }
@@ -386,15 +376,6 @@ static void load_static_surfaces(TerrainData **data, TerrainData *vertexData, s3
 
             add_surface(surface, FALSE);
         }
-
-#ifdef ALL_SURFACES_HAVE_FORCE
-        *data += 4;
-#else
-        *data += 3;
-        if (hasForce) {
-            (*data)++;
-        }
-#endif
     }
 }
 
@@ -502,6 +483,7 @@ void load_area_terrain(s32 index, TerrainData *data, RoomData *surfaceRooms, s16
     s32 terrainLoadType;
     TerrainData *vertexData = NULL;
     u32 surfacePoolData;
+    CollisionType surfaceType;
 
     // Initialize the data for this.
     gEnvironmentRegions = NULL;
@@ -523,9 +505,7 @@ void load_area_terrain(s32 index, TerrainData *data, RoomData *surfaceRooms, s16
     while (TRUE) {
         terrainLoadType = *data++;
 
-        if (TERRAIN_LOAD_IS_SURFACE_TYPE_LOW(terrainLoadType)) {
-            load_static_surfaces(&data, vertexData, terrainLoadType, &surfaceRooms);
-        } else if (terrainLoadType == TERRAIN_LOAD_VERTICES) {
+        if (terrainLoadType == TERRAIN_LOAD_VERTICES) {
             vertexData = read_vertex_data(&data);
         } else if (terrainLoadType == TERRAIN_LOAD_OBJECTS) {
             spawn_special_objects(index, &data);
@@ -535,9 +515,11 @@ void load_area_terrain(s32 index, TerrainData *data, RoomData *surfaceRooms, s16
             continue;
         } else if (terrainLoadType == TERRAIN_LOAD_END) {
             break;
-        } else if (TERRAIN_LOAD_IS_SURFACE_TYPE_HIGH(terrainLoadType)) {
-            load_static_surfaces(&data, vertexData, terrainLoadType, &surfaceRooms);
-            continue;
+        } else if (terrainLoadType == TERRAIN_LOAD_TRIS) {
+            s16 byte1 = *data++;
+            s16 byte2 = *data++;
+            surfaceType.asValue = byte1 << 16 | byte2;
+            load_static_surfaces(&data, vertexData, surfaceType, &surfaceRooms);
         }
     }
 
@@ -625,7 +607,12 @@ void transform_object_vertices(TerrainData **data, TerrainData *vertexData) {
 void load_object_surfaces(TerrainData **data, TerrainData *vertexData, u32 dynamic) {
     s32 i;
 
-    s32 surfaceType = *(*data)++;
+    *data += 1;
+    CollisionType surfaceType;
+    s16 byte1 = *(*data)++;
+    s16 byte2 = *(*data)++;
+    surfaceType.asValue = byte1 << 16 | byte2;
+
     s32 numSurfaces = *(*data)++;
 
 #ifndef ALL_SURFACES_HAVE_FORCE
@@ -640,16 +627,18 @@ void load_object_surfaces(TerrainData **data, TerrainData *vertexData, u32 dynam
 
     for (i = 0; i < numSurfaces; i++) {
         struct Surface *surface = read_surface_data(vertexData, data, dynamic);
-
+        *data += 3;
         if (surface != NULL) {
             surface->object = o;
             surface->type = surfaceType;
 
 #ifdef ALL_SURFACES_HAVE_FORCE
-            surface->force = *(*data + 3);
+            surface->force = *(*data);
+            *data += 1;
 #else
             if (hasForce) {
-                surface->force = *(*data + 3);
+                surface->force = *(*data);
+                *data += 1;
             } else {
                 surface->force = 0;
             }
@@ -659,16 +648,6 @@ void load_object_surfaces(TerrainData **data, TerrainData *vertexData, u32 dynam
             surface->room = room;
             add_surface(surface, dynamic);
         }
-
-#ifdef ALL_SURFACES_HAVE_FORCE
-        *data += 4;
-#else
-        if (hasForce) {
-            *data += 4;
-        } else {
-            *data += 3;
-        }
-#endif
     }
 }
 

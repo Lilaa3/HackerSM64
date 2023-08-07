@@ -517,6 +517,7 @@ void floor_painting_continuous_rippling(struct Painting *painting, struct Painti
  * Check for Mario entering one of the special floors associated with the painting.
  */
 void painting_update_floors(struct Painting *painting) {
+    /*
     s16 paintingId = painting->id;
     s8 rippleLeft = 0;
     s8 rippleMiddle = 0;
@@ -530,6 +531,7 @@ void painting_update_floors(struct Painting *painting) {
     |* (unique) surface types. This code checks which surface Mario is currently on   *|
     \* and sets a bitfield accordingly.                                               */
 
+    /*
     // check if Mario's current floor is one of the special floors
     if (gPaintingMarioFloorType == paintingId * 3 + SURFACE_PAINTING_WOBBLE_A6) {
         rippleLeft = RIPPLE_LEFT;
@@ -568,6 +570,7 @@ void painting_update_floors(struct Painting *painting) {
 
     // Mario "went under" if he was not under last frame, but is under now
     painting->marioWentUnder = (painting->marioWasUnder ^ painting->marioIsUnder) & painting->marioIsUnder;
+    */
 }
 
 /**
@@ -1216,6 +1219,7 @@ void floor_painting_update(struct Painting *painting, struct Painting *paintingG
  * Use PAINTING_ID(id, group) to set the right parameter in a level's geo layout.
  */
 Gfx *geo_painting_draw(s32 callContext, struct GraphNode *node, UNUSED void *context) {
+    return;
     struct GraphNodeGenerated *gen = (struct GraphNodeGenerated *) node;
     s32 group = (gen->parameter >> 8) & 0xFF;
     s32 id = gen->parameter & 0xFF;
@@ -1254,6 +1258,7 @@ Gfx *geo_painting_draw(s32 callContext, struct GraphNode *node, UNUSED void *con
  * Update the painting system's local copy of Mario's current floor and position.
  */
 Gfx *geo_painting_update(s32 callContext, UNUSED struct GraphNode *node, UNUSED Mat4 mtx) {
+    /*
     struct Surface *surface;
 
     // Reset the update counter
@@ -1271,5 +1276,6 @@ Gfx *geo_painting_update(s32 callContext, UNUSED struct GraphNode *node, UNUSED 
         gPaintingMarioYPos = gMarioObject->oPosY;
         gPaintingMarioZPos = gMarioObject->oPosZ;
     }
+    */
     return NULL;
 }

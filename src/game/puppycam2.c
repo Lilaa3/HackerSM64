@@ -1185,9 +1185,9 @@ void puppycam_projection_behaviours(void) {
 
 #ifdef ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
  #ifdef UNLOCK_ALL
-    if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_LOOK_UP_WARP) {
+    if (gMarioState->floor != NULL && gMarioState->floor->type.warpsAndLevel == COL_TYPE_LOOK_UP_WARP) {
  #else // !UNLOCK_ALL
-    if (gMarioState->floor != NULL && gMarioState->floor->type == SURFACE_LOOK_UP_WARP
+    if (gMarioState->floor != NULL && gMarioState->floor->type.warpsAndLevel == COL_TYPE_LOOK_UP_WARP
         && save_file_get_total_star_count(gCurrSaveFileNum - 1, COURSE_MIN - 1, COURSE_MAX - 1) >= 10) {
  #endif // !UNLOCK_ALL
         if (gPuppyCam.pitchTarget >= 0x7000) {

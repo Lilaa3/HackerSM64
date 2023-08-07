@@ -133,7 +133,7 @@ void envfx_set_lava_bubble_position(s32 index, Vec3s centerPos) {
         return;
     }
 
-    if (surface->type == SURFACE_BURNING) {
+    if (surface->type.special == COL_TYPE_BURNING) {
         (gEnvFxBuffer + index)->yPos = floorY;
     } else {
         (gEnvFxBuffer + index)->yPos = FLOOR_LOWER_LIMIT_MISC;

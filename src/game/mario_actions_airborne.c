@@ -68,7 +68,7 @@ s32 check_fall_damage(struct MarioState *m, u32 hardFallAction) {
 
     f32 damageHeight = FALL_DAMAGE_HEIGHT_SMALL;
 
-    if (m->action != ACT_TWIRLING && m->floor->type != SURFACE_BURNING) {
+    if (m->action != ACT_TWIRLING && m->floor->type.special != COL_TYPE_BURNING) {
         if (m->vel[1] < -55.0f) {
             if (fallHeight > FALL_DAMAGE_HEIGHT_LARGE) {
                 m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 16 : 24;
@@ -106,13 +106,11 @@ s32 should_get_stuck_in_ground(UNUSED struct MarioState *m) {
 }
 #else
 s32 should_get_stuck_in_ground(struct MarioState *m) {
-    u32 terrainType = m->area->terrainType & TERRAIN_MASK;
     struct Surface *floor = m->floor;
     s32 flags = floor->flags;
-    s32 type = floor->type;
+    CollisionType type = floor->type;
 
-    if (floor != NULL && (terrainType == TERRAIN_SNOW || terrainType == TERRAIN_SAND)
-        && type != SURFACE_BURNING && SURFACE_IS_NOT_HARD(type)) {
+    if (floor != NULL && type.canGetStuck) {
         if (!(flags & SURFACE_FLAG_DYNAMIC) && m->peakHeight - m->pos[1] > 1000.0f && floor->normal.y >= COS30) {
             return TRUE;
         }
@@ -141,7 +139,7 @@ s32 check_horizontal_wind(struct MarioState *m) {
     f32 speed;
     s16 pushAngle;
 
-    if (floor->type == SURFACE_HORIZONTAL_WIND) {
+    if (floor->type.special == COL_TYPE_HORIZONTAL_WIND) {
         pushAngle = floor->force << 8;
 
         m->slideVelX += 1.2f * sins(pushAngle);
@@ -630,7 +628,7 @@ s32 act_long_jump(struct MarioState *m) {
 
     play_mario_sound(m, SOUND_ACTION_TERRAIN_JUMP, SOUND_MARIO_YAHOO);
 
-    if (m->floor->type == SURFACE_VERTICAL_WIND && m->actionState == 0) {
+    if (m->floor->type.special == COL_TYPE_VERTICAL_WIND && m->actionState == 0) {
         play_sound(SOUND_MARIO_HERE_WE_GO, m->marioObj->header.gfx.cameraToObject);
         m->actionState = 1;
     }
@@ -1480,7 +1478,7 @@ s32 act_lava_boost(struct MarioState *m) {
 
     switch (perform_air_step(m, 0)) {
         case AIR_STEP_LANDED:
-            if (m->floor->type == SURFACE_BURNING) {
+            if (m->floor->type.special == COL_TYPE_BURNING) {
                 m->actionState = ACT_STATE_LAVA_BOOST_HIT_LAVA;
                 if (!(m->flags & MARIO_METAL_CAP)) {
                     m->hurtCounter += (m->flags & MARIO_CAP_ON_HEAD) ? 12 : 18;
@@ -1992,7 +1990,7 @@ s32 check_common_airborne_cancels(struct MarioState *m) {
         return drop_and_set_mario_action(m, ACT_SQUISHED, 0);
     }
 
-    if (m->floor->type == SURFACE_VERTICAL_WIND && (m->action & ACT_FLAG_ALLOW_VERTICAL_WIND_ACTION)) {
+    if (m->floor->type.special == COL_TYPE_VERTICAL_WIND && (m->action & ACT_FLAG_ALLOW_VERTICAL_WIND_ACTION)) {
         return drop_and_set_mario_action(m, ACT_VERTICAL_WIND, 0);
     }
 

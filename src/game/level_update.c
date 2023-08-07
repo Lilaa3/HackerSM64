@@ -541,7 +541,7 @@ void check_instant_warp(void) {
 #endif // ENABLE_VANILLA_LEVEL_SPECIFIC_CHECKS
 
     if ((floor = gMarioState->floor) != NULL) {
-        s32 index = floor->type - SURFACE_INSTANT_WARP_1B;
+        s32 index = floor->type.warpsAndLevel - COL_TYPE_INSTANT_WARP_0;
         if (index >= INSTANT_WARP_INDEX_START && index < INSTANT_WARP_INDEX_STOP
             && gCurrentArea->instantWarps != NULL) {
             struct InstantWarp *warp = &gCurrentArea->instantWarps[index];
@@ -667,6 +667,7 @@ void initiate_warp(s16 destLevel, s16 destArea, s16 destWarpNode, s32 warpFlags)
  */
 struct WarpNode *get_painting_warp_node(void) {
     struct WarpNode *warpNode = NULL;
+    /*
     s32 paintingIndex = gMarioState->floor->type - SURFACE_PAINTING_WARP_D3;
 
     if (paintingIndex >= PAINTING_WARP_INDEX_START && paintingIndex < PAINTING_WARP_INDEX_END) {
@@ -675,7 +676,7 @@ struct WarpNode *get_painting_warp_node(void) {
             warpNode = &gCurrentArea->paintingWarpNodes[paintingIndex];
         }
     }
-
+    */
     return warpNode;
 }
 

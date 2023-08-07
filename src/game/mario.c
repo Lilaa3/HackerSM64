@@ -265,22 +265,34 @@ void adjust_sound_for_speed(struct MarioState *m) {
     set_sound_moving_speed(SOUND_BANK_MOVING, (absForwardVel > 100) ? 100 : absForwardVel);
 }
 
+s32 CollisionToMarioParticles[] = {
+    [COL_TYPE_PARTICLE_DEFAULT]                 = 0,
+    [COL_TYPE_PARTICLE_DUST]                    = PARTICLE_DUST,
+    [COL_TYPE_PARTICLE_SPARKLES]                = PARTICLE_SPARKLES,
+    [COL_TYPE_PARTICLE_WATER_SPLASH]            = PARTICLE_WATER_SPLASH,
+    [COL_TYPE_PARTICLE_WAVE_TRAIL]              = PARTICLE_WAVE_TRAIL,
+    [COL_TYPE_PARTICLE_FIRE]                    = PARTICLE_IDLE_WATER_WAVE,
+    [COL_TYPE_PARTICLE_LEAF]                    = PARTICLE_LEAF,
+    [COL_TYPE_PARTICLE_SNOW]                    = PARTICLE_SNOW,
+    [COL_TYPE_PARTICLE_BREATH]                  = PARTICLE_BREATH,
+    [COL_TYPE_PARTICLE_DIRT]                    = PARTICLE_DIRT,
+    [COL_TYPE_PARTICLE_TRIANGLE]                = PARTICLE_TRIANGLE,
+};
+
 /**
  * Spawns particles if the step sound says to, then either plays a step sound or relevant other sound.
  */
 void play_sound_and_spawn_particles(struct MarioState *m, u32 soundBits, u32 waveParticleType) {
-    if (m->terrainSoundAddend == (SOUND_TERRAIN_WATER << 16)) {
+    if (m->floor->type.particles == COL_TYPE_PARTICLE_SHALLOW_WATER){
         if (waveParticleType != 0) {
             m->particleFlags |= PARTICLE_SHALLOW_WATER_SPLASH;
-        } else {
+        }
+        else {
             m->particleFlags |= PARTICLE_SHALLOW_WATER_WAVE;
         }
-    } else {
-        if (m->terrainSoundAddend == (SOUND_TERRAIN_SAND << 16)) {
-            m->particleFlags |= PARTICLE_DIRT;
-        } else if (m->terrainSoundAddend == (SOUND_TERRAIN_SNOW << 16)) {
-            m->particleFlags |= PARTICLE_SNOW;
-        }
+    }
+    else{
+        m->particleFlags |= CollisionToMarioParticles[m->floor->type.particles];
     }
 
     if ((m->flags & MARIO_METAL_CAP) || soundBits == SOUND_ACTION_UNSTUCK_FROM_GROUND
@@ -380,40 +392,12 @@ void mario_set_forward_vel(struct MarioState *m, f32 forwardVel) {
 s32 mario_get_floor_class(struct MarioState *m) {
     s32 floorClass;
 
-    // The slide terrain type defaults to slide slipperiness.
-    // This doesn't matter too much since normally the slide terrain
-    // is checked for anyways.
-    if ((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE) {
-        floorClass = SURFACE_CLASS_VERY_SLIPPERY;
-    } else {
-        floorClass = SURFACE_CLASS_DEFAULT;
-    }
+    floorClass = SURFACE_CLASS_DEFAULT;
 
     if (m->floor != NULL) {
-        switch (m->floor->type) {
-            case SURFACE_NOT_SLIPPERY:
-            case SURFACE_HARD_NOT_SLIPPERY:
-            case SURFACE_SWITCH:
-                floorClass = SURFACE_CLASS_NOT_SLIPPERY;
-                break;
-
-            case SURFACE_SLIPPERY:
-            case SURFACE_NOISE_SLIPPERY:
-            case SURFACE_HARD_SLIPPERY:
-            case SURFACE_NO_CAM_COL_SLIPPERY:
-                floorClass = SURFACE_CLASS_SLIPPERY;
-                break;
-
-            case SURFACE_SUPER_SLIPPERY:
-            case SURFACE_VERY_SLIPPERY:
-            case SURFACE_ICE:
-            case SURFACE_HARD_VERY_SLIPPERY:
-            case SURFACE_NOISE_VERY_SLIPPERY_73:
-            case SURFACE_NOISE_VERY_SLIPPERY_74:
-            case SURFACE_NOISE_VERY_SLIPPERY:
-            case SURFACE_NO_CAM_COL_VERY_SLIPPERY:
-                floorClass = SURFACE_CLASS_VERY_SLIPPERY;
-                break;
+        floorClass = m->floor->type.slipperiness;
+        if (m->floor->type.slipperiness == SURFACE_CLASS_SUPER_SLIPPERY){
+            floorClass = SURFACE_CLASS_VERY_SLIPPERY;
         }
     }
 
@@ -425,25 +409,6 @@ s32 mario_get_floor_class(struct MarioState *m) {
     return floorClass;
 }
 
-// clang-format off
-s8 sTerrainSounds[7][6] = {
-    // default,              hard,                 slippery,
-    // very slippery,        noisy default,        noisy slippery
-    { SOUND_TERRAIN_DEFAULT, SOUND_TERRAIN_STONE,  SOUND_TERRAIN_GRASS,
-      SOUND_TERRAIN_GRASS,   SOUND_TERRAIN_GRASS,  SOUND_TERRAIN_DEFAULT }, // TERRAIN_GRASS
-    { SOUND_TERRAIN_STONE,   SOUND_TERRAIN_STONE,  SOUND_TERRAIN_STONE,
-      SOUND_TERRAIN_STONE,   SOUND_TERRAIN_GRASS,  SOUND_TERRAIN_GRASS }, // TERRAIN_STONE
-    { SOUND_TERRAIN_SNOW,    SOUND_TERRAIN_ICE,    SOUND_TERRAIN_SNOW,
-      SOUND_TERRAIN_ICE,     SOUND_TERRAIN_STONE,  SOUND_TERRAIN_STONE }, // TERRAIN_SNOW
-    { SOUND_TERRAIN_SAND,    SOUND_TERRAIN_STONE,  SOUND_TERRAIN_SAND,
-      SOUND_TERRAIN_SAND,    SOUND_TERRAIN_STONE,  SOUND_TERRAIN_STONE }, // TERRAIN_SAND
-    { SOUND_TERRAIN_SPOOKY,  SOUND_TERRAIN_SPOOKY, SOUND_TERRAIN_SPOOKY,
-      SOUND_TERRAIN_SPOOKY,  SOUND_TERRAIN_STONE,  SOUND_TERRAIN_STONE }, // TERRAIN_SPOOKY
-    { SOUND_TERRAIN_DEFAULT, SOUND_TERRAIN_STONE,  SOUND_TERRAIN_GRASS,
-      SOUND_TERRAIN_ICE,     SOUND_TERRAIN_STONE,  SOUND_TERRAIN_ICE }, // TERRAIN_WATER
-    { SOUND_TERRAIN_STONE,   SOUND_TERRAIN_STONE,  SOUND_TERRAIN_STONE,
-      SOUND_TERRAIN_STONE,   SOUND_TERRAIN_ICE,    SOUND_TERRAIN_ICE }, // TERRAIN_SLIDE
-};
 // clang-format on
 
 /**
@@ -451,63 +416,11 @@ s8 sTerrainSounds[7][6] = {
  * This depends on surfaces and terrain.
  */
 u32 mario_get_terrain_sound_addend(struct MarioState *m) {
-    s16 floorSoundType;
-    s16 terrainType = m->area->terrainType & TERRAIN_MASK;
-    s32 ret = SOUND_TERRAIN_DEFAULT << 16;
-    s32 floorType;
-
     if (m->floor != NULL) {
-        floorType = m->floor->type;
-
-        if ((gCurrLevelNum != LEVEL_LLL) && (m->floorHeight < (m->waterLevel - 10))) {
-            // Water terrain sound, excluding LLL since it uses water in the volcano.
-            ret = SOUND_TERRAIN_WATER << 16;
-        } else if (SURFACE_IS_QUICKSAND(floorType)) {
-            ret = SOUND_TERRAIN_SAND << 16;
-        } else {
-            switch (floorType) {
-                default:
-                    floorSoundType = 0;
-                    break;
-
-                case SURFACE_NOT_SLIPPERY:
-                case SURFACE_HARD:
-                case SURFACE_HARD_NOT_SLIPPERY:
-                case SURFACE_SWITCH:
-                    floorSoundType = 1;
-                    break;
-
-                case SURFACE_SLIPPERY:
-                case SURFACE_HARD_SLIPPERY:
-                case SURFACE_NO_CAM_COL_SLIPPERY:
-                    floorSoundType = 2;
-                    break;
-
-                case SURFACE_SUPER_SLIPPERY:
-                case SURFACE_VERY_SLIPPERY:
-                case SURFACE_ICE:
-                case SURFACE_HARD_VERY_SLIPPERY:
-                case SURFACE_NOISE_VERY_SLIPPERY_73:
-                case SURFACE_NOISE_VERY_SLIPPERY_74:
-                case SURFACE_NOISE_VERY_SLIPPERY:
-                case SURFACE_NO_CAM_COL_VERY_SLIPPERY:
-                    floorSoundType = 3;
-                    break;
-
-                case SURFACE_NOISE_DEFAULT:
-                    floorSoundType = 4;
-                    break;
-
-                case SURFACE_NOISE_SLIPPERY:
-                    floorSoundType = 5;
-                    break;
-            }
-
-            ret = sTerrainSounds[terrainType][floorSoundType] << 16;
-        }
+        return m->floor->type.sound << 16;
     }
 
-    return ret;
+    return SOUND_TERRAIN_DEFAULT << 16;
 }
 
 /**
@@ -515,7 +428,7 @@ u32 mario_get_terrain_sound_addend(struct MarioState *m) {
  */
 s32 mario_facing_downhill(struct MarioState *m, s32 turnYaw) {
     // Forces Mario to do a belly slide rather than a butt slide when on a super slippery floor, no matter his angle, so that the player can't jump.
-    if (m->floor && m->floor->type == SURFACE_SUPER_SLIPPERY)
+    if (m->floor && m->floor->type.slipperiness == SURFACE_CLASS_SUPER_SLIPPERY)
         return FALSE;
 
     s16 faceAngleYaw = m->faceAngle[1];
@@ -537,7 +450,7 @@ s32 mario_facing_downhill(struct MarioState *m, s32 turnYaw) {
 u32 mario_floor_is_slippery(struct MarioState *m) {
     f32 normY;
 
-    if (((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE  && m->floor->normal.y < COS1) || (m->floor->type == SURFACE_SUPER_SLIPPERY)) {
+    if (((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE  && m->floor->normal.y < COS1) || (m->floor->type.slipperiness == SURFACE_CLASS_SUPER_SLIPPERY)) {
         return TRUE;
     }
 
@@ -558,7 +471,7 @@ s32 mario_floor_is_slope(struct MarioState *m) {
     f32 normY;
 
     if (((m->area->terrainType & TERRAIN_MASK) == TERRAIN_SLIDE
-        && m->floor->normal.y < COS1) || (m->floor->type == SURFACE_SUPER_SLIPPERY)) {
+        && m->floor->normal.y < COS1) || (m->floor->type.slipperiness == SURFACE_CLASS_SUPER_SLIPPERY)) {
         return TRUE;
     }
 
@@ -577,11 +490,11 @@ s32 mario_floor_is_slope(struct MarioState *m) {
  */
 s32 mario_floor_is_steep(struct MarioState *m) {
     f32 normY;
-    if (m->floor->type == SURFACE_SUPER_SLIPPERY)
+    if (m->floor->type.slipperiness == SURFACE_CLASS_SUPER_SLIPPERY)
         return TRUE;
 
 #ifdef JUMP_KICK_FIX
-    if (m->floor->type == SURFACE_NOT_SLIPPERY) {
+    if (m->floor->type.slipperiness == SURFACE_CLASS_NOT_SLIPPERY) {
         return FALSE;
     }
 #endif
@@ -1770,12 +1683,12 @@ s32 execute_mario_action(UNUSED struct Object *obj) {
 
         // Both of the wind handling portions play wind audio only in
         // non-Japanese releases.
-        if (gMarioState->floor->type == SURFACE_HORIZONTAL_WIND) {
+        if (gMarioState->floor->type.special == COL_TYPE_HORIZONTAL_WIND) {
             spawn_wind_particles(0, (gMarioState->floor->force << 8));
             play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
         }
 
-        if (gMarioState->floor->type == SURFACE_VERTICAL_WIND) {
+        if (gMarioState->floor->type.special == COL_TYPE_VERTICAL_WIND) {
             spawn_wind_particles(1, 0);
             play_sound(SOUND_ENV_WIND2, gMarioState->marioObj->header.gfx.cameraToObject);
         }

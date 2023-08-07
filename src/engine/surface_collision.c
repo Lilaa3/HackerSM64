@@ -60,7 +60,7 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
     Vec3f v0, v1, v2;
     f32 d00, d01, d11, d20, d21;
     f32 invDenom;
-    TerrainData type = SURFACE_DEFAULT;
+    CollisionType type;
     s32 numCols = 0;
 
     // Max collision radius = 200
@@ -84,10 +84,10 @@ static s32 find_wall_collisions_from_list(struct SurfaceNode *surfaceNode, struc
             if (surf->flags & SURFACE_FLAG_NO_CAM_COLLISION) continue;
         } else {
             // Ignore camera only surfaces.
-            if (type == SURFACE_CAMERA_BOUNDARY) continue;
+            if (type.camera == COL_TYPE_CAMERA_BOUNDARY) continue;
 
             // If an object can pass through a vanish cap wall, pass through.
-            if (type == SURFACE_VANISH_CAP_WALLS && o != NULL) {
+            if (type.vanish && o != NULL) {
                 // If an object can pass through a vanish cap wall, pass through.
                 if (o->activeFlags & ACTIVE_FLAG_MOVE_THROUGH_GRATE) continue;
                 // If Mario has a vanish cap, pass through the vanish cap wall.
@@ -270,7 +270,7 @@ void add_ceil_margin(s32 *x, s32 *z, Vec3s target1, Vec3s target2, f32 margin) {
 }
 
 static s32 check_within_ceil_triangle_bounds(s32 x, s32 z, struct Surface *surf, f32 margin) {
-    s32 addMargin = surf->type != SURFACE_HANGABLE && !FLT_IS_NONZERO(margin);
+    s32 addMargin = surf->type.special != COL_TYPE_HANGABLE && !FLT_IS_NONZERO(margin);
     Vec3i vx, vz;
     vx[0] = surf->vertex1[0];
     vz[0] = surf->vertex1[2];
@@ -300,7 +300,7 @@ static s32 check_within_ceil_triangle_bounds(s32 x, s32 z, struct Surface *surf,
 static struct Surface *find_ceil_from_list(struct SurfaceNode *surfaceNode, s32 x, s32 y, s32 z, f32 *pheight) {
     register struct Surface *surf, *ceil = NULL;
     register f32 height;
-    SurfaceType type = SURFACE_DEFAULT;
+    CollisionType type;
     *pheight = CELL_HEIGHT_LIMIT;
     // Stay in this loop until out of ceilings.
     while (surfaceNode != NULL) {
@@ -316,7 +316,7 @@ static struct Surface *find_ceil_from_list(struct SurfaceNode *surfaceNode, s32 
             if (surf->flags & SURFACE_FLAG_NO_CAM_COLLISION) {
                 continue;
             }
-        } else if (type == SURFACE_CAMERA_BOUNDARY) {
+        } else if (type.camera == COL_TYPE_CAMERA_BOUNDARY) {
             // Ignore camera only surfaces
             continue;
         }
@@ -432,7 +432,7 @@ static s32 check_within_floor_triangle_bounds(s32 x, s32 z, struct Surface *surf
  */
 static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32 x, s32 y, s32 z, f32 *pheight) {
     register struct Surface *surf, *floor = NULL;
-    register SurfaceType type = SURFACE_DEFAULT;
+    register CollisionType type;
     register f32 height;
     register s32 bufferY = y + FIND_FLOOR_BUFFER;
 
@@ -443,9 +443,9 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
         type        = surf->type;
 
         // To prevent the Merry-Go-Round room from loading when Mario passes above the hole that leads
-        // there, SURFACE_INTANGIBLE is used. This prevent the wrong room from loading, but can also allow
+        // there, COL_TYPE_INTANGIBLE is used. This prevent the wrong room from loading, but can also allow
         // Mario to pass through.
-        if (!(gCollisionFlags & COLLISION_FLAG_INCLUDE_INTANGIBLE) && (type == SURFACE_INTANGIBLE)) {
+        if (!(gCollisionFlags & COLLISION_FLAG_INCLUDE_INTANGIBLE) && (type.special == COL_TYPE_INTANGIBLE)) {
             continue;
         }
 
@@ -454,7 +454,7 @@ static struct Surface *find_floor_from_list(struct SurfaceNode *surfaceNode, s32
             if (surf->flags & SURFACE_FLAG_NO_CAM_COLLISION) {
                 continue;
             }
-        } else if (type == SURFACE_CAMERA_BOUNDARY) {
+        } else if (type.camera == COL_TYPE_CAMERA_BOUNDARY) {
             continue; // If we are not checking for the camera, ignore camera only floors.
         }
 
@@ -504,13 +504,13 @@ struct Surface *find_water_floor_from_list(struct SurfaceNode *surfaceNode, s32 
     f32 buffer = FIND_FLOOR_BUFFER;
 
     // Iterate through the list of water floors until there are no more water floors.
-    // SURFACE_NEW_WATER_BOTTOM
+    // COL_TYPE_WATER_BOTTOM
     while (bottomSurfaceNode != NULL) {
         surf = bottomSurfaceNode->surface;
         bottomSurfaceNode = bottomSurfaceNode->next;
 
         // skip wall angled water
-        if (surf->type != SURFACE_NEW_WATER_BOTTOM || absf(surf->normal.y) < NORMAL_FLOOR_THRESHOLD) continue;
+        if (surf->type.special != COL_TYPE_WATER_BOTTOM || absf(surf->normal.y) < NORMAL_FLOOR_THRESHOLD) continue;
 
         if (!check_within_bounds_y_norm(x, z, surf)) continue;
 
@@ -524,13 +524,13 @@ struct Surface *find_water_floor_from_list(struct SurfaceNode *surfaceNode, s32 
     }
 
     // Iterate through the list of water tops until there are no more water tops.
-    // SURFACE_NEW_WATER
+    // COL_TYPE_WATER
     while (topSurfaceNode != NULL) {
         surf = topSurfaceNode->surface;
         topSurfaceNode = topSurfaceNode->next;
 
         // skip water tops or wall angled water bottoms
-        if (surf->type == SURFACE_NEW_WATER_BOTTOM || absf(surf->normal.y) < NORMAL_FLOOR_THRESHOLD) continue;
+        if (surf->type.special == COL_TYPE_WATER || absf(surf->normal.y) < NORMAL_FLOOR_THRESHOLD) continue;
 
         if (!check_within_bounds_y_norm(x, z, surf)) continue;
 
