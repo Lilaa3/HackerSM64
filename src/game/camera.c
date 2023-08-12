@@ -5765,11 +5765,6 @@ void cam_ccm_leave_slide_shortcut(UNUSED struct Camera *c) {
  * Apply any modes that are triggered by special floor surface types
  */
 u32 surface_type_modes(struct Camera *c) {
-    if (sMarioGeometry.currFloorType.asValue == SURFACE_NO_CAM_COL_SLIPPERY){
-        transition_to_camera_mode(c, CAMERA_MODE_CLOSE, 90);
-        return TRUE;
-    }
-
     switch (sMarioGeometry.currFloorType.camera) {
         case COL_TYPE_CLOSE_CAMERA:
             transition_to_camera_mode(c, CAMERA_MODE_CLOSE, 90);
