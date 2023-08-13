@@ -530,7 +530,7 @@ struct Surface *find_water_floor_from_list(struct SurfaceNode *surfaceNode, s32 
         topSurfaceNode = topSurfaceNode->next;
 
         // skip water tops or wall angled water bottoms
-        if (surf->type.special == COL_TYPE_WATER || absf(surf->normal.y) < NORMAL_FLOOR_THRESHOLD) continue;
+        if (surf->type.special == COL_TYPE_WATER_BOTTOM || absf(surf->normal.y) < NORMAL_FLOOR_THRESHOLD) continue;
 
         if (!check_within_bounds_y_norm(x, z, surf)) continue;
 
