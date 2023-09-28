@@ -6,6 +6,7 @@
 #include "types.h"
 #include "camera.h"
 #include "engine/graph_node.h"
+#include "coin.h"
 
 struct WarpNode {
     /*00*/ u8 id;
@@ -78,6 +79,7 @@ struct Area {
 #ifdef BETTER_REVERB
     /*0x3C*/ u8 betterReverbPreset;
 #endif
+    ALIGNED16 struct CoinAreaData coinData;
 };
 
 // All the transition data to be used in screen_transition.c

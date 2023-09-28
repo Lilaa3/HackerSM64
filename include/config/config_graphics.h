@@ -127,6 +127,7 @@
  * When this is disabled, the culling will only be skipped according to the NO_CULLING_EMULATOR_BLACKLIST.
  */
 // #define CULLING_ON_EMULATOR
+#define NO_CULLING_EMULATOR_BLACKLIST (EMU_CONSOLE | EMU_WIIVC | EMU_ARES | EMU_SIMPLE64 | EMU_CEN64)
 
 /**
  * Makes objects below the screen be culled. 
