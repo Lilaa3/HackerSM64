@@ -141,12 +141,12 @@ ALWAYS_INLINE struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u8 t
 	return spawn_coin(relativePos, type, flags);
 }
 
-ALWAYS_INLINE struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3s offset, u8 type, u16 flags) {
+ALWAYS_INLINE struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3f offset, u8 type, u16 flags) {
     Vec3s pos;
-    pos[0] = obj->oPosX + offset[0] * coss(obj->oFaceAngleYaw) - offset[2] * sins(obj->oFaceAngleYaw);
-    pos[2] = obj->oPosZ + offset[0] * sins(obj->oFaceAngleYaw) + offset[2] * coss(obj->oFaceAngleYaw);
+    // Some coin formations still rotate wrong, fix.
+    pos[0] = obj->oPosX + (offset[0] * coss(obj->oFaceAngleYaw) - offset[2] * sins(obj->oFaceAngleYaw));
     pos[1] = obj->oPosY + offset[1];
-
+    pos[2] = obj->oPosZ + (offset[0] * sins(obj->oFaceAngleYaw) + offset[2] * coss(obj->oFaceAngleYaw));
 	return spawn_coin(pos, type, flags);
 }
 
@@ -247,18 +247,6 @@ ALWAYS_INLINE void collect_coin(struct CoinAreaData* coinData, s32 i){
         coinData->head--;
 
 }
-
-Gfx coinColours[3][3] = {   {   gsDPSetPrimColor(0, 0, 255, 209, 0, 255), //Yellows
-                                gsDPSetEnvColor(207, 83, 0, 255),
-                                gsSPEndDisplayList(),         },
-                        
-                            {   gsDPSetPrimColor(0, 0, 0, 133, 255, 255), //Blues
-                                gsDPSetEnvColor(46, 0, 171, 255),
-                                gsSPEndDisplayList(),         },
-
-                            {   gsDPSetPrimColor(0, 0, 255, 0, 0, 255), //Reds
-                                gsDPSetEnvColor(118, 0, 40, 255),
-                                gsSPEndDisplayList(),         },};
 
 // Culls the coin if the console check returns positive and is far away. Returns false if the coin should be skipped.
 ALWAYS_INLINE s32 coin_render_distance_cull(struct CoinInfo* coin){

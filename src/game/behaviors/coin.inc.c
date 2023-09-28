@@ -133,7 +133,7 @@ void bhv_coin_loop(void) {
 }
 
 void spawn_coin_in_formation(s32 index, s32 shape) {
-    Vec3s pos = { 0, 0, 0 };
+    Vec3f pos = { 0, 0, 0 };
     s32 spawnCoin    = TRUE;
     s32 flags = 0;
     s32 snapToGround = TRUE;

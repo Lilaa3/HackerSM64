@@ -74,7 +74,7 @@ void collect_coin(struct CoinAreaData* coinData, s32 i);
 struct CoinInfo *spawn_coin(Vec3s pos, u32 type, u32 flags);
 
 struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u8 type, u16 flags);
-struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3s offset, u8 type, u16 flags);
+struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3f offset, u8 type, u16 flags);
 struct CoinInfo *spawn_coin_specific_o(struct Object *obj, u8 type, u16 flags);
 
 #define spawn_coin_relative_o(offset, type, flags) \
