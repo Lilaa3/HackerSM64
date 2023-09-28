@@ -77,27 +77,27 @@ static const Vtx coin_seg3_vertex_secret_r[] = {
 };
 
 // 0x03005780
-ALIGNED8 static const Texture coin_seg3_texture_0_ia8[] = {
+ALIGNED8 const Texture coin_seg3_texture_0_ia8[] = {
 #include "actors/coin/coin_0.ia8.inc.c"
 };
 
 // 0x03005F80
-ALIGNED8 static const Texture coin_seg3_texture_22_5_ia8[] = {
+ALIGNED8 const Texture coin_seg3_texture_22_5_ia8[] = {
 #include "actors/coin/coin_22_5.ia8.inc.c"
 };
 
 // 0x03006780
-ALIGNED8 static const Texture coin_seg3_texture_45_ia8[] = {
+ALIGNED8 const Texture coin_seg3_texture_45_ia8[] = {
 #include "actors/coin/coin_45.ia8.inc.c"
 };
 
 // 0x03006F80
-ALIGNED8 static const Texture coin_seg3_texture_67_5_ia8[] = {
+ALIGNED8 const Texture coin_seg3_texture_67_5_ia8[] = {
 #include "actors/coin/coin_67_5.ia8.inc.c"
 };
 
 // 0x03007
-ALIGNED8 static const Texture coin_seg3_texture_90_ia8[] = {
+ALIGNED8 const Texture coin_seg3_texture_90_ia8[] = {
 #include "actors/coin/coin_90.ia8.inc.c"
 };
 

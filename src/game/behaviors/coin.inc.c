@@ -1,5 +1,7 @@
 // coin.inc.c
 
+#include "src/game/coin.h"
+
 struct ObjectHitbox sYellowCoinHitbox = {
     /* interactType:      */ INTERACT_COIN,
     /* downOffset:        */ 0,
@@ -46,27 +48,8 @@ s32 bhv_coin_sparkles_init(void) {
 }
 
 void bhv_yellow_coin_init(void) {
-    cur_obj_set_behavior(bhvYellowCoin);
-    obj_set_hitbox(o, &sYellowCoinHitbox);
-    cur_obj_update_floor_height();
-
-    if (500.0f < absf(o->oPosY - o->oFloorHeight)) {
-        if (cur_obj_has_model(MODEL_YELLOW_COIN)) {
-            cur_obj_set_model(MODEL_YELLOW_COIN_NO_SHADOW);
-        } else if (cur_obj_has_model(MODEL_BLUE_COIN)) {
-            cur_obj_set_model(MODEL_BLUE_COIN_NO_SHADOW);
-        } else if (cur_obj_has_model(MODEL_RED_COIN)) {
-            cur_obj_set_model(MODEL_RED_COIN_NO_SHADOW);
-#ifdef IA8_30FPS_COINS
-        } else if (cur_obj_has_model(MODEL_SILVER_COIN)) {
-            cur_obj_set_model(MODEL_SILVER_COIN_NO_SHADOW);
-#endif
-        }
-    }
-
-    if (o->oFloorHeight < FLOOR_LOWER_LIMIT_MISC) {
-        obj_mark_for_deletion(o);
-    }
+    spawn_coin_at_o(COIN_BHV_TYPE_YELLOW, 0);
+    obj_mark_for_deletion(o);
 }
 
 void bhv_yellow_coin_loop(void) {
@@ -149,40 +132,10 @@ void bhv_coin_loop(void) {
     bhv_coin_sparkles_init();
 }
 
-void bhv_coin_formation_spawned_coin_loop(void) {
-    if (o->oTimer == 0) {
-        cur_obj_set_behavior(bhvYellowCoin);
-        obj_set_hitbox(o, &sYellowCoinHitbox);
-        if (o->oCoinSnapToGround) {
-            o->oPosY += 300.0f;
-            cur_obj_update_floor_height();
-
-            if (o->oPosY + FIND_FLOOR_BUFFER < o->oFloorHeight || o->oFloorHeight < FLOOR_LOWER_LIMIT_MISC) {
-                obj_mark_for_deletion(o);
-            } else {
-                o->oPosY = o->oFloorHeight;
-            }
-        } else {
-            cur_obj_update_floor_height();
-
-            if (absf(o->oPosY - o->oFloorHeight) > 250.0f) {
-                cur_obj_set_model(MODEL_YELLOW_COIN_NO_SHADOW);
-            }
-        }
-    } else {
-        if (bhv_coin_sparkles_init()) {
-            o->parentObj->oCoinRespawnBits |= (1 << o->oBehParams2ndByte);
-        }
-        o->oAnimState++;
-    }
-    if (o->parentObj->oAction == COIN_FORMATION_ACT_DEACTIVATE) {
-        obj_mark_for_deletion(o);
-    }
-}
-
 void spawn_coin_in_formation(s32 index, s32 shape) {
-    Vec3i pos = { 0, 0, 0 };
+    Vec3s pos = { 0, 0, 0 };
     s32 spawnCoin    = TRUE;
+    s32 flags = 0;
     s32 snapToGround = TRUE;
 
     switch (shape & COIN_FORMATION_BP_SHAPE_MASK) {
@@ -210,48 +163,21 @@ void spawn_coin_in_formation(s32 index, s32 shape) {
             break;
     }
 
-    if (shape & COIN_FORMATION_BP_FLYING) {
+    if (shape & COIN_FORMATION_BP_FLYING)
         snapToGround = FALSE;
-    }
 
-    if (spawnCoin) {
-        struct Object *newCoin =
-            spawn_object_relative(index, pos[0], pos[1], pos[2], o,
-                                  MODEL_YELLOW_COIN, bhvCoinFormationSpawnedCoin);
-        newCoin->oCoinSnapToGround = snapToGround;
-    }
+    if (snapToGround)
+        flags |= COIN_FLAG_SNAP_TO_GROUND;
+
+    if (spawnCoin) 
+        spawn_coin_relative_o(pos, COIN_BHV_TYPE_YELLOW, flags);
 }
 
 void bhv_coin_formation_init(void) {
-    o->oCoinRespawnBits = GET_BPARAM3(o->oBehParams);
-}
-
-void bhv_coin_formation_loop(void) {
-    s32 bitIndex;
-
-    switch (o->oAction) {
-        case COIN_FORMATION_ACT_INACTIVE:
-            if (o->oDistanceToMario < COIN_FORMATION_DISTANCE) {
-                for (bitIndex = 0; bitIndex < 8; bitIndex++) {
-                    if (!(o->oCoinRespawnBits & (1 << bitIndex))) {
-                        spawn_coin_in_formation(bitIndex, o->oBehParams2ndByte);
-                    }
-                }
-                o->oAction = COIN_FORMATION_ACT_ACTIVE;
-            }
-            break;
-        case COIN_FORMATION_ACT_ACTIVE:
-            if (o->oDistanceToMario > (COIN_FORMATION_DISTANCE + 100.0f)) {
-                o->oAction = COIN_FORMATION_ACT_DEACTIVATE;
-            }
-            break;
-        case COIN_FORMATION_ACT_DEACTIVATE:
-            o->oAction = COIN_FORMATION_ACT_INACTIVE;
-            break;
+    for (s32 bitIndex = 0; bitIndex < 8; bitIndex++) {
+        spawn_coin_in_formation(bitIndex, o->oBehParams2ndByte);
     }
-
-    // Casting to u8 doesn't seem to match
-    set_object_respawn_info_bits(o, o->oCoinRespawnBits & RESPAWN_INFO_DONT_RESPAWN);
+    obj_mark_for_deletion(o);
 }
 
 void coin_inside_boo_act_dropped(void) {

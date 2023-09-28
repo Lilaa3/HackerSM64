@@ -521,8 +521,12 @@ void geo_process_master_list(struct GraphNodeMasterList *node) {
                 node->listHeads[ucode][layer] = NULL;
             }
         }
+
+        render_coins();
+
         geo_process_node_and_siblings(node->node.children);
         geo_process_master_list_sub(gCurGraphNodeMasterList);
+
         gCurGraphNodeMasterList = NULL;
     }
 }

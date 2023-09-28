@@ -1026,12 +1026,14 @@ s32 play_mode_normal(void) {
         if (sTimerRunning && gHudDisplay.timer < 17999) {
             gHudDisplay.timer++;
         }
+        lvl_process_coins(&gCurrentArea->coinData);
         area_update_objects();
     }
 #else
     if (sTimerRunning && gHudDisplay.timer < 17999) {
         gHudDisplay.timer++;
     }
+    lvl_process_coins(&gCurrentArea->coinData);
     area_update_objects();
 #endif
     update_hud_values();

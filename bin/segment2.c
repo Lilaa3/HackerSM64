@@ -2793,7 +2793,7 @@ const Gfx dl_shadow_square[] = {
 };
 #endif
 
-static const Vtx vertex_shadow[] = {
+const Vtx vertex_shadow[] = {
 #ifdef HD_SHADOWS
     {{{    -1,      0,     -1}, 0, { -2048,  -2048}, {0xff, 0xff, 0xff, 0xff}}},
     {{{     1,      0,     -1}, 0, {  2048,  -2048}, {0xff, 0xff, 0xff, 0xff}}},

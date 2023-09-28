@@ -186,6 +186,8 @@ void clear_areas(void) {
     gWarpTransition.isActive = FALSE;
     gWarpTransition.pauseRendering = FALSE;
     gMarioSpawnInfo->areaIndex = -1;
+    
+    lvl_clean_coins();
 
     for (i = 0; i < AREA_COUNT; i++) {
         gAreaData[i].index = i;

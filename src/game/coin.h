@@ -13,12 +13,10 @@
 #include "game/area.h"
 #include "config/config_graphics.h"
 
-#define COIN_RADIUS 0.315f
-#define COIN_CULLING_RADIUS 0.63f
-#define COIN_RENDER_DISTANCE COIN_CULLING_RADIUS * 2000
-#define COIN_LOD_DISTANCE COIN_RENDER_DISTANCE / 2.f
-
-extern struct Object gMacroObjectDefaultParent;
+#define COIN_RADIUS (0.64f * 100)
+#define COIN_SHADOW_RADIUS (COIN_RADIUS / 3)
+#define COIN_CULLING_RADIUS COIN_RADIUS
+#define COIN_RENDER_DISTANCE (COIN_RADIUS * 1000)
 
 struct CoinState{
     u8 render:1;
@@ -26,11 +24,11 @@ struct CoinState{
 };
 
 struct CoinInfo{
+    u8 type;
     Vec3s pos;
-    u16 type;
 };
 
-#define COIN_ARRAY_SIZE 300
+#define COIN_ARRAY_SIZE 200
 struct CoinAreaData
 {
     ALIGNED16 struct CoinState coinStates[COIN_ARRAY_SIZE];
@@ -73,24 +71,17 @@ s32 coin_hitbox_intersects_with_mario(struct CoinInfo* coin);
 void collect_coin(struct CoinAreaData* coinData, s32 i);
 
 //Coin spawning functions
-struct CoinInfo *spawn_coin(Vec3f pos, u32 type, u32 flags);
+struct CoinInfo *spawn_coin(Vec3s pos, u32 type, u32 flags);
 
-ALWAYS_INLINE struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3f offset, u8 type, u16 flags) {
-    Vec3f relativePos = {pos[0] + offset[0], pos[1] + offset[1], pos[2] + offset[2]};
-	return spawn_coin(relativePos, type, flags);
-}
-
-#define spawn_coin_relative_specific_o(obj, offset, type, flags) \
-    spawn_coin_relative(&obj->oPosVec, offset, type, flags)
+struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u8 type, u16 flags);
+struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3s offset, u8 type, u16 flags);
+struct CoinInfo *spawn_coin_specific_o(struct Object *obj, u8 type, u16 flags);
 
 #define spawn_coin_relative_o(offset, type, flags) \
-    spawn_coin_relative_specific_o(o, offset, type, flags)
-
-#define spawn_coin_specific_o(obj, type, flags) \
-    spawn_coin(&obj->oPosVec, type, flags)
+    spawn_coin_relative_specific_o(gCurrentObject, offset, type, flags)
 
 #define spawn_coin_at_o(type, flags) \
-    spawn_coin_at_specific_o(o, type, flags)
+    spawn_coin_specific_o(gCurrentObject, type, flags)
 
 //Search functions
 s32 hidden_blue_coins_left();

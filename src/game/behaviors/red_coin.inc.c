@@ -5,6 +5,8 @@
  * the course's red coin star.
  */
 
+#include "src/game/coin.h"
+
 /**
  * Red coin's hitbox details.
  */
@@ -24,17 +26,8 @@ static struct ObjectHitbox sRedCoinHitbox = {
  * Red coin initialization function. Sets the coin's hitbox and parent object.
  */
 void bhv_red_coin_init(void) {
-    // Set the red coins to have a parent of the closest red coin star.
-    struct Object *hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar);
-    if (hiddenRedCoinStar != NULL) {
-        o->parentObj = hiddenRedCoinStar;
-    } else if ((hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvBowserCourseRedCoinStar)) != NULL) {
-        o->parentObj = hiddenRedCoinStar;
-    } else {
-        o->parentObj = NULL;
-    }
-
-    obj_set_hitbox(o, &sRedCoinHitbox);
+    spawn_coin_at_o(COIN_BHV_TYPE_RED, 0);
+    obj_mark_for_deletion(o);
 }
 
 /**

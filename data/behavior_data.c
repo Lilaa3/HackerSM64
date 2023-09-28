@@ -953,23 +953,13 @@ const BehaviorScript bhvCoinInsideBoo[] = {
     END_LOOP(),
 };
 
-const BehaviorScript bhvCoinFormationSpawnedCoin[] = {
-    BEGIN(OBJ_LIST_LEVEL),
-    OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    BILLBOARD(),
-    CALL_NATIVE(bhv_init_room),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_coin_formation_spawned_coin_loop),
-    END_LOOP(),
-};
-
 const BehaviorScript bhvCoinFormation[] = {
     BEGIN(OBJ_LIST_SPAWNER),
     OR_INT(oFlags, (OBJ_FLAG_COMPUTE_DIST_TO_MARIO | OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE)),
     CALL_NATIVE(bhv_coin_formation_init),
-    BEGIN_LOOP(),
-        CALL_NATIVE(bhv_coin_formation_loop),
-    END_LOOP(),
+    //BEGIN_LOOP(),
+    //    CALL_NATIVE(bhv_coin_formation_loop),
+    //END_LOOP(),
 };
 
 const BehaviorScript bhvOneCoin[] = {
