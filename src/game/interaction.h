@@ -140,4 +140,5 @@ u32  get_door_save_file_flag(struct Object *door);
 void mario_process_interactions(struct MarioState *m);
 void mario_handle_special_floors(struct MarioState *m);
 
+u32 interact_coin_objectless(struct MarioState *m, u32 coinValue);
 #endif // INTERACTION_H

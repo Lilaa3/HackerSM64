@@ -23,7 +23,7 @@ struct ObjectHitbox sYellowCoinHitbox = {
  * 
  *     0
  **/
-s16 sCoinArrowPositions[][2] = {
+f32 sCoinArrowPositions[][2] = {
     { 0, -150 },
     { 0, -50 },
     { 0, 50 },
@@ -133,9 +133,8 @@ void bhv_coin_loop(void) {
 }
 
 void spawn_coin_in_formation(s32 index, s32 shape) {
-    Vec3f pos = { 0, 0, 0 };
+    Vec3f pos = { 0.f, 0.f, 0.f };
     s32 spawnCoin    = TRUE;
-    s32 flags = 0;
     s32 snapToGround = TRUE;
 
     switch (shape & COIN_FORMATION_BP_SHAPE_MASK) {
@@ -163,10 +162,10 @@ void spawn_coin_in_formation(s32 index, s32 shape) {
             break;
     }
 
+    s32 flags = 0;
     if (shape & COIN_FORMATION_BP_FLYING)
         snapToGround = FALSE;
-
-    if (snapToGround)
+    else if (snapToGround)
         flags |= COIN_FLAG_SNAP_TO_GROUND;
 
     if (spawnCoin) 

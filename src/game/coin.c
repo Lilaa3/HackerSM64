@@ -84,17 +84,17 @@ const Gfx coin_dl_start[] = {
 };
 
 static const Vtx coin_vertices[] = {
-    // Yellow
+    // Yellow COIN_BHV_TYPE_YELLOW
     {{{   -32,      0,      0}, 0, {   -16,   4080}, {0xff, 0xff, 0x00, 0xff}}},
     {{{    32,      0,      0}, 0, {  4080,   4080}, {0xff, 0xff, 0x00, 0xff}}},
     {{{    32,     64,      0}, 0, {  4080,    -16}, {0xff, 0xff, 0x00, 0xff}}},
     {{{   -32,     64,      0}, 0, {   -16,    -16}, {0xff, 0xff, 0x00, 0xff}}},
-    // Blue
+    // Blue COIN_BHV_TYPE_BLUE
     {{{   -48,      0,      0}, 0, {   -16,   4080}, {0x80, 0x80, 0xff, 0xff}}},
     {{{    48,      0,      0}, 0, {  4080,   4080}, {0x80, 0x80, 0xff, 0xff}}},
     {{{    48,     96,      0}, 0, {  4080,    -16}, {0x80, 0x80, 0xff, 0xff}}},
     {{{   -48,     96,      0}, 0, {   -16,    -16}, {0x80, 0x80, 0xff, 0xff}}},
-    // Red
+    // Red COIN_BHV_TYPE_RED
     {{{   -36,      0,      0}, 0, {   -16,   4080}, {0xff, 0x00, 0x00, 0xff}}},
     {{{    36,      0,      0}, 0, {  4080,   4080}, {0xff, 0x00, 0x00, 0xff}}},
     {{{    36,     72,      0}, 0, {  4080,    -16}, {0xff, 0x00, 0x00, 0xff}}},
@@ -105,7 +105,7 @@ extern s16 gMatStackIndex;
 extern ALIGNED16 Mat4 gMatStack[32];
 extern ALIGNED16 Mtx *gMatStackFixed[32];
 
-u32 blueCoinSwitchActiveState = BLUE_COIN_SWITCH_IDLE;
+u32 gBlueCoinSwitchState = BLUE_COIN_SWITCH_IDLE;
 
 struct CoinInfo *spawn_coin(Vec3s pos, u32 type, u32 flags) {
     struct Area* area = gCurrentArea;
@@ -113,7 +113,6 @@ struct CoinInfo *spawn_coin(Vec3s pos, u32 type, u32 flags) {
 
     struct CoinInfo *coin = &coinData->coins[coinData->head];
     struct CoinState *coinState = &coinData->coinStates[coinData->head];
-    coinData->head += 1;
 
     coin->pos[0] = pos[0];
     coin->pos[2] = pos[2];
@@ -132,106 +131,57 @@ struct CoinInfo *spawn_coin(Vec3s pos, u32 type, u32 flags) {
     coinState->render = TRUE;
     coinState->room = get_room_at_pos(coin->pos[0], coin->pos[1], coin->pos[2]);
 
+    coinData->head += 1;
     return coin;
 }
 
-ALWAYS_INLINE struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u8 type, u16 flags) {
+ALWAYS_INLINE struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u32 type, u32 flags) {
     Vec3s relativePos;
     vec3s_sum(relativePos, pos, offset);
 	return spawn_coin(relativePos, type, flags);
 }
 
-ALWAYS_INLINE struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3f offset, u8 type, u16 flags) {
+ALWAYS_INLINE struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3f offset, u32 type, u32 flags) {
     Vec3s pos;
+    s16 yaw = obj->oFaceAngleYaw;
     // Some coin formations still rotate wrong, fix.
-    pos[0] = obj->oPosX + (offset[0] * coss(obj->oFaceAngleYaw) - offset[2] * sins(obj->oFaceAngleYaw));
-    pos[1] = obj->oPosY + offset[1];
-    pos[2] = obj->oPosZ + (offset[0] * sins(obj->oFaceAngleYaw) + offset[2] * coss(obj->oFaceAngleYaw));
+    pos[0] = (s16) obj->oPosX + (offset[0] * coss(yaw) + offset[2] * sins(yaw));
+    pos[1] = (s16) obj->oPosY + offset[1];
+    pos[2] = (s16) obj->oPosZ + (offset[2] * coss(yaw) - offset[0] * sins(yaw));
 	return spawn_coin(pos, type, flags);
 }
 
-ALWAYS_INLINE struct CoinInfo *spawn_coin_specific_o(struct Object *obj, u8 type, u16 flags) {
+ALWAYS_INLINE struct CoinInfo *spawn_coin_specific_o(struct Object *obj, u32 type, u32 flags) {
     Vec3s pos;
     vec3f_to_vec3s(pos, &obj->oPosVec);
 	return spawn_coin(pos, type, flags);
 }
 
 void lvl_clean_coins(){
-    for(int i = 0; i < AREA_COUNT; i++){  
+    for(u32 i = 0; i < AREA_COUNT; i++){  
         struct Area* area = &gAreaData[i];
         struct CoinAreaData* coinData = &(area->coinData);
-
-        for(int j = 0; j < COIN_ARRAY_SIZE; j++){
-            struct CoinInfo *coin = &coinData->coins[j];
-            struct CoinState *coinState = &coinData->coinStates[j];
-
-            vec3_zero(coin->pos);
-            coin->type = COIN_BHV_TYPE_YELLOW;
-            coinState->render = FALSE;
-            coinState->room = -1;
-        }
-
         coinData->head = 0;
     }
-    blueCoinSwitchActiveState = BLUE_COIN_SWITCH_IDLE;
+    gBlueCoinSwitchState = BLUE_COIN_SWITCH_IDLE;
 }
 
 s32 hidden_blue_coins_left(){
     s32 blueCoinsFound = 0;
 
-    struct Area* area = gCurrentArea;
-    struct CoinInfo* coinData = &(area->coinData);
+    struct CoinAreaData* coinData = &(gCurrentArea->coinData);
 
-    //for(int i = 0; i < coinData->coinHead; i++){
-    //    if(is_coin_flag_true(i, COIN_FLAG_HIDDEN_BLUE, coinData)){
-    //        blueCoinsFound += 0x01;
-    //    }
-    //}
+    for(u32 i = 0; i < coinData->head; i++){
+        if (coinData->coins[i].type == COIN_BHV_TYPE_BLUE)
+            blueCoinsFound += 0x01;
+    }
 
     return blueCoinsFound;
 }
 
 u32 coinAmounts[3] = {1, 5, 5};
 
-extern struct Object gMacroObjectDefaultParent;
-ALWAYS_INLINE void collect_coin(struct CoinAreaData* coinData, s32 i){
-    struct CoinInfo* coin = &(coinData->coins[i]);
-
-    u32 coinAmount = coinAmounts[coin->type];
-    gMarioState->numCoins += coinAmount;
-    gMarioState->healCounter += 4 * coinAmount;
-#ifdef BREATH_METER
-    gMarioState->breathCounter += (4 * coinAmount);
-#endif
-
-#ifdef X_COIN_STAR
-    if (COURSE_IS_MAIN_COURSE(gCurrCourseNum) && gMarioState->numCoins - coinAmount < X_COIN_STAR
-        && gMarioState->numCoins >= X_COIN_STAR) {
-        bhv_spawn_star_no_level_exit(STAR_BP_ACT_100_COINS);
-    }
-#endif
-#if ENABLE_RUMBLE
-    if (coinAmount >= 2) {
-        queue_rumble_data(5, 80);
-    }
-#endif
-    struct Object *sparkles = spawn_object_at_origin(&gMacroObjectDefaultParent, 0, MODEL_SPARKLES, bhvCoinSparklesSpawner);
-    obj_set_pos(sparkles, coin->pos[0], coin->pos[1], coin->pos[2]);
-    
-    if(coin->type == COIN_BHV_TYPE_RED){
-        struct Object *hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar);
-        if (hiddenRedCoinStar != NULL)
-        {
-            hiddenRedCoinStar->oHiddenStarTriggerCounter++;
-
-            if (hiddenRedCoinStar->oHiddenStarTriggerCounter < 8) {
-                spawn_object_relative(hiddenRedCoinStar->oHiddenStarTriggerCounter, coin->pos[0], coin->pos[1] + 25.f, coin->pos[2], &gMacroObjectDefaultParent, MODEL_NUMBER, bhvOrangeNumber);
-            }
-
-            play_sound(SOUND_MENU_COLLECT_RED_COIN + (((u8) hiddenRedCoinStar->oHiddenStarTriggerCounter - 1) << 16), gGlobalSoundSource);
-        }
-    }
-
+ALWAYS_INLINE void delete_coin(struct CoinAreaData* coinData, s32 i){
     // Basically, put the coin furthest in the buffer into the no longer
     // needed coin slots.
 
@@ -245,13 +195,37 @@ ALWAYS_INLINE void collect_coin(struct CoinAreaData* coinData, s32 i){
     
     if (coinData->head)
         coinData->head--;
+}
 
+extern struct Object gMacroObjectDefaultParent;
+ALWAYS_INLINE void collect_coin(struct CoinAreaData* coinData, s32 i){
+    struct CoinInfo* coin = &(coinData->coins[i]);
+
+    interact_coin_objectless(gMarioState, coinAmounts[coin->type]);
+
+    if(coin->type == COIN_BHV_TYPE_RED){
+        struct Object *hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar);
+        if (hiddenRedCoinStar != NULL)
+        {
+            collect_red_coin();
+        }
+    }
+
+    struct Object *sparkles = spawn_object_at_origin(&gMacroObjectDefaultParent, 0, MODEL_SPARKLES, bhvCoinSparklesSpawner);
+    obj_set_pos(sparkles, coin->pos[0], coin->pos[1], coin->pos[2]);
+
+    delete_coin(coinData, i);
 }
 
 // Culls the coin if the console check returns positive and is far away. Returns false if the coin should be skipped.
 ALWAYS_INLINE s32 coin_render_distance_cull(struct CoinInfo* coin){
-    f32 distance = 0;
-    //vec3f_get_dist_squared(&coin->pos, gPlayerCameraState->pos, &distance);
+    f32 cameraX = gPlayerCameraState->pos[0];
+    f32 cameraY = gPlayerCameraState->pos[1];
+    f32 cameraZ = gPlayerCameraState->pos[2];
+    f32 x = coin->pos[0];
+    f32 y = coin->pos[1];
+    f32 z = coin->pos[2];
+    f32 distance = sqr(x - cameraX) + sqr(y - cameraY)+ sqr(z - cameraZ);
     return (distance < sqr(COIN_RENDER_DISTANCE)); // Compiler will handle the sqr, no need for another define
 }
 
@@ -311,16 +285,17 @@ ALWAYS_INLINE s32 coin_frustum_cull(struct CoinInfo* coin){
     return TRUE;
 }
 
-// Checks for the blue coin switch state and deactivates the render if needed. 
+// Checks for the blue coin switch state and deactivates the render if needed.
 // Returns false if the coin should be skipped.
 ALWAYS_INLINE s32 coin_hidden_blue_logic(struct CoinState* coinState){
-    if (blueCoinSwitchActiveState != BLUE_COIN_SWITCH_BLINKING){
-        coinState->render = FALSE;
-
-        if (blueCoinSwitchActiveState == BLUE_COIN_SWITCH_IDLE) 
-            return FALSE;
+    if (gBlueCoinSwitchState & BLUE_COIN_SWITCH_ACTIVE){
+        coinState->render = !(gBlueCoinSwitchState & BLUE_COIN_SWITCH_BLINKING);
+        return TRUE;
     }
-    return TRUE;
+    else{
+        coinState->render = FALSE;
+        return FALSE;
+    }
 }
 
 // Checks for the blue coin switch state and deactivates the render if needed. Returns false if the coin should be skipped.
@@ -361,8 +336,9 @@ void lvl_process_coin(struct CoinAreaData* coinData, u32 index){
     }
 
     coinState->render = coin_frustum_cull(coin);
-    if (coin->type == COIN_BHV_TYPE_BLUE && !coin_hidden_blue_logic(coinState))
+    if (coin->type == COIN_BHV_TYPE_BLUE && !coin_hidden_blue_logic(coinState)){
         return;
+    }
 
     if (coin_hitbox_intersects_with_mario(coin)){
         collect_coin(coinData, index);
@@ -431,7 +407,7 @@ void render_coins() {
         mtxf_to_mtx(mtx, coinMat);
         gSPMatrix(coinDLHead++, mtx, G_MTX_NOPUSH | G_MTX_LOAD);
 
-        gSPVertex(coinDLHead++, coin_vertices + coin.type * 4, 4, 0);
+        gSPVertex(coinDLHead++, coin_vertices + (coin.type * 4), 4, 0);
         gSP2Triangles(coinDLHead++, 0,  1,  2, 0x0,  0,  2,  3, 0x0);
  
         f32 *pos = coinMat[3];

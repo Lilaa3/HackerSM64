@@ -41,20 +41,20 @@ enum CoinSpawnFlags{
 };
 
 enum CoinType{
-    COIN_BHV_TYPE_YELLOW,
-    COIN_BHV_TYPE_BLUE,
-    COIN_BHV_TYPE_RED,
+    COIN_BHV_TYPE_YELLOW = 0,
+    COIN_BHV_TYPE_BLUE = 1,
+    COIN_BHV_TYPE_RED = 2,
 };
 
 enum BlueCoinSwitchState{
-    BLUE_COIN_SWITCH_IDLE = 0x00,
-    BLUE_COIN_SWITCH_ACTIVE = 0x01,
-    BLUE_COIN_SWITCH_BLINKING = 0x02,
+    BLUE_COIN_SWITCH_IDLE = 0,
+    BLUE_COIN_SWITCH_ACTIVE = BIT(0),
+    BLUE_COIN_SWITCH_BLINKING = BIT(1),
 };
 
 extern u32 coinAmounts[];
 
-extern u32 blueCoinSwitchActiveState;
+extern u32 gBlueCoinSwitchState;
 
 void render_coins();
 void lvl_process_coins(struct CoinAreaData* coinData);
@@ -73,9 +73,9 @@ void collect_coin(struct CoinAreaData* coinData, s32 i);
 //Coin spawning functions
 struct CoinInfo *spawn_coin(Vec3s pos, u32 type, u32 flags);
 
-struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u8 type, u16 flags);
-struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3f offset, u8 type, u16 flags);
-struct CoinInfo *spawn_coin_specific_o(struct Object *obj, u8 type, u16 flags);
+struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u32 type, u32 flags);
+struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3f offset, u32 type, u32 flags);
+struct CoinInfo *spawn_coin_specific_o(struct Object *obj, u32 type, u32 flags);
 
 #define spawn_coin_relative_o(offset, type, flags) \
     spawn_coin_relative_specific_o(gCurrentObject, offset, type, flags)

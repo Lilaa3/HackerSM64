@@ -5,71 +5,11 @@
  * you press a blue coin switch (a.k.a. bhvBlueCoinSwitch).
  */
 
-/**
- * Update function for bhvHiddenBlueCoin.
- */
-void bhv_hidden_blue_coin_loop(void) {
-    struct Object *blueCoinSwitch;
+#include "game/coin.h"
 
-    switch (o->oAction) {
-        case HIDDEN_BLUE_COIN_ACT_INACTIVE:
-            // Become invisible and intangible
-            cur_obj_disable_rendering();
-            cur_obj_become_intangible();
-
-            // Set action to HIDDEN_BLUE_COIN_ACT_WAITING after the blue coin switch is found.
-            o->oHiddenBlueCoinSwitch = cur_obj_nearest_object_with_behavior(bhvBlueCoinSwitch);
-
-            if (o->oHiddenBlueCoinSwitch != NULL) {
-                o->oAction = HIDDEN_BLUE_COIN_ACT_WAITING;
-            }
-
-            break;
-
-        case HIDDEN_BLUE_COIN_ACT_WAITING:
-            // Wait until the blue coin switch starts ticking to activate.
-            blueCoinSwitch = o->oHiddenBlueCoinSwitch;
-
-            if (blueCoinSwitch->oAction == BLUE_COIN_SWITCH_ACT_TICKING) {
-                o->oAction = HIDDEN_BLUE_COIN_ACT_ACTIVE;
-            }
-
-#ifdef BLUE_COIN_SWITCH_PREVIEW
-            if (gMarioObject->platform == blueCoinSwitch) {
-                cur_obj_enable_rendering();
-            } else {
-                cur_obj_disable_rendering();
-            }
-#endif
-
-            break;
-
-        case HIDDEN_BLUE_COIN_ACT_ACTIVE:
-            // Become tangible
-            cur_obj_enable_rendering();
-            cur_obj_become_tangible();
-
-            // Delete the coin once collected
-            if (o->oInteractStatus & INT_STATUS_INTERACTED) {
-                spawn_object(o, MODEL_SPARKLES, bhvCoinSparklesSpawner);
-                obj_mark_for_deletion(o);
-            }
-
-            // After 200 frames of waiting and 20 2-frame blinks (for 240 frames total),
-            // delete the object.
-            if (cur_obj_wait_then_blink(200, 20)) {
-#ifdef BLUE_COIN_SWITCH_RETRY
-                o->oAction = HIDDEN_BLUE_COIN_ACT_INACTIVE;
-                o->header.gfx.node.flags &= ~GRAPH_RENDER_INVISIBLE;
-#else
-                obj_mark_for_deletion(o);
-#endif
-            }
-
-            break;
-    }
-
-    o->oInteractStatus = INT_STATUS_NONE;
+void bhv_hidden_blue_coin_init(void) {
+    spawn_coin_at_o(COIN_BHV_TYPE_BLUE, 0);
+    obj_mark_for_deletion(o);
 }
 
 /**
@@ -81,6 +21,7 @@ void bhv_blue_coin_switch_loop(void) {
 
     switch (o->oAction) {
         case BLUE_COIN_SWITCH_ACT_IDLE:
+            gBlueCoinSwitchState = BLUE_COIN_SWITCH_IDLE;
             // If Mario is on the switch and has ground-pounded,
             // recede and get ready to start ticking.
             if (gMarioObject->platform == o) {
@@ -118,6 +59,7 @@ void bhv_blue_coin_switch_loop(void) {
 #endif
                 // Set to BLUE_COIN_SWITCH_ACT_TICKING
                 o->oAction = BLUE_COIN_SWITCH_ACT_TICKING;
+                gBlueCoinSwitchState = BLUE_COIN_SWITCH_ACTIVE;
 #ifdef BLUE_COIN_SWITCH_RETRY
                 // ???
                 o->oVelY    = 0.0f;
@@ -139,14 +81,23 @@ void bhv_blue_coin_switch_loop(void) {
             break;
 
         case BLUE_COIN_SWITCH_ACT_TICKING:
+#define BLINKING_START_FRAME 200
+#define BLINK_AMOUNT 20
+            if (o->oTimer > BLINKING_START_FRAME){
+                s32 timeBlinking = o->oTimer - BLINKING_START_FRAME;
+                gBlueCoinSwitchState = BLUE_COIN_SWITCH_ACTIVE;
+                if (timeBlinking & 0x1) {
+                    gBlueCoinSwitchState |= BLUE_COIN_SWITCH_BLINKING;
+                }
+            }
             // Tick faster when the blue coins start blinking
-            if (o->oTimer < 200) {
+            if (o->oTimer < BLINKING_START_FRAME) {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_FAST, gGlobalSoundSource);
             } else {
                 play_sound(SOUND_GENERAL2_SWITCH_TICK_SLOW, gGlobalSoundSource);
             }
 #ifdef BLUE_COIN_SWITCH_RETRY
-            if (cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL) {
+            if (hidden_blue_coins_left() == 0) {
                 spawn_mist_particles_variable(0, 0, 46.0f);
                 obj_mark_for_deletion(o);
             // Set to BLUE_COIN_SWITCH_ACT_EXTENDING after the coins unload after the 240-frame timer expires.
@@ -161,6 +112,7 @@ void bhv_blue_coin_switch_loop(void) {
             if (o->oTimer > 3) {
                 // Set to BLUE_COIN_SWITCH_ACT_IDLE
                 o->oAction = BLUE_COIN_SWITCH_ACT_IDLE;
+                gBlueCoinSwitchState = BLUE_COIN_SWITCH_IDLE;
             } else {
                 // Have collision while extending
                 load_object_collision_model();
@@ -170,7 +122,7 @@ void bhv_blue_coin_switch_loop(void) {
 #else
             // Delete the switch (which stops the sound) after the last coin is collected,
             // or after the coins unload after the 240-frame timer expires.
-            if ((cur_obj_nearest_object_with_behavior(bhvHiddenBlueCoin) == NULL) || (o->oTimer > 240)) {
+            if (hidden_blue_coins_left() == 0 || (o->oTimer > 240)) {
                 obj_mark_for_deletion(o);
             }
 #endif
