@@ -729,7 +729,7 @@ void reset_mario_pitch(struct MarioState *m) {
     }
 }
 
-ALWAYS_INLINE u32 interact_coin_objectless(struct MarioState *m, u32 coinValue) {
+ALWAYS_INLINE void interact_coin_objectless(struct MarioState *m, u32 coinValue) {
     m->numCoins += coinValue;
     m->healCounter += 4 * coinValue;
 #ifdef BREATH_METER

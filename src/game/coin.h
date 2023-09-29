@@ -13,11 +13,6 @@
 #include "game/area.h"
 #include "config/config_graphics.h"
 
-#define COIN_RADIUS (0.64f * 100)
-#define COIN_SHADOW_RADIUS (COIN_RADIUS / 3)
-#define COIN_CULLING_RADIUS COIN_RADIUS
-#define COIN_RENDER_DISTANCE (COIN_RADIUS * 100)
-
 struct CoinState{
     u8 render:1;
     s8 room:7;
