@@ -59,6 +59,7 @@ const Texture *coin_frames[] = {
     &coin_seg3_texture_45_ia8,
     &coin_seg3_texture_67_5_ia8,
     &coin_seg3_texture_90_ia8,
+
     &coin_seg3_texture_67_5_ia8,
     &coin_seg3_texture_45_ia8,
     &coin_seg3_texture_22_5_ia8,
@@ -83,7 +84,24 @@ const Gfx coin_dl_start[] = {
     gsSPEndDisplayList(),
 };
 
-static const Vtx coin_vertices[] = {
+static Vtx coin_vertices[] = {
+    // Yellow COIN_BHV_TYPE_YELLOW
+    {{{   -32,      0,      0}, 0, {  4080,   4080}, {0xff, 0xff, 0x00, 0xff}}},
+    {{{    32,      0,      0}, 0, {   -16,   4080}, {0xff, 0xff, 0x00, 0xff}}},
+    {{{    32,     64,      0}, 0, {   -16,    -16}, {0xff, 0xff, 0x00, 0xff}}},
+    {{{   -32,     64,      0}, 0, {  4080,    -16}, {0xff, 0xff, 0x00, 0xff}}},
+    // Blue COIN_BHV_TYPE_BLUE
+    {{{   -48,      0,      0}, 0, {  4080,   4080}, {0x80, 0x80, 0xff, 0xff}}},
+    {{{    48,      0,      0}, 0, {   -16,   4080}, {0x80, 0x80, 0xff, 0xff}}},
+    {{{    48,     96,      0}, 0, {   -16,    -16}, {0x80, 0x80, 0xff, 0xff}}},
+    {{{   -48,     96,      0}, 0, {  4080,    -16}, {0x80, 0x80, 0xff, 0xff}}},
+    // Red COIN_BHV_TYPE_RED
+    {{{   -36,      0,      0}, 0, {  4080,   4080}, {0xff, 0x00, 0x00, 0xff}}},
+    {{{    36,      0,      0}, 0, {   -16,   4080}, {0xff, 0x00, 0x00, 0xff}}},
+    {{{    36,     72,      0}, 0, {   -16,    -16}, {0xff, 0x00, 0x00, 0xff}}},
+    {{{   -36,     72,      0}, 0, {  4080,    -16}, {0xff, 0x00, 0x00, 0xff}}},
+
+    // Flipped
     // Yellow COIN_BHV_TYPE_YELLOW
     {{{   -32,      0,      0}, 0, {   -16,   4080}, {0xff, 0xff, 0x00, 0xff}}},
     {{{    32,      0,      0}, 0, {  4080,   4080}, {0xff, 0xff, 0x00, 0xff}}},
@@ -144,7 +162,7 @@ ALWAYS_INLINE struct CoinInfo *spawn_coin_relative(Vec3s pos, Vec3s offset, u32 
 ALWAYS_INLINE struct CoinInfo *spawn_coin_relative_specific_o(struct Object *obj, Vec3f offset, u32 type, u32 flags) {
     Vec3s pos;
     s16 yaw = obj->oFaceAngleYaw;
-    // Some coin formations still rotate wrong, fix.
+
     pos[0] = (s16) obj->oPosX + (offset[0] * coss(yaw) + offset[2] * sins(yaw));
     pos[1] = (s16) obj->oPosY + offset[1];
     pos[2] = (s16) obj->oPosZ + (offset[2] * coss(yaw) - offset[0] * sins(yaw));
@@ -185,11 +203,6 @@ ALWAYS_INLINE void delete_coin(struct CoinAreaData* coinData, s32 i){
     // Basically, put the coin furthest in the buffer into the no longer
     // needed coin slots.
 
-    // Now you might be wondering
-    // "but lilaaaaaaaaaaaaaaaaaaaaa what happens if that coin and this coin are the same"
-    // Thats no problem, that just means the stupid coin will be copied once, then the head
-    // will be reduced all the same.
-
     coinData->coins[i] = coinData->coins[coinData->head - 1];
     coinData->coinStates[i] = coinData->coinStates[coinData->head - 1];
     
@@ -198,17 +211,66 @@ ALWAYS_INLINE void delete_coin(struct CoinAreaData* coinData, s32 i){
 }
 
 extern struct Object gMacroObjectDefaultParent;
-ALWAYS_INLINE void collect_coin(struct CoinAreaData* coinData, s32 i){
+
+void spawn_orange_number_at_coin(struct CoinInfo* coin, u8 num, f32 x){
+    struct Object *orangeNumber = spawn_object_at_origin(&gMacroObjectDefaultParent, 0, MODEL_NUMBER, bhvOrangeNumber);
+    obj_set_pos(orangeNumber, coin->pos[0] + x, coin->pos[1] + 25.f, coin->pos[2]);
+    orangeNumber->oOrangeNumberOffset = x;
+    orangeNumber->oHomeX = coin->pos[0];
+    orangeNumber->oHomeZ = coin->pos[2];
+    orangeNumber->oBehParams2ndByte = num;
+}
+
+void collect_red_coin(struct CoinInfo* coin){
+    struct Object *hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar);
+    if (hiddenRedCoinStar == NULL)
+        return;
+
+    // ...increment the star's counter.
+    hiddenRedCoinStar->oHiddenStarTriggerCounter++;
+    u32 counter = hiddenRedCoinStar->oHiddenStarTriggerCounter;
+
+    // Spawn the orange number counter, as long as it isn't the last coin.
+    if (counter != hiddenRedCoinStar->oHiddenStarTriggerTotal) {
+        // Cap visible count to 99
+        if (counter > 99) {
+            spawn_orange_number_at_coin(coin, 9, 28);
+            spawn_orange_number_at_coin(coin, 9, -28);
+            
+        }
+        else if (counter >= 10) {
+            spawn_orange_number_at_coin(coin, counter % 10, 28);
+            spawn_orange_number_at_coin(coin, counter / 10, -28);
+        }
+        else {
+            spawn_orange_number_at_coin(coin, counter, 0);
+        }
+    }
+
+#ifdef JP_RED_COIN_SOUND
+    // For JP version, play an identical sound for all coins.
+    create_sound_spawner(SOUND_GENERAL_RED_COIN);
+#else
+    if (hiddenRedCoinStar->oHiddenStarTriggerTotal - hiddenRedCoinStar->oHiddenStarTriggerCounter > 7) {
+        // Play the first red coin sound until it gets to the final 8
+        play_sound(SOUND_MENU_COLLECT_RED_COIN, gGlobalSoundSource);
+    }
+    else {
+        // On all versions but the JP version, each coin collected plays a higher noise.
+        play_sound(SOUND_MENU_COLLECT_RED_COIN
+                + (((u8) 7 - (hiddenRedCoinStar->oHiddenStarTriggerTotal - counter)) << 16),
+                gGlobalSoundSource);
+    }
+#endif
+}
+
+void collect_coin(struct CoinAreaData* coinData, s32 i){
     struct CoinInfo* coin = &(coinData->coins[i]);
 
     interact_coin_objectless(gMarioState, coinAmounts[coin->type]);
 
     if(coin->type == COIN_BHV_TYPE_RED){
-        struct Object *hiddenRedCoinStar = cur_obj_nearest_object_with_behavior(bhvHiddenRedCoinStar);
-        if (hiddenRedCoinStar != NULL)
-        {
-            collect_red_coin();
-        }
+        collect_red_coin(coin);
     }
 
     struct Object *sparkles = spawn_object_at_origin(&gMacroObjectDefaultParent, 0, MODEL_SPARKLES, bhvCoinSparklesSpawner);
@@ -219,6 +281,9 @@ ALWAYS_INLINE void collect_coin(struct CoinAreaData* coinData, s32 i){
 
 // Culls the coin if the console check returns positive and is far away. Returns false if the coin should be skipped.
 ALWAYS_INLINE s32 coin_render_distance_cull(struct CoinInfo* coin){
+    if (!(gEmulator & NO_CULLING_EMULATOR_BLACKLIST)){
+        return TRUE;
+    }
     f32 cameraX = gPlayerCameraState->pos[0];
     f32 cameraY = gPlayerCameraState->pos[1];
     f32 cameraZ = gPlayerCameraState->pos[2];
@@ -239,49 +304,14 @@ ALWAYS_INLINE s32 coin_room_cull(struct CoinState* coinState){
     s32 gDoorAdjecentRoom1 = gDoorAdjacentRooms[gMarioCurrentRoom].backwardRoom;
     return (gDoorAdjecentRoom0 == room || gDoorAdjecentRoom1 == room);
 }
-//#define CULLING_ON_EMULATOR // Active for testing
-// Culls the coin using frustum culling. Returns false if the coin should be skipped.
-// Same stuff as obj_is_in_view
+
+#define CULLING_ON_EMULATOR // Active for testing
+
+extern struct CameraFOVStatus sFOVState;
+extern f32 sAspectRatio;
+
+// Removed behavior
 ALWAYS_INLINE s32 coin_frustum_cull(struct CoinInfo* coin){
-    Vec3f cameraToObject = {0, 0, 0};
-    for (register u32 i = 0; i < 3; i++) {
-        cameraToObject[i] = ((gCameraTransform[0][i] * coin->pos[0])
-                        + (gCameraTransform[1][i] * coin->pos[1])
-                        + (gCameraTransform[2][i] * coin->pos[2])
-                        +  gCameraTransform[3][i]);
-    }
-    
-    f32 cameraToObjectDepth = cameraToObject[2];
-
-    #define VALID_DEPTH_MIDDLE (-20100.f / 2.f)
-    #define VALID_DEPTH_RANGE (19900 / 2.f)
-    if (absf(cameraToObjectDepth - VALID_DEPTH_MIDDLE) >= VALID_DEPTH_RANGE + COIN_CULLING_RADIUS) {
-        return FALSE;
-    }
-
-#ifndef CULLING_ON_EMULATOR
-    // If an emulator is detected, skip any other culling.
-    if(!(gEmulator & NO_CULLING_EMULATOR_BLACKLIST)){
-        return TRUE;
-    }
-#endif
-
-#ifdef VERTICAL_CULLING
-    f32 vScreenEdge = -cameraToObjectDepth * gCurGraphNodeCamFrustum->halfFovVertical;
-
-    // Unlike with horizontal culling, we only check if the object is bellow the screen
-    // to prevent shadows from being culled.
-    if (cameraToObject[1] < -vScreenEdge - cullingRadius) {
-        return FALSE;
-    }
-
-#endif
-    
-    f32 hScreenEdge = -cameraToObjectDepth * gCurGraphNodeCamFrustum->halfFovHorizontal;
-
-    if (absf(cameraToObject[0]) > hScreenEdge + COIN_CULLING_RADIUS) {
-        return FALSE;
-    }
     return TRUE;
 }
 
@@ -327,6 +357,8 @@ ALWAYS_INLINE s32 coin_hitbox_intersects_with_mario(struct CoinInfo* coin){
 s32 gRenderableCoins;
 
 void lvl_process_coin(struct CoinAreaData* coinData, u32 index){
+    gCurrentObject = &gMacroObjectDefaultParent;
+
     struct CoinInfo *coin = &coinData->coins[index];
     struct CoinState *coinState = &coinData->coinStates[index];
 
@@ -344,9 +376,6 @@ void lvl_process_coin(struct CoinAreaData* coinData, u32 index){
         collect_coin(coinData, index);
         coinState->render = FALSE;
     }
-    else if (coinState->render){
-        gRenderableCoins += coinState->render;
-    }
 }
 
 void lvl_process_coins(struct CoinAreaData* coinData){ 
@@ -354,6 +383,8 @@ void lvl_process_coins(struct CoinAreaData* coinData){
 
     for(register u32 i = 0; i < coinData->head; i++){
         lvl_process_coin(coinData, i);
+        if (coinData->coinStates[i].render)
+            gRenderableCoins += 1;
     }
 
 	print_text_fmt_int(150, 20, "Coin Count %d", coinData->head);
@@ -361,8 +392,10 @@ void lvl_process_coins(struct CoinAreaData* coinData){
 
 OSTime lastCoinRender = 0x00;
 
+#define COIN_FPS 15
 #define FRAME_FROM_TIMER(fps) (gGlobalTimer / (30 / fps))
-#define GET_TEXTURE_FRAME(frames, fps) frames[FRAME_FROM_TIMER(fps) % ARRAY_COUNT(frames)]
+#define GET_FRAME_NUMBER(frames, fps) FRAME_FROM_TIMER(fps) % ARRAY_COUNT(frames)
+#define GET_TEXTURE_FRAME(frames, fps) frames[GET_FRAME_NUMBER(frames, fps)]
 
 void render_coins() {
     struct Area* area = gCurrentArea;
@@ -380,9 +413,16 @@ void render_coins() {
     Vec3f shadowSize = {COIN_SHADOW_RADIUS, COIN_SHADOW_RADIUS, COIN_SHADOW_RADIUS};
 
     //Set materials
-    gDPSetTextureImage(coinDLHead++, G_IM_FMT_IA, G_IM_SIZ_8b, 64, GET_TEXTURE_FRAME(coin_frames, 15))
+    gDPSetTextureImage(coinDLHead++, G_IM_FMT_IA, G_IM_SIZ_8b, 64, GET_TEXTURE_FRAME(coin_frames, COIN_FPS))
     gSPDisplayList(coinDLHead++, coin_dl_start);
     gSPDisplayList(shadowDLHead++, dl_shadow_circle);
+    
+
+    Vtx *vertices = coin_vertices;
+    if (GET_FRAME_NUMBER(coin_frames, COIN_FPS) >= 5){
+        print_text(30, 30, "Flipped?");
+        vertices += ARRAY_COUNT(coin_vertices) / 2;
+    }
 
     gSPSetGeometryMode(shadowDLHead++, G_ZBUFFER);
     gDPSetRenderMode(shadowDLHead++, G_RM_AA_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_DECAL2);
@@ -401,16 +441,14 @@ void render_coins() {
             continue;
         struct CoinInfo coin = coinData->coins[coinIndex];
 
-        Mtx *mtx = alloc_display_list(sizeof(*mtx));
-
-        vec3s_to_vec3f(coinMat[3], coin.pos); // Only slightly cringe.
-        mtxf_to_mtx(mtx, coinMat);
+        f32 *pos = coinMat[3];
+        vec3s_to_vec3f(pos, coin.pos);
+        Mtx *mtx = alloc_display_list(sizeof(*mtx)); mtxf_to_mtx(mtx, coinMat); // To fixed point
         gSPMatrix(coinDLHead++, mtx, G_MTX_NOPUSH | G_MTX_LOAD);
 
-        gSPVertex(coinDLHead++, coin_vertices + (coin.type * 4), 4, 0);
+        gSPVertex(coinDLHead++, vertices + (coin.type * 4), 4, 0);
         gSP2Triangles(coinDLHead++, 0,  1,  2, 0x0,  0,  2,  3, 0x0);
  
-        f32 *pos = coinMat[3];
         // Shadow logic
         struct Surface *floor = NULL;
         pos[1] = find_floor(coin.pos[0], coin.pos[1], coin.pos[2], &floor);
