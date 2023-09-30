@@ -27,19 +27,31 @@
 
 #define COIN_SYSTEM_DEBUG
 
+#ifdef COIN_SYSTEM_DEBUG
+#define CULLING_ON_EMULATOR
+#endif
+
 // These values are only used here, putting them into .h makes changing them annoying
 #define COIN_RADIUS (0.64f * 100)
-#define COIN_SHADOW_RADIUS (COIN_RADIUS / 1.75f)
 #define COIN_CULLING_RADIUS COIN_RADIUS
 #define COIN_RENDER_DISTANCE (COIN_RADIUS * 100)
 
-Vec3f shadowSize = {COIN_SHADOW_RADIUS, COIN_SHADOW_RADIUS, COIN_SHADOW_RADIUS / 1.75f};
-#define COIN_FPS 15
+Vec3f shadowSize = {1.f, 1.f, 1.f};
+#define COIN_FPS 16
 
-Gfx coin_shadow_mesh[] = {
-	gsSPVertex(vertex_shadow, 4, 0),
-    gsSP2Triangles( 0,  2,  1, 0x0,  1,  2,  3, 0x0),
-	gsSPEndDisplayList(),
+#ifdef HD_SHADOWS
+#define SHADOW_UV 2048
+#else
+#define SHADOW_UV 512
+#endif
+
+#define COIN_SHADOW_WIDTH (COIN_RADIUS / 1.75f)
+#define COIN_SHADOW_THICKNESS (COIN_RADIUS / 2.75f)
+const Vtx coin_vertex_shadow[] = {
+    {{{-COIN_SHADOW_WIDTH, 0, -COIN_SHADOW_THICKNESS}, 0, { -SHADOW_UV, -SHADOW_UV}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{ COIN_SHADOW_WIDTH, 0, -COIN_SHADOW_THICKNESS}, 0, {  SHADOW_UV, -SHADOW_UV}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{-COIN_SHADOW_WIDTH, 0,  COIN_SHADOW_THICKNESS}, 0, { -SHADOW_UV,  SHADOW_UV}, {0xff, 0xff, 0xff, 0xff}}},
+    {{{ COIN_SHADOW_WIDTH, 0,  COIN_SHADOW_THICKNESS}, 0, {  SHADOW_UV,  SHADOW_UV}, {0xff, 0xff, 0xff, 0xff}}},
 };
 
 Gfx mat_revert_coin[] = {
@@ -101,11 +113,6 @@ static Vtx coin_vertices[] = {
     {{{    32,      0,      0}, 0, {   -16,   4080}, {0xff, 0xff, 0x00, 0xff}}},
     {{{    32,     64,      0}, 0, {   -16,    -16}, {0xff, 0xff, 0x00, 0xff}}},
     {{{   -32,     64,      0}, 0, {  4080,    -16}, {0xff, 0xff, 0x00, 0xff}}},
-    // Blue COIN_BHV_TYPE_BLUE
-    {{{   -48,      0,      0}, 0, {  4080,   4080}, {0x80, 0x80, 0xff, 0xff}}},
-    {{{    48,      0,      0}, 0, {   -16,   4080}, {0x80, 0x80, 0xff, 0xff}}},
-    {{{    48,     96,      0}, 0, {   -16,    -16}, {0x80, 0x80, 0xff, 0xff}}},
-    {{{   -48,     96,      0}, 0, {  4080,    -16}, {0x80, 0x80, 0xff, 0xff}}},
     // Red COIN_BHV_TYPE_RED
     {{{   -36,      0,      0}, 0, {  4080,   4080}, {0xff, 0x00, 0x00, 0xff}}},
     {{{    36,      0,      0}, 0, {   -16,   4080}, {0xff, 0x00, 0x00, 0xff}}},
@@ -118,11 +125,6 @@ static Vtx coin_vertices[] = {
     {{{    32,      0,      0}, 0, {  4080,   4080}, {0xff, 0xff, 0x00, 0xff}}},
     {{{    32,     64,      0}, 0, {  4080,    -16}, {0xff, 0xff, 0x00, 0xff}}},
     {{{   -32,     64,      0}, 0, {   -16,    -16}, {0xff, 0xff, 0x00, 0xff}}},
-    // Blue COIN_BHV_TYPE_BLUE
-    {{{   -48,      0,      0}, 0, {   -16,   4080}, {0x80, 0x80, 0xff, 0xff}}},
-    {{{    48,      0,      0}, 0, {  4080,   4080}, {0x80, 0x80, 0xff, 0xff}}},
-    {{{    48,     96,      0}, 0, {  4080,    -16}, {0x80, 0x80, 0xff, 0xff}}},
-    {{{   -48,     96,      0}, 0, {   -16,    -16}, {0x80, 0x80, 0xff, 0xff}}},
     // Red COIN_BHV_TYPE_RED
     {{{   -36,      0,      0}, 0, {   -16,   4080}, {0xff, 0x00, 0x00, 0xff}}},
     {{{    36,      0,      0}, 0, {  4080,   4080}, {0xff, 0x00, 0x00, 0xff}}},
@@ -194,20 +196,7 @@ void lvl_clean_coins(){
     gBlueCoinSwitchState = BLUE_COIN_SWITCH_IDLE;
 }
 
-s32 hidden_blue_coins_left(){
-    s32 blueCoinsFound = 0;
-
-    struct CoinAreaData* coinData = &(gCurrentArea->coinData);
-
-    for(u32 i = 0; i < coinData->head; i++){
-        if (coinData->coins[i].type == COIN_BHV_TYPE_BLUE)
-            blueCoinsFound += 0x01;
-    }
-
-    return blueCoinsFound;
-}
-
-u32 coinAmounts[3] = {1, 5, 5};
+u32 coinAmounts[3] = {1, 5};
 
 ALWAYS_INLINE void delete_coin(struct CoinAreaData* coinData, s32 i){
     // Basically, put the coin furthest in the buffer into the no longer
@@ -290,22 +279,19 @@ void collect_coin(struct CoinAreaData* coinData, s32 i){
 }
 
 // Culls the coin if the console check returns positive and is far away. Returns false if the coin should be skipped.
-ALWAYS_INLINE s32 coin_render_distance_cull(struct CoinInfo* coin){
+ALWAYS_INLINE s32 coin_render_distance_cull(f32 x, f32 y, f32 z){
     if (!(gEmulator & NO_CULLING_EMULATOR_BLACKLIST)){
         return TRUE;
     }
     f32 cameraX = gPlayerCameraState->pos[0];
     f32 cameraY = gPlayerCameraState->pos[1];
     f32 cameraZ = gPlayerCameraState->pos[2];
-    f32 x = coin->pos[0];
-    f32 y = coin->pos[1];
-    f32 z = coin->pos[2];
-    f32 distance = sqr(x - cameraX) + sqr(y - cameraY)+ sqr(z - cameraZ);
+    f32 distance = sqr(x - cameraX) + sqr(y - cameraY) + sqr(z - cameraZ);
     return (distance < sqr(COIN_RENDER_DISTANCE)); // Compiler will handle the sqr, no need for another define
 }
 
 // Culls the coin depending on its room. Returns false if the coin should be skipped.
-ALWAYS_INLINE s32 coin_room_cull(struct CoinState* coinState){
+s32 coin_room_cull(struct CoinState* coinState){
     s32 room = coinState->room;
     if (room < 0 || gMarioCurrentRoom == room)
         return TRUE;
@@ -315,40 +301,17 @@ ALWAYS_INLINE s32 coin_room_cull(struct CoinState* coinState){
     return (gDoorAdjecentRoom0 == room || gDoorAdjecentRoom1 == room);
 }
 
-#define CULLING_ON_EMULATOR // Active for testing
-
-extern struct CameraFOVStatus sFOVState;
-extern f32 sAspectRatio;
-
-// Removed behavior, worth adding back for 3d coins
-ALWAYS_INLINE s32 coin_frustum_cull(UNUSED struct CoinInfo* coin){
-    return TRUE;
-}
-
-// Checks for the blue coin switch state and deactivates the render if needed.
-// Returns false if the coin should be skipped.
-ALWAYS_INLINE s32 coin_hidden_blue_logic(struct CoinState* coinState){
-    if (gBlueCoinSwitchState & BLUE_COIN_SWITCH_ACTIVE){
-        coinState->render = !(gBlueCoinSwitchState & BLUE_COIN_SWITCH_BLINKING);
-        return TRUE;
-    }
-    else{
-        coinState->render = FALSE;
-        return FALSE;
-    }
-}
-
 // Checks for the blue coin switch state and deactivates the render if needed. Returns false if the coin should be skipped.
-ALWAYS_INLINE s32 coin_hitbox_intersects_with_mario(struct CoinInfo* coin){
-    f32 dya_bottom = coin->pos[1] - 128;
+ALWAYS_INLINE s32 coin_hitbox_intersects_with_mario(f32 x, f32 y, f32 z){
+    f32 dya_bottom = y - 128;
 
     f32 marioX = gMarioObject->oPosX;
     f32 marioY = gMarioObject->oPosY;
     f32 marioZ = gMarioObject->oPosZ;
 
     f32 dyb_bottom = marioY - gMarioObject->hitboxDownOffset;
-    f32 dx = coin->pos[0] - marioX;
-    f32 dz = coin->pos[2] - marioZ;
+    f32 dx = x - marioX;
+    f32 dz = z - marioZ;
     f32 collisionRadius = 100 + gMarioObject->hurtboxRadius;
     f32 lateraldistance = sqr(dx) + sqr(dz);
 
@@ -366,37 +329,32 @@ ALWAYS_INLINE s32 coin_hitbox_intersects_with_mario(struct CoinInfo* coin){
 
 s32 gRenderableCoins;
 
-ALWAYS_INLINE void lvl_process_coin(struct CoinAreaData* coinData, u32 index){
-    gCurrentObject = &gMacroObjectDefaultParent;
-
-    struct CoinInfo *coin = &coinData->coins[index];
-    struct CoinState *coinState = &coinData->coinStates[index];
-
-    if (!coin_room_cull(coinState) || !coin_render_distance_cull(coin)){
-        coinState->render = FALSE;
-        return;
-    }
-
-    coinState->render = coin_frustum_cull(coin);
-    if (coin->type == COIN_BHV_TYPE_BLUE && !coin_hidden_blue_logic(coinState)){
-        return;
-    }
-
-    if (coin_hitbox_intersects_with_mario(coin)){
-        collect_coin(coinData, index);
-        coinState->render = FALSE;
-    }
-}
-
 void lvl_process_coins(struct CoinAreaData* coinData){ 
-    s32 renderableCoins = 0;
+    gCurrentObject = &gMacroObjectDefaultParent;
+    register s32 renderableCoins asm("v0");
+    for(u32 coinIndex = 0; coinIndex < coinData->head; coinIndex++){
+        struct CoinInfo *coin = &coinData->coins[coinIndex];
+        struct CoinState *coinState = &coinData->coinStates[coinIndex];
 
-    for(u32 i = 0; i < coinData->head; i++){
-        lvl_process_coin(coinData, i);
-        if (coinData->coinStates[i].render)
-            renderableCoins += 1;
+        f32 x = coin->pos[0];
+        f32 y = coin->pos[1];
+        f32 z = coin->pos[2];
+        if ((coin->type == COIN_BHV_TYPE_YELLOW && !coin_render_distance_cull(x, y, z)) || 
+            !coin_room_cull(coinState)){
+            coinState->render = FALSE;
+            return;
+        }
+
+        if (coin_hitbox_intersects_with_mario(x, y, z)){
+            collect_coin(coinData, coinIndex);
+        }
+        else{
+            coinState->render = TRUE;
+            renderableCoins += TRUE;
+        }
     }
     gRenderableCoins = renderableCoins;
+
 #ifdef COIN_SYSTEM_DEBUG
 	print_text_fmt_int(120, 60, "Coin Count %d", coinData->head);
 #endif
@@ -406,22 +364,33 @@ void lvl_process_coins(struct CoinAreaData* coinData){
 #define GET_FRAME_NUMBER(frames, fps) FRAME_FROM_TIMER(fps) % ARRAY_COUNT(frames)
 #define GET_TEXTURE_FRAME(frames, fps) frames[GET_FRAME_NUMBER(frames, fps)]
 
+#define COIN_FRAME_COUNT ARRAY_COUNT(coin_frames)
 void render_coins() {
     struct Area* area = gCurrentArea;
     struct CoinAreaData* coinData = &(area->coinData);
+    
+    if (gRenderableCoins < 1){
+        return;
+    }
 
-    Gfx *coinDL = alloc_display_list((3 * gRenderableCoins + 4) * sizeof(Gfx));
+    Gfx *coinDL = alloc_display_list((3 * gRenderableCoins + 5) * sizeof(Gfx));
     Gfx *coinDLHead = coinDL;
-    Gfx *shadowDL = alloc_display_list((3 * gRenderableCoins + 5) * sizeof(Gfx));
+    Gfx *shadowDL = alloc_display_list((4 * gRenderableCoins + 5) * sizeof(Gfx));
     Gfx *shadowDLHead = shadowDL;
 
     Vec3f floorNormal = {0, 0, 0};
 
-    Vtx *vertices = coin_vertices; // Flip the last 3 frames
+    s16 shadowYaw = (
+        (COIN_FRAME_COUNT - GET_FRAME_NUMBER(coin_frames, COIN_FPS)) * 
+        (S16_MAX / COIN_FRAME_COUNT)
+    );
+    shadowYaw += gCamera->yaw;
+
+    Vtx *vertices = coin_vertices; 
     if (GET_FRAME_NUMBER(coin_frames, COIN_FPS) >= 5){
-        vertices += ARRAY_COUNT(coin_vertices) / 2;
+        vertices += ARRAY_COUNT(coin_vertices) / 2; // Flip the last 3 frames
     }
-    s16 shadowYaw = GET_FRAME_NUMBER(coin_frames, COIN_FPS) * (S16_MAX / 8);
+
     gDPSetTextureImage(coinDLHead++, G_IM_FMT_IA, G_IM_SIZ_8b, 64, GET_TEXTURE_FRAME(coin_frames, COIN_FPS))
 
 #ifdef COIN_SYSTEM_DEBUG
@@ -437,7 +406,6 @@ void render_coins() {
     gDPSetRenderMode(shadowDLHead++, G_RM_AA_ZB_XLU_DECAL, G_RM_AA_ZB_XLU_DECAL2);
 
     Mat4 coinMtxf; 
-    // Kaze says I don´t need to copy this, never trust Kaze.
     // Kaze is right on making one fixed point matrix and copying it + applying translation on every coin instead
     // Will implement soon
     for (u32 i = 0; i < 3; i++) {
@@ -446,6 +414,8 @@ void render_coins() {
         }
         coinMtxf[i][3] = 0.0f;
     }
+    MTXF_END(coinMtxf)
+
     Mat4 shadowMtxf;
 
     for(u32 coinIndex = 0; coinIndex < coinData->head; coinIndex++){
@@ -456,22 +426,19 @@ void render_coins() {
         f32 *pos = coinMtxf[3];
         vec3s_to_vec3f(pos, coin.pos);
         Mtx *coinMtx = alloc_display_list(sizeof(Mtx)); mtxf_to_mtx(coinMtx, coinMtxf); // To fixed point
-        gSPMatrix(coinDLHead++, coinMtx, G_MTX_NOPUSH | G_MTX_LOAD);
-
+        gSPMatrix(coinDLHead++, coinMtx, G_MTX_MODELVIEW | G_MTX_NOPUSH | G_MTX_LOAD);
         gSPVertex(coinDLHead++, vertices + (coin.type * 4), 4, 0);
         gSP2Triangles(coinDLHead++, 0,  1,  2, 0x0,  0,  2,  3, 0x0);
  
         struct Surface *floor = NULL;
-        f32 y = find_floor(coin.pos[0], coin.pos[1], coin.pos[2], &floor);
+        f32 y = find_floor(pos[0], pos[1], pos[2], &floor);
         if(floor == NULL)
             continue; // No floor, skip shadows
 
         // Shadow render logic
         f32 distanceToGround = (pos[1] - y);
-
         if (distanceToGround > 255 * 2)
             continue;
-
         pos[1] = y;
 
         surface_normal_to_vec3f(floorNormal, floor);
@@ -480,7 +447,8 @@ void render_coins() {
 
         gSPMatrix(shadowDLHead++, shadowMtx, G_MTX_MODELVIEW | G_MTX_NOPUSH | G_MTX_LOAD);
         gDPSetEnvColor(shadowDLHead++, 0, 0, 0, 255 - CLAMP(distanceToGround / 2, 0, 255));
-        gSPDisplayList(shadowDLHead++, coin_shadow_mesh);
+        gSPVertex(shadowDLHead++, coin_vertex_shadow, 4, 0);
+        gSP2Triangles(shadowDLHead++, 0,  2,  1, 0x0,  1,  2,  3, 0x0);
     }
 
     gSPDisplayList(shadowDLHead++, mat_revert_shadow);

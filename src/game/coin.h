@@ -37,8 +37,7 @@ enum CoinSpawnFlags{
 
 enum CoinType{
     COIN_BHV_TYPE_YELLOW = 0,
-    COIN_BHV_TYPE_BLUE = 1,
-    COIN_BHV_TYPE_RED = 2,
+    COIN_BHV_TYPE_RED = 1,
 };
 
 enum BlueCoinSwitchState{
@@ -53,14 +52,10 @@ extern u32 gBlueCoinSwitchState;
 
 void render_coins();
 void lvl_process_coins(struct CoinAreaData* coinData);
-void lvl_process_coin(struct CoinAreaData* coinData, u32 index);
 void lvl_clean_coins();
 
-s32 coin_render_distance_cull(struct CoinInfo* coin);
 s32 coin_room_cull(struct CoinState* coinState);
 s32 coin_frustum_cull(struct CoinInfo* coin);
-s32 coin_hidden_blue_logic(struct CoinState* coinState);
-s32 coin_hitbox_intersects_with_mario(struct CoinInfo* coin);
 
 //Utility functions
 void collect_coin(struct CoinAreaData* coinData, s32 i);
@@ -77,9 +72,4 @@ struct CoinInfo *spawn_coin_specific_o(struct Object *obj, u32 type, u32 flags);
 
 #define spawn_coin_at_o(type, flags) \
     spawn_coin_specific_o(gCurrentObject, type, flags)
-
-//Search functions
-s32 hidden_blue_coins_left();
-s32 redCoinsLeft();
-
 #endif
