@@ -1,0 +1,9 @@
+[submodule "lib/tinygltf"]
+	path = lib/tinygltf
+	url = https://github.com/syoyo/tinygltf
+[submodule "tools/fast_glTF64/lib/fmt"]
+	path = tools/fast_glTF64/lib/fmt
+	url = https://github.com/fmtlib/fmt
+[submodule "tools/fast_glTF64/lib/tinygltf"]
+	path = tools/fast_glTF64/lib/tinygltf
+	url = https://github.com/syoyo/tinygltf
