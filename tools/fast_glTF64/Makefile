@@ -1,25 +1,25 @@
-# Name of application to build
 TARGET := fast_gltf64
 
 DEBUG ?= 1
 
 PLATFORM := native
 
-### Text variables ###
-
-# These use the fact that += always adds a space to create a variable that is just a space
-# Space has a single space, indent has 2
-space :=
-space +=
-
-indent =
-indent += 
-indent += 
-
 ### Tools ###
 
 # System tools
-CD := cdBLUE      := \033[0;34m
+MKDIR := mkdir
+MKDIR_OPTS := -p
+
+RMDIR := rm
+RMDIR_OPTS := -rf
+
+PRINT := printf '
+ENDCOLOR := \033[0m
+WHITE     := \033[0m
+ENDWHITE  := $(ENDCOLOR)
+GREEN     := \033[0;32m
+ENDGREEN  := $(ENDCOLOR)
+BLUE      := \033[0;34m
 ENDBLUE   := $(ENDCOLOR)
 YELLOW    := \033[0;33m
 ENDYELLOW := $(ENDCOLOR)
@@ -27,7 +27,7 @@ ENDLINE := \n'
 
 RUN := 
 
-SUFFIX := -9
+SUFFIX := -11
 
 # Build tools
 CC      := gcc$(SUFFIX)
@@ -133,23 +133,6 @@ $(BUILD_ROOT)/%.o : %.s | $(BUILD_DIRS)
 
 # .o -> application
 $(APP) : $(OBJS) $(SEG_OBJS)
-MKDIR := mkdir
-MKDIR_OPTS := -p
-
-RMDIR := rm
-RMDIR_OPTS := -rf
-
-PRINT := printf '
-ENDCOLOR := \033[0m
-WHITE     := \033[0m
-ENDWHITE  := $(ENDCOLOR)
-GREEN     := \033[0;32m
-ENDGREEN  := $(ENDCOLOR)
-BLUE      := \033[0;34m
-ENDBLUE   := $(ENDCOLOR)
-YELLOW    := \033[0;33m
-ENDYELLOW := $(ENDCOLOR)
-ENDLINE := \n'
 
 RUN := 
 
