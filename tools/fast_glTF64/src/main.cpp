@@ -1,5 +1,11 @@
-#include <fmt/core.h>
+#include <fstream>
+#include <iostream>
+
+#include "settings.hpp"
+
+const std::filesystem::path settings_path = "settings.json";
 
 int main() {
-    fmt::print("Hello!\n");
+    auto settings = read_c_settings_file(settings_path);
+    return EXIT_SUCCESS;
 }

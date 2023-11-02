@@ -1,0 +1,43 @@
+{
+    "Max Thread Amount": 12,
+    "Searchable Directories": [
+        "actors/"
+    ],
+    "Default Actor Settings": {
+        "Debug Prints": false,
+        "Write .old files": true,
+        "Skip": false,
+        "Never Apply Translation Flags": false, // Defines if the translation is read somewhere outside off rendering, used for the removal of translation flags
+        "DMA Table Name": "" // Leave empty for no table
+    },
+    "Special Cases": [
+        "castle_flag"
+    ],
+    "Actor Settings": {
+        "castle_flag": {
+            "Path": "levels/castle_grounds/areas/1/11/"
+        },
+        "mario": {
+            "DMA Table Name": "gMarioAnims",
+            "Animations Settings": {
+                "anim_09": { "Never Apply Translation Flags": true},
+                "anim_0B": { "Never Apply Translation Flags": true},
+                "anim_0C": { "Never Apply Translation Flags": true},
+                "anim_25": { "Never Apply Translation Flags": true},
+                "anim_26": { "Never Apply Translation Flags": true},
+                "anim_5F": { "Never Apply Translation Flags": true},
+                "anim_60": { "Never Apply Translation Flags": true},
+                "anim_61": { "Never Apply Translation Flags": true},
+                "anim_9C": { "Never Apply Translation Flags": true},
+                "anim_9D": { "Never Apply Translation Flags": true}
+            }
+        }
+    },
+    "DMA Tables": {
+        "gMarioAnims": {
+            "Animation Path": "assets/anims",
+            "Struct Name": "MarioAnimsObj",
+            "Per Frame DMA": true
+        }
+    }
+}

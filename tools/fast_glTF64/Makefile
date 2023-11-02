@@ -1,4 +1,4 @@
-TARGET := fast_gltf64
+TARGET := fast_glTF64
 
 DEBUG ?= 1
 
@@ -40,7 +40,7 @@ OBJCOPY := objcopy
 ### Files and Directories ###
 
 # Source files
-SRC_DIRS     := src lib/gltf lib/meshoptimizer/src lib/glm
+SRC_DIRS     := src lib/gltf
 C_SRCS       := $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.c))
 CXX_SRCS     := $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.cpp)) $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.cc))
 ASM_SRCS     := $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.s))
@@ -189,11 +189,13 @@ APP      := $(TARGET)
 # Build tool flags
 
 CFLAGS     := -fdata-sections -ffunction-sections
-CXXFLAGS   := -std=c++2a -fno-rtti -fdata-sections -ffunction-sections
+CXXFLAGS   := -std=c++2a -fdata-sections -ffunction-sections
 CPPFLAGS   := -I include $(LIBS_INC_FLAGS) -DAPP_NAME=\"$(TARGET)\" -DTINYGLTF_USE_CPP14
 WARNFLAGS  := -Wall -Wextra -Wpedantic -Wdouble-promotion -Wfloat-conversion
 ASFLAGS    := 
 LDFLAGS    := -Wl,-gc-sections $(LIBS_LD_FLAGS)
+
+# CXXFLAGS   += -fno-rtti
 
 ifneq ($(DEBUG),0)
 CPPFLAGS   += -DDEBUG_MODE

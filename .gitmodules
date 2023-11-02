@@ -7,3 +7,6 @@
 [submodule "tools/fast_glTF64/lib/tinygltf"]
 	path = tools/fast_glTF64/lib/tinygltf
 	url = https://github.com/syoyo/tinygltf
+[submodule "tools/fast_glTF64/lib/json"]
+	path = tools/fast_glTF64/lib/json
+	url = https://github.com/nlohmann/json.git
