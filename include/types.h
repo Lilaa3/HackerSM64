@@ -192,27 +192,33 @@ struct VblankHandler {
     OSMesg msg;
 };
 
+#include "config_animation.h"
+
 enum AnimFlags {
     ANIM_FLAG_NOLOOP     = BIT(0), // 0x01
     ANIM_FLAG_FORWARD    = BIT(1), // 0x02
     ANIM_FLAG_NO_ACCEL   = BIT(2), // 0x04
-    ANIM_FLAG_HOR_TRANS  = BIT(3), // 0x08
-    ANIM_FLAG_VERT_TRANS = BIT(4), // 0x10
-    ANIM_FLAG_DISABLED   = BIT(5), // 0x20
-    ANIM_FLAG_NO_TRANS   = BIT(6), // 0x40
-    ANIM_FLAG_UNUSED     = BIT(7), // 0x80
+    ANIM_FLAG_DISABLED   = BIT(3), // 0x20
+    #ifdef USE_TRANSLATION_FLAGS
+        ANIM_FLAG_HOR_TRANS  = BIT(4), // 0x08
+        ANIM_FLAG_VERT_TRANS = BIT(5), // 0x10
+        ANIM_FLAG_NO_TRANS   = BIT(6), // 0x40
+    #endif
 };
 
-struct Animation {
-    /*0x00*/ s16 flags;
-    /*0x02*/ s16 animYTransDivisor;
-    /*0x04*/ s16 startFrame;
-    /*0x06*/ s16 loopStart;
-    /*0x08*/ s16 loopEnd;
-    /*0x0A*/ s16 unusedBoneCount;
-    /*0x0C*/ const s16 *values;
-    /*0x10*/ const u16 *index;
-    /*0x14*/ u32 length; // only used with Mario animations to determine how much to load. 0 otherwise.
+ALIGNED16 struct Animation {
+    #ifdef USE_Y_DIVISOR
+      /*0x00*/ u8 transDivisor;
+    #endif
+    /*0x01*/ u8 flags;
+    /*0x02*/ u8 startFrame;
+    /*0x03*/ u8 loopStart;
+    /*0x04*/ u16 loopEnd;
+    /*0x06*/ const s16 *values;
+    #if ANIM_DATA_STRUCTURE == ANIM_STRUCTURE_INDEX
+        /*0x0A*/ const u16 *index;
+    #endif
+    /*0x0E*/ 
 };
 
 #define ANIMINDEX_NUMPARTS(animindex) (sizeof(animindex) / sizeof(u16) / 6 - 1)
