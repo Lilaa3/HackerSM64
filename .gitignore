@@ -54,10 +54,6 @@ build/*
 *.map
 .assets-local.txt
 
-# fast_glTF64 builds
-/tools/fast_glTF64/build/*
-tools/fast_glTF64/fast_gltf64
-
 # Vanilla Assets.
 # You can allow an asset to be committed by deleting one of these lines.
 actors/amp/amp_body.rgba16.png

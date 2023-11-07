@@ -40,7 +40,7 @@ OBJCOPY := objcopy
 ### Files and Directories ###
 
 # Source files
-SRC_DIRS     := src lib/gltf
+SRC_DIRS     := src src/c_to_glTF lib/gltf
 C_SRCS       := $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.c))
 CXX_SRCS     := $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.cpp)) $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.cc))
 ASM_SRCS     := $(foreach src_dir,$(SRC_DIRS),$(wildcard $(src_dir)/*.s))

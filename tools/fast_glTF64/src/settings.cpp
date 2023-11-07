@@ -7,8 +7,8 @@
 using namespace SM64_fast_glTF64;
 using json = nlohmann::json;
 
-ConverterSettings read_c_settings_file(std::filesystem::path path) {
-    fmt::print(INFO_COLOR, "Reading c to glTF settings json.\n");
+ConverterSettings read_settings_file(std::filesystem::path path) {
+    fmt::print(INFO_COLOR, "Reading settings json.\n");
     std::ifstream settings_file;
     try {
         fmt::print(INFO2_COLOR, "Reading as text({}).\n", path);
