@@ -1,8 +1,13 @@
 s32 simpleInt = 0;
 
-f32 simpleFloat = 1.4f;
+f32 simpleFloat = 1 . 4f;
 
 f32 simpleDouble = 1.4;
+
+char* simpleString = "This is a string test\n\
+This is another line which uses \ to seperate!""This is a string seperated by another set of quotes";
+
+char* simpleString2 = 'This is another string test';
 
 // One line comment test
 
@@ -10,11 +15,14 @@ f32 simpleDouble = 1.4;
     multi-line
 */
 
-ALIGNED8 static const Texture dAmpElectricityTexture[] = {
+ALIGNED8 static const Texture includeTest[1] = {
 #include "actors/amp/amp_electricity.rgba16.inc.c"
 };
 
-enum RenderLayers {
+f32 mathProcessorTest = ((20.7f * 2.1) / 5|5) % 4; // Random math, completly random
+
+
+enum RandomEnumTest {
     LAYER_FORCE,
     LAYER_OPAQUE,
     LAYER_OPAQUE_INTER,
@@ -33,7 +41,7 @@ enum RenderLayers {
     LAYER_COUNT
 };
 
-static const Vtx dAmpElectricityVertices[] = {
+static const Vtx vertexArrayTest[] = {
     { { { 224, 0, -89 }, 0, { 0, 480 }, { 0xff, 0xff, 0xff, 0xff } } },
     { { { 187, 149, 0 }, 0, { 223, 1078 }, { 0xff, 0xff, 0xff, 0xff } } },
     { { { 224, 0, 90 }, 0, { 479, 478 }, { 0xff, 0xff, 0xff, 0xff } } },
@@ -60,21 +68,8 @@ const Gfx dAmpElectricityDl[] = {
     gsSPEndDisplayList(),
 };
 
-static struct ObjectHitbox sAmpHitbox = {
-    /* interactType:      */ INTERACT_SHOCK,
-    /* downOffset:        */ 40,
-    /* damageOrCoinValue: */ 1,
-    /* health:            */ 0,
-    /* numLootCoins:      */ 0,
-    /* radius:            */ 40,
-    /* height:            */ 50,
-    /* hurtboxRadius:     */ 50,
-    /* hurtboxHeight:     */ 60,
-};
-
 // Function Test
-void bhv_homing_amp_init(void) {
-    vec3f_copy(&o->oHomeVec, &o->oPosVec);
+void bhv_homing_amp_init(void) {vec3f_copy(&o->oHomeVec, &o->oPosVec);
     o->oGravity = 0.0f;
     o->oHomingAmpAvgY = o->oHomeY;
 
@@ -91,3 +86,48 @@ void bhv_homing_amp_init(void) {
             do_2;
     }
 }
+
+static struct ObjectHitbox sAmpHitbox = {
+    /* interactType:      */ INTERACT_SHOCK,
+    /* downOffset:        */ 40,
+    /* damageOrCoinValue: */ 1,
+};
+
+static struct RenderPhase sRenderPhases[] = {
+#ifdef OBJECTS_REJ
+ #if SILHOUETTE
+    [RENDER_PHASE_ZEX_AFTER_SILHOUETTE]    = {
+        .startLayer = LAYER_OCCLUDE_SILHOUETTE_FIRST,
+        .endLayer   = LAYER_LAST,
+        .ucode      = GRAPH_NODE_UCODE_DEFAULT
+    },
+    [RENDER_PHASE_REJ_NON_ZB]              = {
+        .startLayer = LAYER_NON_ZB_FIRST,
+        .endLayer   = LAYER_LAST,
+        .ucode      = GRAPH_NODE_UCODE_REJ
+    },
+ #else
+    [RENDER_PHASE_REJ_ZB]                  = {
+        .startLayer = LAYER_ZB_FIRST,
+        .endLayer   = LAYER_ZB_LAST,
+        .ucode      = GRAPH_NODE_UCODE_REJ
+    },
+ #endif
+#else
+ #if SILHOUETTE
+    // Silhouette, no .rej
+    [RENDER_PHASE_ZEX_BEFORE_SILHOUETTE]   = {
+        .startLayer = LAYER_FIRST,
+        .endLayer   = LAYER_LAST_BEFORE_SILHOUETTE,
+    },
+
+ #else
+    // No silhouette, no .rej
+    [RENDER_PHASE_ZEX_ALL]                 = {
+        .startLayer = LAYER_FIRST,
+        .endLayer   = LAYER_LAST,
+    },
+
+ #endif
+#endif
+};

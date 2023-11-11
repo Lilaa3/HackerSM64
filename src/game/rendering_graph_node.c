@@ -951,10 +951,10 @@ void geo_set_animation_globals(struct AnimInfo *node, s32 hasAnimation) {
     gCurrAnimAttribute = segmented_to_virtual((void *) anim->index);
     gCurrAnimData = segmented_to_virtual((void *) anim->values);
 
-    if (anim->animYTransDivisor == 0) {
+    if (anim->transDivisor == 0) {
         gCurrAnimTranslationMultiplier = 1.0f;
     } else {
-        gCurrAnimTranslationMultiplier = (f32) node->animYTrans / (f32) anim->animYTransDivisor;
+        gCurrAnimTranslationMultiplier = (f32) node->animYTrans / (f32) anim->transDivisor;
     }
 }
 

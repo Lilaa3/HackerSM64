@@ -207,7 +207,7 @@ enum AnimFlags {
 };
 
 ALIGNED16 struct Animation {
-    #ifdef USE_Y_DIVISOR
+    #ifdef USE_TRANSLATION_DIVISOR
       /*0x00*/ u8 transDivisor;
     #endif
     /*0x01*/ u8 flags;

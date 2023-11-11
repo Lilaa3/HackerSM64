@@ -1,3 +1,5 @@
+#pragma once
+
 #include <fmt/color.h>
 
 const auto YELLOW_COLOR = fg(fmt::rgb(255, 255, 0));
