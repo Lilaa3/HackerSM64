@@ -17,23 +17,18 @@
 */
 
 #include <filesystem>
+#include <map>
 #include <string>
+#include <any>
 
 namespace LCP {
 typedef std::filesystem::path Path;
 typedef std::string string;
 typedef char8_t char_t;
 
-
 const char_t EMPTY_CHAR = U'\0';
 
 const auto BIT = [](int i) { return 1 << i; };
-
-enum StateFlags {
-    READING_TOKENS = BIT(0),
-    READING_VALUES = BIT(1),
-    START = READING_TOKENS,
-};
 
 enum DebugFlags {
     PRINT_PARSING_TEXT = BIT(0),
@@ -44,14 +39,64 @@ enum DebugFlags {
     ALL = UINT_MAX,
 };
 
-class ParsedValue {
-  public:
-    int to_do;
+enum IfMacroType {
+    IF,
+    IFDEF,
+    IFNDEF,
 };
 
-class Initialization : public ParsedValue {
+class IfMacro {
   public:
-    std::vector<string> types;
+    IfMacroType type;
+    string value;
+
+    operator std::string() const {
+        return fmt::format("TO IMPLEMENT");
+    }
+};
+
+enum ParsedType { ARRAY, MACRO_CALL, INT, FLOAT, STRING };
+
+class ParsedValue {
+  public:
+    size_t start, end;
+    IfMacro if_def;
+    ParsedType type;
+    std::any value;
+
+    ParsedValue(size_t start = 0, size_t end = 0, IfMacro if_def = IfMacro(), ParsedType type = ParsedType(), std::any value = std::any()) {
+      this->start = start;
+      this->end = end;
+      this->if_def = if_def;
+      this->type = type;
+      this->value = value;
+    }
+    virtual operator std::string() const {
+        return fmt::format("TO IMPLEMENT");
+    }
+};
+
+class ParsedValues {
+  public:
+    std::vector<std::shared_ptr<ParsedValues>> values;
+
+    virtual void push_back(std::shared_ptr<ParsedValues> value) {
+      this->values.push_back(value);
+    }
+  
+    virtual operator std::string() const {
+        return fmt::format("TO IMPLEMENT");
+    }
+};
+
+class Initialization : public ParsedValues {
+  public:
+    bool is_static;
+    bool is_const;
+    std::vector<string> keywords;
+    operator std::string() const {
+        return fmt::format("TO IMPLEMENT");
+    }
 };
 
 class FirstPassToken {
@@ -60,14 +105,16 @@ class FirstPassToken {
     size_t end;
     string text_value;
     FirstPassToken(size_t start = 0, size_t end = 0, string text_value = "") {
-      this->start = start;
-      this->end = end;
-      this->text_value = text_value;
+        this->start = start;
+        this->end = end;
+        this->text_value = text_value;
     }
     operator std::string() const {
-      return fmt::format("{}, {}: \"{}\"", this->start, this->end, this->text_value);
+        return fmt::format("{}, {}: \"{}\"", this->start, this->end, this->text_value);
     }
 };
+
+const FirstPassToken EMPTY_TOKEN = FirstPassToken();
 
 const Path TEST_PATH("parser_test_file.c");
 int test_parser();
@@ -78,26 +125,44 @@ class Parser {
 
     int read_c_file_at_path(const Path &path);
     int read_c_data(const string &text);
-    std::vector<Initialization> initializers;
+    std::vector<std::shared_ptr<Initialization>> values;
 
   private:
-    // Must be reset for every file
     size_t index;
+
     char_t prev_chr, chr, next_chr;
     string text;
-    StateFlags state = StateFlags::START;
-
     size_t token_start;
     bool in_string;
     std::vector<FirstPassToken> tokens;
-
-    std::vector<ParsedValue> stack;
-
     void read_tokens();
     void handle_comments();
     void handle_tokens();
-    
 
+    const FirstPassToken &prev_token() {
+        if (this->index > 0)
+            return this->tokens[this->index - 1];
+        return EMPTY_TOKEN;
+    }
+    const FirstPassToken &cur_token() {
+        return this->tokens[this->index];
+    }
+    const FirstPassToken &next_token() {
+        if (this->index < this->tokens.size() - 1)
+            return this->tokens[this->index + 1];
+        return EMPTY_TOKEN;
+    }
+    std::vector<std::shared_ptr<ParsedValues>> stack;
+    std::shared_ptr<Initialization> cur_initializer;
+    std::vector<FirstPassToken> accumelated_tokens;
+    const std::shared_ptr<ParsedValues> &stack_back() {
+      return this->stack.back();
+    }
+  
+    string get_tabs();
+    void read_data();
+    void read_keywords();
     void read_values();
+    bool reading_keywords, reading_function;
 };
 }; // namespace LCP

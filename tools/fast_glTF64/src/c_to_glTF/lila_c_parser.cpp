@@ -10,6 +10,7 @@ using namespace LCP;
 
 int LCP::test_parser() {
     Parser parser;
+    parser.debug_flags = DebugFlags::ALL;
     parser.read_c_file_at_path(TEST_PATH);
     return EXIT_SUCCESS;
 }
@@ -69,22 +70,23 @@ int Parser::read_c_data(const string &text) {
     if (this->debug_flags & DebugFlags::PRINT_FILE)
         fmt::print("{}\n", this->text);
 
-    this->state = StateFlags::START;
-
     this->read_tokens();
-    if (this->debug_flags & DebugFlags::PRINT_TOKENS){
+    if (this->debug_flags & DebugFlags::PRINT_TOKENS) {
         fmt::print("Tokens have been read sucessfuly\n");
 
-        for (auto token : this->tokens) {
+        for (const auto &token : this->tokens) {
             fmt::print("{}\n", (string) token);
         }
     }
+
+    this->read_data();
 
     return EXIT_SUCCESS;
 }
 
 void Parser::read_tokens() {
     this->token_start = 0;
+    this->in_string = false;
     this->tokens.clear();
     for (this->index = 0; this->index < text.size(); this->index++) {
         if (this->index > 0)
@@ -114,7 +116,8 @@ void Parser::handle_comments() {
         else
             end = this->text.find(MULTI_COMMENT_END, start) + MULTI_COMMENT_END.size();
 
-        assert(end != -1);
+        if (end == -1)
+            end = this->text.size() - 1;
 
         this->index = end;
 
@@ -127,12 +130,12 @@ void Parser::handle_comments() {
 }
 
 void Parser::handle_tokens() {
-    const std::string delimiters = " \n;{}()[],&#:\"'|/%*->.";
+    const std::string delimiters = " \n;{}()[],&^#:\"'|/%*->.+-><";
     bool chr_is_delimiter = delimiters.find(this->chr) != std::string::npos;
     bool prev_chr_is_delimiter = delimiters.find(this->prev_chr) != std::string::npos;
 
-    if (chr_is_delimiter || prev_chr_is_delimiter) {
-        if (this->prev_chr == '-' || this->chr == '>') 
+    if (chr_is_delimiter || prev_chr_is_delimiter || this->next_chr == EMPTY_CHAR) {
+        if (this->prev_chr == '-' || this->chr == '>')
             return;
 
         if (this->chr == '"' || this->chr == '\'') {
@@ -153,6 +156,9 @@ void Parser::handle_tokens() {
         if (this->in_string)
             return;
 
+        if (this->next_chr == EMPTY_CHAR) // Lil hack for tokens right at the end of the text
+            this->index++;
+
         string possible_token = erase_spaces(region(this->text, this->token_start, this->index));
         if (possible_token.size() > 0) {
             FirstPassToken token = FirstPassToken(this->token_start, this->index, possible_token);
@@ -162,5 +168,74 @@ void Parser::handle_tokens() {
     }
 }
 
+void Parser::read_data() {
+    this->stack.clear();
+
+    this->cur_initializer = std::make_shared<Initialization>();
+    this->reading_keywords = true;
+    this->reading_function = false;
+
+    for (this->index = 0; this->index < this->tokens.size(); this->index++) {
+        if (this->reading_keywords) {
+            this->read_keywords();
+        }
+        if (!this->reading_keywords) {
+            this->read_values();
+        }
+    }
+}
+
+string Parser::get_tabs() {
+    string tabs = "";
+    for (size_t i = 0; i < this->stack.size(); i++) {
+        tabs += "\t";
+    }
+    return tabs;
+}
+
+void Parser::read_keywords() {
+    string token = this->cur_token().text_value;
+    if (token == "=" || token == "{") {
+        this->values.push_back(this->cur_initializer);
+        if (this->prev_token().text_value == ")" && token == "{") {
+            this->reading_function = true;
+        }
+        this->stack.push_back(this->cur_initializer);
+        this->cur_initializer = std::make_shared<Initialization>();
+        this->reading_keywords = false;
+        fmt::print("{}Entering value\n", this->get_tabs());
+    }
+    else {
+        fmt::print("{}\n", token);
+        this->cur_initializer->keywords.push_back(token);
+    }
+}
+
 void Parser::read_values() {
+    string token_string = this->cur_token().text_value;
+    if (token_string == "=") // Ignore just for now.
+        return;
+
+    if (token_string == "{" || token_string == "(") {
+        fmt::print("{}Entering stack\n", this->get_tabs());
+        auto array = std::make_shared<ParsedValues>();
+        this->stack_back()->push_back(array);
+        this->stack.push_back(array);
+    } else if (token_string == "}" || token_string == ")"
+               || (token_string == ";" && !this->reading_function)) {
+        this->stack.pop_back();
+        if (this->stack.size() == 1 && this->reading_function){
+            fmt::print("{}Exiting stack because of funciton\n", this->get_tabs());
+            this->stack.pop_back();
+        }
+        if (this->stack.size() == 0) {
+            this->reading_function = false;
+            this->reading_keywords = true;
+        }
+        fmt::print("{}Exiting stack\n", this->get_tabs());
+    }
+    else {
+        this->accumelated_tokens.push_back(this->cur_token());
+        fmt::print("{}{}\n", this->get_tabs(), token_string);
+    }
 }
