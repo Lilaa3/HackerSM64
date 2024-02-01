@@ -124,12 +124,13 @@ ALWAYS_INLINE void render_particles(s32 physicAdvances) {
         u8 r =  CLAMP_U8((curParticle->tR - curParticle->r) * fraction + curParticle->r);
         u8 g =  CLAMP_U8((curParticle->tG - curParticle->g) * fraction + curParticle->g);
         u8 b =  CLAMP_U8((curParticle->tB - curParticle->b) * fraction + curParticle->b);
+        osSyncPrintf("curParticle->opacity %d\n", (s32) curParticle->opacity);
         gDPSetEnvColor(gfxHead++, r, g, b, curParticle->opacity); // Sets enviroment colour.
 
         // Check if the current particle is a billboard, if so use the billboarding function and ignore the first 2 angles.
         // If not, use the rotate and translate function. 
 
-        if (curParticle->isBillboard) {
+        if (curParticle->flags & PARTICLE_FLAG_BILLBOARD) {
             mtxf_billboard_fast(curParticle->angles[2], curParticle->pos, destMtx, srcMtx);
         } else {
             mtxf_rotate_zxy_and_mul_fast(curParticle->angles, curParticle->pos, destMtx, srcMtx);
@@ -169,7 +170,6 @@ ALWAYS_INLINE void run_particle_physics(struct FastParticle* curParticle, s32 ph
 
     apply_drag_to_value(&curParticle->forwardVel, curParticle->dragStrength * f32PhysicAdvances);
     apply_drag_to_value(&curParticle->velY, curParticle->dragStrength * f32PhysicAdvances);
-    osSyncPrintf("forwardVel %d\n", (s32) curParticle->forwardVel);
 
     curParticle->velY += curParticle->gravity;
     if(curParticle->velY > curParticle->maxYVel){
@@ -193,11 +193,11 @@ void spawn_fast_particle(Vec3f pos, struct SpawnFastParticlesInfo info) {
     for (i = 0; i < info.count; i++) {
         struct FastParticle *curParticle = &particleArray[curParticleAddID];
         
-        curParticle->despawnTime = info.despawnTime;
+        curParticle->despawnTime = info.despawnTime + 1;
 
         curParticle->material = info.material;
         
-        curParticle->isBillboard = info.isBillboard;
+        curParticle->flags = info.flags;
 
         curParticle->opacity = info.opacity;
         curParticle->opacityVel = info.opacityVel;
@@ -229,7 +229,16 @@ void spawn_fast_particle(Vec3f pos, struct SpawnFastParticlesInfo info) {
         curParticle->maxYVel = info.maxYVel;
 
         curParticle->scale = (random_float() * info.scaleRange) + info.scaleBase;
-        curParticle->scaleVel = info.scaleVel;
+
+        if (info.flags & PARTICLE_FLAG_SCALE_VEL_BY_OPACITY_PROPS) {
+            curParticle->scaleVel = curParticle->scale / (info.opacity / info.opacityVel);
+        }
+        else if (info.flags & PARTICLE_FLAG_SCALE_VEL_BY_OPACITY_PROPS_REVERSE) {
+            curParticle->scaleVel = curParticle->scale / (info.opacity / (info.opacity-info.opacityVel));
+        }
+        else {
+            curParticle->scaleVel = info.scaleVel;
+        }
 
         curParticleAddID = (curParticleAddID + 1) % 50;
     }

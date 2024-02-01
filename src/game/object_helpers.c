@@ -1699,7 +1699,38 @@ struct ParticalMaterial mistMaterial = {
 
 struct SpawnFastParticlesInfo newInfo;
 
+void cur_obj_spawn_old_particles(struct SpawnParticlesInfo *info) {
+    struct Object *particle;
+    s32 i;
+    f32 scale;
+    s32 numParticles = info->count;
+
+    // If there are a lot of objects already, limit the number of particles
+    if ((gPrevFrameObjectCount > (OBJECT_POOL_CAPACITY - 90)) && numParticles > 10) {
+        numParticles = 10;
+    }
+    // We're close to running out of object slots, so don't spawn particles at
+    // all
+    if (gPrevFrameObjectCount > (OBJECT_POOL_CAPACITY - 30)) {
+        numParticles = 0;
+    }
+    for (i = 0; i < numParticles; i++) {
+        scale = random_float() * (info->sizeRange * 0.1f) + info->sizeBase * 0.1f;
+        particle = spawn_object(o, info->model, bhvWhitePuffExplosion);
+        particle->oBehParams2ndByte = info->behParam;
+        particle->oMoveAngleYaw = random_u16();
+        particle->oGravity = info->gravity;
+        particle->oDragStrength = info->dragStrength;
+        particle->oPosY += info->offsetY;
+        particle->oForwardVel = random_float() * info->forwardVelRange + info->forwardVelBase;
+        particle->oVelY = random_float() * info->velYRange + info->velYBase;
+        obj_scale(particle, scale);
+    }
+}
+
 void cur_obj_spawn_particles(struct SpawnParticlesInfo *info) {
+    //cur_obj_spawn_old_particles(info);
+
     newInfo.count = info->count;
     
     newInfo.scaleBase = info->sizeBase * 0.05f;
@@ -1727,23 +1758,25 @@ void cur_obj_spawn_particles(struct SpawnParticlesInfo *info) {
     newInfo.tG = 255;
     newInfo.tB = 255;
 
+    newInfo.flags = PARTICLE_FLAG_BILLBOARD;
+
+    s32 slowFade = FALSE;
     if (info->behParam == 2 || info->behParam == 3){
         newInfo.opacity = 254;
         if (info->behParam == 2){
             newInfo.opacityVel = -21;
-            newInfo.scaleVel = newInfo.scaleBase * (newInfo.opacityVel / newInfo.opacity);
         }
         else if (info->behParam == 3){
             newInfo.opacityVel = -13;
-            newInfo.scaleVel = newInfo.scaleBase * (-newInfo.opacityVel / newInfo.opacity);
+            slowFade = TRUE;
         }
     }
 
-    if (newInfo.opacity) {
-        f32 despawnByOpacity = (254 / -newInfo.opacityVel);
-        if (despawnByOpacity < newInfo.despawnTime) {
-            newInfo.despawnTime = despawnByOpacity;
-        }
+    if (slowFade) {
+        newInfo.flags |= PARTICLE_FLAG_SCALE_VEL_BY_OPACITY_PROPS_REVERSE;
+    }
+    else {
+        newInfo.flags |= PARTICLE_FLAG_SCALE_VEL_BY_OPACITY_PROPS;
     }
 
     switch (info->model)
@@ -1770,7 +1803,6 @@ void cur_obj_spawn_particles(struct SpawnParticlesInfo *info) {
             newInfo.material = &mistMaterial;
             break;
     }
-    newInfo.isBillboard = TRUE;
 
     osSyncPrintf("despawnTime %d\n", newInfo.despawnTime);
     osSyncPrintf("opacityVel %d\n", newInfo.opacityVel);

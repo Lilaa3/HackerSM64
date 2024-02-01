@@ -13,7 +13,7 @@ struct ParticalMaterial {
 struct FastParticle {
     struct ParticalMaterial *material;
     u8 despawnTime;
-    u8 isBillboard:1;
+    u8 flags;
     u8 matIncrement;
     u8 opacity;
     s8 opacityVel;
@@ -30,10 +30,17 @@ struct FastParticle {
     f32 gravity;
 };
 
+enum ParticleFlags {
+    PARTICLE_FLAG_BILLBOARD = BIT(0),
+    PARTICLE_FLAG_SCALE_VEL_BY_OPACITY_PROPS = BIT(1),
+    PARTICLE_FLAG_SCALE_VEL_BY_OPACITY_PROPS_REVERSE = BIT(2),
+};
+
 struct SpawnFastParticlesInfo {
     s8 count;
     u8 despawnTime;
-    u8 isBillboard:1;
+
+    u8 flags;
     
     struct ParticalMaterial *material;
 
