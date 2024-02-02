@@ -124,7 +124,6 @@ ALWAYS_INLINE void render_particles(s32 physicAdvances) {
         u8 r =  CLAMP_U8((curParticle->tR - curParticle->r) * fraction + curParticle->r);
         u8 g =  CLAMP_U8((curParticle->tG - curParticle->g) * fraction + curParticle->g);
         u8 b =  CLAMP_U8((curParticle->tB - curParticle->b) * fraction + curParticle->b);
-        osSyncPrintf("curParticle->opacity %d\n", (s32) curParticle->opacity);
         gDPSetEnvColor(gfxHead++, r, g, b, curParticle->opacity); // Sets enviroment colour.
 
         // Check if the current particle is a billboard, if so use the billboarding function and ignore the first 2 angles.
@@ -187,7 +186,7 @@ ALWAYS_INLINE void run_particle_physics(struct FastParticle* curParticle, s32 ph
 	curParticle->despawnTime -= physicAdvances;
 }
 
-void spawn_fast_particle(Vec3f pos, struct SpawnFastParticlesInfo info) {
+void spawn_fast_particle(Vec3f pos, const struct SpawnFastParticlesInfo info) {
     s32 i;
 
     for (i = 0; i < info.count; i++) {
@@ -234,7 +233,7 @@ void spawn_fast_particle(Vec3f pos, struct SpawnFastParticlesInfo info) {
             curParticle->scaleVel = curParticle->scale / (info.opacity / info.opacityVel);
         }
         else if (info.flags & PARTICLE_FLAG_SCALE_VEL_BY_OPACITY_PROPS_REVERSE) {
-            curParticle->scaleVel = curParticle->scale / (info.opacity / (info.opacity-info.opacityVel));
+            curParticle->scaleVel = curParticle->scale / (info.opacity / (info.opacity + info.opacityVel));
         }
         else {
             curParticle->scaleVel = info.scaleVel;
