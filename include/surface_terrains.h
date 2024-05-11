@@ -5,14 +5,6 @@
 #include "config.h"
 #include "sounds.h"
 
-enum SurfaceClass {
-    SURFACE_CLASS_DEFAULT,
-    SURFACE_CLASS_VERY_SLIPPERY,
-    SURFACE_CLASS_SLIPPERY,
-    SURFACE_CLASS_NOT_SLIPPERY,
-    SURFACE_CLASS_SUPER_SLIPPERY,
-};
-
 #define COLLISION_TYPE(warpsAndLevel, special, slipperiness, camera, particles, sound, nonDecalShadow, vanish, canGetStuck) \
     ((nonDecalShadow << NON_DECAL_SHADOW_POS) | \
     (vanish << VANISH_POS) | \
@@ -26,6 +18,14 @@ enum SurfaceClass {
 
 #define COLLISION_TYPE_COMMON(special, slipperiness, particles, sound) \
     COLLISION_TYPE(0, special, slipperiness, 0, particles, sound, FALSE, FALSE, FALSE)
+
+enum SurfaceClass {
+    SURFACE_CLASS_DEFAULT,
+    SURFACE_CLASS_VERY_SLIPPERY,
+    SURFACE_CLASS_SLIPPERY,
+    SURFACE_CLASS_NOT_SLIPPERY,
+    SURFACE_CLASS_SUPER_SLIPPERY,
+};
 
 enum WarpsAndLevelTypes {
     COL_TYPE_LEVEL_DEFAULT,
@@ -99,9 +99,6 @@ enum ParticlesCollisionTypes {
 
 #define INSTANT_WARP_INDEX_START  0x00
 #define INSTANT_WARP_INDEX_STOP   0x04
-
-// Example of default collision type macro:
-// COLLISION_TYPE(0, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE)
 
 // Surface Types
 #define SURFACE_DEFAULT                         0
