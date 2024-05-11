@@ -324,6 +324,8 @@ enum TerrainType {
 
 // Collision Tris Initiate
 #define COL_TRI_INIT(surfType, triNum) TERRAIN_LOAD_TRIS, COL_TYPE_TO_2_S16(surfType), triNum
+#define COL_TRI_INIT_NEW(warpsAndLevel, special, slipperiness, camera, particles, sound, nonDecalShadow, vanish, canGetStuck, triNum) \
+    COL_TRI_INIT(COLLISION_TYPE(warpsAndLevel, special, slipperiness, camera, particles, sound, nonDecalShadow, vanish, canGetStuck), triNum)
 
 // Collision Tri
 #ifdef ALL_SURFACES_HAVE_FORCE
