@@ -270,24 +270,20 @@ struct ObjectNode {
 #define WARPS_AND_LEVEL_SIZE 4
 #define SPECIAL_SIZE 5
 #define SLIPPERINESS_SIZE 3
-#define NO_CAMERA_COLLISION_SIZE 1
 #define CAMERA_SIZE 4
 #define PARTICLES_SIZE 4
 #define SOUND_SIZE 4
-#define PADDING_SIZE 4
+#define PADDING_SIZE 5
 
 #define NON_DECAL_SHADOW_POS    (VANISH_POS + VANISH_SIZE)
 #define VANISH_POS              (CAN_GET_STUCK_POS + CAN_GET_STUCK_SIZE)
 #define CAN_GET_STUCK_POS       (WARPS_AND_LEVEL_POS + WARPS_AND_LEVEL_SIZE)
 #define WARPS_AND_LEVEL_POS     (SPECIAL_POS + SPECIAL_SIZE)
 #define SPECIAL_POS             (SLIPPERINESS_POS + SLIPPERINESS_SIZE)
-#define SLIPPERINESS_POS        (NO_CAMERA_COLLISION_POS + NO_CAMERA_COLLISION_SIZE)
-#define NO_CAMERA_COLLISION_POS (CAMERA_POS + CAMERA_SIZE)
+#define SLIPPERINESS_POS        (CAMERA_POS + CAMERA_SIZE)
 #define CAMERA_POS              (PARTICLES_POS + PARTICLES_SIZE)
 #define PARTICLES_POS           (SOUND_POS + SOUND_SIZE)
 #define SOUND_POS               (PADDING_SIZE)
-
-
 typedef union {
     struct {
         /*0 */ u32 nonDecalShadow:NON_DECAL_SHADOW_SIZE;
@@ -296,11 +292,10 @@ typedef union {
         /*3 */ u32 warpsAndLevel:WARPS_AND_LEVEL_SIZE;
         /*7 */ u32 special:SPECIAL_SIZE;
         /*12*/ u32 slipperiness:SLIPPERINESS_SIZE;
-        /*15*/ u32 noCameraCollision:NO_CAMERA_COLLISION_SIZE;
-        /*16*/ u32 camera:CAMERA_SIZE;
-        /*20*/ u32 particles:PARTICLES_SIZE;
-        /*24*/ u32 sound:SOUND_SIZE;
-        /*28*/ u32 padding:PADDING_SIZE;
+        /*15*/ u32 camera:CAMERA_SIZE;
+        /*19*/ u32 particles:PARTICLES_SIZE;
+        /*23*/ u32 sound:SOUND_SIZE;
+        /*27*/ u32 padding:PADDING_SIZE;
         /*32*/
     };
     u32 asValue;

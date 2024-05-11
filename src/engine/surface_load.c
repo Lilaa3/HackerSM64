@@ -323,18 +323,6 @@ static s32 surface_has_force(s32 surfaceType) {
 #endif
 
 /**
- * Returns whether a surface should have the
- * SURFACE_FLAG_NO_CAM_COLLISION flag.
- */
-static s32 surf_has_no_cam_collision(CollisionType surfaceType) {
-    if (surfaceType.noCameraCollision){
-        return SURFACE_FLAG_NO_CAM_COLLISION;
-    }
-
-    return SURFACE_FLAGS_NONE;
-}
-
-/**
  * Load in the surfaces for a given surface type. This includes setting the flags,
  * exertion, and room.
  */
@@ -346,8 +334,7 @@ static void load_static_surfaces(TerrainData **data, TerrainData *vertexData, Co
 #ifndef ALL_SURFACES_HAVE_FORCE
     s16 hasForce = surface_has_force(surfaceType);
 #endif
-    s32 flags = surf_has_no_cam_collision(surfaceType);
-
+    s32 flags = (surfaceType.camera == COL_TYPE_NO_CAMERA_COLLISION ? SURFACE_FLAG_NO_CAM_COLLISION : 0);
     s32 numSurfaces = *(*data)++;
 
     for (i = 0; i < numSurfaces; i++) {
@@ -619,7 +606,7 @@ void load_object_surfaces(TerrainData **data, TerrainData *vertexData, u32 dynam
     TerrainData hasForce = surface_has_force(surfaceType);
 #endif
 
-    s32 flags = surf_has_no_cam_collision(surfaceType) | (dynamic ? SURFACE_FLAG_DYNAMIC : 0);
+    s32 flags = (surfaceType.camera == COL_TYPE_NO_CAMERA_COLLISION ? SURFACE_FLAG_NO_CAM_COLLISION : 0) | (dynamic ? SURFACE_FLAG_DYNAMIC : 0);
 
     // The DDD warp is initially loaded at the origin and moved to the proper
     // position in paintings.c and doesn't update its room, so set it here.

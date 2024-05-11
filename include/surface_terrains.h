@@ -13,21 +13,19 @@ enum SurfaceClass {
     SURFACE_CLASS_SUPER_SLIPPERY,
 };
 
-
-#define COLLISION_TYPE(warpsAndLevel, special, slipperiness, camera, particles, sound, nonDecalShadow, vanish, canGetStuck, noCameraCollision) \
+#define COLLISION_TYPE(warpsAndLevel, special, slipperiness, camera, particles, sound, nonDecalShadow, vanish, canGetStuck) \
     ((nonDecalShadow << NON_DECAL_SHADOW_POS) | \
     (vanish << VANISH_POS) | \
     (canGetStuck << CAN_GET_STUCK_POS) | \
     (warpsAndLevel << WARPS_AND_LEVEL_POS) | \
     (special << SPECIAL_POS) | \
     (slipperiness << SLIPPERINESS_POS) | \
-    (noCameraCollision << NO_CAMERA_COLLISION_POS) | \
     (camera << CAMERA_POS) | \
     (particles << PARTICLES_POS) | \
     (sound << SOUND_POS))
 
 #define COLLISION_TYPE_COMMON(special, slipperiness, particles, sound) \
-    COLLISION_TYPE(0, special, slipperiness, 0, particles, sound, FALSE, FALSE, FALSE, FALSE)
+    COLLISION_TYPE(0, special, slipperiness, 0, particles, sound, FALSE, FALSE, FALSE)
 
 enum WarpsAndLevelTypes {
     COL_TYPE_LEVEL_DEFAULT,
@@ -70,6 +68,7 @@ enum SpecialCollisionTypes {
 
 enum CameraCollisionTypes {
     COL_FLAG_CAMERA_DEFAULT,
+    COL_TYPE_NO_CAMERA_COLLISION,
     COL_TYPE_CAMERA_WALL,
     COL_TYPE_CLOSE_CAMERA,
     COL_TYPE_CAMERA_FREE_ROAM,
@@ -119,7 +118,7 @@ enum ParticlesCollisionTypes {
 
 // Plays the Merry go round usic, see handle_merry_go_round_music in bbh_merry_go_round.inc.c for
 // more details
-#define SURFACE_MGR_MUSIC                       COLLISION_TYPE(COL_TYPE_MUSIC, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE)
+#define SURFACE_MGR_MUSIC                       COLLISION_TYPE(COL_TYPE_MUSIC, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE)
 
 #define SURFACE_QUICKSAND                       COLLISION_TYPE_COMMON(COL_TYPE_QUICKSAND, 0, 0, 0) // (depth of 60 units)
 #define SURFACE_SHALLOW_QUICKSAND               COLLISION_TYPE_COMMON(COL_TYPE_SHALLOW_QUICKSAND, 0, 0, 0) // (depth of 10 units)
@@ -130,15 +129,15 @@ enum ParticlesCollisionTypes {
 #define SURFACE_INSTANT_QUICKSAND               COLLISION_TYPE_COMMON(COL_TYPE_INSTANT_QUICKSAND, 0, 0, 0) // Lethal, instant
 #define SURFACE_INSTANT_MOVING_QUICKSAND        COLLISION_TYPE_COMMON(COL_TYPE_INSTANT_MOVING_QUICKSAND, 0, 0, 0) // Moving, lethal, instant
 
-#define SURFACE_WALL_MISC                       COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_WALL, 0, 0, FALSE, FALSE, FALSE, FALSE) // Cannon to adjust the camera
+#define SURFACE_WALL_MISC                       COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_WALL, 0, 0, FALSE, FALSE, FALSE) // Cannon to adjust the camera
 
 #define SURFACE_HORIZONTAL_WIND                 COLLISION_TYPE_COMMON(COL_TYPE_HORIZONTAL_WIND, 0, 0, 0) // Horizontal wind, has parameters
 #define SURFACE_VERTICAL_WIND                   COLLISION_TYPE_COMMON(COL_TYPE_VERTICAL_WIND, 0, 0, 0) // Death at bottom with vertical wind. Warps to ID of force parameter's
 
-#define SURFACE_TIMER_START                     COLLISION_TYPE(COL_TYPE_TIMER_START, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE)// Timer start (Peach's secret slide)
-#define SURFACE_TIMER_END                       COLLISION_TYPE(COL_TYPE_TIMER_END, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE)// Timer stop (Peach's secret slide)
+#define SURFACE_TIMER_START                     COLLISION_TYPE(COL_TYPE_TIMER_START, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE)// Timer start (Peach's secret slide)
+#define SURFACE_TIMER_END                       COLLISION_TYPE(COL_TYPE_TIMER_END, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE)// Timer stop (Peach's secret slide)
 
-#define SURFACE_ICE                             COLLISION_TYPE(0, 0, SURFACE_CLASS_VERY_SLIPPERY, 0, 0, SOUND_TERRAIN_ICE, TRUE, FALSE, FALSE, FALSE)
+#define SURFACE_ICE                             COLLISION_TYPE(0, 0, SURFACE_CLASS_VERY_SLIPPERY, 0, 0, SOUND_TERRAIN_ICE, TRUE, FALSE, FALSE)
 #define SURFACE_SLOW                            COLLISION_TYPE_COMMON(COL_TYPE_SLOW, 0, 0, 0)
 
 #define SURFACE_SUPER_SLIPPERY                  COLLISION_TYPE_COMMON(0, SURFACE_CLASS_SUPER_SLIPPERY, 0, SOUND_TERRAIN_GRASS)
@@ -154,33 +153,33 @@ enum ParticlesCollisionTypes {
 #define SURFACE_HARD_SLIPPERY                   SURFACE_SLIPPERY
 #define SURFACE_HARD_NOT_SLIPPERY               SURFACE_NOT_SLIPPERY
 
-#define SURFACE_CAMERA_FREE_ROAM                COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_FREE_ROAM, 0, 0, FALSE, FALSE, FALSE, FALSE) // (THI and TTC)
-#define SURFACE_BOSS_FIGHT_CAMERA               COLLISION_TYPE(0, 0, 0, COL_TYPE_BOSS_FIGHT_CAMERA, 0, 0, FALSE, FALSE, FALSE, FALSE) // (BoB and WF bosses)
-#define SURFACE_CLOSE_CAMERA                    COLLISION_TYPE(0, 0, 0, COL_TYPE_CLOSE_CAMERA, 0, 0, FALSE, FALSE, FALSE, FALSE)
-#define SURFACE_CAMERA_8_DIR                    COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_8_DIR, 0, 0, FALSE, FALSE, FALSE, FALSE) // Enables far camera for platforms, used in THI
-#define SURFACE_CAMERA_MIDDLE                   COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_MIDDLE, 0, 0, FALSE, FALSE, FALSE, FALSE) // Used on the 4 pillars of SSL
-#define SURFACE_CAMERA_ROTATE_RIGHT             COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_ROTATE_RIGHT, 0, 0, FALSE, FALSE, FALSE, FALSE) // (Bowser 1 & THI)
-#define SURFACE_CAMERA_ROTATE_LEFT              COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_ROTATE_LEFT, 0, 0, FALSE, FALSE, FALSE, FALSE) // (BoB & TTM)
-#define SURFACE_CAMERA_BOUNDARY                 COLLISION_TYPE(0, COL_TYPE_INTANGIBLE, 0, COL_TYPE_CAMERA_BOUNDARY, 0, 0, FALSE, FALSE, FALSE, FALSE)
-#define SURFACE_NO_CAM_COLLISION                COLLISION_TYPE(0, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, TRUE)
-#define SURFACE_NO_CAM_COL_VERY_SLIPPERY        COLLISION_TYPE(0, 0, SURFACE_CLASS_VERY_SLIPPERY, 0, 0, 0, FALSE, FALSE, FALSE, TRUE)
-#define SURFACE_NO_CAM_COL_SLIPPERY             COLLISION_TYPE(0, 0, SURFACE_CLASS_SLIPPERY, COL_TYPE_CLOSE_CAMERA, 0, 0, FALSE, FALSE, FALSE, TRUE) // (CCM, PSS and TTM slides)
-#define SURFACE_SWITCH                          COLLISION_TYPE(0, 0, SURFACE_CLASS_NOT_SLIPPERY, 0, 0, SOUND_TERRAIN_STONE, FALSE, FALSE, FALSE, TRUE) // Used by switches and Dorrie
+#define SURFACE_CAMERA_FREE_ROAM                COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_FREE_ROAM, 0, 0, FALSE, FALSE, FALSE) // (THI and TTC)
+#define SURFACE_BOSS_FIGHT_CAMERA               COLLISION_TYPE(0, 0, 0, COL_TYPE_BOSS_FIGHT_CAMERA, 0, 0, FALSE, FALSE, FALSE) // (BoB and WF bosses)
+#define SURFACE_CLOSE_CAMERA                    COLLISION_TYPE(0, 0, 0, COL_TYPE_CLOSE_CAMERA, 0, 0, FALSE, FALSE, FALSE)
+#define SURFACE_CAMERA_8_DIR                    COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_8_DIR, 0, 0, FALSE, FALSE, FALSE) // Enables far camera for platforms, used in THI
+#define SURFACE_CAMERA_MIDDLE                   COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_MIDDLE, 0, 0, FALSE, FALSE, FALSE) // Used on the 4 pillars of SSL
+#define SURFACE_CAMERA_ROTATE_RIGHT             COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_ROTATE_RIGHT, 0, 0, FALSE, FALSE, FALSE) // (Bowser 1 & THI)
+#define SURFACE_CAMERA_ROTATE_LEFT              COLLISION_TYPE(0, 0, 0, COL_TYPE_CAMERA_ROTATE_LEFT, 0, 0, FALSE, FALSE, FALSE) // (BoB & TTM)
+#define SURFACE_CAMERA_BOUNDARY                 COLLISION_TYPE(0, COL_TYPE_INTANGIBLE, 0, COL_TYPE_CAMERA_BOUNDARY, 0, 0, FALSE, FALSE, FALSE)
+#define SURFACE_NO_CAM_COLLISION                COLLISION_TYPE(0, 0, 0, SURFACE_FLAG_NO_CAM_COLLISION, 0, 0, FALSE, FALSE, FALSE)
+#define SURFACE_NO_CAM_COL_VERY_SLIPPERY        COLLISION_TYPE(0, 0, SURFACE_CLASS_VERY_SLIPPERY, SURFACE_FLAG_NO_CAM_COLLISION, 0, 0, FALSE, FALSE, FALSE)
+#define SURFACE_NO_CAM_COL_SLIPPERY             COLLISION_TYPE(0, 0, SURFACE_CLASS_SLIPPERY, SURFACE_FLAG_NO_CAM_COLLISION, 0, 0, FALSE, FALSE, FALSE) // (CCM, PSS and TTM slides)
+#define SURFACE_SWITCH                          COLLISION_TYPE(0, 0, SURFACE_CLASS_NOT_SLIPPERY, SURFACE_FLAG_NO_CAM_COLLISION, 0, SOUND_TERRAIN_STONE, FALSE, FALSE, FALSE) // Used by switches and Dorrie
 
-#define SURFACE_VANISH_CAP_WALLS                COLLISION_TYPE(0, 0, 0, 0, 0, 0, FALSE, TRUE, FALSE, FALSE) // Vanish cap walls, pass through them with Vanish Cap
+#define SURFACE_VANISH_CAP_WALLS                COLLISION_TYPE(0, 0, 0, 0, 0, 0, FALSE, TRUE, FALSE) // Vanish cap walls, pass through them with Vanish Cap
 
 // Warps to ID of force parameter's second byte if set, otherwise
 // defaults to ID 0xF3.
-#define SURFACE_WARP                            COLLISION_TYPE(COL_TYPE_WARP, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE)
+#define SURFACE_WARP                            COLLISION_TYPE(COL_TYPE_WARP, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE)
 // second byte if set, otherwise warps to 0xF3 if it exists, otherwise
 // defaults to ID 0xF1.
-#define SURFACE_LOOK_UP_WARP                    COLLISION_TYPE(COL_TYPE_LOOK_UP_WARP, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE)
+#define SURFACE_LOOK_UP_WARP                    COLLISION_TYPE(COL_TYPE_LOOK_UP_WARP, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE)
 
 // Instant warp to other areas
-#define SURFACE_INSTANT_WARP_1B                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_0, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE) // (WDW and endless stairs)
-#define SURFACE_INSTANT_WARP_1C                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_1, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE) // (WDW)
-#define SURFACE_INSTANT_WARP_1D                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_2, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE) // (DDD, SSL and TTM)
-#define SURFACE_INSTANT_WARP_1E                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_3, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE, FALSE) // (DDD, SSL and TTM)
+#define SURFACE_INSTANT_WARP_1B                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_0, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE) // (WDW and endless stairs)
+#define SURFACE_INSTANT_WARP_1C                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_1, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE) // (WDW)
+#define SURFACE_INSTANT_WARP_1D                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_2, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE) // (DDD, SSL and TTM)
+#define SURFACE_INSTANT_WARP_1E                 COLLISION_TYPE(COL_TYPE_INSTANT_WARP_3, 0, 0, 0, 0, 0, FALSE, FALSE, FALSE) // (DDD, SSL and TTM)
 
 #define SURFACE_TTM_VINES                       SURFACE_DEFAULT
 #define SURFACE_WATER                           SURFACE_DEFAULT

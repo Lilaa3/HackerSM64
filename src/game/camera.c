@@ -2388,7 +2388,7 @@ static UNUSED void unused_mode_0f_camera(struct Camera *c) {
  */
 void mode_slide_camera(struct Camera *c) {
     if (sMarioGeometry.currFloorType.camera == COL_TYPE_CLOSE_CAMERA ||
-        (sMarioGeometry.currFloorType.noCameraCollision && 
+        (sMarioGeometry.currFloorType.camera == COL_TYPE_NO_CAMERA_COLLISION && 
         sMarioGeometry.currFloorType.slipperiness == SURFACE_CLASS_SLIPPERY)) {
         mode_lakitu_camera(c);
     } else {
