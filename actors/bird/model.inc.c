@@ -1,14 +1,5 @@
-Lights1 bird_blue_lights = gdSPDefLights1(
-	0xC, 0x5D, 0x72,
-	0x1D, 0x91, 0xB0, 0x28, 0x28, 0x28);
 
-Lights1 bird_white_lights = gdSPDefLights1(
-	0x3F, 0x3F, 0x3F,
-	0xFF, 0xFF, 0xFF, 0x28, 0x28, 0x28);
 
-Lights1 bird_beak_lights = gdSPDefLights1(
-	0x33, 0x27, 0xD,
-	0xCE, 0x9D, 0x34, 0x28, 0x28, 0x28);
 
 Vtx bird_body_mesh_layer_1_vtx_0[22] = {
 	{{ {-38, -8, -4}, 0, {-16, -16}, {38, 135, 0, 255} }},
@@ -90,7 +81,8 @@ Gfx bird_body_mesh_layer_1[] = {
 	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
 	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(bird_blue_lights),
+    gsSPLightColor(LIGHT_1, 0x1d91b0ff),
+    gsSPLightColor(LIGHT_2, 0xc5d72ff),
 	gsSPVertex(bird_body_mesh_layer_1_vtx_0 + 0, 22, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
@@ -102,7 +94,8 @@ Gfx bird_body_mesh_layer_1[] = {
 	gsSP2Triangles(21, 11, 19, 0, 19, 11, 10, 0),
 	gsSP2Triangles(10, 14, 19, 0, 19, 14, 15, 0),
 	gsDPPipeSync(),
-	gsSPSetLights1(bird_white_lights),
+    gsSPLightColor(LIGHT_1, 0xffffffff),
+    gsSPLightColor(LIGHT_2, 0x3f3f3fff),
 	gsSPVertex(bird_body_mesh_layer_1_vtx_1 + 0, 13, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
 	gsSP2Triangles(0, 4, 3, 0, 4, 0, 5, 0),
@@ -113,7 +106,8 @@ Gfx bird_body_mesh_layer_1[] = {
 	gsSP2Triangles(1, 11, 12, 0, 12, 2, 1, 0),
 	gsSP2Triangles(1, 3, 11, 0, 11, 3, 8, 0),
 	gsDPPipeSync(),
-	gsSPSetLights1(bird_beak_lights),
+    gsSPLightColor(LIGHT_1, 0xce9d34ff),
+    gsSPLightColor(LIGHT_2, 0x33270dff),
 	gsSPVertex(bird_body_mesh_layer_1_vtx_2 + 0, 4, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
 	gsSP1Triangle(3, 0, 2, 0),
@@ -126,7 +120,8 @@ Gfx bird_left_wing_mesh_layer_1[] = {
 	gsDPPipeSync(),
 	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
 	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
-	gsSPSetLights1(bird_blue_lights),
+    gsSPLightColor(LIGHT_1, 0x1d91b0ff),
+    gsSPLightColor(LIGHT_2, 0xc5d72ff),
 	gsSPVertex(bird_left_wing_mesh_layer_1_vtx_0 + 0, 9, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
 	gsSP2Triangles(0, 4, 3, 0, 5, 4, 0, 0),

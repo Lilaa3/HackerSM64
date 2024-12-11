@@ -1,10 +1,4 @@
-Lights1 blargg_body_lights = gdSPDefLights1(
-	0x3F, 0xB, 0x7,
-	0xFF, 0x2E, 0x1F, 0x28, 0x28, 0x28);
 
-Lights1 blargg_teeth_lights = gdSPDefLights1(
-	0x2C, 0x2C, 0x2C,
-	0xB2, 0xB2, 0xB2, 0x28, 0x28, 0x28);
 
 Vtx blargg_lower_body_mesh_layer_1_vtx_0[41] = {
 	{{ {-61, -12, -11}, 0, {-16, -16}, {169, 20, 166, 255} }},
@@ -229,7 +223,8 @@ Gfx blargg_lower_body_mesh_layer_1[] = {
 	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
 	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
 	gsSPTexture(65535, 65535, 0, 0, 1),
-	gsSPSetLights1(blargg_body_lights),
+    gsSPLightColor(LIGHT_1, 0xff2e1fff),
+    gsSPLightColor(LIGHT_2, 0x3f0b07ff),
 	gsSPVertex(blargg_lower_body_mesh_layer_1_vtx_0 + 0, 32, 0),
 	gsSP2Triangles(0, 1, 2, 0, 1, 3, 2, 0),
 	gsSP2Triangles(1, 4, 3, 0, 4, 5, 3, 0),
@@ -292,7 +287,8 @@ Gfx blargg_head_mesh_layer_1[] = {
 	gsSP2Triangles(17, 26, 16, 0, 24, 26, 17, 0),
 	gsSP2Triangles(24, 17, 18, 0, 26, 24, 25, 0),
 	gsDPPipeSync(),
-	gsSPSetLights1(blargg_teeth_lights),
+    gsSPLightColor(LIGHT_1, 0xb2b2b2ff),
+    gsSPLightColor(LIGHT_2, 0x2c2c2cff),
 	gsSPVertex(blargg_head_mesh_layer_1_vtx_1 + 0, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
@@ -314,7 +310,8 @@ Gfx blargg_jaw_mesh_layer_1[] = {
 	gsDPPipeSync(),
 	gsSPSetOtherMode(G_SETOTHERMODE_H, 4, 20, G_AD_NOISE | G_CD_MAGICSQ | G_CK_NONE | G_TC_FILT | G_TF_BILERP | G_TT_NONE | G_TL_TILE | G_TD_CLAMP | G_TP_PERSP | G_CYC_1CYCLE | G_PM_1PRIMITIVE),
 	gsSPSetOtherMode(G_SETOTHERMODE_L, 0, 3, G_AC_NONE | G_ZS_PIXEL),
-	gsSPSetLights1(blargg_body_lights),
+    gsSPLightColor(LIGHT_1, 0xff2e1fff),
+    gsSPLightColor(LIGHT_2, 0x3f0b07ff),
 	gsSPVertex(blargg_jaw_mesh_layer_1_vtx_0 + 0, 12, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 1, 0, 0),
 	gsSP2Triangles(3, 0, 4, 0, 4, 0, 5, 0),
@@ -327,7 +324,8 @@ Gfx blargg_jaw_mesh_layer_1[] = {
 	gsSP2Triangles(5, 6, 7, 0, 8, 11, 7, 0),
 	gsSP2Triangles(8, 9, 11, 0, 9, 10, 11, 0),
 	gsDPPipeSync(),
-	gsSPSetLights1(blargg_teeth_lights),
+    gsSPLightColor(LIGHT_1, 0xb2b2b2ff),
+    gsSPLightColor(LIGHT_2, 0x2c2c2cff),
 	gsSPVertex(blargg_jaw_mesh_layer_1_vtx_1 + 0, 30, 0),
 	gsSP2Triangles(0, 1, 2, 0, 3, 4, 5, 0),
 	gsSP2Triangles(6, 7, 8, 0, 9, 10, 11, 0),
