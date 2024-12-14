@@ -1361,8 +1361,8 @@ const BehaviorScript bhvEndToad[] = {
 const BehaviorScript bhvEndPeach[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_ANIMATIONS(oAnimations, peach_seg5_anims_0501C41C),
-    ANIMATE(PEACH_ANIM_0),
+    LOAD_ANIMATIONS(oAnimations, peach_anims),
+    ANIMATE(PEACH_ANIM_LISTEN_EVERYBODY),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_end_peach_loop),
     END_LOOP(),
@@ -6039,8 +6039,8 @@ const BehaviorScript bhvBeginningLakitu[] = {
 const BehaviorScript bhvBeginningPeach[] = {
     BEGIN(OBJ_LIST_DEFAULT),
     OR_INT(oFlags, OBJ_FLAG_UPDATE_GFX_POS_AND_ANGLE),
-    LOAD_ANIMATIONS(oAnimations, peach_seg5_anims_0501C41C),
-    ANIMATE(PEACH_ANIM_0),
+    LOAD_ANIMATIONS(oAnimations, peach_anims),
+    ANIMATE(PEACH_ANIM_LISTEN_EVERYBODY),
     BEGIN_LOOP(),
         CALL_NATIVE(bhv_intro_peach_loop),
     END_LOOP(),

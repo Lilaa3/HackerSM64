@@ -1391,20 +1391,6 @@ enum oActionsIntroPeach {
     PEACH_ACT_UNFADE,
     PEACH_ACT_FADE_2,
 };
-enum animIDsPeach { //! TODO: anim names 0-3 & 6-8
-    PEACH_ANIM_0,
-    PEACH_ANIM_1,
-    PEACH_ANIM_2,
-    PEACH_ANIM_3,
-    PEACH_ANIM_DESCEND_FROM_WINDOW,
-    PEACH_ANIM_LOOK_UP_AND_OPEN_EYES,
-    PEACH_ANIM_DIALOG_1_PART_1,
-    PEACH_ANIM_DIALOG_1_PART_2,
-    PEACH_ANIM_DIALOG_1_PART_3,
-    PEACH_ANIM_THANKS_TO_YOU,
-    PEACH_ANIM_KISS,
-    PEACH_ANIM_WAVING,
-};
 
 /* Yoshi */
     /* oAction */

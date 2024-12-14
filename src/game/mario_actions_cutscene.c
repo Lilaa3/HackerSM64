@@ -28,6 +28,8 @@
 #include "sound_init.h"
 #include "rumble_init.h"
 
+#include "actors/group10.h" // peach anim enum
+
 static struct Object *sIntroWarpPipeObj;
 static struct Object *sEndPeachObj;
 static struct Object *sEndRightToadObj;
@@ -47,7 +49,7 @@ struct CreditsEntry *sDispCreditsEntry = NULL;
 
 // related to peach gfx?
 static s8 sPeachManualBlinkTime = 0;
-static s8 sPeachIsBlinking = FALSE;
+static s8 sPeachScrunchedLips = FALSE;
 static s8 sPeachBlinkTimes[7] = { 2, 3, 2, 1, 2, 3, 2 };
 
 static u8 sStarsNeededForDialog[] = { 1, 3, 8, 30, 50, 70 };
@@ -162,7 +164,7 @@ void bhv_end_peach_loop(void) {
     cur_obj_init_animation_with_sound(sEndPeachAnimation);
     if (cur_obj_check_if_near_animation_end()) {
         // anims: 0-3, 4, 5, 6-8, 9, 10, 11
-        if (sEndPeachAnimation <  PEACH_ANIM_3 || sEndPeachAnimation == PEACH_ANIM_DIALOG_1_PART_1 || sEndPeachAnimation == PEACH_ANIM_DIALOG_1_PART_2) {
+        if (sEndPeachAnimation <  PEACH_ANIM_WALKING_AWAY_2 || sEndPeachAnimation == PEACH_ANIM_LOOK_UP_AND_OPEN_EYES || sEndPeachAnimation == PEACH_ANIM_MARIO) {
             sEndPeachAnimation++;
         }
     }
@@ -183,19 +185,29 @@ void bhv_end_toad_loop(void) {
 // Geo switch case function for controlling Peach's eye state.
 Gfx *geo_switch_peach_eyes(s32 callContext, struct GraphNode *node, UNUSED s32 context) {
     struct GraphNodeSwitchCase *switchCase = (struct GraphNodeSwitchCase *) node;
-    s16 timer;
 
     if (callContext == GEO_CONTEXT_RENDER) {
         if (sPeachManualBlinkTime == 0) {
-            timer = (gAreaUpdateCounter + 0x20) >> 1 & 0x1F;
+            s16 timer = (gAreaUpdateCounter + 0x20) >> 1 & 0x1F;
             if (timer < 7) {
-                switchCase->selectedCase = sPeachIsBlinking * 4 + sPeachBlinkTimes[timer];
+                switchCase->selectedCase = sPeachBlinkTimes[timer];
             } else {
-                switchCase->selectedCase = sPeachIsBlinking * 4 + 1;
+                switchCase->selectedCase = 1;
             }
         } else {
-            switchCase->selectedCase = sPeachIsBlinking * 4 + sPeachManualBlinkTime - 1;
+            switchCase->selectedCase = sPeachManualBlinkTime - 1;
         }
+    }
+
+    return NULL;
+}
+
+// Geo switch case function for controlling Peach's lips state from normal to scrunched.
+Gfx *geo_switch_peach_lips(s32 callContext, struct GraphNode *node, UNUSED s32 context) {
+    struct GraphNodeSwitchCase *switchCase = (struct GraphNodeSwitchCase *) node;
+
+    if (callContext == GEO_CONTEXT_RENDER) {
+        switchCase->selectedCase = sPeachScrunchedLips; // 0: normal, 1: scrunched
     }
 
     return NULL;
@@ -2086,7 +2098,7 @@ static void end_peach_cutscene_spawn_peach(struct MarioState *m) {
         sEndLeftToadObj->oOpacity = 255;
 
         sPeachManualBlinkTime = 4;
-        sEndPeachAnimation = PEACH_ANIM_DESCEND_FROM_WINDOW;
+        sEndPeachAnimation = PEACH_ANIM_DESCEND;
 
         sEndToadAnims[END_TOAD_INDEX_WEST] = TOAD_ANIM_WEST_STANDING;
         sEndToadAnims[END_TOAD_INDEX_EAST] = TOAD_ANIM_EAST_STANDING;
@@ -2143,7 +2155,7 @@ static void end_peach_cutscene_run_to_peach(struct MarioState *m) {
     struct Surface *surf;
 
     if (m->actionTimer == 22) {
-        sEndPeachAnimation = PEACH_ANIM_LOOK_UP_AND_OPEN_EYES;
+        sEndPeachAnimation = PEACH_ANIM_DESCEND_AND_LOOK_DOWN;
     }
 
     if ((m->pos[2] -= 20.0f) <= -1181.0f) {
@@ -2199,7 +2211,7 @@ static void end_peach_cutscene_dialog_1(struct MarioState *m) {
 
     switch (m->actionTimer) {
         case END_PEACH_CUTSCENE_DIALOG_1_TIME_1:
-            sEndPeachAnimation = PEACH_ANIM_DIALOG_1_PART_1;
+            sEndPeachAnimation = PEACH_ANIM_LOOK_UP_AND_OPEN_EYES;
             break;
 
         case END_PEACH_CUTSCENE_DIALOG_1_TIME_2:
@@ -2212,7 +2224,7 @@ static void end_peach_cutscene_dialog_1(struct MarioState *m) {
 
         case END_PEACH_CUTSCENE_DIALOG_1_TIME_4:
             sPeachManualBlinkTime = 1;
-            sPeachIsBlinking      = 1;
+            sPeachScrunchedLips   = TRUE;
             break;
 
         case END_PEACH_CUTSCENE_DIALOG_1_TIME_5:
@@ -2225,7 +2237,7 @@ static void end_peach_cutscene_dialog_1(struct MarioState *m) {
 
         case END_PEACH_CUTSCENE_DIALOG_1_TIME_6:
             sPeachManualBlinkTime = 0;
-            sPeachIsBlinking      = 0;
+            sPeachScrunchedLips   = FALSE;
             break;
 
         case END_PEACH_CUTSCENE_DIALOG_1_TIME_7:
@@ -2280,7 +2292,7 @@ static void end_peach_cutscene_dialog_2(struct MarioState *m) {
             break;
 
         case END_PEACH_CUTSCENE_DIALOG_2_TIME_2:
-            sPeachIsBlinking = TRUE;
+            sPeachScrunchedLips = TRUE;
             break;
 
         case END_PEACH_CUTSCENE_DIALOG_2_TIME_3:
@@ -2328,7 +2340,7 @@ static void end_peach_cutscene_kiss_from_peach(struct MarioState *m) {
 
     switch (m->actionTimer) {
         case 8:
-            sPeachIsBlinking = FALSE;
+            sPeachScrunchedLips = FALSE;
             break;
 
         case 10:
@@ -2410,10 +2422,10 @@ static void end_peach_cutscene_dialog_3(struct MarioState *m) {
 
     switch (m->actionTimer) {
         case 1:
-            sEndPeachAnimation = PEACH_ANIM_0;
+            sEndPeachAnimation = PEACH_ANIM_LISTEN_EVERYBODY;
             sEndToadAnims[END_TOAD_INDEX_WEST] = TOAD_ANIM_WEST_WAVE_THEN_TURN;
             sEndToadAnims[END_TOAD_INDEX_EAST] = TOAD_ANIM_EAST_NOD_THEN_TURN;
-            sPeachIsBlinking = TRUE;
+            sPeachScrunchedLips = TRUE;
             set_cutscene_message(160, 227, 5, 30);
 #ifndef VERSION_JP
             play_sound(SOUND_PEACH_BAKE_A_CAKE, sEndPeachObj->header.gfx.cameraToObject);
