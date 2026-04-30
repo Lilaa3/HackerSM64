@@ -38,7 +38,7 @@ struct DmaHandlerList {
     void *bufTarget;
 };
 
-#define EFFECTS_MEMORY_POOL 0x4000
+#define EFFECTS_MEMORY_POOL 0x4000 * 100
 
 extern struct MemoryPool *gEffectsMemoryPool;
 

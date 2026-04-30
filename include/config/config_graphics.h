@@ -7,7 +7,7 @@
 /**
  * The size of the master display list (gDisplayListHead). 6400 is vanilla.
  */
-#define GFX_POOL_SIZE 10000
+#define GFX_POOL_SIZE 20000
 
 /**
  * Causes the global light direction to be in world space,
@@ -132,7 +132,7 @@
  * Makes objects below the screen be culled. 
  * NOTE: Vanilla objects do not account for vertical culling.
  */
-// #define VERTICAL_CULLING
+#define VERTICAL_CULLING
 
 /**
  * If the first command of an object´s geolayout is not GEO_CULLING_RADIUS, DEFAULT_CULLING_RADIUS

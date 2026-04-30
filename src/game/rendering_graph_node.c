@@ -51,6 +51,7 @@ s16 gMatStackIndex = 0;
 ALIGNED16 Mat4 gMatStack[32];
 ALIGNED16 Mtx *gMatStackFixed[32];
 f32 sAspectRatio;
+extern struct Object *gMarioObject;
 
 /**
  * Animation nodes have state in global variables, so this struct captures
@@ -1074,6 +1075,20 @@ void geo_process_object(struct Object *node) {
         // FIXME: correct types
         if (node->header.gfx.animInfo.curAnim != NULL) {
             geo_set_animation_globals(&node->header.gfx.animInfo, (node->header.gfx.node.flags & GRAPH_RENDER_HAS_ANIMATION) != 0);
+        }
+
+        f32 cameraToObjectDepth = node->header.gfx.cameraToObject[2];
+        if (!isInvisible && node->oBehParams != 0 && node != gMarioObject && cameraToObjectDepth < 0 && cameraToObjectDepth > -1400) {
+            f32 x = (node->header.gfx.cameraToObject[0] / (cameraToObjectDepth * gCurGraphNodeCamFrustum->halfFovHorizontal)) * -SCREEN_WIDTH  + (SCREEN_WIDTH / 2);
+            f32 y = (node->header.gfx.cameraToObject[1] / (cameraToObjectDepth * gCurGraphNodeCamFrustum->halfFovVertical)) * -SCREEN_HEIGHT + (SCREEN_HEIGHT / 2);
+            if (x > 0 && x < SCREEN_WIDTH && y > 0 && y < SCREEN_HEIGHT) {
+                print_text_fmt_int((s32)x, (s32)y, "%x", node->oBehParams);
+            }
+            /*if (node == gMarioObject) {
+                print_text_fmt_int(SCREEN_WIDTH / 2, 0, "%d", x);
+                print_text_fmt_int(SCREEN_WIDTH / 2, 20, "%d", y);
+                print_text_fmt_int(SCREEN_WIDTH / 2, 40, "%d", cameraToObjectDepth);
+            }*/
         }
 
         if (!isInvisible && obj_is_in_view(&node->header.gfx)) {
