@@ -1,12 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x130025f8" readable_name="Water Level Diamond">
-    <description>An interactive diamond object that, when touched by Mario, triggers a change in the global water level, adjusting it to match the diamond's own height.</description>
     <tags>
         <tag>INTERACTIVE</tag>
         <tag>WATER</tag>
     </tags>
     <models>
-        <model>breakable_box</model>
+        <model>breakable_box</model> <!-- Comes from a macro...... it's kinda funny-->
         <model>wdw_water_level_diamond</model>
     </models>
 </behavior>

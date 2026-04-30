@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <behavior name="0x13003c30" readable_name="Waterfall Sound Loop">
-    <description>An invisible object that continuously plays a waterfall environmental sound.</description>
     <tags>
         <tag>SOUND</tag>
+        <tag>WATER</tag>
+        <tag>ENVIROMENTAL</tag>
     </tags>
 </behavior>

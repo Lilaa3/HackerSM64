@@ -1,13 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x13004f10" readable_name="Water Bomb Cannon">
-    <description>A cannon that fires water bombs. It pushes Mario away from its base and activates when Mario is nearby, rotating to target him before firing.</description>
     <tags>
-        <tag>ENEMY</tag>
         <tag>SPAWNER</tag>
-        <tag>WATER</tag>
+        <tag>BOB</tag>
     </tags>
     <fields>
-        <field name="Cannon Mode" type="int" shift="0" mask="0xFF" default="0"/>
+        <field name="Disabled" type="bool" bytes="2" default="0"/>
     </fields>
     <models>
         <model>cannon_base</model>

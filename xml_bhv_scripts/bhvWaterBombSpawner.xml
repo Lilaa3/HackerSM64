@@ -3,9 +3,9 @@
     <description>A spawner that drops water bombs targeting Mario's current position when he is within a specific radius. The trigger radius is calculated as (50 * parameter + 200).</description>
     <tags>
         <tag>SPAWNER</tag>
-        <tag>WATER</tag>
+        <tag>BOB</tag>
     </tags>
     <fields>
-        <field name="Spawn Radius Multiplier" type="int" shift="0" mask="0xFF" default="0" multiplier="50"/>
+        <field name="Spawn Radius Multiplier" type="units" bytes="2" default="0" multiplier="50" offset="200"/> <!-- Seems to  go unused?? -->
     </fields>
 </behavior>
