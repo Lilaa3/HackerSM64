@@ -4,7 +4,6 @@
     <tags>
         <tag>ENEMY</tag>
         <tag>HOLDABLE</tag>
-        <tag>Common</tag>
     </tags>
     <models>
         <model>koopa_shell</model>

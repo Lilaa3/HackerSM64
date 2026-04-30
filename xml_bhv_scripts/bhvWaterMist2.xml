@@ -1,9 +1,10 @@
 <?xml version="1.0" ?>
 <behavior name="0x13000dd8" readable_name="Water Mist 2">
-    <description>A particle object representing water mist. It remains positioned slightly above the current water level, with random small offsets in its horizontal position and a random opacity.</description>
+    <comment>Has bparam2 set in all objects, but not used. Flickers and moves slightly on the water level.</comment>
     <tags>
         <tag>PARTICLE</tag>
         <tag>WATER</tag>
+        <tag>CASTLE_GROUNDS</tag>
     </tags>
     <models>
         <model>mist</model>

@@ -3,7 +3,6 @@
     <description>A Floomba that starts in the FLOOMBA_ACT_STARTUP state. It utilizes a custom animation speed derived from the first behavior parameter (BPARAM1 / 16.0) during its startup sequence.</description>
     <tags>
         <tag>ENEMY</tag>
-        <tag>Common</tag>
         <tag>Individual</tag>
     </tags>
     <fields>

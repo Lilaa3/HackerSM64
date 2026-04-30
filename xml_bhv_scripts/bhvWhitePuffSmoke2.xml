@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002528" readable_name="White Puff Smoke 2">
-    <description>A smoke particle that performs random XZ translation and moves under gravity over 7 animation frames before deactivating.</description>
     <tags>
         <tag>PARTICLE</tag>
     </tags>

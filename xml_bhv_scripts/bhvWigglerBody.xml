@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
 <behavior name="0x130048e0" readable_name="Wiggler Body">
-    <description>A body segment of a Wiggler. It follows the movement of its parent Wiggler using a segment-based chain system. Its position and orientation are updated based on its index in the parent's segment list.</description>
+    <description>A body segment of a Wiggler. It follows the movement of its parent Wiggler dictates in oWigglerSegments.</description>
     <tags>
         <tag>ENEMY</tag>
         <tag>PART</tag>
     </tags>
     <fields>
-        <field name="Segment Index" type="int" shift="8" mask="0xFF" default="0">
+        <field name="Segment Index" type="int" byte="2" default="0">
             <enums/>
         </field>
     </fields>

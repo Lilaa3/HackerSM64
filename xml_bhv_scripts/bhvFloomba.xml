@@ -1,9 +1,8 @@
 <?xml version="1.0" ?>
 <behavior name="bhvFloomba" readable_name="Floomba">
-    <description>A blue variant of the Goomba. It sets oIsFloomba to TRUE and inherits all movement, AI, and parameter logic from bhvGoomba.</description>
+    <description>A.. 😳 variant of a Goomba. It sets oIsFloomba to TRUE and then switches to bhvGoomba.</description>
     <tags>
         <tag>ENEMY</tag>
-        <tag>Common</tag>
         <tag>Individual</tag>
     </tags>
     <fields>

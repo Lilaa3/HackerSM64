@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300091c" readable_name="Yellow Coin">
-    <description>A collectible yellow coin. When collected by Mario, it spawns sparkle particles and is removed from the world.</description>
     <tags>
         <tag>COLLECTABLE</tag>
     </tags>

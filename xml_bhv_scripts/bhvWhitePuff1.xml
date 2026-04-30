@@ -1,7 +1,8 @@
 <?xml version="1.0" ?>
 <behavior name="0x130024dc" readable_name="White Puff 1">
-    <description>A brief white particle effect. It spawns with a random XZ offset and a slight upward nudge, then scales up and is deleted after 4 frames.</description>
+    <description>Spawned by bhvMistParticleSpawner.</description>
     <tags>
         <tag>PARTICLE</tag>
+        <tag>PART</tag>
     </tags>
 </behavior>

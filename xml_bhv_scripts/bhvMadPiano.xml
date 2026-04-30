@@ -3,7 +3,6 @@
     <description>A hostile piano in Big Boo's Haunt that attempts to chomp Mario by moving and rotating towards him, while staying relative to its home position.</description>
     <tags>
         <tag>ENEMY</tag>
-        <tag>Common</tag>
     </tags>
     <models>
         <model>mad_piano</model>

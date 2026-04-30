@@ -1,8 +1,7 @@
 <?xml version="1.0" ?>
 <behavior name="0x13003db8" readable_name="Wing Cap">
-    <description>A collectible cap that moves through the environment. It handles terrain collisions, can sink in quicksand, and interacts with water.</description>
     <tags>
-        <tag>COLLECTABLE</tag>
+        <tag>CAP</tag>
         <tag>LEVEL</tag>
     </tags>
 </behavior>

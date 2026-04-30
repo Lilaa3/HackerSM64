@@ -1,8 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002dc0" readable_name="Wave Trail">
-    <description>A water particle that stays slightly above the water surface. It gradually shrinks in size and deactivates after a set number of repetitions. Some instances are randomly deleted upon creation to space out the trail.</description>
+    <particle>PARTICLE_WAVE_TRAIL</particle>
     <tags>
         <tag>PARTICLE</tag>
         <tag>WATER</tag>
     </tags>
+    <models>
+        <model>water_wave_trail</model>
+    </models>
 </behavior>

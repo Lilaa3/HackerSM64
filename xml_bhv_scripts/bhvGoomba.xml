@@ -3,7 +3,6 @@
     <description>Standard Goomba enemy. Its size, scale, gravity, and damage are determined by the 'size's parameter. It manages a basic AI state machine (Walk, Jump, Attacked Mario) and handles collision via sGoombaHitbox.</description>
     <tags>
         <tag>ENEMY</tag>
-        <tag>Common</tag>
         <tag>Individual</tag>
     </tags>
     <fields>

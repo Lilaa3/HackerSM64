@@ -1,11 +1,10 @@
 <?xml version="1.0" ?>
-<behavior name="0x13002bcc" readable_name="Small Whomp">
-    <description>A small version of the Whomp enemy. It slides across the floor and can be defeated by pushing it into a wall. The behavior parameter controls the distance at which the Whomp is hidden from view.</description>
+<behavior name="0x13002bcc" readable_name="Whomp">
     <tags>
         <tag>ENEMY</tag>
     </tags>
     <fields>
-        <field name="Hide Distance" type="bool" byte="2" default="False"/>
+        <field name="Is Whomp King" type="bool" byte="2" default="False"/>
     </fields>
     <models>
         <model>whomp</model>

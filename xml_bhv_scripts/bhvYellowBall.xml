@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002ea8" readable_name="Yellow Ball">
-    <description>A yellow ball object with no defined behavior logic.</description>
+    <description>A yellow ball object, billboarded.</description>
     <tags>
         <tag>UNUSED</tag>
     </tags>

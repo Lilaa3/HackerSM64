@@ -3,7 +3,6 @@
     <description>A versatile Koopa Troopa with several variations: normal, unshelled, tiny, and Koopa the Quick. Each variation affects movement speed, agility, and behavior.</description>
     <tags>
         <tag>ENEMY</tag>
-        <tag>Common</tag>
     </tags>
     <fields>
         <field name="Movement Type" type="int" byte="2" default="0">

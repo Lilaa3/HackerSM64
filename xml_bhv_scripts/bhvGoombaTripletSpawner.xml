@@ -4,7 +4,6 @@
     <tags>
         <tag>ENEMY</tag>
         <tag>SPAWNER</tag>
-        <tag>Common</tag>
     </tags>
     <fields>
         <field name="Spawned Goomba Size" type="int" shift="16" mask="0x03" default="0">

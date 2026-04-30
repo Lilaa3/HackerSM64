@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13000638" readable_name="WF Breakable Wall Left">
-    <description>A wall that is only tangible when Mario is shot from a cannon. Colliding with it causes it to explode and spawn coins. If a corresponding right-side breakable wall is present, it plays a puzzle jingle.</description>
     <tags>
         <tag>SURFACE</tag>
         <tag>INTERACTIVE</tag>
