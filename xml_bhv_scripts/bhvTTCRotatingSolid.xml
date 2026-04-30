@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004bf0" readable_name="TTC Rotating Solid">
+    <description>A solid block in TTC that rotates and moves vertically. It can be a cube or a prism.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>TTC</tag>
+    </tags>
+    <fields>
+        <field name="Shape" type="int" shift="8" mask="0xFF" default="0">
+            <enums>
+                <enum value="0" name="Cube" c_name="TTC_ROTATING_SOLID_BP_CUBE"/>
+                <enum value="1" name="Prism" c_name="TTC_ROTATING_SOLID_BP_PRISM"/>
+            </enums>
+        </field>
+    </fields>
+    <models>
+        <model>ttc_rotating_cube</model>
+        <model>ttc_rotating_prism</model>
+    </models>
+</behavior>

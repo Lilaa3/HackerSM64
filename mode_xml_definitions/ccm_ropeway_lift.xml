@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Ccm Ropeway Lift">
+    <geolayout>0xe0003d0</geolayout>
+    <level>CCM</level>
+    <ids>
+        <id value="0x36" name="MODEL_CCM_ROPEWAY_LIFT"/>
+    </ids>
+</model>

@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002178" readable_name="Fish">
+    <description>A fish that roams the water. It constantly checks if it is still submerged; if it leaves the water (unless the 'sIn Full Water Level's flag is set), it is marked for deletion. Its movement and actions are managed via the sFishActions function array.</description>
+    <tags>
+        <tag>FISH</tag>
+        <tag>WATER</tag>
+        <tag>NPC</tag>
+        <tag>ENEMY</tag>
+    </tags>
+    <fields>
+        <field name="Flags" type="bitflag" shift="8" mask="0xFF" default="0">
+            <description>Flags for fish behavior, such as whether it is in a fully submerged level.</description>
+            <enums>
+                <enum value="16" name="In Full Water Level" c_name="FISH_BP_FLAG_IN_FULL_WATER_LEVEL"/>
+            </enums>
+        </field>
+    </fields>
+</behavior>

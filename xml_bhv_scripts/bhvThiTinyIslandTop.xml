@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000194" readable_name="THI Tiny Island Top">
+    <comment>No configurable parameters.</comment>
+    <description>Handles the ground-pound interaction on Tiny Island's top to drain water. Triggers environment changes and plays sounds when activated.</description>
+    <tags>
+        <tag>INTERACTIVE</tag>
+        <tag>THI</tag>
+    </tags>
+    <models>
+        <model>thi_tiny_island_top</model>
+    </models>
+</behavior>

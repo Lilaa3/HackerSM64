@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000f48" readable_name="Ukiki Cage">
+    <description>A surface object that serves as the destination for the Ukiki puzzle. Once a monkey lands on it, the cage spins, falls, and disappears, triggering the spawn of a Power Star.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>INTERACTIVE</tag>
+    </tags>
+    <models>
+        <model>ttm_star_cage</model>
+    </models>
+</behavior>

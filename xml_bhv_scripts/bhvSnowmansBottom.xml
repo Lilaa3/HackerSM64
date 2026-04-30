@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003ce4" readable_name="Snowman's Bottom">
+    <description>The bottom part of the snowman. When Mario interacts with it, it rolls towards the snowman's head, causing the snowman to bounce and providing a reward.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SL</tag>
+    </tags>
+    <models>
+        <model>ccm_snowman_base</model>
+    </models>
+</behavior>

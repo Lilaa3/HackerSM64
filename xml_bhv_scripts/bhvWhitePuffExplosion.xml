@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<behavior name="0x130007dc" readable_name="White Puff Explosion">
+    <description>A particle effect that expands and fades. The fade rate and whether it scales inversely to opacity are controlled by behavior parameters.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+    </tags>
+    <fields>
+        <field name="Fade Style" type="int" shift="8" mask="0xFF" default="2">
+            <enums>
+                <enum value="2" name="Fast Fade" c_name=""/>
+                <enum value="3" name="Slow Fade" c_name=""/>
+            </enums>
+        </field>
+    </fields>
+</behavior>

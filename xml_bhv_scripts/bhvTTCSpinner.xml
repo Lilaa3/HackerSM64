@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004d90" readable_name="TTC Spinner">
+    <description>A rotating platform in TTC. Its speed is controlled by the TTC speed setting.</description>
+    <tags>
+        <tag>PLATFORM</tag>
+        <tag>TTC</tag>
+    </tags>
+    <models>
+        <model>ttc_spinner</model>
+    </models>
+</behavior>

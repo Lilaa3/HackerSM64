@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003aa4" readable_name="Bob Bowling Ball Spawner">
+    <description>A spawner for bowling balls used by Bob.</description>
+    <tags>
+        <tag>SPAWNER</tag>
+        <tag>HURT</tag>
+    </tags>
+    <fields>
+        <field name="Spawner Type" type="int" byte="2" default="0">
+            <enums>
+                <enum value="0" name="Bob Upper" c_name="BBALL_BP_STYPE_BOB_UPPER"/>
+                <enum value="1" name="TTM" c_name="BBALL_BP_STYPE_TTM"/>
+                <enum value="2" name="Bob Lower" c_name="BBALL_BP_STYPE_BOB_LOWER"/>
+            </enums>
+        </field>
+    </fields>
+</behavior>

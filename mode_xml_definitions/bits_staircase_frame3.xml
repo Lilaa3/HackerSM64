@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Bits Staircase Frame3">
+    <geolayout>0xe0006e8</geolayout>
+    <level>BITS</level>
+    <ids>
+        <id value="0x44" name="MODEL_BITS_STAIRCASE_FRAME3"/>
+    </ids>
+</model>

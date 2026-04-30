@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300241c" readable_name="Sunken Ship Part">
+    <description>A part of a sunken ship that adjusts its opacity based on distance to Mario.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <models>
+        <model>jrb_sunken_ship</model>
+        <model>jrb_sunken_ship_back</model>
+    </models>
+</behavior>

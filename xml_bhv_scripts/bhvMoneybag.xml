@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x130039a0" readable_name="Moneybag">
+    <description>A coin bag that moves around and returns to its home position. If Mario gets close to its home, it starts moving again. Once it returns home, it spawns a coin and disappears.</description>
+    <tags>
+        <tag>COLLECTABLE</tag>
+        <tag>INTERACTIVE</tag>
+        <tag>ENEMY</tag>
+    </tags>
+    <models>
+        <model>moneybag</model>
+    </models>
+</behavior>

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x130011ec" readable_name="Fire Particle Spawner">
+    <description>A particle spawner that generates flame effects around Mario during his flame state. It spawns bhvBlackSmokeMario particles every other frame and maintains a relative offset from its parent object. The spawner is automatically deleted once the ACTIVE_PARTICLE_FIRE flag is removed from Mario.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>FIRE</tag>
+    </tags>
+</behavior>

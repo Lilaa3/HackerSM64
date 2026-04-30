@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001448" readable_name="Piranha Plant Waking Bubbles">
+    <comment>No behavior parameters.</comment>
+    <description>Small bubbles that spawn when a Piranha Plant's main bubble bursts. They move in random directions with gravity before disappearing.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <models>
+        <model>bubble</model>
+    </models>
+</behavior>

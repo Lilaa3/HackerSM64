@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="bhvMrIIris" readable_name="Mr. I Iris">
+    <description>Mr. I iris, the iris part of Mr. I. It follows the body's position and scale, and blinks when the body does.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>BOSS</tag>
+    </tags>
+</behavior>

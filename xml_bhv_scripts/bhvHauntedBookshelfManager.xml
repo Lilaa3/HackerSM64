@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x130050d4" readable_name="Haunted Bookshelf Manager">
+    <description>A manager object for the haunted bookshelf puzzle. It spawns three bhvBookSwitch objects at predefined relative positions and coordinates their interaction with bhvHauntedBookshelf objects.</description>
+    <tags>
+        <tag>MANAGER</tag>
+        <tag>BBH</tag>
+        <tag>PUZZLE</tag>
+    </tags>
+</behavior>

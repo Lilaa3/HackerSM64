@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004e08" readable_name="Mr. Blizzard Snowball">
+    <description>Mr. Blizzard snowball, a projectile thrown by Mr. Blizzard that disappears upon hitting the ground or water.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>SPECIALIZED</tag>
+    </tags>
+</behavior>

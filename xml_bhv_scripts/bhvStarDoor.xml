@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000000" readable_name="Star Door">
+    <description>A door that opens and closes. It's typically used for transitions between rooms in the castle.</description>
+    <tags>
+        <tag>DOOR</tag>
+    </tags>
+    <models>
+        <model>castle_inside_castle_star_door_30_stars</model>
+        <model>castle_inside_castle_star_door_50_stars</model>
+        <model>castle_inside_castle_star_door_70_stars</model>
+        <model>castle_inside_castle_star_door_8_stars</model>
+    </models>
+</behavior>

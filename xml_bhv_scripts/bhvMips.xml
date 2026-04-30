@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<behavior name="0x130044fc" readable_name="Mips">
+    <comment>The star type is stored in the second byte of the behavior parameters.</comment>
+    <description>A holdable NPC in the castle. His specific star assignment and initial forward velocity are determined by the player's total star count during initialization.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>INTERACTIVE</tag>
+        <tag>SPECIALIZED</tag>
+        <tag>CASTLE</tag>
+    </tags>
+    <fields>
+        <field name="Star Type" type="int" shift="8" mask="0xFF" default="0">
+            <enums>
+                <enum value="0" name="Star 1" c_name="MIPS_BP_STAR_1"/>
+                <enum value="1" name="Star 2" c_name="MIPS_BP_STAR_2"/>
+            </enums>
+        </field>
+    </fields>
+    <models>
+        <model>mips</model>
+    </models>
+</behavior>

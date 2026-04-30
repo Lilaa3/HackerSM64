@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300286c" readable_name="Hidden Staircase Step">
+    <description>A static surface object acting as a step for a hidden staircase. It maintains its own collision model and is assigned to room 1.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>BBH</tag>
+    </tags>
+    <models>
+        <model>bbh_staircase_step</model>
+    </models>
+</behavior>

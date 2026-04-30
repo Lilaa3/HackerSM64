@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<behavior name="0x130007a0" readable_name="Warp Pipe">
+    <description>A surface object representing a warp pipe. Its trigger radius is determined by its first behavior parameter.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>WARP</tag>
+    </tags>
+    <fields>
+        <field name="Warp Radius" type="int" shift="0" mask="0xFF" default="0" multiplier="10"/>
+    </fields>
+    <models>
+        <model>warp_pipe</model>
+    </models>
+</behavior>

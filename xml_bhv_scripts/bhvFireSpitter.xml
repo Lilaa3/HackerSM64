@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300518c" readable_name="Fire Spitter">
+    <description>A stationary entity that periodically spits fireballs at Mario. It cycles between an idle state and a spitting state, using a fixed vertical graph offset of 40 units. It leverages standard object movement and floor/wall updates to maintain its position.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>FIRE</tag>
+        <tag>NPC</tag>
+    </tags>
+    <models>
+        <model>bowling_ball</model>
+    </models>
+</behavior>

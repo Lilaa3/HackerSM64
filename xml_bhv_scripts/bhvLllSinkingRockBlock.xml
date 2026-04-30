@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001d40" readable_name="LLL Sinking Rock Block">
+    <description>A rock block in LLL that sinks when stepped on by Mario and rises back up once he leaves.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+    </tags>
+    <models>
+        <model>lll_sinking_rock_block</model>
+    </models>
+</behavior>

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Ttc Small Treadmill">
+    <geolayout>0xe0002a8</geolayout>
+    <level>TTC</level>
+    <ids>
+        <id value="0x3a" name="MODEL_TTC_SMALL_TREADMILL"/>
+    </ids>
+</model>

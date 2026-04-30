@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x130053c4" readable_name="Penguin Race Finish Line">
+    <comment>No behavior parameters.</comment>
+    <description>A finish line for the penguin race. It detects if Mario crosses the line before the racing penguins reach the bottom, marking him as the winner.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>INTERACTIVE</tag>
+    </tags>
+</behavior>

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Wf Rotating Platform">
+    <geolayout>0xe0009b8</geolayout>
+    <level>WF</level>
+    <ids>
+        <id value="0x10" name="MODEL_WF_ROTATING_PLATFORM"/>
+    </ids>
+</model>

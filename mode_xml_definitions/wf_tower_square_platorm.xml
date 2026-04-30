@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Wf Tower Square Platorm">
+    <geolayout>0xe000b10</geolayout>
+    <level>WF</level>
+    <ids>
+        <id value="0x2d" name="MODEL_WF_TOWER_SQUARE_PLATORM"/>
+    </ids>
+</model>

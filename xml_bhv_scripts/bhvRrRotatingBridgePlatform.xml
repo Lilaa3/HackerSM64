@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<behavior name="0x130010d8" readable_name="RR Rotating Bridge Platform">
+    <description>A rotating platform that also acts as a flamethrower. It rotates around its axis and spawns flame objects when Mario is nearby. The behavior parameter determines the flame's color and speed.</description>
+    <tags>
+        <tag>RR</tag>
+        <tag>PLATFORM</tag>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>FIRE</tag>
+    </tags>
+    <fields>
+        <field name="Flame Type" type="int" byte="2" default="0">
+            <enums>
+                <enum value="0" name="Default"/>
+                <enum value="1" name="Blue" c_name="FLAMETHROWER_BP_BLUE"/>
+                <enum value="2" name="Slow" c_name="FLAMETHROWER_BP_SLOW"/>
+            </enums>
+        </field>
+    </fields>
+    <models>
+        <model>rr_rotating_bridge_platform</model>
+    </models>
+</behavior>

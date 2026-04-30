@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300090c" readable_name="One Coin">
+    <comment>Sets oBehParams2ndByte to YELLOW_COIN_BP_ONE_COIN and follows bhvYellowCoin logic.</comment>
+    <description>A standard yellow coin that provides one coin when collected.</description>
+    <tags>
+        <tag>COLLECTABLE</tag>
+    </tags>
+    <models>
+        <model>yellow_coin</model>
+    </models>
+</behavior>

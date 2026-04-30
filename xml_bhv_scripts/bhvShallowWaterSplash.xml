@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002d7c" readable_name="Shallow Water Splash">
+    <description>A particle effect that spawns a series of water droplets to simulate a shallow water splash. There is a very small chance to spawn a fish particle easter egg.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>WATER</tag>
+    </tags>
+</behavior>

@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<behavior name="0x130006e0" readable_name="WF Rotating Wooden Platform">
+    <description>A platform that rotates periodically. It remains stationary for 60 frames, then rotates at a velocity of 0x100 for 126 frames before stopping again.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+        <tag>PLATFORM</tag>
+        <tag>WF</tag>
+    </tags>
+    <models>
+        <model>wf_rotating_wooden_platform</model>
+    </models>
+</behavior>

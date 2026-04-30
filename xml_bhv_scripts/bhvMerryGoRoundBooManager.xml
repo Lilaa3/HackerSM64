@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002684" readable_name="Merry-Go-Round Boo Manager">
+    <description>Manages the Boo encounter on the Merry-Go-Round in Big Boo's Haunt. Spawns multiple Merry-Go-Round Boos and, once a quota is reached, spawns the Big Boo boss.</description>
+    <tags>
+        <tag>MANAGER</tag>
+        <tag>ENEMY</tag>
+        <tag>BBH</tag>
+    </tags>
+</behavior>

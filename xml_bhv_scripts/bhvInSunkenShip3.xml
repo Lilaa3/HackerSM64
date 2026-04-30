@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x130023ec" readable_name="Sunken Ship Part 3">
+    <description>A rocking piece of the sunken ship. Uses a sine-wave to oscillate pitch and roll, and plays a boat rocking sound based on Mario's height.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+    </tags>
+</behavior>

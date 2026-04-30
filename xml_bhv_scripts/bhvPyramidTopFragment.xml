@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003bec" readable_name="Pyramid Top Fragment">
+    <description>Debris fragments spawned from the explosion of the pyramid top. They follow basic physical laws, rotating as they fall, and disappear after 60 frames.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <models>
+        <model>dirt</model>
+    </models>
+</behavior>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002ef8" readable_name="Toad Message">
+    <comment>The dialog and star spawn are determined by the first behavior parameter.</comment>
+    <description>A Toad that speaks to Mario and may spawn a star if certain star requirements are met.</description>
+    <tags>
+        <tag>NPC</tag>
+        <tag>DIALOGUE</tag>
+    </tags>
+    <fields>
+        <field name="Dialog ID" type="dialogue_id" shift="0" mask="0xFFFFFFFF" default="0"/>
+    </fields>
+    <models>
+        <model>toad</model>
+    </models>
+</behavior>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001d78" readable_name="LLL Moving Octagonal Mesh Platform">
+    <description>A moving platform in the LLL Bowser fight. Its movement path is determined by an action list selected via its behavior parameters, and it features a subtle waving vertical motion.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <fields>
+        <field name="Action List Index" type="int" byte="2" default="0"/>
+    </fields>
+    <models>
+        <model>lll_moving_octagonal_mesh_platform</model>
+    </models>
+</behavior>

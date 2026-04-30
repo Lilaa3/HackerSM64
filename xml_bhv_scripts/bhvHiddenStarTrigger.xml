@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003f1c" readable_name="Hidden Star Trigger">
+    <description>An invisible trigger that increments the oHiddenStarTriggerCounter of the nearest bhvHiddenStar object when collided with by Mario. It spawns an orange number indicator for counts 1-4 and plays a secret collection sound, then deactivates itself.</description>
+    <tags>
+        <tag>INTERACTIVE</tag>
+        <tag>COLLECTABLE</tag>
+        <tag>STAR</tag>
+    </tags>
+</behavior>

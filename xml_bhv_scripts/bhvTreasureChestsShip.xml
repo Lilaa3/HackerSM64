@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300444c" readable_name="Treasure Chest Manager (Ship)">
+    <description>Manager object for the treasure chest puzzle on the ship. Spawns the chests and handles the puzzle completion reward, which includes playing a jingle and draining the environmental water level.</description>
+    <tags>
+        <tag>MANAGER</tag>
+        <tag>CHEST</tag>
+        <tag>SHIP</tag>
+    </tags>
+</behavior>

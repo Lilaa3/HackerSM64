@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000a78" readable_name="Pound Tiny Star Particle">
+    <description>A small star particle that spawns during a ground pound. It moves upward with a fixed velocity and shrinks over time.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+    </tags>
+    <models>
+        <model>unused_cartoon_start</model>
+    </models>
+</behavior>

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001518" readable_name="Pushable Metal Box">
+    <description>A metal box that Mario can push. It uses a dedicated hitbox and checks if Mario is in the pushing state before applying forward velocity.</description>
+    <tags>
+        <tag>INTERACTIVE</tag>
+        <tag>SURFACE</tag>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <models>
+        <model>metal_box</model>
+    </models>
+</behavior>

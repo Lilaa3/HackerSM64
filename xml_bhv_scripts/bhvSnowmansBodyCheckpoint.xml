@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003d34" readable_name="Snowman's Body Checkpoint">
+    <description>A checkpoint object that marks when Mario is near the snowman's body, triggering state changes in the parent snowman object.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SL</tag>
+    </tags>
+</behavior>

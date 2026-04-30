@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000174" readable_name="THI Huge Island Top">
+    <comment>No configurable parameters.</comment>
+    <description>A surface object that handles the top trap on Huge Island. It hides itself and modifies an environment region when the water is drained.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>THI</tag>
+    </tags>
+    <models>
+        <model>thi_huge_island_top</model>
+    </models>
+</behavior>

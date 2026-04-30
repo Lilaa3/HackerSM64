@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Rr Tricky Triangles">
+    <geolayout>0xe000958</geolayout>
+    <level>RR</level>
+    <ids>
+        <id value="0x41" name="MODEL_RR_TRICKY_TRIANGLES"/>
+    </ids>
+</model>

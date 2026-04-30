@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000a54" readable_name="Vertical Star Particle Spawner">
+    <description>A short-lived spawner object that generates 7 tiny star particles with predetermined velocities and directions before deactivating.</description>
+    <tags>
+        <tag>SPAWNER</tag>
+        <tag>PARTICLE</tag>
+    </tags>
+</behavior>

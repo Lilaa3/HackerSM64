@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<behavior name="0x130006d8" readable_name="Rotating Counter-Clockwise">
+    <description>An object that rotates in a counter-clockwise direction.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+</behavior>

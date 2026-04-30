@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000cfc" readable_name="RR Elevator Platform">
+    <description>An elevator platform that moves between a minimum and maximum Y height. The behavior parameter selects the height configuration from a predefined table, which also determines if the platform has a fixed maximum height (home Y) or uses a custom height from the table.</description>
+    <tags>
+        <tag>RR</tag>
+        <tag>PLATFORM</tag>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <fields>
+        <field name="Elevator Index" type="int" byte="2" default="0"/>
+    </fields>
+    <models>
+        <model>rr_elevator_platform</model>
+    </models>
+</behavior>

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<behavior name="0x130036c8" readable_name="Small Chill Bully">
+    <description>A 'schill's version of the small Bully enemy. It shares the same behavior as a regular small Bully but has a different subtype that affects its death logic (spawning a star).</description>
+    <tags>
+        <tag>ENEMY</tag>
+    </tags>
+</behavior>

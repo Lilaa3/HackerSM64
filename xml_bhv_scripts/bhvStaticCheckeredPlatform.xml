@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<behavior name="0x130029e4" readable_name="Static Checkered Platform">
+    <description>A stationary checkered platform.</description>
+    <tags>
+        <tag>PLATFORM</tag>
+    </tags>
+</behavior>

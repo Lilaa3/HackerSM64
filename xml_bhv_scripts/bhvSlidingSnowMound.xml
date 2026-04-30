@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004244" readable_name="Sliding Snow Mound">
+    <description>A mound of snow that slides to the left and then sinks into the ground.</description>
+    <tags>
+        <tag>SL</tag>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+    </tags>
+    <models>
+        <model>sl_snow_triangle</model>
+    </models>
+</behavior>

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001d14" readable_name="LLL Rotating Hexagonal Platform">
+    <description>A hexagonal platform in the LLL Bowser fight that continuously rotates around its center.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+    </tags>
+    <models>
+        <model>lll_rotating_hexagonal_platform</model>
+    </models>
+</behavior>

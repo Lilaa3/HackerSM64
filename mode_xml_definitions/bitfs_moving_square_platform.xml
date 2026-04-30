@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Bitfs Moving Square Platform">
+    <geolayout>0xe000728</geolayout>
+    <level>BITFS</level>
+    <ids>
+        <id value="0x3e" name="MODEL_BITFS_MOVING_SQUARE_PLATFORM"/>
+    </ids>
+</model>

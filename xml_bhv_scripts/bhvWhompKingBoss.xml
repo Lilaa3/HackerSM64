@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002bb8" readable_name="Whomp King Boss">
+    <description>A boss version of the Whomp. It is larger, has more health, and uses unique AI and death sequences compared to small Whomps.</description>
+    <tags>
+        <tag>BOSS</tag>
+        <tag>ENEMY</tag>
+    </tags>
+    <models>
+        <model>whomp</model>
+    </models>
+</behavior>

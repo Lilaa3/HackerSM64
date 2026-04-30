@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000ed0" readable_name="Unused Particle Spawner">
+    <description>An unused spawner object that falls under gravity. If it collides with Mario, it spawns 10 purple particles (bhvPurpleParticle) and despawns. It also despawns upon hitting the ground.</description>
+    <tags>
+        <tag>UNUSED</tag>
+        <tag>SPAWNER</tag>
+    </tags>
+</behavior>

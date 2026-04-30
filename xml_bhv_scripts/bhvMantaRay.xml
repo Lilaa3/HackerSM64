@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004370" readable_name="Manta Ray">
+    <description>A manta ray that swims through the water, spawning water rings. Collecting 5 of these rings triggers the spawn of a star.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>WATER</tag>
+        <tag>SPAWNER</tag>
+    </tags>
+    <models>
+        <model>manta_ray</model>
+    </models>
+</behavior>

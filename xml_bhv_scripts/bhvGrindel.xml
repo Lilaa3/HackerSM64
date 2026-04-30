@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000b58" readable_name="Grindel">
+    <description>A Thwomp-like enemy that executes a cycle of rising, floating, and falling. Its behavior is managed via sGrindelThwompActions, with a configurable 'sRise Delay's parameter.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+    </tags>
+    <fields>
+        <field name="Rise Delay" type="frames" byte="2" default="0"/>
+    </fields>
+    <models>
+        <model>ssl_grindel</model>
+    </models>
+</behavior>

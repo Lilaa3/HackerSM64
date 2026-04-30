@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x130027f4" readable_name="Boo (Merry-Go-Round)">
+    <comment>Acts as a wrapper for bhvGhostHuntBoo with Merry-Go-Round specific parameters.</comment>
+    <description>Specialized variant of the Boo behavior for the Merry-Go-Round encounter. Configures a specific behavior parameter and redirects execution to the general Boo hunting logic.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>SPECIALIZED</tag>
+    </tags>
+    <models>
+        <model>boo</model>
+    </models>
+</behavior>

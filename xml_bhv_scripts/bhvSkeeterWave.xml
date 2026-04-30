@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x130054a0" readable_name="Skeeter Wave">
+    <description>A water wave particle spawned by a Skeeter. It shrinks over time and then disappears.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>WATER</tag>
+    </tags>
+    <models>
+        <model>idle_water_wave</model>
+    </models>
+</behavior>

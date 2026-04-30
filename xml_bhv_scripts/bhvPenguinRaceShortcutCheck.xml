@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x130053dc" readable_name="Penguin Race Shortcut Check">
+    <comment>No behavior parameters.</comment>
+    <description>An invisible trigger that detects if Mario has taken a shortcut during the penguin race, marking him as having cheated.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>INTERACTIVE</tag>
+    </tags>
+</behavior>

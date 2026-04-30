@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004b6c" readable_name="Ferris Wheel Platform">
+    <description>A platform that orbits a bhvFerrisWheelAxle. Its world position is dynamically calculated based on the axle's current rotation and a relative angle offset determined by the 'sPlatform Index's behavior parameter, where each index represents a 90-degree (0x4000) offset.</description>
+    <tags>
+        <tag>PLATFORM</tag>
+        <tag>SURFACE</tag>
+    </tags>
+    <fields>
+        <field name="Platform Index" type="int" shift="8" mask="0xFF" default="0">
+            <description>Index of the platform (0-3), used to set the relative angle (multiplied by 90 degrees).</description>
+        </field>
+    </fields>
+</behavior>

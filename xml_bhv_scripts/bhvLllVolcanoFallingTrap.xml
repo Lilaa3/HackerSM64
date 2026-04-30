@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003f78" readable_name="LLL Volcano Falling Trap">
+    <description>A trap in the LLL volcano that tilts downwards when Mario is nearby, triggering a screen shake and sound, before eventually resetting its position.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+    </tags>
+    <models>
+        <model>lll_volcano_falling_trap</model>
+    </models>
+</behavior>

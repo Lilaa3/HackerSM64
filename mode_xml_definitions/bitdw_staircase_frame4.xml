@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Bitdw Staircase Frame4">
+    <geolayout>0xe0005a0</geolayout>
+    <level>BITDW</level>
+    <ids>
+        <id value="0x3b" name="MODEL_BITDW_STAIRCASE_FRAME4"/>
+    </ids>
+</model>

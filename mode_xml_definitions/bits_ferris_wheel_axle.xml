@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Bits Ferris Wheel Axle">
+    <geolayout>0xe000640</geolayout>
+    <level>BITS</level>
+    <ids>
+        <id value="0x3d" name="MODEL_BITS_FERRIS_WHEEL_AXLE"/>
+    </ids>
+</model>

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000c04" readable_name="Tumbling Bridge Platform">
+    <description>A surface platform that tumbles when stepped on by Mario. It accelerates its rotation and falls under gravity until it reaches the floor height, at which point it stops tumbling. It despawns when the parent bridge manager object transitions to action 3.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+    </tags>
+</behavior>

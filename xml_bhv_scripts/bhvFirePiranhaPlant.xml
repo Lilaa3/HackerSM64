@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<behavior name="0x13005120" readable_name="Fire Piranha Plant">
+    <description>A Piranha Plant that shoots fireballs. Its scale and respawn behavior are determined by the variant parameter, while the loot coin count is toggled by another.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>FIRE</tag>
+        <tag>TTC</tag>
+    </tags>
+    <fields>
+        <field name="Variant" type="int" byte="2" default="0">
+            <enums>
+                <enum value="0" name="Normal" c_name="FIRE_PIRANHA_PLANT_BP_NORMAL"/>
+            </enums>
+        </field>
+        <field name="Disable Coins" type="bool" shift="24" mask="0x1" default="0"/>
+    </fields>
+    <models>
+        <model>piranha_plant</model>
+    </models>
+</behavior>

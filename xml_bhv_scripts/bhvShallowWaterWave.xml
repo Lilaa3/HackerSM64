@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002d50" readable_name="Shallow Water Wave">
+    <description>A particle effect that spawns a small number of water droplets to simulate a shallow water wave.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>WATER</tag>
+    </tags>
+</behavior>

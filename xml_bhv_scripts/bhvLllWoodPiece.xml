@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001e04" readable_name="LLL Wood Piece">
+    <description>A piece of floating wood in LLL that oscillates vertically. It is destroyed when the bridge manager that spawned it resets.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+    </tags>
+</behavior>

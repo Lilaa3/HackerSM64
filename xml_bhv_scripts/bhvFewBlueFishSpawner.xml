@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300214c" readable_name="Few Blue Fish Spawner">
+    <description>A specialized fish spawner that inherits functionality from bhvFishSpawner. It specifically sets the second behavior parameter to FISH_SPAWNER_BP_FEW_BLUE to configure the spawning of a small number of blue fish.</description>
+    <tags>
+        <tag>SPAWNER</tag>
+        <tag>FISH</tag>
+        <tag>WATER</tag>
+    </tags>
+</behavior>

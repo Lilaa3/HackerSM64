@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Bitdw Sliding Platform">
+    <geolayout>0xe000528</geolayout>
+    <level>BITDW</level>
+    <ids>
+        <id value="0x38" name="MODEL_BITDW_SLIDING_PLATFORM"/>
+    </ids>
+</model>

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002f6c" readable_name="Spin Airborne Circle Warp">
+    <description>Unused behavior.</description>
+    <tags>
+        <tag>UNUSED</tag>
+    </tags>
+</behavior>

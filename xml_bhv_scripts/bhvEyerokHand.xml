@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<behavior name="0x130052d0" readable_name="Eyerok Hand">
+    <description>One of Eyerok's hands that executes complex attack patterns including smashes, sweeps, and double pounds. Its visual scale is controlled by a behavior parameter. It manages its own collision and attack state, coordinating with the Eyerok Boss entity.</description>
+    <tags>
+        <tag>BOSS</tag>
+        <tag>NPC</tag>
+        <tag>ENEMY</tag>
+        <tag>SURFACE</tag>
+    </tags>
+    <fields>
+        <field name="Side" type="int" byte="2" default="1">
+            <enums>
+                <enum value="-1" name="Left" c_name="None"/>
+                <enum value="1" name="Right" c_name="None"/>
+            </enums>
+        </field>
+        <field name="Scale" type="int" shift="8" mask="0xFF" default="1">
+            <description>Multiplier for the hand's overall scale.</description>
+        </field>
+    </fields>
+</behavior>

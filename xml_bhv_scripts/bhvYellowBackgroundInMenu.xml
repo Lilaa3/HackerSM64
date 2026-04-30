@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002fc0" readable_name="Yellow Background In Menu">
+    <description>A background element used in the file select menu, scaled significantly to provide a yellow backdrop.</description>
+    <tags>
+        <tag>UI</tag>
+        <tag>MENU</tag>
+    </tags>
+</behavior>

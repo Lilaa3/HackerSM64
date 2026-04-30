@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004af4" readable_name="Track Ball">
+    <description>A surface object that accompanies a platform on a track. It uses its second behavior parameter as an index to determine when to despawn relative to the parent platform's base index.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>HELPER</tag>
+        <tag>MOVING</tag>
+    </tags>
+    <fields>
+        <field name="Ball Index" type="int" shift="8" mask="0xFF" default="0"/>
+    </fields>
+</behavior>

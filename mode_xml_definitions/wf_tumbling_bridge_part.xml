@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Wf Tumbling Bridge Part">
+    <geolayout>0xe000ab0</geolayout>
+    <level>WF</level>
+    <ids>
+        <id value="0xb0" name="MODEL_WF_TUMBLING_BRIDGE_PART"/>
+    </ids>
+</model>

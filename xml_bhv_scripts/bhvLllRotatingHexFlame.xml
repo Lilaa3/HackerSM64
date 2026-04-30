@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001dcc" readable_name="LLL Rotating Hex Flame">
+    <description>A flame particle that orbits the rotating block in the LLL Bowser fight. It is positioned relative to its parent and disappears when the parent removes its flames.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>FIRE</tag>
+    </tags>
+    <models>
+        <model>red_flame</model>
+    </models>
+</behavior>

@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001108" readable_name="Flamethrower">
+    <description>An object that spits fireballs when Mario is within 2000 units. It cycles between idle, blow fire, and cooldown states. The second behavior parameter determines the flame model (Red or Blue) and velocity (Normal: 95.0, Slow: 50.0).</description>
+    <tags>
+        <tag>FIRE</tag>
+        <tag>SPAWNER</tag>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <fields>
+        <field name="Flamethrower Type" type="int" byte="2" default="0">
+            <description>The type of flames produced (color and speed).</description>
+            <enums>
+                <enum value="0" name="Normal" c_name="None"/>
+                <enum value="1" name="Blue" c_name="FLAMETHROWER_BP_BLUE"/>
+                <enum value="2" name="Slow" c_name="FLAMETHROWER_BP_SLOW"/>
+            </enums>
+        </field>
+    </fields>
+</behavior>

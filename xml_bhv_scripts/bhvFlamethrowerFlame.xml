@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001124" readable_name="Flamethrower Flame">
+    <description>A flame projectile spawned by a flamethrower. Its scale increases over time based on forward velocity. Depending on the 'sFlame Type's parameter, it can have a tall hitbox with vertical floor snapping, move upwards instead of using gravity, or use a different scaling formula.</description>
+    <tags>
+        <tag>FIRE</tag>
+        <tag>HURT</tag>
+        <tag>PROJECTILE</tag>
+    </tags>
+    <fields>
+        <field name="Flame Type" type="int" byte="2" default="0">
+            <description>Determines scaling, hitbox height, and movement direction.</description>
+            <enums>
+                <enum value="2" name="Slow" c_name="FLAMETHROWER_BP_SLOW"/>
+                <enum value="3" name="Tall Hitbox" c_name="FLAMETHROWER_BP_TALL_HITBOX"/>
+                <enum value="4" name="Upwards" c_name="FLAMETHROWER_BP_UPWARDS"/>
+            </enums>
+        </field>
+    </fields>
+</behavior>

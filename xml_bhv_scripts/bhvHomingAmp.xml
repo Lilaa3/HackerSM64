@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003354" readable_name="Homing Amp">
+    <description>A floating enemy that starts invisible and scaled down, appearing and growing when Mario is within 800 units. It cycles through inactive, appear, chase, give up, and attack cooldown states, and continuously oscillates its Y-position.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>MOVING</tag>
+        <tag>HURT</tag>
+    </tags>
+    <models>
+        <model>amp</model>
+    </models>
+</behavior>

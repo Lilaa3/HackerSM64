@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Lll Wood Bridge">
+    <geolayout>0xe000b50</geolayout>
+    <level>LLL</level>
+    <ids>
+        <id value="0x35" name="MODEL_LLL_WOOD_BRIDGE"/>
+    </ids>
+</model>

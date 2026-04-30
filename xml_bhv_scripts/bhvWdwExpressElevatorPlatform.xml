@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x130021c0" readable_name="WDW Express Elevator Platform">
+    <description>A static surface platform associated with the WDW Express Elevator system.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>PLATFORM</tag>
+    </tags>
+    <models>
+        <model>wdw_express_elevator</model>
+    </models>
+</behavior>

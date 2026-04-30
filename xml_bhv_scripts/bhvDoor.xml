@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000b0c" readable_name="Door">
+    <tags>
+        <tag>DOOR</tag>
+        <tag>INTERACTIVE</tag>
+        <tag>SURFACE</tag>
+    </tags>
+    <default_models>
+        <model>MODEL_CASTLE_CASTLE_DOOR_UNUSED</model>
+        <model>MODEL_CASTLE_WOODEN_DOOR_UNUSED</model>
+        <model>MODEL_UNKNOWN_DOOR_1E</model>
+        <model>MODEL_HMC_METAL_DOOR</model>
+        <model>MODEL_HMC_HAZY_MAZE_DOOR</model>
+        <model>MODEL_UNKNOWN_DOOR_21</model>
+        <model>MODEL_CASTLE_DOOR_0_STARS</model>
+        <model>MODEL_CASTLE_DOOR_1_STAR</model>
+        <model>MODEL_CASTLE_DOOR_3_STARS</model>
+        <model>MODEL_CASTLE_KEY_DOOR</model>
+    </default_models>
+    <fields>
+        <field name="Star Requirement" type="int" byte="3" default="0"/>
+    </fields>
+    <models>
+        <model>castle_door</model>
+        <model>castle_door_0_star</model>
+        <model>castle_door_1_star</model>
+        <model>castle_door_3_star</model>
+        <model>hazy_maze_door</model>
+        <model>key_door</model>
+        <model>metal_door</model>
+        <model>unknown_door_1e</model>
+        <model>unknown_door_21</model>
+        <model>wooden_door</model>
+    </models>
+</behavior>

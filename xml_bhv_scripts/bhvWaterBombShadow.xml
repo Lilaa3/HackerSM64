@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004bd4" readable_name="Water Bomb Shadow">
+    <description>A shadow particle that follows a water bomb. It mirrors the bomb's position and scale on the floor, despawning once the parent bomb explodes.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>WATER</tag>
+    </tags>
+    <models>
+        <model>water_bomb_s_shadow</model>
+    </models>
+</behavior>

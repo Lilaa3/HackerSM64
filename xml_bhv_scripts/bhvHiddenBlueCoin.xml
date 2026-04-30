@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002588" readable_name="Hidden Blue Coin">
+    <description>A blue coin that remains invisible and intangible until the nearest bhvBlueCoinSwitch enters the BLUE_COIN_SWITCH_ACT_TICKING state. Once active, it becomes visible and tangible for 240 frames (200 wait + 40 blink) before despawning.</description>
+    <tags>
+        <tag>COLLECTABLE</tag>
+        <tag>COINS</tag>
+        <tag>INTERACTIVE</tag>
+    </tags>
+    <models>
+        <model>blue_coin</model>
+    </models>
+</behavior>

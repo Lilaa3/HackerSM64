@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300506c" readable_name="Flying Bookend">
+    <description>A flying hazard that transitions to a target state (action 1) when Mario is within 400 units and facing it. It changes its model to MODEL_BOOKEND_PART and rotates its pitch and roll upon activation.</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>MOVING</tag>
+        <tag>ENVIRONMENTAL</tag>
+    </tags>
+    <models>
+        <model>bookend</model>
+    </models>
+</behavior>

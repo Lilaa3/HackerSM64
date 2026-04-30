@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004538" readable_name="Yoshi">
+    <description>A friendly NPC character (Yoshi) who can walk around a designated area, talk to Mario, and give presents.</description>
+    <tags>
+        <tag>NPC</tag>
+        <tag>FRIENDLY</tag>
+    </tags>
+    <models>
+        <model>yoshi</model>
+    </models>
+</behavior>

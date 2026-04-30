@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004c24" readable_name="TTC Pendulum">
+    <description>A pendulum object in TTC that oscillates. Its movement is controlled by the TTC speed setting.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>TTC</tag>
+    </tags>
+    <models>
+        <model>ttc_pendulum</model>
+    </models>
+</behavior>

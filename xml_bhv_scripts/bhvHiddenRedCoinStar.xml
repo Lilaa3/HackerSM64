@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003e8c" readable_name="Hidden Red Coin Star">
+    <description>A star that spawns once a required number of red coins are collected. The requirement is either hardcoded based on existing red coins in the level or specified via the 'sRequired Red Coins's parameter (BPARAM2). Upon triggering, it spawns a cutscene star and deactivates.</description>
+    <tags>
+        <tag>COLLECTABLE</tag>
+        <tag>LEVEL</tag>
+        <tag>STAR</tag>
+    </tags>
+    <fields>
+        <field name="Required Red Coins" type="int" byte="2" default="0"/>
+    </fields>
+</behavior>

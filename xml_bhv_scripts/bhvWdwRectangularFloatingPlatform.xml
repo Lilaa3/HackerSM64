@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x130042b4" readable_name="WDW Rectangular Floating Platform">
+    <description>A surface platform that floats on water. Its vertical position is dynamically adjusted to maintain a constant offset above the highest available surface (either the floor or the water level).</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>PLATFORM</tag>
+        <tag>WATER</tag>
+    </tags>
+    <models>
+        <model>wdw_rectangular_floating_platform</model>
+    </models>
+</behavior>

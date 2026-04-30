@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<behavior name="0x130006a4" readable_name="Tower Door">
+    <comment>No configurable behavior parameters.</comment>
+    <description>A destructible door in the tower. When attacked by Mario, it explodes and spawns a number of coins.</description>
+    <tags>
+        <tag>SURFACE</tag>
+        <tag>INTERACTIVE</tag>
+        <tag>WF</tag>
+    </tags>
+    <models>
+        <model>wf_tower_door</model>
+    </models>
+</behavior>

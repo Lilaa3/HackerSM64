@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x130015a4" readable_name="Heave Ho Throw Mario">
+    <description>A helper object that manages Mario's position and velocity when he is being thrown by a bhvHeaveHo. It applies a specific launch velocity (forwardVel: -45.0, velY: 95.0) and triggers the MARIO_THROWN_BY_OBJ status.</description>
+    <tags>
+        <tag>MANAGER</tag>
+        <tag>HURT</tag>
+    </tags>
+</behavior>

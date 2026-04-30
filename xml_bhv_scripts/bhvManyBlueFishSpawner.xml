@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300213c" readable_name="Many Blue Fish Spawner">
+    <description>A spawner that produces a large number of blue fish. It leverages the common fish spawner behavior with a specific blue fish configuration.</description>
+    <tags>
+        <tag>SPAWNER</tag>
+        <tag>FISH</tag>
+    </tags>
+</behavior>

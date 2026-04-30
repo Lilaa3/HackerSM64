@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Bitdw Ferris Wheel Axle">
+    <geolayout>0xe000570</geolayout>
+    <level>BITDW</level>
+    <ids>
+        <id value="0x39" name="MODEL_BITDW_FERRIS_WHEEL_AXLE"/>
+    </ids>
+</model>

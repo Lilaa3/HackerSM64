@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x130024ac" readable_name="Mist Particle Spawner">
+    <comment>This behavior is a transient spawner and does not use behavior parameters.</comment>
+    <description>Spawns a mist and a smoke particle, clears the parent's dust particle flag, and then deactivates.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>MANAGER</tag>
+    </tags>
+</behavior>

@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004ba8" readable_name="Water Bomb">
+    <description>An explosive projectile used in water levels. It can either be shot from a cannon (where it's intangible and despawns after 100 frames) or dropped from above (where it bounces on the ground, squishing on each impact, until it explodes).</description>
+    <tags>
+        <tag>ENEMY</tag>
+        <tag>PROJECTILE</tag>
+        <tag>WATER</tag>
+    </tags>
+    <models>
+        <model>water_bomb</model>
+    </models>
+</behavior>

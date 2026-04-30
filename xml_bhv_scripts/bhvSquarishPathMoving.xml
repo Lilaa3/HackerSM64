@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001408" readable_name="Squarish Path Moving Platform">
+    <description>A platform that moves in a square path. The starting direction is determined by its parameters.</description>
+    <tags>
+        <tag>PLATFORM</tag>
+    </tags>
+    <fields>
+        <field name="Starting Direction" type="int" shift="8" mask="0x03" default="0">
+            <enums>
+                <enum value="0" name="Direction 1 (0)" c_name="Action 1"/>
+                <enum value="1" name="Direction 2 (0x4000)" c_name="Action 2"/>
+                <enum value="2" name="Direction 3 (0x8000)" c_name="Action 3"/>
+                <enum value="3" name="Direction 4 (0xC000)" c_name="Action 4"/>
+            </enums>
+        </field>
+    </fields>
+    <models>
+        <model>bitdw_square_platform</model>
+    </models>
+</behavior>

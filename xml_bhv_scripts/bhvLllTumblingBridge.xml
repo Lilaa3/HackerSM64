@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<behavior name="0x13000c64" readable_name="LLL Tumbling Bridge">
+    <description>A bridge that tumbles over when Mario steps on it. It manages the tumbling sequence via a set of action functions.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+        <tag>MOVING</tag>
+        <tag>SPAWNER</tag>
+    </tags>
+</behavior>

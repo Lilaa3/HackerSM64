@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<behavior name="0x13004898" readable_name="Wiggler Head">
+    <description>The head of a Wiggler. It manages the overall movement and animation of the Wiggler, as well as spawning and updating its body segments.</description>
+    <tags>
+        <tag>ENEMY</tag>
+    </tags>
+    <models>
+        <model>wiggler_head</model>
+    </models>
+</behavior>

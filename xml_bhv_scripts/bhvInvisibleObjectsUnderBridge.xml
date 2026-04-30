@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<behavior name="0x13001bf4" readable_name="Invisible Objects Under Bridge">
+    <comment>Native function definition for bhv_invisible_objects_under_bridge_init was not found.</comment>
+    <description>Manages objects that are invisible or inactive until Mario is under the bridge.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SPECIALIZED</tag>
+    </tags>
+</behavior>

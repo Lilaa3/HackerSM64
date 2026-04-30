@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x13003750" readable_name="Jet Stream Water Ring">
+    <description>A collectable water ring that contributes to the Jet Stream Ring Spawner's count. It features a wobble animation and dynamically scales and fades.</description>
+    <tags>
+        <tag>COLLECTABLE</tag>
+        <tag>WATER</tag>
+    </tags>
+    <models>
+        <model>water_ring</model>
+    </models>
+</behavior>

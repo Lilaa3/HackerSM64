@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<behavior name="0x13002480" readable_name="Sunken Ship Part 2">
+    <description>A static environmental piece of the sunken ship. Loads specific collision data and sets a fixed rotation.</description>
+    <tags>
+        <tag>ENVIRONMENTAL</tag>
+        <tag>SURFACE</tag>
+    </tags>
+</behavior>

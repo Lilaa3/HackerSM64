@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<behavior name="0x1300046c" readable_name="Small Particle Bubbles">
+    <description>A small water bubble particle that rises upwards with a slight random drift and oscillates in scale. It deactivates after 70 frames.</description>
+    <tags>
+        <tag>PARTICLE</tag>
+        <tag>WATER</tag>
+    </tags>
+    <models>
+        <model>white_particle_small</model>
+    </models>
+</behavior>

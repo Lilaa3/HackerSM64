@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<model readable_name="Bitfs Sliding Platform">
+    <geolayout>0xe000740</geolayout>
+    <level>BITFS</level>
+    <ids>
+        <id value="0x3f" name="MODEL_BITFS_SLIDING_PLATFORM"/>
+    </ids>
+</model>
