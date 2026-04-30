@@ -1,7 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x13003e1c" readable_name="Vanish Cap">
-    <description>A collectible cap object that can vanish. In its move state, it rotates and performs a vertical scaling animation when it hits the ground.</description>
+    <description>Shares the model with the main mario cap, switches to transparency using anim state.</description>
     <tags>
         <tag>COLLECTABLE</tag>
+        <tag>CAP</tag>
     </tags>
+    <models>
+        <model>mario_s_cap</model>
+    </models>
 </behavior>
