@@ -1,9 +1,8 @@
 <?xml version="1.0" ?>
-<behavior name="0x13002f40" readable_name="Unlock Door Star">
-    <description>A decorative star that appears upon unlocking a door. It rises, spins with increasing velocity, spawns sparkle particles, and eventually despawns.</description>
+<behavior name="0x13002f40" readable_name="Star (Unlock Door)">
     <tags>
-        <tag>COLLECTABLE</tag>
-        <tag>LEVEL</tag>
+        <tag>CUTSCENE</tag>
+        <tag>CASTLE</tag>
     </tags>
     <models>
         <model>star</model>

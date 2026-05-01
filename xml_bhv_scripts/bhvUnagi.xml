@@ -1,15 +1,17 @@
 <?xml version="1.0" ?>
 <behavior name="0x13004f40" readable_name="Unagi">
-    <description>A giant eel enemy that follows predefined paths. Depending on its type, it either swims around the ship or resides in a cave, occasionally emerging to attack Mario. It spawns several sub-objects when Mario is in close proximity.</description>
+    <description>Follows predefined paths.</description>
+    <comment>Behavior param 2 gets dupped to param 1 for no reason?</comment>
     <tags>
         <tag>ENEMY</tag>
         <tag>JRB</tag>
     </tags>
     <fields>
-        <field name="Unagi Type" type="int" shift="0" mask="0xFF" default="0">
+        <field name="Type" type="int" bytes="2" default="0">
             <enums>
                 <enum value="0" name="Ship" c_name="UNAGI_BP_IN_SHIP"/>
                 <enum value="1" name="Cave" c_name="UNAGI_BP_IN_CAVE"/>
+                <enum value="2" name="Start Swimming" c_name="UNAGI_BP_START_SWIMMING"/>
             </enums>
         </field>
     </fields>
