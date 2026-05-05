@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<behavior name="0x130023d0" readable_name="Ship Part 3">
-    <description>A part of the JRB ship that oscillates in pitch and roll, simulating the boat rocking on water.</description>
+<behavior name="0x130023d0" readable_name="JRB Afloat Ship">
+    <description>A part of the JRB Afloating ship act 2 and onwards.</description>
     <tags>
         <tag>JRB</tag>
         <tag>ENVIRONMENTAL</tag>

@@ -1,6 +1,7 @@
 <?xml version="1.0" ?>
-<behavior name="0x13004244" readable_name="Sliding Snow Mound">
-    <description>A mound of snow that slides to the left and then sinks into the ground.</description>
+<behavior name="0x13004244" readable_name="SL Sliding Snow Mound">
+    <description>A mound of snow that slides to the left regardless of its own orientation.</description>
+    <comment>TODO in hacker it should probably respect it's own rotation</comment>
     <tags>
         <tag>SL</tag>
         <tag>ENVIRONMENTAL</tag>

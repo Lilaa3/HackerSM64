@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
-<behavior name="0x1300244c" readable_name="Sunken Ship Part 2">
-    <description>Another part of a sunken ship with fixed rotation and scale.</description>
+<behavior name="0x1300244c" readable_name="JRB Sunken Ship">
     <tags>
         <tag>ENVIRONMENTAL</tag>
     </tags>

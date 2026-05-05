@@ -6,8 +6,8 @@
     <fields>
         <field name="Fade Style" type="int" byte="2" default="2">
             <enums>
-                <enum value="2" name="Fast Fade" c_name=""/>
-                <enum value="3" name="Slow Fade" c_name=""/>
+                <enum value="2" name="Fast Fade"/>
+                <enum value="3" name="Slow Fade"/>
             </enums>
         </field>
     </fields>

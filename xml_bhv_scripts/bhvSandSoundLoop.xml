@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13003ca4" readable_name="Sand Sound Loop">
-    <description>An invisible object that continuously plays a moving sand sound, provided the camera is not in the standard behind-Mario mode.</description>
+    <description>Plays a moving sand sound, provided the camera is not in the standard behind-Mario mode.</description>
     <tags>
         <tag>SOUND</tag>
         <tag>ENVIRONMENTAL</tag>

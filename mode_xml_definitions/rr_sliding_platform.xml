@@ -5,4 +5,7 @@
     <ids>
         <id value="0x36" name="MODEL_RR_SLIDING_PLATFORM"/>
     </ids>
+    <collisions>
+        <collision c_name="rr_seg7_collision_070295F8" address="0x070295F8"/>
+    </collisions>
 </model>

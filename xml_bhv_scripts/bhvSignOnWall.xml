@@ -5,4 +5,7 @@
         <tag>ENVIRONMENTAL</tag>
         <tag>DIALOGUE</tag>
     </tags>
+    <fields>
+        <field name="Dialogue ID" type="dialogue_id" byte="2" default="0"/>
+    </fields>
 </behavior>

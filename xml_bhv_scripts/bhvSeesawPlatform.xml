@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13004b1c" readable_name="Seesaw Platform">
-    <description>A platform that tilts based on Mario's position. It rotates towards Mario when he is standing on it and oscillates back to a neutral position when he leaves.</description>
     <tags>
         <tag>PLATFORM</tag>
         <tag>ENVIRONMENTAL</tag>

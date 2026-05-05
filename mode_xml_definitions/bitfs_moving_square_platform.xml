@@ -5,4 +5,7 @@
     <ids>
         <id value="0x3e" name="MODEL_BITFS_MOVING_SQUARE_PLATFORM"/>
     </ids>
+    <collisions>
+        <collision c_name="bitfs_seg7_collision_07015714" address="0x07015714"/>
+    </collisions>
 </model>
