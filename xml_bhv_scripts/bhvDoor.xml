@@ -5,18 +5,6 @@
         <tag>INTERACTIVE</tag>
         <tag>SURFACE</tag>
     </tags>
-    <default_models>
-        <model>MODEL_CASTLE_CASTLE_DOOR_UNUSED</model>
-        <model>MODEL_CASTLE_WOODEN_DOOR_UNUSED</model>
-        <model>MODEL_UNKNOWN_DOOR_1E</model>
-        <model>MODEL_HMC_METAL_DOOR</model>
-        <model>MODEL_HMC_HAZY_MAZE_DOOR</model>
-        <model>MODEL_UNKNOWN_DOOR_21</model>
-        <model>MODEL_CASTLE_DOOR_0_STARS</model>
-        <model>MODEL_CASTLE_DOOR_1_STAR</model>
-        <model>MODEL_CASTLE_DOOR_3_STARS</model>
-        <model>MODEL_CASTLE_KEY_DOOR</model>
-    </default_models>
     <fields>
         <field name="Star Requirement" type="int" byte="3" default="0"/>
     </fields>

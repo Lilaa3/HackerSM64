@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<behavior name="0x130038b0" readable_name="Star Key Collection Puff Spawner">
-    <description>Spawns a puff of mist particles when a star key is collected and then deactivates.</description>
+<behavior name="0x130038b0" readable_name="Star/Key Collection Puff Spawner">
+    <description>Dust used when a star or key is collected.</description>
     <tags>
         <tag>PARTICLE</tag>
         <tag>SPAWNER</tag>

@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002b08" readable_name="Sparkle Particle Spawner">
-    <description>Spawns sparkle particles with random positional offsets.</description>
+    <particle>PARTICLE_SPARKLES</particle>
     <tags>
         <tag>PARTICLE</tag>
         <tag>SPAWNER</tag>

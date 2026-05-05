@@ -1,15 +1,14 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300080c" readable_name="Spawned Star (No Level Exit)">
-    <description>A star that spawns with a cutscene. It checks if the star has already been collected using the Star ID. It can spawn either at its home position or above Mario.</description>
     <tags>
         <tag>COLLECTABLE</tag>
         <tag>SPECIALIZED</tag>
     </tags>
     <fields>
-        <field name="Star ID" type="int" shift="0" mask="0xFF" default="0">
-            <description>The ID of the star, used to determine if it should be transparent (already collected).</description>
+        <field name="Star ID" type="int" byte="1" default="0">
+            <description>The ID of the star, used to determine if it should be transparent (already collected). 6 is 100 coins.</description>
         </field>
-        <field name="Spawn Position" type="int" shift="8" mask="0xFF" default="1">
+        <field name="Spawn Position" type="int" byte="2" default="0">
             <enums>
                 <enum value="0" name="At Mario" c_name="SPAWN_STAR_POS_CUTSCENE_BP_SPAWN_AT_MARIO"/>
                 <enum value="1" name="Home" c_name="SPAWN_STAR_POS_CUTSCENE_BP_SPAWN_AT_HOME"/>

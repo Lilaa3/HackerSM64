@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x130016ac" readable_name="Stub">
-    <description>A stub behavior used as a placeholder.</description>
+    <description>A stub behavior, disables rendering.</description>
     <tags>
         <tag>UNUSED</tag>
     </tags>

@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300243c" readable_name="Sunken Ship Set Rotation">
-    <description>Helper behavior to set specific rotation angles for sunken ship parts.</description>
+    <description>Helper behavior for other behaviors to set specific rotation angles for sunken ship parts.</description>
     <tags>
-        <tag>UNUSED</tag>
+        <tag>HELPER</tag>
     </tags>
 </behavior>

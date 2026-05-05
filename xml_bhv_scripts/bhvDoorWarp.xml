@@ -7,16 +7,6 @@
         <tag>SURFACE</tag>
         <tag>WARP</tag>
     </tags>
-    <default_models>
-        <model name="Castle Door" c_name="MODEL_CASTLE_CASTLE_DOOR" value="0x26">
-            <levels>
-                <level>Castle</level>
-            </levels>
-        </model>
-        <model c_name="MODEL_CASTLE_WOODEN_DOOR" value="0x27"/>
-        <model c_name="MODEL_CASTLE_METAL_DOOR" value="0x29"/>
-        <model c_name="MODEL_CASTLE_KEY_DOOR" value="0x2C"/>
-    </default_models>
     <fields>
         <field name="Warp ID" type="int" byte="2" default="0"/>
         <field name="Door Type" type="int" byte="3" default="0">

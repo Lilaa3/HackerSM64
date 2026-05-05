@@ -1,11 +1,10 @@
 <?xml version="1.0" ?>
 <behavior name="0x13003e3c" readable_name="Star">
-    <description>A Power Star that can be collected. It checks if it has already been collected using the Star ID.</description>
     <tags>
         <tag>COLLECTABLE</tag>
     </tags>
     <fields>
-        <field name="Star ID" type="int" shift="0" mask="0xFF" default="0">
+        <field name="Star ID" type="int" byte="1" default="0">
             <description>The ID of the star, used to determine if it should be transparent (already collected).</description>
         </field>
     </fields>

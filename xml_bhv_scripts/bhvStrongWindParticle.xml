@@ -1,13 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002e20" readable_name="Strong Wind Particle">
-    <description>A particle that represents strong wind, spawned near walking penguins. Its spread is determined by its parameters.</description>
+    <description>Used for the Snowman in SL and Fwoosh.</description>
     <tags>
         <tag>PARTICLE</tag>
     </tags>
-    <fields>
-        <field name="Wind Spread" type="int" shift="8" mask="0xFF" default="0">
-            <description>Multiplier for the random yaw spread (multiplied by 500).</description>
-        </field>
+     <fields>
+        <field name="Wind Spread Multiplier" type="int" byte="2" multiplier="500" default="0"/>
     </fields>
     <models>
         <model>mist</model>
