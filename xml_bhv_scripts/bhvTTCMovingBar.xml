@@ -6,7 +6,7 @@
         <tag>TTC</tag>
     </tags>
     <fields>
-        <field name="Stop Timer Multiplier" type="int" shift="8" mask="0xFF" default="0">
+        <field name="Stop Timer Multiplier" type="int" byte="2" multiplier="10" default="0">
             <description>Multiplier for the initial stopped timer (multiplied by 10).</description>
         </field>
     </fields>

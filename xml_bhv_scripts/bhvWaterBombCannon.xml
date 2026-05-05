@@ -5,7 +5,7 @@
         <tag>BOB</tag>
     </tags>
     <fields>
-        <field name="Disabled" type="bool" bytes="2" default="0"/>
+        <field name="Disabled" type="bool" byte="2" default="0"/>
     </fields>
     <models>
         <model>cannon_base</model>

@@ -1,7 +1,6 @@
 <?xml version="1.0" ?>
-<behavior name="0x13000174" readable_name="THI Huge Island Top">
-    <comment>No configurable parameters.</comment>
-    <description>A surface object that handles the top trap on Huge Island. It hides itself and modifies an environment region when the water is drained.</description>
+<behavior name="0x13000174" readable_name="THI Top Drain (Huge)">
+    <description>Checks if was drained in small, if drained, hide model, otherwise load collision.</description>
     <tags>
         <tag>SURFACE</tag>
         <tag>THI</tag>

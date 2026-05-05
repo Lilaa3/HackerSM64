@@ -1,17 +1,17 @@
 <?xml version="1.0" ?>
 <behavior name="0x13000c28" readable_name="WF Tumbling Bridge">
-    <description>A spawner that creates a sequence of tumbling bridge segments. The specific configuration (number of sections, dimensions, model, and collision) is determined by a behavior parameter.</description>
+    <description>A spawner that creates a sequence of tumbling bridge segments. The specific configuration (number of sections, dimensions, model, and collision) is determined by the field.</description>
     <tags>
         <tag>SPAWNER</tag>
         <tag>WF</tag>
     </tags>
     <fields>
-        <field name="Bridge Configuration" type="int" shift="8" mask="0xFF" default="0">
+        <field name="Bridge Configuration" type="int" byte="2" default="0">
             <enums>
                 <enum value="0" name="WF Tumbling Bridge Part"/>
-                <enum value="1" name="BBH Tumbling Platform"/>
+                <enum value="1" name="BBH Tumbling Platform Part"/>
                 <enum value="2" name="LLL Falling Platform"/>
-                <enum value="3" name="BITFS Tumbling Platform"/>
+                <enum value="3" name="BITFS Tumbling Platform Part"/>
             </enums>
         </field>
     </fields>

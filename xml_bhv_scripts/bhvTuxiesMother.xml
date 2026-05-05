@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002088" readable_name="Tuxie's Mother">
-    <description>A large penguin NPC that interacts with Mario and her baby penguin. She requires the correct baby penguin (matching her baby ID) to be delivered to her to reward Mario with a star.</description>
+    <description>She requires the correct baby penguin (matching her baby ID) to be delivered to her to reward Mario with a star.</description>
     <tags>
         <tag>NPC</tag>
         <tag>FRIENDLY</tag>

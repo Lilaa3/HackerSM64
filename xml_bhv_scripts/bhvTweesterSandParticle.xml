@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002634" readable_name="Tweester Sand Particle">
-    <description>A billboarded particle object spawned by Tweester. It drifts upward and outward with semi-random rotation and scale, despawning after 15 frames.</description>
     <tags>
         <tag>PARTICLE</tag>
         <tag>ENEMY</tag>

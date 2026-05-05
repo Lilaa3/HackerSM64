@@ -1,16 +1,17 @@
 <?xml version="1.0" ?>
 <behavior name="0x13003a80" readable_name="TTM Bowling Ball Spawner">
-    <description>A spawner that periodically generates bowling balls if Mario is below it and within a specific radius. The spawn distance and odds are determined by the spawner type parameter.</description>
     <tags>
         <tag>SPAWNER</tag>
         <tag>TTM</tag>
     </tags>
     <fields>
-        <field name="Spawner Type" type="int" shift="0" mask="0xFF" default="1">
+        <field name="Spawner Type" type="int" byte="2" default="1">
             <enums>
-                <enum value="0" name="Bob Upper" c_name="BBALL_BP_STYPE_BOB_UPPER"/>
                 <enum value="1" name="TTM" c_name="BBALL_BP_STYPE_TTM"/>
-                <enum value="2" name="Bob Lower" c_name="BBALL_BP_STYPE_BOB_LOWER"/>
+                <enum value="0" name="BOB Upper" c_name="BBALL_BP_STYPE_BOB_UPPER"/>
+                <enum value="2" name="BOB Lower" c_name="BBALL_BP_STYPE_BOB_LOWER"/>
+                <enum value="3" name="THI Large" c_name="BBALL_BP_STYPE_THI_LARGE"/>
+                <enum value="4" name="THI Small" c_name="BBALL_BP_STYPE_THI_SMALL"/>
             </enums>
         </field>
     </fields>

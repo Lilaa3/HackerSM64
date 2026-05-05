@@ -1,7 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13000940" readable_name="Temporary Yellow Coin">
-    <comment>No configurable parameters.</comment>
-    <description>A yellow coin that disappears after a certain amount of time (200 frames followed by 20 blinks).</description>
     <tags>
         <tag>COLLECTABLE</tag>
         <tag>COINS</tag>

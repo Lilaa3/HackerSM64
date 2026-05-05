@@ -6,8 +6,8 @@
         <tag>TTC</tag>
     </tags>
     <fields>
-        <field name="Peak Offset Multiplier" type="int" shift="16" mask="0xFFFF" default="0">
-            <description>Multiplier for the peak offset (multiplied by 100.0f). If 0, defaults to 500.0f.</description>
+        <field name="Peak Offset Multiplier" type="units" bytes="23" multiplier="100" default="4">
+            <description>If 0, defaults to 500.0f.</description>
         </field>
     </fields>
     <models>

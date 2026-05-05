@@ -6,6 +6,6 @@
         <tag>BOB</tag>
     </tags>
     <fields>
-        <field name="Spawn Radius Multiplier" type="units" bytes="2" default="0" multiplier="50" offset="200"/> <!-- Seems to  go unused?? -->
+        <field name="Spawn Radius Multiplier" type="units" byte="2" default="0" multiplier="50" offset="200"/> <!-- Seems to  go unused?? -->
     </fields>
 </behavior>

@@ -10,7 +10,7 @@
         <field name="Flamethrower Type" type="int" byte="2" default="0">
             <description>The type of flames produced (color and speed).</description>
             <enums>
-                <enum value="0" name="Normal" c_name="None"/>
+                <enum value="0" name="Normal"/>
                 <enum value="1" name="Blue" c_name="FLAMETHROWER_BP_BLUE"/>
                 <enum value="2" name="Slow" c_name="FLAMETHROWER_BP_SLOW"/>
             </enums>

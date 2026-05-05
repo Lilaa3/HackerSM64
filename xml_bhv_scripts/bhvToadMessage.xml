@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002ef8" readable_name="Toad Message">
-    <comment>The dialog and star spawn are determined by the first behavior parameter.</comment>
-    <description>A Toad that speaks to Mario and may spawn a star if certain star requirements are met.</description>
+    <comment>TODO Should there be some kind of default enums.</comment>
+    <description>Speaks dialogue, if specific dialogue ids (TOAD_STAR_1_REQUIREMENT, TOAD_STAR_2_REQUIREMENT, TOAD_STAR_3_REQUIREMENT) certain star requirements are used, otherwise deletion. The dialogue for these is also modified after receiving their respective star after talking.</description>
     <tags>
         <tag>NPC</tag>
         <tag>DIALOGUE</tag>
     </tags>
     <fields>
-        <field name="Dialog ID" type="dialogue_id" shift="0" mask="0xFFFFFFFF" default="0"/>
+        <field name="Dialog ID" type="dialogue_id" bytes="1" default="133"/>
     </fields>
     <models>
         <model>toad</model>

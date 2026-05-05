@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002aa4" readable_name="Tree">
-    <description>A static environmental object that pushes Mario away when he is positioned within its height range and radius.</description>
     <tags>
         <tag>ENVIRONMENTAL</tag>
         <tag>POLE</tag>
