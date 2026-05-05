@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
-<behavior name="0x13002e3c" readable_name="SL Snowman Wind">
-    <description>A snowman that speaks to Mario and then blows strong wind particles towards him, limiting the wind's angle to a specific range relative to its original orientation.</description>
+<behavior name="0x13002e3c" readable_name="SL Snowman">
+    <description>The handler for the strong wind blown by the Snowman in SL. Triggers dialog and then aims towards Mario.</description>
     <tags>
         <tag>SL</tag>
         <tag>ENVIRONMENTAL</tag>

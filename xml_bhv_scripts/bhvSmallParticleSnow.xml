@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13000444" readable_name="Small Particle Snow">
-    <description>A small snow particle that rises upwards with a slight random drift. It is destroyed once it reaches the surface of the water.</description>
+    <description>Used by bub and bubba</description>
     <tags>
         <tag>PARTICLE</tag>
         <tag>SNOW</tag>

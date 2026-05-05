@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300521c" readable_name="Snufit Balls">
-    <description>A ball projectile fired by a Snufit. It moves forward and falls under gravity after hitting Mario (if he is metal) or a wall/floor.</description>
+    <description>Despawns if mario is an different room.</description>
     <tags>
         <tag>PROJECTILE</tag>
         <tag>ENEMY</tag>
