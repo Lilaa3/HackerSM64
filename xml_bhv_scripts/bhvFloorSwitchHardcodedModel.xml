@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13001484" readable_name="Floor Switch (Hardcoded Model)">
-    <description>A purple switch that manages a state machine: Idle -&gt; Pressed -&gt; Ticking -&gt; Wait for Mario to get off -&gt; Unpressed. The ticking phase duration and sound are controlled by the 'switch Mode's parameter.</description>
     <tags>
         <tag>INTERACTIVE</tag>
         <tag>SURFACE</tag>

@@ -1,20 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x13001478" readable_name="Floor Switch (Grills)">
-    <description>A purple floor switch that inherits from bhvFloorSwitchHardcodedModel. It typically uses the default PURPLE_SWITCH_BP_NO_TICK mode to interact with grill objects.</description>
+    <description>A purple floor switch that inherits from bhvFloorSwitchHardcodedModel. It forces PURPLE_SWITCH_BP_NO_TICK.</description>
     <tags>
         <tag>INTERACTIVE</tag>
         <tag>SURFACE</tag>
         <tag>PUZZLE</tag>
     </tags>
-    <fields>
-        <field name="Switch Mode" type="int" byte="2" default="0">
-            <enums>
-                <enum value="0" name="No Tick" c_name="PURPLE_SWITCH_BP_NO_TICK"/>
-                <enum value="1" name="Fast" c_name="PURPLE_SWITCH_BP_ANIMATES"/>
-                <enum value="2" name="Slow" c_name="PURPLE_SWITCH_BP_REVEAL_HIDDEN"/>
-            </enums>
-        </field>
-    </fields>
     <models>
         <model>purple_switch</model>
     </models>
