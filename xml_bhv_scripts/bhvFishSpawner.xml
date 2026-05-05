@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300215c" readable_name="Fish Spawner">
-    <description>A general-purpose fish spawner that manages the creation of fish schools. Its specific spawning configuration (fish type, quantity, and environment flags) is determined by the second behavior parameter, and it executes logic through the sFishSpawnerActions function array.</description>
+    <description>A general-purpose fish spawner that manages the creation of fish schools.</description>
     <tags>
         <tag>SPAWNER</tag>
         <tag>FISH</tag>
@@ -16,8 +16,7 @@
                 <enum value="3" name="Few Cyan" c_name="FISH_SPAWNER_BP_FEW_CYAN"/>
             </enums>
         </field>
-        <field name="Flags" type="bitflag" shift="8" mask="0xFF" default="0">
-            <description>Flags for fish spawning behavior.</description>
+        <field name="Flags" type="bitflag" byte="2" shift="4" default="0">
             <enums>
                 <enum value="16" name="In Full Water Level" c_name="FISH_BP_FLAG_IN_FULL_WATER_LEVEL"/>
             </enums>

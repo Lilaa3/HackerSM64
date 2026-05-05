@@ -5,4 +5,7 @@
     <ids>
         <id value="0x37" name="MODEL_BOWSER_3_FALLING_PLATFORM_2"/>
     </ids>
+    <collisions>
+        <collision c_name="bowser_3_seg7_collision_07004C18" address="0x07004C18"/>
+    </collisions>
 </model>

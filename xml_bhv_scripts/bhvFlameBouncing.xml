@@ -1,11 +1,9 @@
 <?xml version="1.0" ?>
-<behavior name="0x13001a30" readable_name="Bouncing Flame">
-    <description>A bouncing flame hazard typically spawned by Bowser. It utilizes physics-based movement to bounce around the environment. The flame is automatically deleted after 300 frames, upon hitting a death plane or burning surface, or if it returns within 300 units of Bowser while he is in a free state.</description>
+<behavior name="0x13001a30" readable_name="Bowser Bouncing Flame">
     <tags>
         <tag>FIRE</tag>
         <tag>HURT</tag>
-        <tag>NPC</tag>
-        <tag>ENVIRONMENTAL</tag>
+        <tag>BOWSER</tag>
     </tags>
     <models>
         <model>blue_flame</model>

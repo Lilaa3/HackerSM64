@@ -1,11 +1,9 @@
 <?xml version="1.0" ?>
 <behavior name="0x13001aa4" readable_name="Bowser Flame">
-    <description>A hazardous flame spawned by Bowser. It begins in an intangible state, moving with a sinusoidal oscillation. Upon landing, it becomes tangible and gradually shrinks in scale. When it fully despawns, it spawns a bhvBlackSmokeUpward particle and has a 10% chance to spawn a temporary yellow coin.</description>
     <tags>
         <tag>FIRE</tag>
         <tag>HURT</tag>
-        <tag>NPC</tag>
-        <tag>ENVIRONMENTAL</tag>
+        <tag>BOWSER</tag>
     </tags>
     <models>
         <model>red_flame</model>

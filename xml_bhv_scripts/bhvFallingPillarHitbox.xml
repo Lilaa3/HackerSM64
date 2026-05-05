@@ -1,13 +1,12 @@
 <?xml version="1.0" ?>
-<behavior name="0x130043c4" readable_name="Falling Pillar Hitbox">
-    <description>Invisible hitboxes that track the movement and orientation of a parent bhvFallingPillar. The vertical position of each hitbox along the pillar's length is determined by the 'sHitbox Index's behavior parameter.</description>
+<behavior name="0x130043c4" readable_name="JRB Falling Pillar Hitbox">
+    <description>Invisible hitboxes, relies on the parent object's transform.</description>
     <tags>
-        <tag>ENVIRONMENTAL</tag>
+        <tag>JRB</tag>
         <tag>HURT</tag>
-        <tag>NPC</tag>
     </tags>
     <fields>
-        <field name="Hitbox Index" type="int" shift="8" mask="0xFF" default="0">
+        <field name="Hitbox Index" type="int" byte="2" multiplier="400" offset="300" default="0">
             <description>Index of the hitbox along the pillar's height.</description>
         </field>
     </fields>

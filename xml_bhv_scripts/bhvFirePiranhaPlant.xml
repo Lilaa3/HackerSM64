@@ -4,15 +4,15 @@
     <tags>
         <tag>ENEMY</tag>
         <tag>FIRE</tag>
-        <tag>TTC</tag>
     </tags>
     <fields>
-        <field name="Variant" type="int" byte="2" default="0">
+        <field name="Neutral scale" type="int" byte="2" default="1">
             <enums>
-                <enum value="0" name="Normal" c_name="FIRE_PIRANHA_PLANT_BP_NORMAL"/>
+                <enum value="0" name="Normal (0.5)" c_name="FIRE_PIRANHA_PLANT_BP_NORMAL"/>
+                <enum value="1" name="Big (2.0)" c_name="FIRE_PIRANHA_PLANT_BP_THI"/>
             </enums>
         </field>
-        <field name="Disable Coins" type="bool" shift="24" mask="0x1" default="0"/>
+        <field name="Disable Coins" type="bool" byte="3" default="0"/>
     </fields>
     <models>
         <model>piranha_plant</model>

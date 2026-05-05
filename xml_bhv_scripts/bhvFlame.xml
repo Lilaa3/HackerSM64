@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13000c84" readable_name="Flame">
-    <description>A static environmental hazard that deals damage to Mario on contact. It uses the INTERACT_FLAME interaction type and maintains a constant hitbox. Its update loop consists of resetting the interaction status and cycling through texture animations to simulate flickering flames.</description>
+    <description>A static environmental hazard.</description>
     <tags>
         <tag>FIRE</tag>
         <tag>HURT</tag>

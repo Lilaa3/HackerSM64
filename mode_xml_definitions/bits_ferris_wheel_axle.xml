@@ -5,4 +5,7 @@
     <ids>
         <id value="0x3d" name="MODEL_BITS_FERRIS_WHEEL_AXLE"/>
     </ids>
+    <collisions>
+        <collision c_name="bits_seg7_collision_0701AC28" address="0x0701AC28"/>
+    </collisions>
 </model>
