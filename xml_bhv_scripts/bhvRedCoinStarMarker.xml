@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300556c" readable_name="Red Coin Star Marker">
-    <description>An environmental marker that indicates the spawn location of a Red Coin Star. It simply rotates in place until the star is actually spawned.</description>
+    <description>Marker on the floor of where the red coin star will spawn. Spawned with the (hidden) red coin star.</description>
     <tags>
         <tag>ENVIRONMENTAL</tag>
         <tag>SPECIALIZED</tag>
