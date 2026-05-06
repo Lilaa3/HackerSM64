@@ -3,7 +3,6 @@
     <description>A star that remains inactive until its trigger counter reaches 5. It calculates the initial trigger count based on the number of bhvHiddenStarTrigger objects present in the level upon initialization. Upon triggering, it spawns a cutscene star and deactivates.</description>
     <tags>
         <tag>COLLECTABLE</tag>
-        <tag>LEVEL</tag>
         <tag>STAR</tag>
     </tags>
 </behavior>

@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13004148" readable_name="Hidden 1-Up Mushroom (In Pole)">
-    <description>A 1-Up Mushroom hidden in a pole. It appears after a set number of triggers (determined by the 'sTrigger Count's parameter), performing a loop-in-air animation before moving towards Mario.</description>
+    <description>A 1-Up Mushroom that remains invisible in a pole until o1UpHiddenTimesTriggered (set by Hidden 1up In Pole Trigger) matches the Trigger Count.</description>
     <tags>
         <tag>COLLECTABLE</tag>
     </tags>

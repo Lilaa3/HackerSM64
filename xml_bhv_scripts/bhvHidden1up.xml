@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x130040ec" readable_name="Hidden 1-Up Mushroom">
-    <description>A 1-Up Mushroom that remains invisible until o1UpHiddenTimesTriggered matches the 'sTrigger Count's parameter. It then performs a loop-in-air animation before moving away from Mario. Despawns if it hits a wall or Mario moves further than 3000 units away.</description>
+    <description>A 1-Up Mushroom that remains invisible until o1UpHiddenTimesTriggered (set by Hidden 1up Trigger) matches the Trigger Count.</description>
     <tags>
         <tag>COLLECTABLE</tag>
     </tags>

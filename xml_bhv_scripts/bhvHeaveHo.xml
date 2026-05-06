@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13001548" readable_name="Heave Ho">
-    <description>A small floating entity that can grab Mario and throw him. It uses sHeaveHoActions for movement and manages a specific throw state machine. It is marked as grabbable but is designed to grab Mario instead.</description>
+    <description>Handles movement and logic. Spawns its Heave Ho Throwing Helper.</description>
     <tags>
         <tag>ENEMY</tag>
         <tag>MOVING</tag>
