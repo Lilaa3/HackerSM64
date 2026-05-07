@@ -7,7 +7,7 @@
         <tag>CAP</tag>
     </tags>
     <fields>
-        <field name="Cap Type" type="int" byte="2" default="0">
+        <field name="Cap Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Wing Cap" c_name="CAP_SWITCH_BP_WING_CAP"/>
                 <enum value="1" name="Metal Cap" c_name="CAP_SWITCH_BP_METAL_CAP"/>

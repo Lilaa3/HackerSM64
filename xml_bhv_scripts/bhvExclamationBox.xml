@@ -5,7 +5,7 @@
         <tag>SURFACE</tag>
         <tag>ENVIRONMENTAL</tag>
     </tags>
-    <field name="Door Type" type="int" byte="2" default="0">
+    <field name="Door Type" type="int" bparam="2" default="0">
         <enums>
             <enum value="0" name="Wing Cap" c_name="EXCLAMATION_BOX_BP_WING_CAP"/>
             <enum value="1" name="Metal Cap" c_name="EXCLAMATION_BOX_BP_METAL_CAP"/>

@@ -5,7 +5,7 @@
         <tag>SURFACE</tag>
     </tags>
     <fields>
-        <field name="Initial Position" type="int" byte="2" default="0">
+        <field name="Initial Position" type="int" bparam="2" default="0">
             <description>Offsets the starting yposition, but is still relative.</description>
             <enums>
                 <enum value="0" name="High" c_name="PYRAMID_WALL_BP_POSITION_HIGH"/>

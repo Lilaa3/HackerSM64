@@ -6,19 +6,19 @@
         <tag>Individual</tag>
     </tags>
     <fields>
-        <field name="Animation Speed" type="int" byte="1" multiplier="0.0625">
+        <field name="Animation Speed" type="int" bparam="1" multiplier="0.0625">
             <description>Multiplied by 1/16 to determine animation speed during startup.</description>
         </field>
-        <field name="Size" type="int" byte="2" mask="0x03" default="0">
+        <field name="Size" type="int" bparam="2" mask="0x03" default="0">
             <enums>
                 <enum value="0" name="Regular" c_name="GOOMBA_SIZE_REGULAR"/>
                 <enum value="1" name="Huge" c_name="GOOMBA_SIZE_HUGE"/>
                 <enum value="2" name="Tiny" c_name="GOOMBA_SIZE_TINY"/>
             </enums>
         </field>
-        <field name="Zoom Frames" type="frames" byte="3" mask="0x7F" default="0"/>
-        <field name="Mirrored Startup Anim" type="bool" byte="3" mask="0x80" shift="7" default="False"/>
-        <field name="Spawn Delay" type="frames" byte="4" default="0">
+        <field name="Zoom Frames" type="frames" bparam="3" mask="0x7F" default="0"/>
+        <field name="Mirrored Startup Anim" type="bool" bparam="3" mask="0x80" shift="7" default="False"/>
+        <field name="Spawn Delay" type="frames" bparam="4" default="0">
             <description>Countdown timer before the object unhides.</description>
         </field>
     </fields>

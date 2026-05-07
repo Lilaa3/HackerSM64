@@ -8,7 +8,7 @@
         <tag>ENVIRONMENTAL</tag>
     </tags>
     <fields>
-        <field name="Animation Index" type="int" byte="2" default="0">
+        <field name="Animation Index" type="int" bparam="2" default="0">
             <enums>
                 <enum name="BITS" value="0"/>
                 <enum name="BITDW" value="1"/>

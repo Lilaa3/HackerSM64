@@ -6,7 +6,7 @@
         <tag>TTC</tag>
     </tags>
     <fields>
-        <field name="Type" type="int" byte="2" default="0">
+        <field name="Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Hand" c_name="TTC_2D_ROTATOR_BP_HAND"/>
                 <enum value="1" name="Cog" c_name="TTC_2D_ROTATOR_BP_COG"/>

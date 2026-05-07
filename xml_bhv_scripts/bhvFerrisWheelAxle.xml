@@ -6,7 +6,7 @@
         <tag>SURFACE</tag>
     </tags>
     <fields>
-        <field name="Wheel Index" type="int" byte="2" default="0">
+        <field name="Wheel Index" type="int" bparam="2" default="0">
             <description>Index into sFerrisWheelProperties for properties.</description>
             <enums>
                 <enum value="0" name="BITS"/>

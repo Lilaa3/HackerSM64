@@ -7,7 +7,7 @@
         <tag>HMC</tag>
     </tags>
     <fields>
-        <field name="Direction ID" type="int" byte="2" default="0"/>
+        <field name="Direction ID" type="int" bparam="2" default="0"/>
     </fields>
     <models>
         <model>hmc_metal_arrow_platform</model>

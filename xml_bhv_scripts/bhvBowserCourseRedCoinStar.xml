@@ -6,7 +6,7 @@
         <tag>COLLECTIBLE</tag>
     </tags>
     <fields>
-        <field name="Required Red Coins" type="int" byte="2" default="0">
+        <field name="Required Red Coins" type="int" bparam="2" default="0">
             <description>Number of red coins required to spawn the star. 0 will use the amount of red coins in the area.</description>
         </field>
     </fields>

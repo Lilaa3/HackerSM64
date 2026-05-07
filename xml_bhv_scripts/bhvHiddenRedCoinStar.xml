@@ -7,6 +7,6 @@
         <tag>STAR</tag>
     </tags>
     <fields>
-        <field name="Required Red Coins" type="int" byte="2" default="0"/>
+        <field name="Required Red Coins" type="int" bparam="2" default="0"/>
     </fields>
 </behavior>

@@ -7,7 +7,7 @@
         <tag>INTERACTIVE</tag>
     </tags>
     <fields>
-        <field name="Radius" type="int" byte="2" default="0" multiplier="10">
+        <field name="Radius" type="int" bparam="2" default="0" multiplier="10">
             <description>Radius of the warp's hitbox. 0 is default (85), 0xFF is huge (10000), otherwise multiplied by 10.</description>
         </field>
     </fields>

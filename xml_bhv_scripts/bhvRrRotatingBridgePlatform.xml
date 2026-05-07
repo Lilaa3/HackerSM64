@@ -8,7 +8,7 @@
         <tag>FIRE</tag>
     </tags>
     <fields>
-        <field name="Flamethrower Type" type="int" byte="2" default="1">
+        <field name="Flamethrower Type" type="int" bparam="2" default="1">
             <description>The type of flames produced.</description>
             <enums>
                 <enum value="0" name="Normal" c_name="FLAMETHROWER_BP_0"/>

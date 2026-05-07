@@ -7,7 +7,7 @@
         <tag>BBH</tag>
     </tags>
     <fields>
-        <field name="Type" type="int" byte="2" default="0">
+        <field name="Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Ghost Hunt" c_name="BOO_BP_GHOST_HUNT">
                     <description>If no Ghost Hunt Boo's are left when dying, it will show dialogue of the big boo (DIALOG_108).</description>

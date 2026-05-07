@@ -6,7 +6,7 @@
         <tag>SUB_OBJECT</tag>
     </tags>
     <fields>
-        <field name="Number" type="int" byte="2" default="0">
+        <field name="Number" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="0" c_name="ORANGE_NUMBER_0"/>
                 <enum value="1" name="1" c_name="ORANGE_NUMBER_1"/>

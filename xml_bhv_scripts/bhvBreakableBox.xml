@@ -5,7 +5,7 @@
         <tag>INTERACTIVE</tag>
     </tags>
     <fields>
-        <field name="Type" type="int" byte="2" default="0">
+        <field name="Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="No Coins" c_name="BREAKABLE_BOX_BP_NO_COINS"/>
                 <enum value="1" name="3 Coins" c_name="BREAKABLE_BOX_BP_3_COINS"/>

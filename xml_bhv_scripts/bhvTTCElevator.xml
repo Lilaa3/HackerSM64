@@ -6,7 +6,7 @@
         <tag>TTC</tag>
     </tags>
     <fields>
-        <field name="Peak Offset Multiplier" type="units" bytes="23" multiplier="100" default="4">
+        <field name="Peak Offset Multiplier" type="units" bparam="23" multiplier="100" default="4">
             <description>If 0, defaults to 500.0f.</description>
         </field>
     </fields>

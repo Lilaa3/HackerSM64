@@ -6,6 +6,6 @@
         <tag>SOUND</tag>
     </tags>
     <fields>
-        <field name="Sound ID" type="int" byte="2" default="0" min="0" max="3"/>
+        <field name="Sound ID" type="int" bparam="2" default="0" min="0" max="3"/>
     </fields>
 </behavior>

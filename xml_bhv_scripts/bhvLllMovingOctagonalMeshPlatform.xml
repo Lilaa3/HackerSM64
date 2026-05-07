@@ -8,7 +8,7 @@
         <tag>LLL</tag>
     </tags>
     <fields>
-        <field name="Action List Index" type="int" byte="2" default="0">
+        <field name="Action List Index" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Near the Bully Star"/>
                 <enum value="1" name="Near the Small Bullies"/>

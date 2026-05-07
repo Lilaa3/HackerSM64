@@ -6,7 +6,7 @@
         <tag>INTERACTIVE</tag>
     </tags>
     <fields>
-        <field name="Disable Coins" type="bool" byte="3" default="False">
+        <field name="Disable Coins" type="bool" bparam="3" default="False">
             <enums/>
         </field>
     </fields>

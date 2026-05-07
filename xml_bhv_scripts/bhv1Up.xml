@@ -4,7 +4,7 @@
         <tag>COLLECTIBLE</tag>
     </tags>
     <fields>
-        <field name="Type" type="int" byte="2" default="0">
+        <field name="Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Normal" c_name="MUSHROOM_BP_REQUIRES_NONE"/>
                 <enum value="1" name="Requires Bowser Key 1" c_name="MUSHROOM_BP_REQUIRES_BOWSER_1"/>

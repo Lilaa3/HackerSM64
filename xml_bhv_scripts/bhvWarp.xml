@@ -6,8 +6,8 @@
         <tag>SPAWN_WARP</tag> <!--MARIO_SPAWN_PIPE-->
     </tags>
     <fields>
-        <field name="Warp ID" type="int" byte="2" default="0"/>
-        <field name="Warp Radius" type="units" byte="2" default="0x0B" multiplier="10">
+        <field name="Warp ID" type="int" bparam="2" default="0"/>
+        <field name="Warp Radius" type="units" bparam="2" default="0x0B" multiplier="10">
             <description>0 defaults to 85. Above 2550 is set to 10000.</description>
         </field>
     </fields>

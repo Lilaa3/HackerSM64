@@ -6,7 +6,7 @@
         <tag>SURFACE</tag>
     </tags>
     <fields>
-        <field name="Rotation Speed" type="int" byte="1" default="0">
+        <field name="Rotation Speed" type="int" bparam="1" default="0">
             <enums>
                 <enum value="0" name="300" c_name="300"/>
                 <enum value="1" name="-300" c_name="-300"/>
@@ -14,7 +14,7 @@
                 <enum value="3" name="-600" c_name="-600"/>
             </enums>
         </field>
-        <field name="Collision Model" type="int" byte="2" default="0">
+        <field name="Collision Model" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="BITS"/>
                 <enum value="1" name="RR"/>

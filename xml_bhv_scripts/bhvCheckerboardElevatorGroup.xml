@@ -6,13 +6,13 @@
         <tag>PLATFORM</tag>
     </tags>
     <fields>
-        <field name="Platform Type" type="int" byte="1" default="0">
+        <field name="Platform Type" type="int" bparam="1" default="0">
             <enums>
                 <enum value="0" name="BOB"/>
                 <enum value="1" name="VCUTM"/>
             </enums>
         </field>
-        <field name="Vertical Offset" type="units" byte="2" default="65" multiplier="10"/>
+        <field name="Vertical Offset" type="units" bparam="2" default="65" multiplier="10"/>
     </fields>
     <models>
         <model>checkerboard_platform</model>

@@ -6,7 +6,7 @@
         <tag>SURFACE</tag>
     </tags>
     <fields>
-        <field name="Rising Duration Offset" type="frames" byte="2" offset="40" default="0"/>
+        <field name="Rising Duration Offset" type="frames" bparam="2" offset="40" default="0"/>
     </fields>
     <models>
         <model>thwomp</model>

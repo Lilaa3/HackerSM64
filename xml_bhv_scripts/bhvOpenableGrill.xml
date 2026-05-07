@@ -7,7 +7,7 @@
         <tag>INTERACTIVE</tag>
     </tags>
     <fields>
-        <field name="Grill Type" type="int" byte="2" default="0">
+        <field name="Grill Type" type="int" bparam="2" default="0">
             <description>Index into gOpenableGrills. If non-zero, the puzzle jingle plays upon opening.</description>
             <enums>
                 <enum value="0" name="BOB's Bars Grill" c_name="OPENABLE_GRILL_BP_BOB"/>

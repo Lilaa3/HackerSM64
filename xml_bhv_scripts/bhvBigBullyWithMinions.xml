@@ -6,7 +6,7 @@
         <tag>LLL</tag>
     </tags>
     <fields>
-        <field name="Size" type="int" byte="2" default="1">
+        <field name="Size" type="int" bparam="2" default="1">
             <enums>
                 <enum value="0" name="Small" c_name="BULLY_BP_SIZE_SMALL"/>
                 <enum value="1" name="Big" c_name="BULLY_BP_SIZE_BIG"/>

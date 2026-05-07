@@ -4,7 +4,7 @@
         <tag>COLLECTABLE</tag>
         <tag>BOWSER</tag>
     </tags>
-    <field name="Star Index" type="int" byte="2" default="0">
+    <field name="Star Index" type="int" bparam="2" default="0">
         <description>Index of the star. Always 0 for keys</description>
     </field>
     <models>

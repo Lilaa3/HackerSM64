@@ -4,7 +4,7 @@
         <tag>ENEMY</tag>
     </tags>
     <fields>
-        <field name="Type" type="int" byte="2" default="0">
+        <field name="Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Generic" c_name="BOBOMB_BP_STYPE_GENERIC"/>
                 <enum value="1" name="Stationary" c_name="BOBOMB_BP_STYPE_STATIONARY"/>

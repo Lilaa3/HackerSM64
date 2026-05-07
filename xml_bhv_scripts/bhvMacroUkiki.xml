@@ -10,7 +10,7 @@
         <tag>UNUSED</tag>
     </tags>
     <fields>
-        <field name="Type" type="int" byte="2" default="0">
+        <field name="Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Cage" c_name="UKIKI_BP_CAGE"/>
                 <enum value="1" name="Steal Mario's Cap" c_name="UKIKI_BP_CAP"/>

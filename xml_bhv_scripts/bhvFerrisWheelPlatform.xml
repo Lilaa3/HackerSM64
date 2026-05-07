@@ -6,7 +6,7 @@
         <tag>SURFACE</tag>
     </tags>
     <fields>
-        <field name="Platform Index" type="int" byte="2" max="3" default="0">
+        <field name="Platform Index" type="int" bparam="2" max="3" default="0">
             <description>Index of the platform (0-3), used to set the relative angle (multiplied by 90 degrees).</description>
         </field>
     </fields>

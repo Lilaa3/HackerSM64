@@ -4,7 +4,7 @@
         <tag>PARTICLE</tag>
     </tags>
     <fields>
-        <field name="Fade Style" type="int" byte="2" default="2">
+        <field name="Fade Style" type="int" bparam="2" default="2">
             <enums>
                 <enum value="2" name="Fast Fade"/>
                 <enum value="3" name="Slow Fade"/>

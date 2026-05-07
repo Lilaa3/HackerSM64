@@ -5,7 +5,7 @@
         <tag>ENVIRONMENTAL</tag>
     </tags>
     <fields>
-        <field name="Seesaw Type" type="int" byte="2" default="0">
+        <field name="Seesaw Type" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="BitDW" c_name="SEESAW_PLATFORM_BP_BITDW"/>
                 <enum value="1" name="BitS" c_name="SEESAW_PLATFORM_BP_BITS"/>

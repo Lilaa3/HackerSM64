@@ -6,7 +6,7 @@
         <tag>ENVIRONMENTAL</tag>
     </tags>
     <fields>
-        <field name="Height Index" type="int" byte="2" default="5">
+        <field name="Height Index" type="int" bparam="2" default="5">
             <description>Index into the internal elevator heights table to determine movement range.</description>
             <enums>
                 <enum value="0" name="BBH (bhvMeshElevator) and HMC (bhvHmcElevatorPlatform)"/>

@@ -8,7 +8,7 @@
         <tag>SUB_OBJECT</tag>
     </tags>
     <fields>
-        <field name="Single Frame" type="bool" byte="2" default="0">
+        <field name="Single Frame" type="bool" bparam="2" default="0">
             <enums>
                 <enum value="0" c_name="MOVING_FLAME_BP_NORMAL"/>
                 <enum value="1" c_name="MOVING_FLAME_BP_1FRAME"/>

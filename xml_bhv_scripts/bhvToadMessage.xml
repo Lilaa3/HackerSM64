@@ -7,7 +7,7 @@
         <tag>DIALOGUE</tag>
     </tags>
     <fields>
-        <field name="Dialog ID" type="dialogue_id" bytes="1" default="133"/>
+        <field name="Dialog ID" type="dialogue_id" bparam="1" default="133"/>
     </fields>
     <models>
         <model>toad</model>

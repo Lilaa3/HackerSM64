@@ -6,7 +6,7 @@
         <tag>TTC</tag>
     </tags>
     <fields>
-        <field name="Collision Model" type="int" byte="2" default="0">
+        <field name="Collision Model" type="int" bparam="2" default="0">
             <enums>
                 <enum value="0" name="Cube"/>
                 <enum value="1" name="Prism"/>

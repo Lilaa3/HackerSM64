@@ -8,8 +8,8 @@
         <tag>WARP</tag>
     </tags>
     <fields>
-        <field name="Warp ID" type="int" byte="2" default="0"/>
-        <field name="Door Type" type="int" byte="3" default="0">
+        <field name="Warp ID" type="int" bparam="2" default="0"/>
+        <field name="Door Type" type="int" bparam="3" default="0">
             <enums>
                 <enum value="0" name="Generic"/>
                 <enum value="1" name="Upstairs"/>

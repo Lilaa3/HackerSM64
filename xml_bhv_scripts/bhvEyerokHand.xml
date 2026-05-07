@@ -7,7 +7,7 @@
         <tag>SURFACE</tag>
     </tags>
     <fields>
-        <field name="Side" type="int" byte="2" default="1">
+        <field name="Side" type="int" bparam="2" default="1">
             <enums>
                 <enum value="-1" name="Left"/>
                 <enum value="1" name="Right"/>
