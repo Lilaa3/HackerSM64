@@ -1,13 +1,12 @@
 <?xml version="1.0" ?>
 <behavior name="0x13004348" readable_name="Orange Number">
-    <comment>The specific digit displayed is controlled by behavior parameter 2.</comment>
-    <description>A numerical indicator that pops up and bounces in the world, often used to indicate star or coin counts. It spawns sparkles before disappearing.</description>
     <tags>
         <tag>PARTICLE</tag>
         <tag>UI</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
     <fields>
-        <field name="Number" type="int" shift="8" mask="0xFF" default="0">
+        <field name="Number" type="int" byte="2" default="0">
             <enums>
                 <enum value="0" name="0" c_name="ORANGE_NUMBER_0"/>
                 <enum value="1" name="1" c_name="ORANGE_NUMBER_1"/>

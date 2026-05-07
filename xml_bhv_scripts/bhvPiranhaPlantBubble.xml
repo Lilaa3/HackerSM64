@@ -1,9 +1,8 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300142c" readable_name="Piranha Plant Bubble">
-    <comment>No behavior parameters.</comment>
-    <description>A bubble that appears when a Piranha Plant is sleeping. It grows and shrinks in sync with the plant's animation and bursts into smaller bubbles when the plant wakes up.</description>
+    <description>Grows and shrinks in sync with the plant's (parent object) animation.</description>
     <tags>
         <tag>PARTICLE</tag>
-        <tag>ENVIRONMENTAL</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
 </behavior>

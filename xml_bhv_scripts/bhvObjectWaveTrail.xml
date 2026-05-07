@@ -1,11 +1,10 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002db0" readable_name="Wave Trail">
-    <comment>No behavior parameters.</comment>
-    <description>A water wave particle that shrinks over time. It is typically spawned when Mario moves through water.</description>
     <tags>
         <tag>PARTICLE</tag>
         <tag>WATER</tag>
         <tag>ENVIRONMENTAL</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
     <models>
         <model>water_wave_trail</model>

@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002558" readable_name="Purple Switch Hidden Boxes">
-    <description>A purple floor switch that reveals hidden boxes. It functions as a pre-configured version of the purple switch, hardcoding the reveal hidden behavior.</description>
+    <description>Wraps around Floor Switch Hardcoded Model using Reveal Hidden.</description>
     <tags>
         <tag>INTERACTIVE</tag>
         <tag>SURFACE</tag>

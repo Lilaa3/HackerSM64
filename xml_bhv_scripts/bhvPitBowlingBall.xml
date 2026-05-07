@@ -1,10 +1,9 @@
 <?xml version="1.0" ?>
-<behavior name="0x13003a08" readable_name="Pit Bowling Ball">
-    <comment>No behavior parameters.</comment>
-    <description>A bowling ball that rolls through the environment, shaking the camera and playing a rolling sound as it moves.</description>
+<behavior name="0x13003a08" readable_name="BOB Pit Bowling Ball">
     <tags>
         <tag>ENEMY</tag>
         <tag>ENVIRONMENTAL</tag>
+        <tag>BOB</tag>
     </tags>
     <models>
         <model>bowling_ball</model>

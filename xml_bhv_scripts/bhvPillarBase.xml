@@ -1,7 +1,6 @@
 <?xml version="1.0" ?>
-<behavior name="0x130043e0" readable_name="Pillar Base">
-    <comment>No behavior parameters.</comment>
-    <description>A static pillar base surface object.</description>
+<behavior name="0x130043e0" readable_name="JRB Pillar Base">
+    <description>A static surface object.</description>
     <tags>
         <tag>SURFACE</tag>
         <tag>ENVIRONMENTAL</tag>

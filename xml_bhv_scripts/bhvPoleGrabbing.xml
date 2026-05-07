@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
-<behavior name="0x13000144" readable_name="Pole Grabbing">
-    <description>A grabbable pole. Pushes Mario away if he is within a specific height range and not punching. Height is determined by a parameter.</description>
+<behavior name="0x13000144" readable_name="Grabable Pole">
     <tags>
         <tag>INTERACTIVE</tag>
         <tag>ENVIRONMENTAL</tag>

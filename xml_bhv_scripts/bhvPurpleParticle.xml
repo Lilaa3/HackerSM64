@@ -1,8 +1,9 @@
 <?xml version="1.0" ?>
 <behavior name="0x130000f8" readable_name="Purple Particle">
-    <description>A purple particle that spawns with a random yaw, vertical velocity, and forward velocity. Commonly used for Piranha Plant effects.</description>
+    <description>Commonly used for Piranha Plant and Mr I.</description>
     <tags>
         <tag>PARTICLE</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
     <models>
         <model>bubble_marble</model>

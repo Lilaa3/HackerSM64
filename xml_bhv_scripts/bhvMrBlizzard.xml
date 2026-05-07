@@ -5,7 +5,7 @@
         <tag>SPECIALIZED</tag>
     </tags>
     <fields>
-        <field name="Style" type="int" shift="8" mask="0x1" default="0">
+        <field name="Style" type="int" byte="2" default="0">
             <enums>
                 <enum value="0" name="Standard" c_name="MR_BLIZZARD_STYPE_NO_CAP"/>
                 <enum value="1" name="Jumping" c_name="MR_BLIZZARD_STYPE_JUMPING"/>

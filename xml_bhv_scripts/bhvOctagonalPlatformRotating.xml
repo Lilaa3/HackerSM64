@@ -1,14 +1,12 @@
 <?xml version="1.0" ?>
 <behavior name="0x13004e78" readable_name="Rotating Octagonal Platform">
-    <comment>The angular velocity and collision model are selected via behavior parameters.</comment>
-    <description>An octagonal platform that rotates at a constant angular velocity.</description>
     <tags>
         <tag>PLATAFORM</tag>
         <tag>ENVIRONMENTAL</tag>
         <tag>SURFACE</tag>
     </tags>
     <fields>
-        <field name="Rotation Speed" type="int" shift="8" mask="0xFF" default="0">
+        <field name="Rotation Speed" type="int" byte="1" default="0">
             <enums>
                 <enum value="0" name="300" c_name="300"/>
                 <enum value="1" name="-300" c_name="-300"/>
@@ -18,8 +16,8 @@
         </field>
         <field name="Collision Model" type="int" byte="2" default="0">
             <enums>
-                <enum value="0" name="Model 0" c_name="bits_seg7_collision_0701AA84"/>
-                <enum value="1" name="Model 1" c_name="rr_seg7_collision_07029508"/>
+                <enum value="0" name="BITS"/>
+                <enum value="1" name="RR"/>
             </enums>
         </field>
     </fields>

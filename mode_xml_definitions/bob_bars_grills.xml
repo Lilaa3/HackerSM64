@@ -5,4 +5,7 @@
     <ids>
         <id value="0x38" name="MODEL_BOB_BARS_GRILLS"/>
     </ids>
+    <collisions>
+        <collision c_name="bob_seg7_collision_gate" address="0x07011474"/>
+    </collisions>
 </model>
