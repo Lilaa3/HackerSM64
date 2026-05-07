@@ -1,6 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x13005310" readable_name="Klepto">
-    <description>The crow that steals Mario's cap or stars. It uses a variety of flight patterns to harass Mario and drops its stolen item when attacked.</description>
+    <description>
+        Positions are hardcoded to:
+         { 2200.0f, 1250.0f, -2820.0f },
+        { -6200.0f, 1250.0f, -2800.0f },
+        { -6200.0f, 1250.0f, 1150.0f }
+    </description>
     <tags>
         <tag>ENEMY</tag>
         <tag>BIRD</tag>
@@ -10,7 +15,7 @@
         <field name="Has Star" type="bool" byte="2" default="1">
             <enums>
                 <enum value="0" name="No Star" c_name="KLEPTO_BP_NO_STAR"/>
-                <enum value="1" name="Has Star"/>
+                <enum value="1" name="Has Star" c_name="KLEPTO_BP_HAS_STAR"/>
             </enums>
         </field>
     </fields>
