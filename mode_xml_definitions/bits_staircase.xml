@@ -5,4 +5,7 @@
     <ids>
         <id value="0x41" name="MODEL_BITS_STAIRCASE"/>
     </ids>
+    <collisions>
+        <collision c_name="bits_seg7_collision_0701B0D4" address="0x0701B0D4"/>
+    </collisions>
 </model>

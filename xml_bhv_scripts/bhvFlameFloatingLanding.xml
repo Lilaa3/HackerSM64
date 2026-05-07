@@ -7,7 +7,7 @@
         <tag>BOWSER</tag>
     </tags>
     <fields>
-        <field name="Flame Type" type="int" shift="8" mask="0xFF" default="0">
+        <field name="Flame Type" type="int" byte="2" default="0">
             <description>Determines initial velocity, vertical velocity cap, and the object spawned upon landing.</description>
             <enums>
                 <enum value="0" name="Red"/>

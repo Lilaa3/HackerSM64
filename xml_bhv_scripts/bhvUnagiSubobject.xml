@@ -9,7 +9,7 @@
         <tag>JRB</tag>
     </tags>
     <fields>
-        <field name="Part Index" type="int" shift="0" mask="0xFF" default="0">
+        <field name="Part Index" type="int" byte="2" default="0">
             <enums>
                 <enum value="-4" name="Back (Star)" c_name="UNAGI_PART_BP_BACK"/>
                 <enum value="3" name="Control Distance (Head)" c_name="UNAGI_PART_BP_CONTROL_DISTANCE"/>

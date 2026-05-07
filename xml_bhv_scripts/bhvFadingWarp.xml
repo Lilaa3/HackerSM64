@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <behavior name="0x1300075c" readable_name="Fading Warp">
-    <description>A warp point with a configurable hitbox radius. The radius is determined by the first behavior parameter: a value of 0 sets it to 85, 0xFF sets it to 10000, and other values are multiplied by 10. It resets its interaction status every frame.</description>
+    <description>A warp point with a configurable hitbox radius.</description>
     <tags>
         <tag>WARP</tag>
         <tag>LEVEL</tag>
         <tag>INTERACTIVE</tag>
     </tags>
     <fields>
-        <field name="Radius" type="int" shift="0" mask="0xFF" default="0" multiplier="10">
+        <field name="Radius" type="int" byte="2" default="0" multiplier="10">
             <description>Radius of the warp's hitbox. 0 is default (85), 0xFF is huge (10000), otherwise multiplied by 10.</description>
         </field>
     </fields>

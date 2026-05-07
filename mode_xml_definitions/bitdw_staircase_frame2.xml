@@ -5,4 +5,7 @@
     <ids>
         <id value="0x3d" name="MODEL_BITDW_STAIRCASE_FRAME2"/>
     </ids>
+    <collisions>
+        <collision c_name="bitdw_seg7_collision_0700FB5C" address="0x0700FB5C"/>
+    </collisions>
 </model>

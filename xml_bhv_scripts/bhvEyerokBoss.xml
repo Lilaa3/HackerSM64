@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x130052b4" readable_name="Eyerok Boss">
-    <description>The boss manager for the Eyerok encounter. It controls the fight's overall state machine, including sleep, wake-up, intro dialogue, combat, and death. It manages the initial encounter sequence, including music fading and coordination with Mario's state before initiating the fight.</description>
+    <description>The boss manager for the Eyerok encounter. It controls the fight's overall state machine.</description>
     <tags>
         <tag>BOSS</tag>
         <tag>NPC</tag>

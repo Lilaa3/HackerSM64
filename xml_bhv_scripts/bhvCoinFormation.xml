@@ -8,7 +8,7 @@
         <tag>COLLECTABLE</tag>
     </tags>
     <fields>
-        <field name="Formation Shape" type="bitflag" byte="2" default="0">
+        <field name="Formation Shape" type="enum" byte="2" default="0">
             <enums>
                 <enum value="0" name="Horizontal Line" c_name="COIN_FORMATION_BP_SHAPE_HORIZONTAL_LINE"/>
                 <enum value="1" name="Vertical Line" c_name="COIN_FORMATION_BP_SHAPE_VERTICAL_LINE"/>
@@ -17,7 +17,7 @@
                 <enum value="4" name="Arrow" c_name="COIN_FORMATION_BP_SHAPE_ARROW"/>
             </enums>
         </field>
-        <field name="Flying" type="bool" shift="20" mask="0x1"/>
+        <field name="Flying" type="bool" byte="2" shift="4" default="0"/>
         <field name="Coin Spawn Mask" type="int" byte="3" default="0"/>
     </fields>
 </behavior>
