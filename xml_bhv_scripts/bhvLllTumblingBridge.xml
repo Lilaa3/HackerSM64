@@ -5,6 +5,7 @@
         <tag>SURFACE</tag>
         <tag>MOVING</tag>
         <tag>SPAWNER</tag>
+        <tag>LLL</tag>
     </tags>
     <models automatically_set="true">
         <model>lll_falling_platform</model>

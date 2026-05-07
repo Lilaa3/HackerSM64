@@ -4,6 +4,7 @@
         <tag>ENVIRONMENTAL</tag>
         <tag>SURFACE</tag>
         <tag>MOVING</tag>
+        <tag>LLL</tag>
     </tags>
     <models>
         <model>lll_volcano_falling_trap</model>

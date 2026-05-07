@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
 <behavior name="0x13000e24" readable_name="Mist Circle Particle Spawner">
-    <comment>This behavior is a transient spawner and does not use behavior parameters.</comment>
-    <description>Spawns a circular burst of mist particles based on global configuration and clears the mist circle flag on the parent object before deactivating.</description>
+    <particle>PARTICLE_MIST_CIRCLE</particle>
     <tags>
         <tag>ENVIRONMENTAL</tag>
-        <tag>MANAGER</tag>
+        <tag>SPAWNER</tag>
+        <tag>PARTICLE</tag>
     </tags>
 </behavior>

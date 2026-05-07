@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <behavior name="0x130030a4" readable_name="Moving Blue Coin">
-    <description>Moving blue coin, starts moving when Mario gets close and flickers before disappearing after a set time.</description>
+    <description>Starts moving when Mario gets close.</description>
     <tags>
         <tag>COLLECTABLE</tag>
     </tags>

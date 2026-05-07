@@ -4,5 +4,7 @@
     <tags>
         <tag>ENEMY</tag>
         <tag>PARTICLE</tag>
+        <tag>FIRE</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
 </behavior>

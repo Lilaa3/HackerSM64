@@ -1,10 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x13002fe4" readable_name="Menu Button">
-    <description>Handles interactive menu buttons. Manages state transitions (Default, Growing, Fullscreen, Shrinking, Zoom) with interpolated positional and rotational offsets to create UI animations.</description>
+    <description>Handles interactive menu buttons in the file select.</description>
     <tags>
         <tag>MENU</tag>
         <tag>UI</tag>
         <tag>INTERACTIVE</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
     <models>
         <model>menu_main_menu_blue_copy_button</model>

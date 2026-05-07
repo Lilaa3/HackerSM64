@@ -6,6 +6,7 @@
         <tag>SURFACE</tag>
         <tag>MOVING</tag>
         <tag>SUB_OBJECT</tag>
+        <tag>LLL</tag>
     </tags>
     <models>
         <model>lll_wood_bridge</model>

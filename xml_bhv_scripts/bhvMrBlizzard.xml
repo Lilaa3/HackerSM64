@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 <behavior name="0x13004dbc" readable_name="Mr. Blizzard">
-    <description>Mr. Blizzard, a snowman enemy. He can be configured as a jumping variant or a standard variant that may wear a cap if the player has it.</description>
     <tags>
         <tag>ENEMY</tag>
         <tag>SPECIALIZED</tag>
@@ -10,6 +9,7 @@
             <enums>
                 <enum value="0" name="Standard" c_name="MR_BLIZZARD_STYPE_NO_CAP"/>
                 <enum value="1" name="Jumping" c_name="MR_BLIZZARD_STYPE_JUMPING"/>
+                <enum value="2" name="Hidden"/>
             </enums>
         </field>
     </fields>

@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <behavior name="0x13005024" readable_name="Mad Piano">
-    <description>A hostile piano in Big Boo's Haunt that attempts to chomp Mario by moving and rotating towards him, while staying relative to its home position.</description>
     <tags>
         <tag>ENEMY</tag>
+        <tag>BBH</tag>
     </tags>
     <models>
         <model>mad_piano</model>
