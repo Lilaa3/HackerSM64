@@ -1,10 +1,11 @@
 <?xml version="1.0" ?>
 <behavior name="0x130038e8" readable_name="LLL Drawbridge">
-    <description>The drawbridge in the LLL Bowser fight. It automatically raises and lowers itself on a timer, playing sound effects during the transition.</description>
+    <description>Spawned by LLL Drawbridge Spawner.</description>
     <tags>
-        <tag>ENVIRONMENTAL</tag>
         <tag>SURFACE</tag>
         <tag>MOVING</tag>
+        <tag>SUB_OBJECT</tag>
+        <tag>LLL</tag>
     </tags>
     <models>
         <model>lll_drawbridge_part</model>

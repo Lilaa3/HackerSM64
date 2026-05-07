@@ -8,14 +8,14 @@
     <fields>
         <field name="Bridge Configuration" type="int" byte="2" default="0">
             <enums>
-                <enum value="0" name="WF Tumbling Bridge Part"/>
-                <enum value="1" name="BBH Tumbling Platform Part"/>
-                <enum value="2" name="LLL Falling Platform"/>
-                <enum value="3" name="BITFS Tumbling Platform Part"/>
+                <enum value="0" name="WF" c_name="TUMBLING_BRIDGE_BP_WF"/>
+                <enum value="1" name="BBH" c_name="TUMBLING_BRIDGE_BP_BBH"/>
+                <enum value="2" name="LLL" c_name="TUMBLING_BRIDGE_BP_LLL"/>
+                <enum value="3" name="BITFS" c_name="TUMBLING_BRIDGE_BP_BITFS"/>
             </enums>
         </field>
     </fields>
-    <models>
+    <models automatically_set="true">
         <model>wf_tumbling_bridge_part</model>
         <model>bbh_tumbling_platform_part</model>
         <model>lll_falling_platform</model>

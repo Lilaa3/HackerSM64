@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
 <behavior name="0x13001ef8" readable_name="LLL Tilting Inverted Pyramid">
-    <description>An inverted pyramid platform that tilts its orientation to lean towards Mario when he stands on it, and levels out when he leaves.</description>
     <tags>
-        <tag>ENVIRONMENTAL</tag>
+        <tag>INTERACTIVE</tag>
         <tag>SURFACE</tag>
         <tag>MOVING</tag>
+        <tag>LLL</tag>
     </tags>
     <models>
         <model>lll_tilting_square_platform</model>

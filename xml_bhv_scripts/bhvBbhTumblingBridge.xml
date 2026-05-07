@@ -5,17 +5,7 @@
         <tag>PLATAFORM</tag>
         <tag>MOVING</tag>
     </tags>
-    <fields>
-        <field name="Bridge ID" type="int" byte="2" default="0">
-            <enums>
-                <enum value="0" name="WF" c_name="TUMBLING_BRIDGE_BP_WF"/>
-                <enum value="1" name="BBH" c_name="TUMBLING_BRIDGE_BP_BBH"/>
-                <enum value="2" name="LLL" c_name="TUMBLING_BRIDGE_BP_LLL"/>
-                <enum value="3" name="BITFS" c_name="TUMBLING_BRIDGE_BP_BITFS"/>
-            </enums>
-        </field>
-    </fields>
-    <models>
+    <models automatically_set="true">
         <model>bbh_tumbling_platform</model>
     </models>
 </behavior>

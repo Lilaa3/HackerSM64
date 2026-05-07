@@ -4,6 +4,7 @@
     <tags>
         <tag>SURFACE</tag>
         <tag>MOVING</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
     <models>
         <model>wf_tumbling_bridge_part</model>

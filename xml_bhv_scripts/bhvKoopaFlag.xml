@@ -4,6 +4,7 @@
     <tags>
         <tag>POLE</tag>
         <tag>ENVIRONMENTAL</tag>
+        <tag>SUB_OBJECT</tag>
     </tags>
     <models>
         <model>koopa_flag</model>
